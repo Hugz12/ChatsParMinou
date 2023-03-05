@@ -1,0 +1,97 @@
+#allConnexion{
+	width: 700px;
+	height: 500px;
+	background-color: var(--sec-color);
+	border-radius: 12px;
+	position: relative;
+	margin: 50px auto 0 auto;
+	display: flex;
+	z-index: 0;
+}
+
+#allConnexion > div{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#allConnexion > div > form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: baseline;
+}
+
+#allConnexion > div > div {
+	margin-bottom: 25px;
+}
+
+#allConnexion > div > form > input {
+	margin: 10px 0 10px 0;
+}
+
+#titreRegister, #titreLogin {
+	font-size: 30px;
+}
+
+
+#switchLoginRegister {
+	width : 350px;
+	height: 100%;
+	position: absolute;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	top: 0;
+	left: 350px;
+	z-index: 1;
+	background-color: #83bcf2;
+	overflow: hidden;
+}
+
+
+#textSwitchLoginRegister{
+	width: 250px;
+	text-align: justify;
+	font-size: 15px;
+	color: var(--main-color);
+	margin: 20px 0 20px 0;
+}
+
+
+#buttonSwitchLoginRegister{
+	width: 150px;
+	height: 50px;
+	border: solid 1px white;
+	border-radius: 46px;
+	color: var(--main-color);
+	font-size: 20px;
+	margin: 20px 0 20px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#buttonSwitchLoginRegister:hover{
+	cursor: pointer;
+	background-color: white;
+	color: var(--third-color);
+}
+
+
+
+#custom-button {
+	width: 220px;
+	height: 30px;
+	border: 1px solid rgb(166, 166, 166);
+	margin-top: 5px;
+	font-size: 16px;
+	color: black;
+	background-color: white;
+	line-height: normal;
+}
+
+

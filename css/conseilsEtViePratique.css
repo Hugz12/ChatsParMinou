@@ -1,0 +1,43 @@
+#conseils{
+    background-color: var(--second-color);
+    margin-left: 5vw;
+    padding: 5vw;
+}
+
+#conseilTitre{
+	font-size: 50px;
+	font-weight: bold;
+	color: var(--third-color);
+}
+
+#conseilText{
+    font-size: 20px;
+}
+
+#viePratique{
+    background-color: var(--third-color);
+    padding-left: 10vw;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+}
+
+#viePratiqueTitre{
+    font-size: 50px;
+	font-weight: bold;
+    color: var(--second-color);
+}
+
+#image{
+    width: 30%;
+    height: 30%;
+    margin-right: 10vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    clip-path:ellipse(33% 50%);
+    float: right;
+}
+
+#conseilText2{
+    width: 50%;
+    font-size: 20px;
+}

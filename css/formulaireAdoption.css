@@ -1,0 +1,43 @@
+#allFormulaireAdoption {
+	max-width: 600px;
+	height: auto;
+	background-color: var(--sec-color);
+	border-radius: 12px;
+	margin: 50px auto 0 auto;
+	z-index: 0;
+	padding : 10px 10px 10px 10px;
+}
+
+
+#titreFormulaireAdoption{
+	font-size: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+}
+
+#allFormulaireAdoption > form > input {
+	margin: 10px 0 10px 0;
+	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#lienFormulaireAdoption{
+	color: var(--third-color);
+}
+
+#submitFormulaireAdoption{
+	width: 100px;
+	height: 30px;
+	background-color: var(--main-color);
+	border: 1px solid black;
+	font-size: 15px;
+}
+
+#checkboxFormulaireAdoption{
+	width: 15px;
+	height: 15px;
+}

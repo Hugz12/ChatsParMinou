@@ -1,0 +1,123 @@
+.group {
+	position: relative;	
+    background-color: inherit;
+}
+/*------------------------------------------------------------------------*/
+/*                   input type text, password, textarea                  */
+/*------------------------------------------------------------------------*/
+
+/*architecture a respecter pour le label et l'input
+ *<div class="group">
+ *    <input type="text" name="nom" required>
+ *    <label for="nom">Name</label>
+ *</div>
+*/
+
+/*architecture a respecter pour le label et le textarea
+ *<div class="group">
+ *    <textarea name="nom" required></textarea>
+ *    <label for="nom">Name</label>
+ *</div>
+*/
+
+
+
+form input[type="text"], input[type="password"], textarea {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 15px;
+    width: calc(100% - 1.6em);
+    height: calc(100% - 1.6em);
+}
+
+form label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+    background-color: initial;
+}
+
+form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="password"]:focus, input[type="password"]:valid, textarea:focus, textarea:valid)~label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: var(--sec-color);
+    
+}
+
+form :is(input[type="text"]:focus, input[type="password"]:focus, textarea:focus)~label {
+    color: var(--third-color);
+}
+
+form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="password"]:focus, input[type="password"]:valid, textarea:focus, textarea:valid) {
+    border-color: var(--third-color);
+}
+
+/*------------------------------------------------------------------------*/
+/*                            input type textarea                         */
+/*------------------------------------------------------------------------*/
+
+form textarea {
+    resize: none;
+}
+
+
+/* input type password */
+
+/* input type checkbox */
+
+/* input type radio */
+
+/* input type submit */
+
+
+
+/* input type color */
+
+.colorPicker {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+
+.colorPicker > input[type="color"] {
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    background-color: #fff;
+}
+  
+.colorPicker > input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+  
+.colorPicker > input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    margin: 5px;
+}
+
+.colorPicker > .colorPickerText {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    z-index: 10;
+	color: rgb(163, 163, 163);
+    transform: translateX(-50%);
+
+}
+

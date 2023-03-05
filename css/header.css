@@ -1,0 +1,172 @@
+
+/* HEADER */
+
+#allHeader {
+	height: 70px;
+	overflow: hidden;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	width: 100vw;
+	transition: height 0.3s ease-in-out;
+
+}
+
+header {
+	top: 0;
+	width: 100vw;
+	height: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #FFFFFF;
+	
+
+}
+
+header > a {
+	height: 50px;
+	font-size: 30px !important;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+
+}
+
+header a {
+	text-decoration: none;
+	padding: 0 15px 0 15px;
+	font-size: 15px;
+	color: black;
+}
+
+#nav {
+	display: flex;
+	
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navLink{
+	height: 50px;
+	transition: 0.3s;
+}
+
+.navLink:hover {
+	color: var(--fifth-color);
+} 
+
+#nav > a.policeTexte {
+	/* je veux que mon texte soit au milieu de la box en hauteur*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+
+#nav2 {
+	width: 100vw;
+	height: 100vh;
+	background-color: #FFFFFF;
+	
+}
+
+#nav2 a {
+	border-top: none;
+	padding-left: 20px;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	font-family: "Roboto",sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #83bcf2;
+	text-decoration: none;
+	width: 100%;
+	height: 70px;
+	/* reduire la hauteur des lettres */
+
+}
+
+.logo {
+	width: auto;
+	height: 50px;
+}
+
+#photoDeProfil {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	padding: 0 15px 0 15px;
+	cursor: pointer;
+}
+
+#profil {
+	/*je veux que cette div soit juste en dessous de la photo de profil mais ne perturbe pas le reste du header*/
+	display: none;
+	position: fixed;
+	z-index: 3;
+	top: 82px;
+	right: 15px;
+	width: 200px;
+	height: auto;
+	background-color: var(--sec-color);
+	/*clip-path: polygon(0% 4%, 86% 4%, 90% 0%, 94% 4%, 100% 4%, 100% 100%, 0% 100%);*/
+	box-shadow: 0 0 5px 0px rgb(0, 0, 0, 0.5);
+}
+
+#triangleUp {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: -10px;
+	right: 10px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid var(--sec-color);
+	filter: drop-shadow(0 -2px 1px rgb(0, 0, 0, 0.2));
+	box-sizing: border-box;
+}
+
+#profil > hr {
+	border: 0px;
+	border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+
+	margin: 0;
+}
+
+
+.profileSection {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px 10px 10px;
+	font-family: inherit;
+	text-decoration: none;
+	color: black;
+	transition: 0.3s;
+}
+
+.profileSection:hover {
+	background-color: var(--third-color);
+}
+
+.profileSection > img {
+	transition-duration: 0.3s;
+	width: 20px;
+	height: 20px;
+}
+
+#connexion {
+	width: 120px;
+	height: 40px;
+	margin: 0 10px 0 10px;
+	border-radius: 45px;
+	background-color: var(--fourth-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

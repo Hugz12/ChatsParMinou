@@ -1,0 +1,55 @@
+#chatsTitre {
+	font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+	color: var(--third-color);
+}
+
+#sliderChats {
+	width: 1100px;
+}
+
+.slideChat {
+	width: 1100px;
+	height: 600px;
+	margin: 10px 0px 10px 0px;
+	background-color: var(--sec-color);
+	position: relative;
+}
+
+.buttonHideForm {
+	position: absolute;
+	top: -15px;
+	left: -15px;
+	width: 30px;
+	height: 30px !important;
+	border-radius: 50%;
+	background-color: var(--main-color);
+	text-align: center;
+	align-items: center;
+
+}
+
+#containerButtonAjoutChat {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+#buttonAjoutChat{
+	margin: 20px 0px 20px 0px;
+	
+}
+
+#formAjoutChat {
+	opacity: 0;
+	display: none;
+}
+
+#formSupprimerChat {
+	opacity: 0;
+	display: none;
+}
+

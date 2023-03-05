@@ -1,0 +1,407 @@
+
+
+/* ACCUEIL */
+
+/* PRESENTATION */
+
+#presentation {
+	width: 100vw;
+	height: 500px;
+	position: relative;
+	
+	
+
+}
+
+#presentation img {
+
+	z-index: 10;
+	width: 100vw;
+	height: 500px;
+	object-fit: cover;
+	background-position: center;
+	margin: 0 auto;
+}
+
+#presentationTexte {
+	position: absolute;
+	left:15vw;
+	top: 0px;
+	height: 500px;
+	width: 80%;
+	max-width: 500px;
+	/*font size qui réduit en fonction de la taille de l'écran*/
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: justify;
+	text-justify: auto;
+	
+}
+
+#presentationTexte1 {
+	width: 80%;
+	font-size: 58px;
+	font-weight: bold;
+	text-justify: auto;
+}
+
+#presentationTexte2 {
+	width: 100%;
+	font-size: 16px;
+	text-justify: auto;
+	line-height: 1.75;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CHAT DU MOIS */
+
+#allChatDuMois {
+	width: 100vw;
+	padding: 0 0 70px 0;
+	background-color: var(--sec-color);
+	position: relative;
+}
+
+
+
+.chatBanniere {
+    width: 100%;
+    height: 150px;
+    z-index: 0;
+    position: absolute;
+    top: 120px;
+    display: flex;
+    align-items: center;
+	background-color: var(--third-color);
+}
+
+.chatBanniere > div {
+	width: calc(100vw - 90px);
+	height: 100%;
+	max-width: 1080px;
+	padding: 0 45px 0 45px;
+	margin: 0 auto 0 auto;
+	display: flex;
+	align-items: center;
+	
+}
+
+.chatDescription {
+	width: 25%;
+	max-width: 500px;
+	min-width: 150px;
+	z-index: 1;
+}
+
+
+
+
+
+
+.chatBox {
+	width: calc(100% - 90px);
+	height: calc(100% - 30px);
+	max-width: 1080px;
+	padding: 30px 45px 0 45px;
+	margin: 0 auto 0 auto;
+}
+
+
+.chatNomBlock {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0 80px 0;
+
+}
+
+.chatNom {
+	font-size: 60px;
+	font-weight: bold;
+	padding: 0 0 0 45px;
+	color: var(--fifth-color);
+}
+
+.chatContent {
+	display: flex;
+	justify-content: space-between;
+	height: 390px;
+}
+
+.chatInfos {
+	width: 30vw;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+
+}
+
+.chatInfos1 {
+	padding: 20px 0 20px 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+.chatInfos2 {
+	padding: 20px 0 20px 0;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
+
+.chatInfos2 > div {
+	display: flex;
+	align-items: center;
+	margin: 5px 0 5px 0;
+}
+
+.chatTitre {
+	font-size: 17px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 0 5px 0 5px;
+	
+}
+
+.chatInfos1 .chatTitre {
+	margin: 0 0 10px 0;
+	color: var(--fifth-color);
+}
+
+.chatTexte {
+	font-size: 15px;
+	font-weight: bold;
+	padding: 10px 10px 10px 10px;
+	border-radius: 7px;
+	background-color: var(--third-color);
+}
+
+
+.allSliderPhotoChat {
+	width: auto;
+	height: 100%;
+}
+
+.sliderPhotoChat {
+	width: 500px;
+	height: 100%;
+}
+
+.slidePhotoChat {
+    z-index: 2;
+	width: 480px;
+	height: 340px;
+	margin: 10px 10px 10px 10px;
+	object-fit: cover;
+	background-position: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#event {
+	background-color: var(--main-color);
+	padding: 50px 0 50px 0;
+}
+
+
+#eventTitre {
+	font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+	color: var(--third-color);
+}
+  
+#allSliderEvent {
+	height: 600px;
+}
+
+#sliderEvent {
+	width: 1080px;
+}
+
+
+
+.slideEvent {
+	position: relative;
+	width: 1020px;
+	margin: 10px 30px 10px 30px;
+	height: 500px;
+	background-color: var(--fourth-color);
+}
+
+.imgEvent {
+	z-index: 0;
+	position: absolute;
+	top: 10%;
+	right: 4%;
+	width: 70%;
+	height: 80%;
+	
+
+}
+
+.imgEvent > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	background-position: center;
+}
+
+.texteEvent {
+	z-index: 1;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	top: 30%;
+	left: 5%;
+	min-height: 45%;
+	width: 35%;
+	background-color: var(--main-color);
+	padding: 15px 20px 15px 30px;
+}
+
+.titreEvent {
+	font-size: 40px;
+	font-weight: bold;
+	margin: 10px 0 10px 0;
+}
+
+.descriptionEvent {
+	font-size: 15px;
+	margin: 10px 0 10px 0;
+}
+
+.dateEvent {
+	width: 230px;
+	font-size: 20px;
+	margin: 10px 0 10px 0;
+	padding: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#buttonAddEvenement{
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
+
+
+
+.formChats{
+	position: fixed;
+	border: #000000 1px solid;
+	background: var(--fourth-color);
+	display: flex;
+	flex-direction: column;
+	z-index: 1000;
+	width: 500px;
+	height: auto;
+	padding: 20px;
+	top : 50%;
+	left : 50%;
+	transform: translate(-50%, -50%);
+}
+
+.formChats > form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 75%;
+}
+
+.formChats > form > * {
+	margin: 7px 0 7px 0;
+}
+
+.formChats > div {
+	height: 15%;
+}
+
+/* sur le champ submit */
+.formChats > form > input[type="submit"] {
+	width: 28%;
+}
+
+/* Je donne */
+#nousAider {
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	width: 200px;
+	height : auto;
+	display : flex;
+	justify-content : space-around;
+	align-items: center;
+	padding: 20px 10px 20px 10px;
+	font-size: 20px;
+	background-color: var(--fourth-color);
+	border-radius: 46px;
+	z-index: 2;
+	text-decoration: none;
+
+}
+
+#nousAider > img {
+	width: 50px;
+	height: 50px;
+	transition-duration: 0.3s;
+}
+
+
+#addEvenement {
+	opacity: 0;
+	display: none;
+}
+
+#switchChatDuMois{
+	opacity: 0;
+	display: none;
+}

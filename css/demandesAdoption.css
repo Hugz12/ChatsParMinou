@@ -1,0 +1,226 @@
+h2 {
+    margin-left: 3%;
+}
+
+h3 {
+    margin-left: 4%;
+}
+
+#recherche {
+    width: 35%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #83BCF2;
+    border-radius: 30px;
+    margin-left: 3%;
+    margin-top: 1%;
+}
+
+#recherche input {
+    width: auto;
+    height: 80%;
+    border-radius: 30px;
+    border: none;
+    padding-left: 2%;
+}
+
+#recherche img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#choixRecherche {
+    width: 35%;
+    display : flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.choix-chat {
+    background-color: white;
+    margin: 5px 4px;
+    border-radius: 20px;
+    border: 2px solid #D0D0D0;
+    height: 24px;
+    cursor: pointer; 
+    width: 50px;
+    position: relative;
+    display: inline-block;
+}
+
+.choix-chat button{
+    cursor: pointer;
+    outline: 0;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    float: left;
+    margin: -3px 0 0 -3px;
+    border: 2px solid #D0D0D0;
+    transition: left 0.3s;
+}
+
+.choix-pers {
+    background-color: #83B152;
+    border: 2px solid #7DA652;
+}
+
+.choix-pers  button{
+    left: 26px;
+    top: 0;
+    margin: 0;
+    border: none;
+    width: 24px;
+    height: 24px;
+}
+
+.timeDemande{
+    margin: 0 8% 10px 0;
+    font-size: 16px;
+    width: auto;
+    float: right;
+}
+
+.contenuDemande {
+    width: 92%;
+    height: 150px;
+    display: flex;
+    margin: 0 5%;
+    margin-bottom: 2%;
+}
+
+.infoDemande {
+    width: 96%;
+    display: flex;
+    background-color: #83BCF2;
+    border-radius: 30px;
+}
+
+.imageDemande{
+    width: 25%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.imageDemande img {
+    width: 45%;
+    margin: 2% 0;
+    border-radius: 30px;
+}
+
+.infosChat {
+    width: 15%;
+}
+
+.infosPers {
+    width: 15%;
+}
+
+.memos {
+    width: 45%;
+    display: flex;
+    justify-content: space-around;
+    margin: 1% 0;
+}
+
+.memos textarea{
+    width: 50%;
+    height: 80%;
+    resize: none;
+}
+
+.memos p{
+    width: 50%;
+    height: 80%;
+    background-color: white;
+    padding: 1%;
+    margin: 0;
+    cursor:pointer;
+}
+
+.sous-memos {
+    width: 25%;
+}
+
+.sous-memos textarea{
+    width: 100%;
+    height: 22%;
+    resize: none;
+}
+.sous-memos p{
+    width: 80%;
+    height: 20%;
+    background-color: white;
+    padding: 1%;
+    margin-bottom: 8%;
+    cursor:pointer;
+}
+
+.btnDemande {
+    width: 30px;
+    height: 30px;
+    margin: 3% 1%;
+    text-align: center;
+}
+
+#overlay {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+#popupSupp {
+    background-color: #83BCF2;
+    width: 30%;
+    height: 12%;
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.popupBtn {
+    width: 20%;
+    height: 40%;
+    border: none;
+    font-size: 20px;
+    margin: 0 10%;
+}
+
+.popupBtn:hover {
+    opacity: 0.8;
+}
+
+#popupBtnOui {
+    background-color: lightgreen;
+}
+
+#popupBtnNon {
+    background-color: lightcoral;
+}
+
+#popupInfos {
+    display: none;
+    position: absolute;
+    width: 280px;
+    padding: 10px;
+    background: #eeeeee;
+    color: #000000;
+    border: 1px solid #1a1a1a;
+    font-size: 90%;
+}
