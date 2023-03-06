@@ -186,7 +186,7 @@ function uploadPhoto($photo, $rep, $name){
  * @return array
  */
 function getDemandes(){
-    $SQL = "SELECT * FROM demandeAdoption JOIN chat ON demandeAdoption.codeChat = chat.code";
+    $SQL = "SELECT * FROM demandeAdoption JOIN chat ON demandeAdoption.codeChat = chat.code ORDER BY date DESC";
     $demandes = parcoursRS(SQLSelect($SQL));
     if ($demandes == array()){
         return false;
