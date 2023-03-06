@@ -159,3 +159,20 @@ function etatSwitch(element){
 		}
 	}
 }
+
+
+function openDialogBox(contexte, type) {
+	const input = document.createElement("input");
+	input.type = type;
+	input.addEventListener("change", function() {
+		$(contexte).parent().children("input[type='hidden']").val(this.value);
+		console.log(this.value);
+		if(this.type == "color") {
+			console.log("color");
+			console.log(this);
+			$(contexte).parent().children(".colorPickerColor").css("background-color", this.value);
+		}
+	});
+	input.click();
+
+}

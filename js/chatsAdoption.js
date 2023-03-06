@@ -238,6 +238,10 @@ function displayFormEditChat(element){
 
 
 
+$(".colorPickerColor").on("change", function() {
+	console.log("je change");
+	this.style.backgroundColor = this.value;
+});
 
 
 

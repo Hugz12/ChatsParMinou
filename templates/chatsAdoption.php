@@ -169,8 +169,9 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 						</div>
 						
 						<div class='colorPicker'>
-							<div class='colorPickerText'>Couleur</div>
-							<input type='color' name='couleur' required>
+							<div class='colorPickerText' onclick=\"openDialogBox(this, 'color');\">Couleur</div>
+							<div class='colorPickerColor' onclick=\"openDialogBox(this, 'color')\" ></div>
+							<input type='hidden' name='couleur' value='#000000'>
 						</div>
 
 						<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
