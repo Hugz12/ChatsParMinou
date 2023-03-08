@@ -1,7 +1,90 @@
+/*------------------------------------------------------------------------*/
+/*                           Propriété générale                           */
+/*------------------------------------------------------------------------*/
+
+
 .group {
 	position: relative;	
     background-color: inherit;
 }
+
+.formType {
+	top : 50%;
+	left : 50%;
+	transform: translate(-50%, -50%);
+	position: fixed;
+	background: var(--sec-color);
+	border-radius: 15px;
+	box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
+    
+
+	
+	
+	display: flex;
+	flex-direction: column;
+	z-index: 10;
+	width: 550px;
+	height: auto;
+	padding: 20px;
+	
+}
+
+.formType > form {
+	background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+.formType > form > * {
+    display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	max-height: 500px;
+	flex-wrap: wrap;
+	background-color: inherit;
+    margin: 20px 0 20px 0;
+}
+
+
+.formType > form > .inputText > .group{
+	margin: 20px 0 20px 0;
+	width: 220px;
+}
+
+
+.formType > form > .inputOther > .group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: inherit;
+    width: 250px;
+    height: 180px;
+}
+
+
+/*------------------------------------------------------------------------*/
+/*                      Case input spéciaux ajoutChat                     */
+/*------------------------------------------------------------------------*/
+
+#inputAddChatOther {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: inherit;
+    width: 200px;
+    height: 180px;
+}
+
+#inputAddChatOther > div { 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: inherit;
+}
+
 /*------------------------------------------------------------------------*/
 /*                   input type text, password, textarea                  */
 /*------------------------------------------------------------------------*/
@@ -27,13 +110,13 @@ form input[type="text"], input[type="password"], textarea {
     padding: 0.8em;
     outline: none;
     border: 2px solid rgb(200, 200, 200);
-    background-color: transparent;
+    background-color: inherit;
     border-radius: 15px;
-    width: calc(100% - 1.6em);
-    height: calc(100% - 1.6em);
+    width: calc(100% - 1.6em - 4px);
+    height: calc(100% - 1.6em - 4px);
 }
 
-form label {
+form :is(input[type="text"], input[type="password"], textarea)~label {
     font-size: 100%;
     position: absolute;
     left: 0;
@@ -48,10 +131,11 @@ form label {
 
 form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="password"]:focus, input[type="password"]:valid, textarea:focus, textarea:valid)~label {
     transform: translateY(-50%) scale(.9);
+    z-index: 100;
     margin: 0em;
     margin-left: 1.3em;
     padding: 0.4em;
-    background-color: var(--sec-color);
+    background-color: inherit;
     
 }
 
@@ -71,10 +155,137 @@ form textarea {
     resize: none;
 }
 
+/*------------------------------------------------------------------------*/
+/*                            input type date                             */
+/*------------------------------------------------------------------------*/
+
+form input[type="date"] {
+    font-size: 100%;
+    padding: 15px;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    box-sizing: border-box;
+}
+
+form input[type="date"]~label {
+    position: absolute;
+    width: max-content;
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(163, 163, 163);
+    background-color: var(--sec-color);
+}
+
+
+
+
+
+
 
 /* input type password */
 
-/* input type checkbox */
+/*------------------------------------------------------------------------*/
+/*                           input type checkbox                          */
+/*------------------------------------------------------------------------*/
+
+.switch {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+
+.switch > div {
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 20;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+
+}
+
+
+
+.switch > div > img {
+	width: auto;
+	height: 25px;
+}
+
+.switch > .checkboxText {
+	position: absolute;
+	top: -24px;
+	z-index: 10;
+	color: rgb(163, 163, 163);
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.switch > div.photoGauche {
+	position: absolute;
+	left: 12%;
+	opacity: 0;
+
+}
+
+.switch > div.photoDroite {
+	position: absolute;
+	right: 12%;
+	opacity: 1;
+}
+
+
+   
+input.checkbox {
+	appearance: none;
+	height: 54px;
+	width: 95px;
+	margin: 0;
+	background-color: #fff;
+	position: relative;
+	border-radius: 30px;
+	border:1px solid rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+}
+   
+input.checkbox::before {
+	content: '';
+	display: block;
+	height: 42px;
+	width: 42px;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: calc(42px/2 + 4.5px);
+	background-color: var(--false);
+	border-radius: 25px;
+	transition: .3s ease;
+}
+
+input.checkbox:checked::before {
+	background-color: var(--true);
+	left: calc(100% - (42px/2 + 4.5px));
+}
+
+input.checkboxSexe {
+	--false: #e40386;
+	--true: #48b2e6;
+}
+
+input.checkboxFamille {
+	--false: #5ef4e6;
+	--true: #fcc21b;
+}
+
 
 /* input type radio */
 
@@ -82,13 +293,15 @@ form textarea {
 
 
 
-/* input type color */
+/*------------------------------------------------------------------------*/
+/*                           input type color                             */
+/*------------------------------------------------------------------------*/
 
 .colorPicker {
 	display: flex;
 	flex-direction: row;
 	position: relative;
-    --colorSelected: #fff;
+    --colorSelected: #000;
 }
 
 .colorPicker > .colorPickerColor {
@@ -96,14 +309,21 @@ form textarea {
     height: 54px;
     padding: 0;
     border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(200, 200, 200);
     box-sizing: border-box;
+}
+
+.colorPicker > .colorPickerColor > div {
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    border-radius: 50%;
     background-color: var(--colorSelected);
 }
 
 .colorPicker > .colorPickerText {
     position: absolute;
-    top: -18px;
+    top: -20px;
     left: 50%;
     z-index: 10;
 	color: rgb(163, 163, 163);

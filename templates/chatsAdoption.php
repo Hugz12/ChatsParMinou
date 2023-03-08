@@ -113,7 +113,6 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 				</div>
 
 				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Ajouter Un Chat</div>
-				<br>
 
 				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
 
@@ -139,53 +138,70 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 							<label for=\"statut\">Statut</label>
 						</div>
 
+					</div>
+
+						
+					<div class='inputOther'>
+						<div id='inputAddChatOther' class='group'>
+							<div class='group'>
+								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
+									<div id='etatSexe' class='checkboxText'>Mâle</div>
+									<div class='photoGauche'><img src='./ressources/femelle.png'></div>
+									<input type='checkbox' class='checkbox checkboxSexe' checked='' name='sexe' value='1'>
+									<div class='photoDroite'><img src='./ressources/male.png'></div>
+									<input type='hidden' name='sexe' value='2'> 
+								</div>
+								
+								<div class='colorPicker'>
+									<label for='couleur' class='colorPickerText'>Couleur</label>
+									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
+									<input id='colorInput' type='hidden' name='couleur' value='#000000'>
+								</div>
+							</div>
+
+							<div class='group'>
+								<div class='group'>
+									<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
+									<label for=\"date\">Date de naissance</label>
+								</div>
+
+								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
+									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
+									<div class='photoGauche'><img src='./ressources/logo.png'></div>
+									<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
+									<div class='photoDroite'><img src='./ressources/famille_accueil.png'></div>
+									<input type='hidden' name='familleAccueil' value='1'> 
+								</div>
+							</div>
+						</div>
+
 						<div class='group'>
-							<textarea name='description' required></textarea>
+							<textarea rows='1' name='description' required></textarea>
 							<label for=\"description\">Description</label>
 						</div>
-
-						<div class='sd-container'>
-							<input class='sd' type='date' name='dateNaissance' required>
-							<span class='open-button'>
-								<button type='button'></button>
-							</span>
-						</div>
-
+					
 					</div>
 
-					
-
-					
 
 
-					<div class='inputOther'>
-
-						<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
-							<div id='etatSexe' class='checkboxText'>Mâle</div>
-							<div class='photoGauche'><img src='./ressources/femelle.png'></div>
-							<input type='checkbox' class='checkbox checkboxSexe' checked='' name='sexe' value='1'>
-							<div class='photoDroite'><img src='./ressources/male.png'></div>
-							<input type='hidden' name='sexe' value='2'> 
-						</div>
+					<div class='inputFile'>
 						
-						<div class='colorPicker'>
-							<div class='colorPickerText' onclick=\"openDialogBox(this, 'color');\">Couleur</div>
-							<div class='colorPickerColor' onclick=\"openDialogBox(this, 'color')\" ></div>
-							<input type='hidden' name='couleur' value='#000000'>
+						<div id='allSliderPhoto' class='allSlider'>
+							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.png' alt='flecheGauche'>
+							<div id='sliderPhoto' class='slider ombre'>
+								<div class='slides'></div>
+							</div>
+							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.png' alt='flecheDroite'>
 						</div>
 
-						<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
-							<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
-							<div class='photoGauche'><img src='./ressources/logo.png'></div>
-							<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
-							<div class='photoDroite'><img src='./ressources/famille_accueil.png'></div>
-							<input type='hidden' name='familleAccueil' value='1'> 
-						</div>
+						<label for='photo-upload' class='photo-upload-label'>
+							<svg width='50' height='50'>
+								<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
+								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
+							</svg>
+						</label>
+						<input id='photo-upload' type='file' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
-					</div>
-
-					<div class='inputText'>
-						<input type='file' name='photos[]' multiple required>
 					</div>
 
 					

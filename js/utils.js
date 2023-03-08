@@ -3,7 +3,7 @@
  * @param  {int} sens 1 pour aller à droite et -1 pour aller à gauche
  * @return {void}
  */
-function translateX(contexte, transform){
+function translateX(contexte, transform, overflow=false){
 	// !!!! le transform marche a l'envers, 
 	// transform(taille) par exemple centre sur le 1er element
 	// transform(0) par exemple centre sur le 2eme element
@@ -43,7 +43,6 @@ function translateX(contexte, transform){
 		var max = slides.outerWidth() / taille; // on recupere le nombre d'evenements
 		
 	}	
-
 	////////////////////////////////////////////////////////
 	// on fait le défilement
 	////////////////////////////////////////////////////////
@@ -51,11 +50,12 @@ function translateX(contexte, transform){
 	// Math.trunc(nbElement/2) permet de recuperer le nombre d'element avant le centre
 	// et de gerer les exeptions pour le premier et le dernier element
 	transform = transform - sens; // calcul de la nouvelle position du .slides
-	if (transform > Math.trunc(nbElement/2)) { // si on est sur le premier element on revient au dernier
-		transform = -(max-(1+Math.trunc(nbElement/2)));
+	if (transform > (overflow ? Math.trunc(nbElement/2) : 0)) { // si on est sur le premier element on revient au dernier
+		transform = (overflow ? -(max-(1+Math.trunc(nbElement/2))) : -(max - nbElement));
+		if (!overflow && transform > 0) transform = 0; // on gere l'overflow pour le premier element
 	}
-	else if (transform <= -(max - Math.trunc(nbElement/2))) { // si on est sur le dernier element on revient au premier
-		transform = Math.trunc(nbElement/2);
+	else if (transform <= (overflow ? -(max - Math.trunc(nbElement/2)) : -(max - nbElement+1))) { // si on est sur le dernier element on revient au premier
+		transform = (overflow ? Math.trunc(nbElement/2) : 0);
 	}
 	console.log(transform);
 	slides.css('transform', 'translateX('+(transform)*taille +'px)'); // on applique le défilement
@@ -161,18 +161,42 @@ function etatSwitch(element){
 }
 
 
-function openDialogBox(contexte, type) {
+function openDialogBox(retour, type) {
+	console.log("openDialogBox");
+	console.log(retour);
+	console.log(type);
 	const input = document.createElement("input");
 	input.type = type;
+	input.value = retour.value;
+	//console.log(input);
 	input.addEventListener("change", function() {
-		$(contexte).parent().children("input[type='hidden']").val(this.value);
+		retour.value = this.value;
 		console.log(this.value);
+		
 		if(this.type == "color") {
 			console.log("color");
 			console.log(this);
-			$(contexte).parent().children(".colorPickerColor").css("background-color", this.value);
+			retour.parentNode.style.setProperty("--colorSelected", this.value);
 		}
 	});
 	input.click();
 
+
 }
+
+
+function changerDate(contexte) {
+	console.log(contexte);
+	console.log($(contexte).parent().children('label'));
+	date = $(contexte).val();
+	date = date.split("-");
+	date = date[2] + "/" + date[1] + "/" + date[0];
+	$(contexte).parent().children('label').html(date);
+}
+
+
+
+
+
+
+
