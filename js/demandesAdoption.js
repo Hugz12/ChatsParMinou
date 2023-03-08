@@ -1,41 +1,41 @@
 //Fonction qui append une demande
 function divDemande(date, btn, img, demande){
     return `<div id="demande${demande["id"]}" class="demandes">
-                <p class="tpsDate">${date}</p>
-                <p class="tpsComplet">${demande["date"]}|</p>
                 <div class="contenuDemande">
                     <img class="btnDemande ${btn} clickable" onclick='changerStatut(this, ${JSON.stringify(demande)});' src="./ressources/${img}.png" alt="${img}">
-                    <div class="infoDemande clickable">
-                        <div class="imageDemande">
-                            <img src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
+                    <div class="infoDemande">
+                        <p class="tpsDate">${date}</p>
+                        <p class="tpsComplet">${demande["date"]}|</p>
+                        <div class="infoMoins">
+                            <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
+                            <div class="infosChat">
+                                <p>${demande['name']}</p>
+                                <p>${demande["code"]}</p>
+                                <p class="txtCache">${demande["statut"]}</p>
+                            </div>
+                            <div class="infosPers">
+                                <p>${demande['prenom']} ${demande["nom"]}</p>
+                                <p>${demande['mail']}</p>
+                                <p>${demande['tel']}</p>
+                                <p class="txtCache">${demande['habitation']}</p>
+                                <p class="txtCache">${demande['exterieur']}</p>
+                                <p class="txtCache">${demande['sortie']}</p>
+                                <p class="txtCache">${demande['situationFamiliale']}</p>
+                                <p class="txtCache">${demande['animaux']}</p>
+                            </div>
                         </div>
-                        <div class="infosChat">
-                            <p>${demande['name']}</p>
-                            <p>${demande["code"]}</p>
-                        </div>
-                        <div class="infosPers">
-                            <p>${demande['prenom']} ${demande["nom"]}</p>
-                            <p>${demande['mail']}</p>
-                            <p>${demande['tel']}</p>
-                        </div>
-                        <div class="memos">
+                        <div class="infoPlus">
                             <p class="memo">${demande['memo']}</p>
                             <div class="sous-memos">
                                 <p class="datePv">${demande['datePv']}</p>
                                 <p class="resultatPv">${demande['resultatPv']}</p>
                                 <p class="dateRencontre">${demande['dateRencontre']}</p>
                             </div>
+                            <p class="txtCache">${demande['commentaire']}</p>
                         </div>
+                        
                     </div>
                     <img class="btnDemande btnSupp clickable" src="./ressources/cross.png" alt="cross">
-                </div>
-                <div class="infoPlus">
-                            <p>${demande['habitation']}</p>
-                            <p>${demande['exterieur']}</p>
-                            <p>${demande['sortie']}</p>
-                            <p>${demande['situationFamiliale']}</p>
-                            <p>${demande['animaux']}</p>
-                            <p>${demande['commentaire']}</p>
                 </div>
             </div>`;
 }
@@ -283,7 +283,7 @@ $(function() {
     });
 });
 
-//Fonctions d'edition des memos
+//Fonctions d'edition des commentaires
 $(function() {
     var jTA = $("<textarea>").keyup(function(contexte){
         if(contexte.ctrlKey && (contexte.key == "Enter" || contexte.keyCode == 10 || contexte.keyCode == 13)) {
@@ -296,8 +296,8 @@ $(function() {
             if ($(this).hasClass("resultatPv")) var contenu = "resultatPv";
             if ($(this).hasClass("dateRencontre")) var contenu = "dateRencontre";
     
-            if ($(this).parent().parent().parent().parent().hasClass("demandes")) var parent = $(this).parent().parent().parent().parent();
-            else var parent = $(this).parent().parent().parent().parent().parent();
+            if ($(this).parent().parent().parent().parent().parent().hasClass("demandes")) var parent = $(this).parent().parent().parent().parent().parent();
+            else var parent = $(this).parent().parent().parent().parent().parent().parent();
             //console.log(parent);
     
             var id = parent.attr("id").match(/\d/g).toString().replace(',', '');
@@ -340,7 +340,7 @@ $(function() {
         }
     });
 
-    $(".memos").on("click", "p", function() {
+    $(".commentaires").on("click", "p", function() {
         console.log("click sur p");
         var jTAClone = jTA.clone(true).val($(this).text()).data("lastValue", $(this).text());
 
@@ -496,11 +496,25 @@ function montrerPlusMoins() {
 
 // Zoom sur une demande
 $(function() {
-    $(".infoDemande").on("click", function() {
+    $(".infoMoins").on("click", function() {
         console.log("zoom");
-        var id = $(this).parent().parent().attr("id").match(/\d/g).toString().replace(',', '');
-        $(this).css({"transform" : "scale(1.2)"})/*.animate({height: '300px'})*/;
-        $("#demande" + id + " .infoPlus").show();
-        //$($(this).parent().parent()).css({"height": "300px"});
+
+        if ($($(this).parent()).css("display") == "block") {
+            $($(this).parent()).css({"transform" : "scale(1)" , "transition" : "1s"});
+            $($(this).parent()).css({"display" : "flex"});
+            $(this).css({"width" : "50%"});
+            $($(this).parent().children(".infoPlus")).css({"width" : "50%"});
+            $($(this).children(".infosChat").children(".txtCache")).css({"display" : "none"});
+            $($(this).children(".infosPers").children(".txtCache")).css({"display" : "none"});
+            $($(this).parent().children(".infoPlus").children(".txtCache")).css({"display" : "none"});
+        } else {
+            $($(this).parent()).css({"transform" : "scale(1.2)" , "transition" : "1s"});
+            $($(this).parent()).css({"display" : "block"});
+            $(this).css({"width" : "100%"});
+            $($(this).parent().children(".infoPlus")).css({"width" : "100%"});
+            $($(this).children(".infosChat").children(".txtCache")).css({"display" : "unset"});
+            $($(this).children(".infosPers").children(".txtCache")).css({"display" : "unset"});
+            $($(this).parent().children(".infoPlus").children(".txtCache")).css({"display" : "unset"});
+        }
     });
 });

@@ -1,3 +1,16 @@
+/* Général */
+.txtCache {
+    display: none;
+}
+
+.txtUnset {
+    display: unset;
+}
+textarea{
+    resize: none;
+    background-color: white;
+}
+
 /* Titres */
 h2 {
     margin-left: 3%;
@@ -98,94 +111,112 @@ https://www.w3schools.com/howto/howto_custom_select.asp
 }
 
 .tpsDate{
-    margin: 0 18% 10px 0;
+    position: absolute;
+    right: 1%;
+    top: -30%;
     font-size: 16px;
     width: auto;
-    float: right;
 }
 
 .contenuDemande {
     display: flex;
     justify-content: space-around;
     width: 80%;
-    margin: 0 10% 2% 10%;
-
-    z-index: 2;
-    position: relative;
+    margin: 2% auto 3% auto;
+    cursor: pointer;
 }
 
 .infoDemande {
-    width: 80%;
     display: flex;
+    position: relative;
+    width: 80%;
     background-color: var(--fourth-color);
+}
+
+.infoMoins {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.infoMoins img{
+    width: 25%;
+    margin: 1% 0;
+    border-radius: 30px;
+}
+
+.infosChat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 20%;
+    font-size: 15px;
+    /*font-size: 20px;*/
+}
+
+.infosChat p {
+    margin: 0;
+}
+
+.infosChat p:first-child {
+    font-size: 25px;
+}
+
+.infosPers {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    font-size: 15px;
+    justify-content: space-around;
+}
+
+.infosPers p {
+    margin: 0;
+}
+
+.infosPers p:first-child {
+    font-size: 25px;
 }
 
 .infoPlus {
     display: flex;
     justify-content: space-around;
-    width: 64%;
-    margin: 0 18% 0 18%;
-    background-color: var(--fourth-color);
-}
-
-.imageDemande{
-    width: 25%;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.imageDemande img {
-    width: 45%;
-    margin: 2% 0;
-    border-radius: 30px;
-}
-
-.infosChat {
-    width: 15%;
-}
-
-.infosPers {
-    width: 15%;
-}
-
-.memos {
-    width: 45%;
-    display: flex;
-    justify-content: space-around;
+    width: 50%;
     margin: 1% 0;
 }
 
-.memos textarea{
+.infoPlus textarea{
     width: 50%;
-    height: 80%;
-    resize: none;
+    height: auto;
+    border : solid 1px black;
 }
 
-.memos p{
+.infoPlus p{
     width: 50%;
-    height: 80%;
     background-color: white;
     padding: 1%;
     margin: 0;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .sous-memos {
-    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 45%;
 }
 
 .sous-memos textarea{
-    width: 100%;
-    height: 22%;
-    resize: none;
+    width: 80%;
+    padding: 1%;
 }
 .sous-memos p{
-    width: 80%;
+    width: 90%;
     height: 20%;
     background-color: white;
     padding: 1%;
-    margin-bottom: 8%;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .btnDemande {

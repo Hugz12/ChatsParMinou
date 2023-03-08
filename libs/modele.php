@@ -104,7 +104,7 @@ function addEvenement($titre,$description,$date,$couleur){
 
 /*
 * fonction qui gère l'ajout d'une demande d'adoption
-* @param $nomChat
+* @param $codeChat
 * @param $nom
 * @param $prenom
 * @param $mail
@@ -117,10 +117,10 @@ function addEvenement($titre,$description,$date,$couleur){
 * @param $animaux
 * @param $commentaire
 */
-function addDemandeAdoptionBDD($nomChat,$nom,$prenom,$mail,$tel,$adresse,$habitation,$exterieur,$sortie,$situationFamiliale,$animaux,$commentaire){
+function addDemandeAdoptionBDD($codeChat,$nom,$prenom,$mail,$tel,$adresse,$habitation,$exterieur,$sortie,$situationFamiliale,$animaux,$commentaire){
     date_default_timezone_set('Europe/Paris');
     $date = date('d-m-y h:i:s');
-    $SQL = "INSERT INTO demandeadoption (date,nomChat,nom,prenom,mail,tel,adresse,habitation,exterieur,sortie,situationFamiliale,animaux,commentaire) VALUES ('$date','$nomChat','$nom','$prenom','$mail','$tel','$adresse','$habitation','$exterieur','$sortie','$situationFamiliale','$animaux','$commentaire')";
+    $SQL = "INSERT INTO demandeadoption (date,codeChat,nom,prenom,mail,tel,adresse,habitation,exterieur,sortie,situationFamiliale,animaux,commentaire,statutDemande,memo,datePv,resultatPv,dateRencontre) VALUES ('$date','$codeChat','$nom','$prenom','$mail','$tel','$adresse','$habitation','$exterieur','$sortie','$situationFamiliale','$animaux','$commentaire',1,'','','','')";
     return SQLInsert($SQL);
 }
 
