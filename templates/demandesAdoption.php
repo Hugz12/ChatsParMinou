@@ -14,23 +14,34 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <script src="./js/demandesAdoption.js"></script>
 
 <div id="recherche">
+	<select id="selectRecherche">
+		<option value="rchGenerale">Recherche générale</option>
+		<option value="rchChat">Recherche d'un chat</option>
+		<option value="rchPers">Recherche d'une personne</option>
+		<option value="rchDate">Recherche d'une date</option>
+	</select>
+
 	<input type="text" id="contenuRecherche" placeholder="Rechercher...">
-	<div id="choixRecherche">
-		<p> Chats </p>
-		<div class="choix-chat">
-			<button id="btnChoixRecherche"></button>
-		</div>
-		<p>Personne</p>
+
+	<p>Date d'ajout (plus récentes)</p>
+	<div class="choix-recent">
+		<button id="btnTriTps"></button>
 	</div>
-	<p> Tri par temps </p>
-	<img class="clickable"src="./ressources/infos.png" alt="infos">
+	
+	<img src="./ressources/infos.png" alt="infos">
 </div>
 
-<div id="nouvellesDemande"></div>
+<div id="nouvellesDemandes" class="conteneurDemandes"></div>
 
-<div id="demandesEnCours"></div>
+<a id="lienNouvellesDemandes" class="lienPlusMoins" href="javascript:void(0)">Montrer plus</a>
 
-<div id="traitees"></div>
+<div id="demandesEnCours" class="conteneurDemandes"></div>
+
+<a id="lienEnCours" class="lienPlusMoins" href="javascript:void(0)">Montrer plus</a>
+
+<div id="traitees" class="conteneurDemandes"></div>
+
+<a id="lienTraitees" class="lienPlusMoins" href="javascript:void(0)">Montrer plus</a>
 
 <div id="overlay">
 	<div id="popupSupp">
@@ -50,3 +61,4 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	afficherTitres(demandesAdoption);
 	afficherDemandes(demandesAdoption);
 </script>
+
