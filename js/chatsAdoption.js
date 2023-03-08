@@ -235,13 +235,58 @@ function displayFormEditChat(element){
 }
 
 
+let selectedFiles = [];
+
+function filesAdd(contexte) {
+	const slides = $(".formType .inputFile .slides");
+	console.log(slides);
+	console.log(contexte);
+
+	for (const file of contexte.files) { // Pour tous les fichiers sélectionnés
+               
+		selectedFiles.push(file); // On les ajoute à la liste des fichiers sélectionnés
+
+		const img = document.createElement("img");
+		img.src = URL.createObjectURL(file);
+
+		const slidePhoto = document.createElement("div");
+		slidePhoto.classList.add("slidePhoto");
+		slidePhoto.appendChild(img);
+
+		const deleteButton = document.createElement("button");
+		deleteButton.classList.add("delete-button");
+		deleteButton.innerText = "X";
+		deleteButton.addEventListener("click", () => {
+			selectedFiles = selectedFiles.filter(f => f !== file); 
+			photoUploadInput = document.getElementById("photo-upload");
+			var taille = slides.children().length-1;
+			if (slides.css("transform") != "translateX(0px)") {
+				$(".formType .inputFile .flecheGauche").click();
+			}
+			slides.css("width", taille*100+"px");
+			console.log(photoUploadInput.files);
+
+			$(slidePhoto).remove();
+			pushSelectedFilesInInput();
+		});
+
+		slidePhoto.appendChild(deleteButton);
+		slides.append(slidePhoto);
 
 
+		var taille = slides.children().length;
+		slides.css("width", taille*100+"px");
+	}
+}
 
-$(".colorPickerColor").on("change", function() {
-	console.log("je change");
-	this.style.backgroundColor = this.value;
-});
+function pushSelectedFilesInInput(contexte) {
+	const fileInput = document.getElementById("photo-upload");
+	const fileData = new ClipboardEvent('').clipboardData || new DataTransfer();
+	for (const file of selectedFiles) {
+		fileData.items.add(file);
+	}
+	fileInput.files = fileData.files;
+}
 
 
 
