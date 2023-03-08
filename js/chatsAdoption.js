@@ -260,7 +260,7 @@ function filesAdd(contexte) {
 			selectedFiles = selectedFiles.filter(f => f !== file); 
 			photoUploadInput = document.getElementById("photo-upload");
 			var taille = slides.children().length-1;
-			if (slidePhoto == slides.children()[taille]) {
+			if (slides.css("transform") != "translateX(0px)") {
 				$(".formType .inputFile .flecheGauche").click();
 			}
 			slides.css("width", taille*100+"px");
