@@ -265,7 +265,7 @@ function displayFormEditChat(element){
 let selectedFiles = [];
 
 function filesAdd(contexte) {
-	const slides = $(".formType .inputFile#add .slides");
+	slides = $(contexte).parent().find(".slides");
 	console.log(slides);
 	console.log(contexte);
 
@@ -289,23 +289,22 @@ function filesAdd(contexte) {
 		deleteButton.classList.add("delete-button");
 		deleteButton.innerText = "X";
 
-		deleteButton.addEventListener("click", () => { // Au clic sur le bouton de suppression
-
+		// On ajoute un écouteur d'événement au bouton de suppression
+		deleteButton.addEventListener("click", () => {
 			// On supprime le fichier de la liste des fichiers sélectionnés
 			selectedFiles = selectedFiles.filter(f => f !== file); 
 
 			// On supprime la div qui contient l'image et le bouton de suppression
-			photoUploadInput = document.getElementById("photo-upload");
 			var taille = slides.children().length-1;
 			if (slides.css("transform") != "translateX(0px)") {
 				$(".formType .inputFile .flecheGauche").click();
 			}
 			slides.css("width", taille*100+"px");
-			console.log(photoUploadInput.files);
+			console.log(contexte.files);
 
 			$(slidePhoto).remove();
-			pushSelectedFilesInInput();
-		});
+			pushSelectedFilesInInput(contexte);
+		}); // On ajoute un écouteur d'événement au bouton de suppression
 
 
 		// On ajoute l'image et le bouton de suppression à la div qui les contient
@@ -319,7 +318,7 @@ function filesAdd(contexte) {
 }
 
 function pushSelectedFilesInInput(contexte) {
-	const fileInput = document.getElementById("photo-upload");
+	const fileInput = $(contexte);
 	const fileData = new ClipboardEvent('').clipboardData || new DataTransfer();
 	for (const file of selectedFiles) {
 		fileData.items.add(file);
@@ -339,10 +338,9 @@ function addPreviewOfExistantFiles(code){
 		},
 		success: function (data) {
 			console.log(data);
-			const slides = $(".formType .inputFile .allSlider .slider #edit");
+			const slides = $(".formType #edit");
 
-			var taille = slides.children().length;
-			slides.css("width", taille*100+"px");
+			
 			for (const photo of data) {
 				const img = document.createElement("img");
 				img.src = photo['url'];
@@ -355,28 +353,17 @@ function addPreviewOfExistantFiles(code){
 				deleteButton.classList.add("delete-button");
 				deleteButton.innerText = "X";
 				deleteButton.addEventListener("click", () => {
-					$.ajax({
-						url: 'controleur.php',
-						type: 'POST',
-						data: {
-							action: 'deletePhoto',
-							url: photo['url']
-						},
-						success: function (data) {
-							console.log(data);
-							$(slidePhoto).remove();
-							var taille = slides.children().length-1;
-							slides.css("width", taille*100+"px");
-						},
-						error: function (data) {
-							console.log("error");
-						}
-					});
+					console.log(data);
+					var taille = slides.children().length-1;
+					slides.css("width", taille*100+"px");
+					$(slidePhoto).remove();
 				});
 
 				slidePhoto.appendChild(deleteButton);
 				slides.append(slidePhoto);
 			}
+			var taille = slides.children().length;
+			slides.css("width", taille*100+"px");
 		},
 		error: function (data) {
 			console.log("error");
