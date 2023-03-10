@@ -3,14 +3,6 @@
     display: none;
 }
 
-.txtUnset {
-    display: unset;
-}
-textarea{
-    resize: none;
-    background-color: white;
-}
-
 /* Titres */
 h2 {
     margin-left: 3%;
@@ -131,6 +123,7 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     position: relative;
     width: 80%;
     background-color: var(--fourth-color);
+    border-radius: 30px;
 }
 
 .infoMoins {
@@ -174,7 +167,7 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     margin: 0;
 }
 
-.infosPers p:first-child {
+.nomPers {
     font-size: 25px;
 }
 
@@ -183,40 +176,19 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     justify-content: space-around;
     width: 50%;
     margin: 1% 0;
-}
-
-.infoPlus textarea{
-    width: 50%;
-    height: auto;
-    border : solid 1px black;
-}
-
-.infoPlus p{
-    width: 50%;
-    background-color: white;
-    padding: 1%;
-    margin: 0;
-    cursor: pointer;
+    background-color: inherit;
 }
 
 .sous-memos {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 45%;
 }
 
-.sous-memos textarea{
-    width: 80%;
+.commentaire {
     padding: 1%;
-}
-.sous-memos p{
-    width: 90%;
-    height: 20%;
-    background-color: white;
-    padding: 1%;
-    cursor: pointer;
 }
 
 .btnDemande {
