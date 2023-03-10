@@ -166,7 +166,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 							<div class='group'>
 								<div class='group'>
 									<input type='date' name='dateNaissance' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
-									<label for=\"date\">Date de naissance</label>
+									<label for=\"date\">Naissance</label>
 								</div>
 
 								<div class='colorPicker'>
@@ -188,7 +188,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 
 
-					<div class='inputFile'>
+					<div class='inputFile' id='add'>
 						
 						<div id='allSliderPhoto' class='allSlider'>
 							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.png' alt='flecheGauche'>

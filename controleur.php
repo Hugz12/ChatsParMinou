@@ -262,6 +262,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+
+		case 'getPhotos' : 
+			// qui renvoi les photos du chat stocké dans un dossier
+			if ($code = valider("code")){
+				$photos = getPhotos($code);
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode($photos);
+				die(); 
+			}
+
 		case 'Edit Chat' : 
 			// si il y a au moins un champ non vide
 			if (($statut = valider("statut","POST")) 

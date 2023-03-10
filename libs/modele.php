@@ -242,6 +242,25 @@ function getChat($code){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function getPhotos($code){
+    // retourne un tableau de photos du chat stocké dans le dossier ressources/chats/$code qui contient toutes les informations sur les photos pour pouvoir les afficher
+    $photos = array();
+    $dir = "ressources/chats/$code";
+    $files = scandir($dir);
+    foreach ($files as $file){
+        if ($file != "." && $file != ".."){
+            $photo = array();
+            $photo["name"] = $file;
+            $photo["size"] = filesize("$dir/$file");
+            $photo["type"] = mime_content_type("$dir/$file");
+            $photo["date"] = date("d-m-Y H:i:s", filemtime("$dir/$file"));
+            $photo["url"] = "$dir/$file";
+            $photos[] = $photo;
+        }
+    }
+    return $photos;
+}
+
 function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
 
     if ($statut != false){
