@@ -1,4 +1,12 @@
-
+html, body {
+  height : 100%;
+  width: 100%;
+}
+body {
+  background: linear-gradient(to top, var(--third-color), var(--sec-color));
+  background-repeat: no-repeat;
+  margin: 0;
+}
 .flip-card {
     background-color: transparent;
     width: 305px;
@@ -72,3 +80,28 @@
 #cardD {
     transform : rotate(12deg) translateY(50px);    
   }
+
+/* pour les écrans de petite taille */
+@media (max-width: 1210px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flip-card {
+    margin-bottom: 50px;
+  }
+
+  #cardG {
+    transform : rotate(0deg) translateY(0px);
+  }
+
+  #cardD {
+    transform : rotate(0deg) translateY(0px);    
+  }
+
+  html, body {
+    height : auto;
+    width: 100%;
+  }
+}
