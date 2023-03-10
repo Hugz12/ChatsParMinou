@@ -165,7 +165,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 							<div class='group'>
 								<div class='group'>
-									<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
+									<input type='date' name='dateNaissance' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
 									<label for=\"date\">Date de naissance</label>
 								</div>
 
@@ -204,7 +204,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
 							</svg>
 						</label>
-						<input id='photo-upload' type='file' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+						<input id='photo-upload' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
 					</div>
 
