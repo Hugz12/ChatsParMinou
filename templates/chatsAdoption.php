@@ -151,19 +151,6 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 									<div class='photoDroite'><img src='./ressources/male.png'></div>
 									<input type='hidden' name='sexe' value='2'> 
 								</div>
-								
-								<div class='colorPicker'>
-									<label for='couleur' class='colorPickerText'>Couleur</label>
-									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
-									<input id='colorInput' type='hidden' name='couleur' value='#000000'>
-								</div>
-							</div>
-
-							<div class='group'>
-								<div class='group'>
-									<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
-									<label for=\"date\">Date de naissance</label>
-								</div>
 
 								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
 									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
@@ -172,6 +159,23 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 									<div class='photoDroite'><img src='./ressources/famille_accueil.png'></div>
 									<input type='hidden' name='familleAccueil' value='1'> 
 								</div>
+								
+								
+							</div>
+
+							<div class='group'>
+								<div class='group'>
+									<input type='date' name='dateNaissance' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
+									<label for=\"date\">Date de naissance</label>
+								</div>
+
+								<div class='colorPicker'>
+									<label for='couleur' class='colorPickerText'>Couleur</label>
+									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
+									<input id='colorInput' type='hidden' name='couleur' value='#000000'>
+								</div>
+
+								
 							</div>
 						</div>
 
@@ -200,7 +204,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
 							</svg>
 						</label>
-						<input id='photo-upload' type='file' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+						<input id='photo-upload' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
 					</div>
 

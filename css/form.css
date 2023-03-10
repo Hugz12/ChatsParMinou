@@ -75,7 +75,7 @@ form {
 #inputAddChatOther {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: inherit;
     width: 200px;
     height: 180px;
@@ -90,6 +90,7 @@ form {
 }
 
 /*------------------------------------------------------------------------*/
+
 /*                   input type text, password, textarea                  */
 /*------------------------------------------------------------------------*/
 
@@ -179,7 +180,7 @@ form input[type="date"]~label {
     position: absolute;
     width: max-content;
     left: 50%;
-    top: -20px;
+    top: -17px;
     transform: translateX(-50%);
     pointer-events: none;
     transition: all 0.3s ease;
@@ -327,7 +328,7 @@ input.checkboxFamille {
 
 .colorPicker > .colorPickerText {
     position: absolute;
-    top: -20px;
+    top: -17px;
     left: 50%;
     z-index: 10;
 	color: rgb(163, 163, 163);
