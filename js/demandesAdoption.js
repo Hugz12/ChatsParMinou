@@ -10,28 +10,43 @@ function divDemande(date, btn, img, demande){
                             <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
                             <div class="infosChat">
                                 <p>${demande['name']}</p>
-                                <p>${demande["code"]}</p>
-                                <p class="txtCache">${demande["statut"]}</p>
+                                <p>Code : ${demande["code"]}</p>
+                                <p class="txtCache statutChat">${demande["statut"]}</p>
                             </div>
                             <div class="infosPers">
-                                <p>${demande['prenom']} ${demande["nom"]}</p>
+                                <p class="nomPers">${demande['prenom']} ${demande["nom"]}</p>
                                 <p>${demande['mail']}</p>
                                 <p>${demande['tel']}</p>
+                                <p class="txtCache">${demande['adresse']}</p>
                                 <p class="txtCache">${demande['habitation']}</p>
-                                <p class="txtCache">${demande['exterieur']}</p>
-                                <p class="txtCache">${demande['sortie']}</p>
+                                <p class="txtCache exterieur">${demande['exterieur']}</p>
+                                <p class="txtCache sortie">${demande['sortie']}</p>
                                 <p class="txtCache">${demande['situationFamiliale']}</p>
                                 <p class="txtCache">${demande['animaux']}</p>
                             </div>
                         </div>
                         <div class="infoPlus">
-                            <p class="memo">${demande['memo']}</p>
+                            <form>
+                            <div class='group memo'>
+                                <textarea name='memo'>${demande['memo']}</textarea>
+                                <label for=\"memo\">Memo</label>
+						    </div>
                             <div class="sous-memos">
-                                <p class="datePv">${demande['datePv']}</p>
-                                <p class="resultatPv">${demande['resultatPv']}</p>
-                                <p class="dateRencontre">${demande['dateRencontre']}</p>
+                                <div class='group datePv'>
+                                    <textarea name='datePv'>${demande['datePv']}</textarea>
+                                    <label for=\"datePv\">datePv</label>
+                                </div>
+                                <div class='group resultatPv'>
+                                    <textarea name='resultatPv'>${demande['resultatPv']}</textarea>
+                                    <label for=\"resultatPv\">resultatPv</label>
+                                </div>
+                                <div class='group dateRencontre'>
+                                    <textarea name='dateRencontre'>${demande['dateRencontre']}</textarea>
+                                    <label for=\"dateRencontre\">dateRencontre</label>
+                                </div>
                             </div>
-                            <p class="txtCache">${demande['commentaire']}</p>
+                            </form>
+                            <p class="txtCache commentaire">${demande['commentaire']}</p>
                         </div>
                         
                     </div>
@@ -285,16 +300,17 @@ $(function() {
 
 //Fonctions d'edition des commentaires
 $(function() {
-    var jTA = $("<textarea>").keyup(function(contexte){
+    /*var jTA = */$("<textarea>").keyup(function(contexte){
         if(contexte.ctrlKey && (contexte.key == "Enter" || contexte.keyCode == 10 || contexte.keyCode == 13)) {
             //console.log("appui sur touche Control + " + contexte.key);
             var text = $(this).val();
             //console.log("text : " + text);
-    
+
             if ($(this).hasClass("memo")) var contenu = "memo";
             if ($(this).hasClass("datePv")) var contenu = "datePv";
             if ($(this).hasClass("resultatPv")) var contenu = "resultatPv";
             if ($(this).hasClass("dateRencontre")) var contenu = "dateRencontre";
+            if ($(this).hasClass("commentaire")) var contenu = "commentaire";
     
             if ($(this).parent().parent().parent().parent().parent().hasClass("demandes")) var parent = $(this).parent().parent().parent().parent().parent();
             else var parent = $(this).parent().parent().parent().parent().parent().parent();
@@ -325,14 +341,17 @@ $(function() {
         }
     }); 
 
-    $(document).on("keyup",function(contexte){
+    /*$(document).on("keyup",function(contexte){
         if (contexte.key == "Escape") {
             console.log("appui sur touche " + contexte.key);
             $("textarea").each(function(){
+
                 if ($(this).hasClass("memo")) var contenu = "memo";
                 if ($(this).hasClass("datePv")) var contenu = "datePv";
                 if ($(this).hasClass("resultatPv")) var contenu = "resultatPv";
                 if ($(this).hasClass("dateRencontre")) var contenu = "dateRencontre";
+                if ($(this).hasClass("commentaire")) var contenu = "commentaire";
+
     
                 var jPClone = $("<p class=" + contenu + ">").clone().html($(this).data("lastValue"));
                 $(this).replaceWith(jPClone);
@@ -340,7 +359,7 @@ $(function() {
         }
     });
 
-    $(".commentaires").on("click", "p", function() {
+    $(".infoPlus").on("click", "p", function() {
         console.log("click sur p");
         var jTAClone = jTA.clone(true).val($(this).text()).data("lastValue", $(this).text());
 
@@ -348,9 +367,10 @@ $(function() {
         if ($(this).hasClass("datePv")) jTAClone = jTAClone.addClass("datePv");
         if ($(this).hasClass("resultatPv")) jTAClone = jTAClone.addClass("resultatPv");
         if ($(this).hasClass("dateRencontre")) jTAClone = jTAClone.addClass("dateRencontre");
+        if ($(this).hasClass("commentaire")) jTAClone = jTAClone.addClass("commentaire");
 
         $(this).replaceWith(jTAClone);
-    });
+    });*/
 
     var moveLeft = 20;
     var moveDown = 10;
@@ -503,18 +523,65 @@ $(function() {
             $($(this).parent()).css({"transform" : "scale(1)" , "transition" : "1s"});
             $($(this).parent()).css({"display" : "flex"});
             $(this).css({"width" : "50%"});
-            $($(this).parent().children(".infoPlus")).css({"width" : "50%"});
+            $($(this).parent().children(".infoPlus")).css({"width" : "50%" , "height" : "auto", "margin" : "1% 0"});
             $($(this).children(".infosChat").children(".txtCache")).css({"display" : "none"});
             $($(this).children(".infosPers").children(".txtCache")).css({"display" : "none"});
             $($(this).parent().children(".infoPlus").children(".txtCache")).css({"display" : "none"});
+            $($(this).parent().children(".infoPlus").children(".commentaire")).css({"display" : "none"});
+            $($(this).parent().children(".infoPlus").children(".memo")).css({"width" : "50%"});
+            $($(this).parent().children(".infoPlus").children(".sous-memos")).css({"width" : "45%"});
+            $($(this).parent().children(".tpsDate")).css({"display" : "unset"});
         } else {
             $($(this).parent()).css({"transform" : "scale(1.2)" , "transition" : "1s"});
             $($(this).parent()).css({"display" : "block"});
             $(this).css({"width" : "100%"});
-            $($(this).parent().children(".infoPlus")).css({"width" : "100%"});
+            $($(this).parent().children(".infoPlus")).css({"width" : "100%" , "height" : "10em", "margin" : "1em"});
             $($(this).children(".infosChat").children(".txtCache")).css({"display" : "unset"});
             $($(this).children(".infosPers").children(".txtCache")).css({"display" : "unset"});
             $($(this).parent().children(".infoPlus").children(".txtCache")).css({"display" : "unset"});
+            $($(this).parent().children(".infoPlus").children(".commentaire")).css({"display" : "unset", "width" : "45%"});
+            $($(this).parent().children(".infoPlus").children(".memo")).css({"width" : "20%"});
+            $($(this).parent().children(".infoPlus").children(".sous-memos")).css({"width" : "20%"});
+            $($(this).parent().children(".tpsDate")).css({"display" : "none"});
+        }
+    });
+});
+
+// Remplacement de texte
+$(function() {
+    $(".statutChat").each(function() {
+        switch ($(this).text()) {
+            case '1':
+                $(this).text("A adopter");
+                break;
+            case '2':
+                $(this).text("En cours d'adoption");
+                break;
+            case '3':
+                $(this).text("Adopté");
+                break;
+        }
+    });
+
+    $(".exterieur").each(function() {
+        switch ($(this).text()) {
+            case '0':
+                $(this).text("Pas d'extérieur");
+                break;
+            case '1':
+                $(this).text("Extérieur disponible");
+                break;
+        }
+    });
+
+    $(".sortie").each(function() {
+        switch ($(this).text()) {
+            case '0':
+                $(this).text("Pas de sortie");
+                break;
+            case '1':
+                $(this).text("Sortie autorisée");
+                break;
         }
     });
 });

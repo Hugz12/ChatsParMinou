@@ -3,6 +3,10 @@
 /*------------------------------------------------------------------------*/
 
 
+form {
+    background-color: inherit;
+}
+
 .group {
 	position: relative;	
     background-color: inherit;
