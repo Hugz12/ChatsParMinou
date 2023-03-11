@@ -186,38 +186,64 @@ function displayFormEditChat(element){
 					<div class='inputText'>
 
 						<div class='group'>
-							<input type='text' class='input' name='statut' value='${chat['statut']}' required>
-							<span class='highlight'></span>
-							<span class='bar'></span>
-							<label>Statut</label>
+							<input type='text' name='nom' value='${chat['name']}' required>
+							<label for=\"nom\">Name</label>
 						</div>
 
 						<div class='group'>
-							<input type='text' class='input' name='description' value='${chat['description']}' required>
-							<span class='highlight'></span>
-							<span class='bar'></span>
-							<label>Description</label>
+							<input type='text' name='statut' value='${chat['statut']}'required>
+							<label for=\"statut\">Statut</label>
 						</div>
 
 					</div>
-					
+
 					<div class='inputOther'>
 
-						
+						<div id='inputAddChatOther' class='group' style='justify-content:center;'>
+							<div class='group'>	
 
-						<input type='color' name='couleur' value='${chat['couleur']}' style='width:32px; height: 32px;' >
+								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
+									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
+									<div class='photoGauche'><img src='./ressources/logo.png'></div>
+									<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
+									<div class='photoDroite'><img src='./ressources/famille_accueil.png'></div>
+									<input type='hidden' name='familleAccueil' value='1'> 
+								</div>
 
-						<div class='switch'>
-							<div><img src='./ressources/logo.png'></div>
-							<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
-							<div><img src='./ressources/famille_accueil.png'></div>
-							<input type='hidden' name='familleAccueil' value='1'> 
+								<div class='colorPicker'>
+									<label for='couleur' class='colorPickerText'>Couleur</label>
+									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
+									<input id='colorInput' type='hidden' name='couleur' value='${chat['couleur']}'>
+								</div>
+
+							</div>
+						</div>
+
+						<div class='group'>
+							<textarea rows='1' name='description'required>${chat['description']}</textarea>
+							<label for=\"description\">Description</label>
 						</div>
 
 					</div>
 
-					<div class='inputText'>
-						<input type='file' name='photos[]' multiple required>
+					<div class='inputFile'>
+						
+						<div id='allSliderPhoto' class='allSlider'>
+							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.png' alt='flecheGauche'>
+							<div id='sliderPhoto' class='slider ombre'>
+								<div class='slides' id='edit'></div>
+							</div>
+							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.png' alt='flecheDroite'>
+						</div>
+
+						<label for='photo-upload' class='photo-upload-label'>
+							<svg width='50' height='50'>
+								<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
+								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
+							</svg>
+						</label>
+						<input id='photo-upload' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+
 					</div>
 
 					<div class='inputText'>
@@ -226,6 +252,7 @@ function displayFormEditChat(element){
 
 					<input type='hidden' name='code' value='${chat['code']}'>
 			`);
+			addPreviewOfExistantFiles(chat['code']);
 
 		},
 		error: function (data) {
@@ -238,7 +265,7 @@ function displayFormEditChat(element){
 let selectedFiles = [];
 
 function filesAdd(contexte) {
-	const slides = $(".formType .inputFile .slides");
+	slides = $(contexte).parent().find(".slides");
 	console.log(slides);
 	console.log(contexte);
 
@@ -246,30 +273,41 @@ function filesAdd(contexte) {
                
 		selectedFiles.push(file); // On les ajoute à la liste des fichiers sélectionnés
 
+
+		// Création dela balise img et ajout de l'image
 		const img = document.createElement("img");
 		img.src = URL.createObjectURL(file);
 
+
+		// Création de la div qui contiendra l'image et le bouton de suppression
 		const slidePhoto = document.createElement("div");
 		slidePhoto.classList.add("slidePhoto");
 		slidePhoto.appendChild(img);
 
+		// création du bouton de suppression
 		const deleteButton = document.createElement("button");
 		deleteButton.classList.add("delete-button");
 		deleteButton.innerText = "X";
+
+		// On ajoute un écouteur d'événement au bouton de suppression
 		deleteButton.addEventListener("click", () => {
+			// On supprime le fichier de la liste des fichiers sélectionnés
 			selectedFiles = selectedFiles.filter(f => f !== file); 
-			photoUploadInput = document.getElementById("photo-upload");
+
+			// On supprime la div qui contient l'image et le bouton de suppression
 			var taille = slides.children().length-1;
 			if (slides.css("transform") != "translateX(0px)") {
 				$(".formType .inputFile .flecheGauche").click();
 			}
 			slides.css("width", taille*100+"px");
-			console.log(photoUploadInput.files);
+			console.log(contexte.files);
 
 			$(slidePhoto).remove();
-			pushSelectedFilesInInput();
-		});
+			pushSelectedFilesInInput(contexte);
+		}); // On ajoute un écouteur d'événement au bouton de suppression
 
+
+		// On ajoute l'image et le bouton de suppression à la div qui les contient
 		slidePhoto.appendChild(deleteButton);
 		slides.append(slidePhoto);
 
@@ -280,12 +318,57 @@ function filesAdd(contexte) {
 }
 
 function pushSelectedFilesInInput(contexte) {
-	const fileInput = document.getElementById("photo-upload");
+	const fileInput = $(contexte);
 	const fileData = new ClipboardEvent('').clipboardData || new DataTransfer();
 	for (const file of selectedFiles) {
 		fileData.items.add(file);
 	}
 	fileInput.files = fileData.files;
+}
+
+
+
+function addPreviewOfExistantFiles(code){
+	$.ajax({
+		url: 'controleur.php',
+		type: 'POST',
+		data: {
+			action: 'getPhotos',
+			code: code
+		},
+		success: function (data) {
+			console.log(data);
+			const slides = $(".formType #edit");
+
+			
+			for (const photo of data) {
+				const img = document.createElement("img");
+				img.src = photo['url'];
+
+				const slidePhoto = document.createElement("div");
+				slidePhoto.classList.add("slidePhoto");
+				slidePhoto.appendChild(img);
+
+				const deleteButton = document.createElement("button");
+				deleteButton.classList.add("delete-button");
+				deleteButton.innerText = "X";
+				deleteButton.addEventListener("click", () => {
+					console.log(data);
+					var taille = slides.children().length-1;
+					slides.css("width", taille*100+"px");
+					$(slidePhoto).remove();
+				});
+
+				slidePhoto.appendChild(deleteButton);
+				slides.append(slidePhoto);
+			}
+			var taille = slides.children().length;
+			slides.css("width", taille*100+"px");
+		},
+		error: function (data) {
+			console.log("error");
+		}
+	});
 }
 
 

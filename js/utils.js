@@ -102,6 +102,7 @@ function rotateLogoBack(contexte){
 
 function displayForm(id){
 	console.log("display" + id);
+	$("#"+id + " form").trigger("reset");
 	$("#"+id).css("display", "flex");
 	$(".disabled").css("pointer-events", "none");
 	$("#"+id).animate({opacity: 1}, 250);
