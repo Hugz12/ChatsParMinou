@@ -267,7 +267,9 @@ let selectedFiles = [];
 function filesAdd(contexte) {
 	slides = $(contexte).parent().find(".slides");
 	console.log(slides);
+	console.log("contexte");
 	console.log(contexte);
+	console.log("contexte_end");
 
 	for (const file of contexte.files) { // Pour tous les fichiers sélectionnés
                
@@ -326,6 +328,7 @@ function pushSelectedFilesInInput(contexte) {
 		fileData.items.add(file);
 	}
 	fileInput.files = fileData.files;
+	console.log(fileInput.files);
 }
 
 

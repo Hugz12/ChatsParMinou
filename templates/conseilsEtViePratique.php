@@ -14,7 +14,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <div>
 	<div id="conseils">
 		<div id="conseilTitre" class="policeTitre">
-			<h1>Conseils</h1>
+			<h1>Conseils et vie pratique</h1>
 		</div>
 		<div id="conseilText" class="policeTexte">
 			<a href="https://www.youtube.com">Mmmh oui c'est le conseil de la semaine</a>

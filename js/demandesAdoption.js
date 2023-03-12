@@ -7,48 +7,53 @@ function divDemande(date, btn, img, demande){
                         <p class="tpsDate">${date}</p>
                         <p class="tpsComplet">${demande["date"]}|</p>
                         <div class="infoMoins">
-                            <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
                             <div class="infosChat">
-                                <p>${demande['name']}</p>
-                                <p>Code : ${demande["code"]}</p>
-                                <p class="txtCache statutChat">${demande["statut"]}</p>
+                                <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
+                                <div class="idChat">
+                                    <p class="policeTitre">${demande['name']}</p>
+                                    <p>Code : ${demande["code"]}</p>
+                                    <p class="none statutChat">${demande["statut"]}</p>
+                                </div>
                             </div>
                             <div class="infosPers">
-                                <p class="nomPers">${demande['prenom']} ${demande["nom"]}</p>
-                                <p>${demande['mail']}</p>
-                                <p>${demande['tel']}</p>
-                                <p class="txtCache">${demande['adresse']}</p>
-                                <p class="txtCache">${demande['habitation']}</p>
-                                <p class="txtCache exterieur">${demande['exterieur']}</p>
-                                <p class="txtCache sortie">${demande['sortie']}</p>
-                                <p class="txtCache">${demande['situationFamiliale']}</p>
-                                <p class="txtCache">${demande['animaux']}</p>
+                                <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
+                                <p>Mail: ${demande['mail']}</p>
+                                <p>Tél.: ${demande['tel']}</p>
+                                <p class="none">Adresse: ${demande['adresse']}</p>
+                                <p class="none">Habitation: ${demande['habitation']}</p>
+                                <p class="none exterieur">${demande['exterieur']}</p>
+                                <p class="none sortie">${demande['sortie']}</p>
+                                <p class="none">${demande['situationFamiliale']}</p>
+                                <p class="none">${demande['animaux']}</p>
                             </div>
                         </div>
                         <div class="infoPlus">
                             <form>
-                            <div class='group memo'>
-                                <textarea name='memo'>${demande['memo']}</textarea>
-                                <label for=\"memo\">Memo</label>
-						    </div>
-                            <div class="sous-memos">
-                                <div class='group datePv'>
-                                    <textarea name='datePv'>${demande['datePv']}</textarea>
-                                    <label for=\"datePv\">datePv</label>
+                                <div class='group memo'>
+                                    <textarea name='memo'>${demande['memo']}</textarea>
+                                    <label for=\"memo\">Memo</label>
                                 </div>
-                                <div class='group resultatPv'>
-                                    <textarea name='resultatPv'>${demande['resultatPv']}</textarea>
-                                    <label for=\"resultatPv\">resultatPv</label>
+                                <div class="sous-memos">
+                                    <div class='group datePv'>
+                                        <textarea name='datePv'>${demande['datePv']}</textarea>
+                                        <label for=\"datePv\">datePv</label>
+                                    </div>
+                                    <div class='group resultatPv'>
+                                        <textarea name='resultatPv'>${demande['resultatPv']}</textarea>
+                                        <label for=\"resultatPv\">resultatPv</label>
+                                    </div>
+                                    <div class='group dateRencontre'>
+                                        <textarea name='dateRencontre'>${demande['dateRencontre']}</textarea>
+                                        <label for=\"dateRencontre\">dateRencontre</label>
+                                    </div>
                                 </div>
-                                <div class='group dateRencontre'>
-                                    <textarea name='dateRencontre'>${demande['dateRencontre']}</textarea>
-                                    <label for=\"dateRencontre\">dateRencontre</label>
+                                <div class='group commentaire none'>
+                                    <textarea name='commentaire'>${demande['commentaire']}</textarea>
+                                    <label for=\"commentaire\">commentaire</label>
                                 </div>
-                            </div>
                             </form>
-                            <p class="txtCache commentaire">${demande['commentaire']}</p>
+                            <button class="btnMemo clickable">Enregistrer</button>
                         </div>
-                        
                     </div>
                     <img class="btnDemande btnSupp clickable" src="./ressources/cross.png" alt="cross">
                 </div>
@@ -300,77 +305,32 @@ $(function() {
 
 //Fonctions d'edition des commentaires
 $(function() {
-    /*var jTA = */$("<textarea>").keyup(function(contexte){
-        if(contexte.ctrlKey && (contexte.key == "Enter" || contexte.keyCode == 10 || contexte.keyCode == 13)) {
-            //console.log("appui sur touche Control + " + contexte.key);
-            var text = $(this).val();
-            //console.log("text : " + text);
+    $(".btnMemo").on("click", function() {
+        console.log("Changer Memo");
+        var id = $($(this).parent().parent().parent().parent()).attr("id").match(/\d/g).toString().replace(',', '');
+        //console.log("id : " + id);
 
-            if ($(this).hasClass("memo")) var contenu = "memo";
-            if ($(this).hasClass("datePv")) var contenu = "datePv";
-            if ($(this).hasClass("resultatPv")) var contenu = "resultatPv";
-            if ($(this).hasClass("dateRencontre")) var contenu = "dateRencontre";
-            if ($(this).hasClass("commentaire")) var contenu = "commentaire";
-    
-            if ($(this).parent().parent().parent().parent().parent().hasClass("demandes")) var parent = $(this).parent().parent().parent().parent().parent();
-            else var parent = $(this).parent().parent().parent().parent().parent().parent();
-            //console.log(parent);
-    
-            var id = parent.attr("id").match(/\d/g).toString().replace(',', '');
-            //console.log("id : " + id);
-    
-            $.ajax({
-                url: "./controleur.php",
-                type: "POST",
-                dataType: "html",
-                data: {
-                    action: "Changer Memo",
-                    id: id,
-                    text: text,
-                    class: contenu
-                },
-                success: function() {
-                    console.log("success");
-                },
-                error: function() {
-                    console.log("error");
-                }
-            });
-    
-            $(this).replaceWith($("<p class=" + contenu + ">").clone().html(text));
-        }
-    }); 
-
-    /*$(document).on("keyup",function(contexte){
-        if (contexte.key == "Escape") {
-            console.log("appui sur touche " + contexte.key);
-            $("textarea").each(function(){
-
-                if ($(this).hasClass("memo")) var contenu = "memo";
-                if ($(this).hasClass("datePv")) var contenu = "datePv";
-                if ($(this).hasClass("resultatPv")) var contenu = "resultatPv";
-                if ($(this).hasClass("dateRencontre")) var contenu = "dateRencontre";
-                if ($(this).hasClass("commentaire")) var contenu = "commentaire";
-
-    
-                var jPClone = $("<p class=" + contenu + ">").clone().html($(this).data("lastValue"));
-                $(this).replaceWith(jPClone);
-            });
-        }
+        $.ajax({
+            url: "./controleur.php",
+            type: "POST",
+            dataType: "html",
+            data: {
+                action: "Changer Memo",
+                id: id,
+                memo: $($(this).parent().children("form").children(".memo").children("textarea")).val(),
+                datePv: $($(this).parent().children("form").children(".sous-memos").children(".datePv").children("textarea")).val(),
+                resultatPv: $($(this).parent().children("form").children(".sous-memos").children(".resultatPv").children("textarea")).val(),
+                dateRencontre: $($(this).parent().children("form").children(".sous-memos").children(".dateRencontre").children("textarea")).val(),
+                commentaire: $($(this).parent().children("form").children(".commentaire").children("textarea")).val(),
+            },
+            success: function() {
+                console.log("success");
+            },
+            error: function() {
+                console.log("error");
+            }
+        });
     });
-
-    $(".infoPlus").on("click", "p", function() {
-        console.log("click sur p");
-        var jTAClone = jTA.clone(true).val($(this).text()).data("lastValue", $(this).text());
-
-        if ($(this).hasClass("memo")) jTAClone = jTAClone.addClass("memo");
-        if ($(this).hasClass("datePv")) jTAClone = jTAClone.addClass("datePv");
-        if ($(this).hasClass("resultatPv")) jTAClone = jTAClone.addClass("resultatPv");
-        if ($(this).hasClass("dateRencontre")) jTAClone = jTAClone.addClass("dateRencontre");
-        if ($(this).hasClass("commentaire")) jTAClone = jTAClone.addClass("commentaire");
-
-        $(this).replaceWith(jTAClone);
-    });*/
 
     var moveLeft = 20;
     var moveDown = 10;
@@ -384,11 +344,6 @@ $(function() {
     $('#recherche img').mousemove(function(e) {
         $("#popupInfos").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
     });
-
-    /*$(document).on("mouseover","textarea", function(){
-        console.log($(this).data());
-        console.log("val : " + $(this).val());
-    });*/
 });
 
 // Fonctions de recherche
@@ -412,17 +367,17 @@ $(function() {
                 });
                 break;
 
-            case 'infosPers':
+            case 'rchPers':
                 //console.log("case rchPers");
-                $(".infosChat").filter(function(){ 
-                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                $(".infosPers").filter(function(){ 
+                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
                 });
                 break;
 
             case 'rchDate':
                 //console.log("case rchDate");
-                $(".timeDemande").filter(function(){ 
-                    $($(this).parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                $(".tpsDate").filter(function(){ 
+                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
                 });
                 break;
         }
@@ -520,29 +475,48 @@ $(function() {
         console.log("zoom");
 
         if ($($(this).parent()).css("display") == "block") {
-            $($(this).parent()).css({"transform" : "scale(1)" , "transition" : "1s"});
-            $($(this).parent()).css({"display" : "flex"});
-            $(this).css({"width" : "50%"});
-            $($(this).parent().children(".infoPlus")).css({"width" : "50%" , "height" : "auto", "margin" : "1% 0"});
-            $($(this).children(".infosChat").children(".txtCache")).css({"display" : "none"});
-            $($(this).children(".infosPers").children(".txtCache")).css({"display" : "none"});
-            $($(this).parent().children(".infoPlus").children(".txtCache")).css({"display" : "none"});
-            $($(this).parent().children(".infoPlus").children(".commentaire")).css({"display" : "none"});
-            $($(this).parent().children(".infoPlus").children(".memo")).css({"width" : "50%"});
-            $($(this).parent().children(".infoPlus").children(".sous-memos")).css({"width" : "45%"});
-            $($(this).parent().children(".tpsDate")).css({"display" : "unset"});
+            $($(this).parent()).css({"display" : "flex", "transform" : "scale(1)" , "transition" : "1s"}); //infoDemande
+            $($(this).parent().parent()).removeAttr('style'); //contenuDemande
+            $(this).removeAttr('style'); //infoMoins
+            $($(this).children(".infosChat").children("img")).removeAttr('style'); //infoMoins infosChat img
+            $($(this).parent().children(".infoPlus")).removeAttr('style'); //infoPlus
+            
+            $($(this).children(".infosChat")).removeAttr('style'); //infosChat
+            $($(this).children(".infosChat").children(".idChat")).removeAttr('style'); //infosChat idChat
+            $($(this).children(".infosChat").children(".idChat").children(".none")).removeAttr('style'); //infosChat idChat none
+
+            $($(this).children(".infosPers")).removeAttr('style'); //infosPers 
+            $($(this).children(".infosPers").children(".nomPers")).removeAttr('style'); //infosPers nomPers
+
+            $($(this).children(".infosPers").children(".none")).removeAttr('style'); //infosPers none
+            $($(this).parent().children(".infoPlus").children("form").children(".none")).removeAttr('style'); //infoPlus form none
+            $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).removeAttr('style'); //infosPlus form commentaire
+            $($(this).parent().children(".infoPlus").children("form").children(".memo")).removeAttr('style') //infosPlus form memo
+            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos")).removeAttr('style') //infosPlus form sous-memos
+            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos").children("div")).removeAttr('style'); //infosPlus form sous-memos div
+            $($(this).parent().children(".infoPlus").children(".btnMemo")).removeAttr('style'); //infosPlus btnMemo
+            $($(this).parent().children(".tpsDate")).removeAttr('style'); //tpsDate
         } else {
-            $($(this).parent()).css({"transform" : "scale(1.2)" , "transition" : "1s"});
-            $($(this).parent()).css({"display" : "block"});
-            $(this).css({"width" : "100%"});
-            $($(this).parent().children(".infoPlus")).css({"width" : "100%" , "height" : "10em", "margin" : "1em"});
-            $($(this).children(".infosChat").children(".txtCache")).css({"display" : "unset"});
-            $($(this).children(".infosPers").children(".txtCache")).css({"display" : "unset"});
-            $($(this).parent().children(".infoPlus").children(".txtCache")).css({"display" : "unset"});
-            $($(this).parent().children(".infoPlus").children(".commentaire")).css({"display" : "unset", "width" : "45%"});
-            $($(this).parent().children(".infoPlus").children(".memo")).css({"width" : "20%"});
-            $($(this).parent().children(".infoPlus").children(".sous-memos")).css({"width" : "20%"});
-            $($(this).parent().children(".tpsDate")).css({"display" : "none"});
+            $($(this).parent()).css({"display" : "block", "transform" : "scale(1.2)" , "transition" : "1s"}); //infoDemande
+            $($(this).parent().parent()).css({"margin" : "3% auto 6% auto"}); //contenuDemande
+            $(this).css({"width" : "100%"}); //infoMoins
+            $($(this).children(".infosChat").children("img")).css({"width" : "60%", "margin" : "auto 0"}); //infoMoins infosChat img
+            $($(this).parent().children(".infoPlus")).css({"width" : "98%" , "height" : "10em", "margin" : "1em"}); //infoPlus
+
+            $($(this).children(".infosChat")).css({"display" : "flex", "justify-content" : "space-around", "width" : "45%", "margin" : "0"}); //infosChat
+            $($(this).children(".infosChat").children(".idChat")).css({"display" : "flex", "flex-direction" : "column", "justify-content" : "space-around"}); //infosChat idChat
+            $($(this).children(".infosChat").children(".idChat").children(".none")).css({"display" : "unset"}); //infosChat idChat none
+
+            $($(this).children(".infosPers")).css({"grid-template-columns" : "repeat(2, 1fr)", "grid-template-rows" : "repeat(5, 1fr)", "width" : "45%"}); //infosPers 
+            $($(this).children(".infosPers").children(".nomPers")).css({"grid-area" : "1 / 1 / 2 / 3"}); //infosPers nomPers
+            $($(this).children(".infosPers").children(".none")).css({"display" : "unset"}); //infosPers none
+
+            $($(this).parent().children(".infoPlus").children("form").children(".none")).css({"display" : "unset"}); //infoPlus form none
+            $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).css({"display" : "unset", "width" : "45%", "height" : "120%"}); //infosPlus form commentaire
+            $($(this).parent().children(".infoPlus").children("form").children(".memo")).css({"width" : "30%", "height" : "130%"}); //infosPlus form memo
+            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos")).css({"width" : "20%", "height" : "130%"}); //infosPlus form sous-memos
+            $($(this).parent().children(".infoPlus").children(".btnMemo")).css({"width" : "8%"}); //infosPlus btnMemo
+            $($(this).parent().children(".tpsDate")).css({"display" : "none"}); //tpsDate
         }
     });
 });

@@ -188,7 +188,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 
 
-					<div class='inputFile' id='add'>
+					<div class='inputFile'>
 						
 						<div>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
@@ -196,7 +196,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 								<img src='./ressources/flecheLeft.png' alt='flecheGauche'>
 							</div>
 							<div id='sliderPhoto' class='slider ombre'>
-								<div class='slides'></div>
+								<div class='slides' id='add'></div>
 							</div>
 							<div class='flecheDroite clickable' onclick='translateX(this, undefined, false);'>
 								<img src='./ressources/flecheRight.png' alt='flecheDroite'>
