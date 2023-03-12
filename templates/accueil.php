@@ -81,17 +81,58 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		echo "
 			
 			<div id='addEvenement' class='formType' style='display: none'>
+
 				<div class='buttonHideForm' onclick='hideForm(\"addEvenement\");'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
-				<div class='policeTitre tailleTitre'>Ajouter un évènement</div>
+
+				<div class='policeTitre tailleTitre titreForm'>Ajouter un évènement</div>
+				<br>
 				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
-					<input type='text' class='champDeTexte' name='titre' placeholder='Nom de l'évènement' required>
-					<textarea class='champTextarea' name='description' placeholder='Description de l'évènement' required></textarea>
-					<input type='file' name='image' required>
-					<input type='date' class='champDeTexte' name='date' required>
-					<input type='color' name='couleur' required>
-					<input type='submit' class='button' name='action' onclick='undisplayAddEvenement();' value='Ajouter Evenement'>
+					
+
+					<div id='evenement'>
+
+						<div class='group'>
+							<input type='text' name='titre' required>
+							<label for=\"titre\">Titre</label>
+						</div>
+					
+						<div class='group'>
+							<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
+							<label for=\"date\">Date</label>
+						</div>
+
+						<div class='colorPicker group'>
+							<label for='couleur' class='colorPickerText'>Couleur</label>
+							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
+							<input id='colorInput' type='hidden' name='couleur' value='#000000'>
+						</div>
+
+					</div>
+
+					<div class='inputOther'>
+
+						<div class='group'>
+							<textarea name='description'required></textarea>
+							<label for=\"description\">Description</label>
+						</div>
+
+						<div class='file'>
+							<input type='file' name='photo' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
+							<label for='image' class='photo-upload-label'></label>
+						</div>
+
+					</div>
+
+					
+
+						
+
+					
+					<div class='inputText'>
+						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Chat'>
+					</div>
 				</form>
 			</div>
 

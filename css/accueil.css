@@ -405,3 +405,19 @@
 	opacity: 0;
 	display: none;
 }
+
+
+#evenement {
+	justify-content: space-between;
+	align-items: center;
+}
+#evenement > div {
+	margin: 0px 30px 0px 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#onChangeraApres {
+	width: 150px;
+}

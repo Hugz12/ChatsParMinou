@@ -112,7 +112,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
 
-				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Ajouter Un Chat</div>
+				<div class='policeTitre tailleTitre titreForm'>Ajouter Un Chat</div>
 
 				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
 
