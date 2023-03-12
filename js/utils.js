@@ -196,6 +196,23 @@ function changerDate(contexte) {
 }
 
 
+function previewFile(contexte){
+	// le contexte c'est l'input file
+	if ($(contexte).parent().children(".previewImg")) {
+		$(contexte).parent().children(".previewImg").remove();
+	}
+
+	var file = contexte.files[0];
+	
+	const img = document.createElement("img");
+	img.src = URL.createObjectURL(file);
+	// ajoute la class previewImg
+	img.classList.add("previewImg");
+
+	$(contexte).parent().append(img);
+}
+
+
 
 
 

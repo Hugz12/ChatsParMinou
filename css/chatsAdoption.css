@@ -17,18 +17,7 @@
 	position: relative;
 }
 
-.buttonHideForm {
-	position: absolute;
-	top: -15px;
-	left: -15px;
-	width: 30px;
-	height: 30px !important;
-	border-radius: 50%;
-	background-color: var(--main-color);
-	text-align: center;
-	align-items: center;
 
-}
 
 #containerButtonAjoutChat {
 	width: 100%;
