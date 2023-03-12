@@ -251,9 +251,6 @@ function getPhotos($code){
         if ($file != "." && $file != ".."){
             $photo = array();
             $photo["name"] = $file;
-            $photo["size"] = filesize("$dir/$file");
-            $photo["type"] = mime_content_type("$dir/$file");
-            $photo["date"] = date("d-m-Y H:i:s", filemtime("$dir/$file"));
             $photo["url"] = "$dir/$file";
             $photos[] = $photo;
         }

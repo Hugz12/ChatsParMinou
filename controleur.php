@@ -272,6 +272,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				echo json_encode($photos);
 				die(); 
 			}
+		break;
 
 		case 'Edit Chat' : 
 			// si il y a au moins un champ non vide

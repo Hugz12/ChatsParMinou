@@ -265,9 +265,11 @@ function displayFormEditChat(element){
 let selectedFiles = [];
 
 function filesAdd(contexte) {
-	const slides = $(".formType .inputFile#add .slides");
+	const slides = $(".formType .inputFile .slides");
 	console.log(slides);
+	console.log("contexte");
 	console.log(contexte);
+	console.log("contexte_end");
 
 	for (const file of contexte.files) { // Pour tous les fichiers sélectionnés
                
@@ -316,15 +318,19 @@ function filesAdd(contexte) {
 		var taille = slides.children().length;
 		slides.css("width", taille*100+"px");
 	}
+
+	pushSelectedFilesInInput();
 }
 
-function pushSelectedFilesInInput(contexte) {
+function pushSelectedFilesInInput() {
 	const fileInput = document.getElementById("photo-upload");
+	
 	const fileData = new ClipboardEvent('').clipboardData || new DataTransfer();
 	for (const file of selectedFiles) {
 		fileData.items.add(file);
 	}
 	fileInput.files = fileData.files;
+	console.log(fileInput.files);
 }
 
 
@@ -339,7 +345,7 @@ function addPreviewOfExistantFiles(code){
 		},
 		success: function (data) {
 			console.log(data);
-			const slides = $(".formType .inputFile .allSlider .slider #edit");
+			const slides = $(".formType .inputFile #edit");
 
 			var taille = slides.children().length;
 			slides.css("width", taille*100+"px");
