@@ -37,7 +37,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 			<div class="slides"></div>
 			<div id="pointsEvent" class="sliderPoints"></div>
 		</div>
-		<img class="flecheDroite clickable scalable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
+		<img class="flecheDroite clickable " onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
 	</div>
 
 		
@@ -87,19 +87,21 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 
 
-			<div id='formSupprimerChat' class='formChats' style='display: none'>
-			<div class='buttonHideForm' onclick='hideForm(\"formSupprimerChat\")'>
+			<div id='formSupprimerChat' class='formType' style='display: none'>
+				<div class='buttonHideForm' onclick='hideForm(\"formSupprimerChat\")'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
-				<div class='policeTitre tailleTitre'>Supprimer Un Chat</div><br>
+				<div class='policeTitre tailleTitre' style='color: var(--third-color); text-align: center'>Supprimer Un Chat</div><br>
 				<form action='controleur.php' method='get'>
-					<select class='champDeTexte'name='code' style='width: 500px;'>";
+					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){
 							echo "<option style='font-style:italic;' value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
 						}
 		echo "
 					</select>
-					<input type='submit' class='button' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Chat'>
+					<div class='inputText'>
+						<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Chat'>
+					</div>
 				</form>
 			</div>
 
@@ -112,7 +114,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
 
-				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Ajouter Un Chat</div>
+				<div class='policeTitre tailleTitre' style='color: var(--third-color); text-align:center;'>Ajouter Un Chat</div>
 
 				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
 
@@ -180,7 +182,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 						</div>
 
 						<div class='group'>
-							<textarea rows='1' name='description' required></textarea>
+							<textarea name='description' required></textarea>
 							<label for=\"description\">Description</label>
 						</div>
 					
@@ -190,13 +192,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 					<div class='inputFile'>
 						
-						<div>Ajouter des photos</div>
+						<div class='labelAllSlider'>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
 							<div class='flecheGauche clickable' onclick='translateX(this, undefined, false);'>
 								<img src='./ressources/flecheLeft.png' alt='flecheGauche'>
 							</div>
-							<div id='sliderPhoto' class='slider '>
-								<div class='slides' id='add'></div>
+							<div id='sliderPhoto'>
+								<div class='slides'></div>
 							</div>
 							<div class='flecheDroite clickable' onclick='translateX(this, undefined, false);'>
 								<img src='./ressources/flecheRight.png' alt='flecheDroite'>
@@ -218,7 +220,8 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 					
 
 					<div class='inputText'>
-						<input type='submit' class='buttonType' name='action' value='Ajouter Chat'>
+						<input type='submit' class='buttonType' name='action' value='Ajouter un chat'>
+						
 					</div>
 
 				</form>

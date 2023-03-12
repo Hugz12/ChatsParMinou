@@ -60,13 +60,14 @@
 
 
 .inputFile > * {
-	margin: 5px;
+	margin: 5px 0;
 	z-index: 3;
 	color: rgb(100, 100, 100);
 }
 
 
 #allSliderPhoto {
+	margin: 20px 0 0 0;
 	height: 100px;
 	z-index: 2;
 }
@@ -75,11 +76,29 @@
 	z-index: 3;
 }
 
+.labelAllSlider {
+	font-size: 100%;
+    position: absolute;
+    left: 0;
+    top: calc(5px + 0.3em);
+	z-index: 3;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+	
+    margin: 0em;
+    margin-left: calc(30px + 1.3em);
+    padding: 0 0.4em;
+    background-color: inherit;
+
+
+}
+
 
 #sliderPhoto {
 	z-index: 2;
 	width: 500px;
-	height: 100px;
+	height: 100%;
 	border-radius: 15px;
 	border: solid 2px rgb(200, 200, 200);
 }
@@ -97,12 +116,14 @@
 	object-fit: cover;
 	border-radius: 10px 10px 10px 0px;
 	position: relative;
+	z-index: 3;
 }
 
 .slidePhoto .delete-button {
 	position: absolute;
 	top: 0;
 	right: 0;
+	z-index: 4;
 	border: none;
 	background-color: rgb(255, 108, 108);
 	color: #fff;

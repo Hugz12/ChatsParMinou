@@ -42,9 +42,11 @@ form {
 }
 
 .formType > form > * {
+    position: relative;
     display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+    height: auto;
 	max-height: 500px;
 	flex-wrap: wrap;
 	background-color: inherit;
@@ -118,7 +120,7 @@ form input[type="text"], input[type="password"], textarea {
     background-color: inherit;
     border-radius: 15px;
     width: calc(100% - 1.6em - 4px);
-    height: calc(100% - 1.6em - 4px);
+    height: 1em;
 }
 
 form :is(input[type="text"], input[type="password"], textarea)~label {
@@ -158,6 +160,7 @@ form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="passwor
 
 form textarea {
     resize: none;
+    height: auto;
 }
 
 /*------------------------------------------------------------------------*/
@@ -189,12 +192,6 @@ form input[type="date"]~label {
 }
 
 
-
-
-
-
-
-/* input type password */
 
 /*------------------------------------------------------------------------*/
 /*                           input type checkbox                          */
@@ -258,7 +255,7 @@ input.checkbox {
 	background-color: #fff;
 	position: relative;
 	border-radius: 30px;
-	border:1px solid rgba(0, 0, 0, 0.25);
+	border: 2px solid rgb(200, 200, 200);
 	cursor: pointer;
 }
    
@@ -294,8 +291,32 @@ input.checkboxFamille {
 
 /* input type radio */
 
-/* input type submit */
+/*------------------------------------------------------------------------*/
+/*                          input type button                             */
+/*------------------------------------------------------------------------*/
 
+
+.buttonType {
+    background-color: inherit;
+	font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+   
+
+   
+.buttonType:hover {
+	border-color: var(--third-color);
+    transform: scale(1.1);
+}
+
+.buttonType:active {
+	transform: translateY(0.2rem);
+}
 
 
 /*------------------------------------------------------------------------*/
@@ -337,3 +358,19 @@ input.checkboxFamille {
 
 }
 
+
+/*------------------------------------------------------------------------*/
+/*                           input type select                            */
+/*------------------------------------------------------------------------*/
+
+select {
+    font-size: 100%;
+    padding: 15px;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 15px;
+    width: 54px;
+    height: 54px;
+    box-sizing: border-box;
+}
