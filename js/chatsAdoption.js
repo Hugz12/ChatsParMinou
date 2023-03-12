@@ -266,6 +266,7 @@ let selectedFiles = [];
 
 function filesAdd(contexte) {
 	slides = $(contexte).parent().find(".slides");
+	slider = $(contexte).parent().find(".slider");
 	console.log(slides);
 	console.log("contexte");
 	console.log(contexte);
@@ -307,6 +308,12 @@ function filesAdd(contexte) {
 			$(slidePhoto).remove();
 			pushSelectedFilesInInput(contexte);
 			console.log(contexte.files);
+
+			if (slides.children().length > 0) {
+				slider.css("border", "2px solid var(--third-color)");
+			} else {
+				slider.css("border", "2px solid rgb(200, 200, 200)");
+			}
 		}); // On ajoute un écouteur d'événement au bouton de suppression
 
 
@@ -319,6 +326,12 @@ function filesAdd(contexte) {
 		slides.css("width", taille*100+"px");	
 	}
 	pushSelectedFilesInInput(contexte);
+	// si il y a au moins une photo, on met le contour du slider en bleu
+	if (slides.children().length > 0) {
+		slider.css("border", "2px solid var(--third-color)");
+	} else {
+		slider.css("border", "2px solid rgb(200, 200, 200)");
+	}
 }
 
 function pushSelectedFilesInInput(contexte) {
