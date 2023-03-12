@@ -91,7 +91,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 				<div class='buttonHideForm' onclick='hideForm(\"formSupprimerChat\")'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
-				<div class='policeTitre tailleTitre' style='color: var(--third-color); text-align: center'>Supprimer Un Chat</div><br>
+				<div class='policeTitre tailleTitre titreForm' >Supprimer Un Chat</div><br>
 				<form action='controleur.php' method='get'>
 					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){

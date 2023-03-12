@@ -69,6 +69,11 @@ form {
     height: 180px;
 }
 
+.titreForm {
+	color:var(--third-color); 
+	text-align:center;
+}
+
 
 /*------------------------------------------------------------------------*/
 /*                      Case input spéciaux ajoutChat                     */
