@@ -111,7 +111,7 @@ function afficherChats(chats) {
 		var sliderPointPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
 
 		for (var i=0; i < chatActuel['nbPhoto']; i++) {
-			$(slidesPhoto).append("<img class='slidePhotoChat' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='Chat du mois'/>");
+			$(slidesPhoto).append("<img class='slidePhotoChat' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
 			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		}
@@ -300,10 +300,11 @@ function filesAdd(contexte) {
 				$(".formType .inputFile .flecheGauche").click();
 			}
 			slides.css("width", taille*100+"px");
-			console.log(contexte.files);
+			
 
 			$(slidePhoto).remove();
 			pushSelectedFilesInInput(contexte);
+			console.log(contexte.files);
 		}); // On ajoute un écouteur d'événement au bouton de suppression
 
 
@@ -313,12 +314,13 @@ function filesAdd(contexte) {
 
 
 		var taille = slides.children().length;
-		slides.css("width", taille*100+"px");
+		slides.css("width", taille*100+"px");	
 	}
+	pushSelectedFilesInInput(contexte);
 }
 
 function pushSelectedFilesInInput(contexte) {
-	const fileInput = $(contexte);
+	const fileInput = contexte;
 	const fileData = new ClipboardEvent('').clipboardData || new DataTransfer();
 	for (const file of selectedFiles) {
 		fileData.items.add(file);

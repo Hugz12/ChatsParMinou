@@ -32,12 +32,12 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 	?>
 
 	<div id="allSliderChats" class="allSlider">
-		<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
+		<img class="flecheGauche clickable scalable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
 		<div id="sliderChats" class="slider">
 			<div class="slides"></div>
 			<div id="pointsEvent" class="sliderPoints"></div>
 		</div>
-		<img class="flecheDroite clickable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
+		<img class="flecheDroite clickable scalable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
 	</div>
 
 		
@@ -120,7 +120,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 						<div class='group'>
 							<input type='text' name='nom' required>
-							<label for=\"nom\">Name</label>
+							<label for=\"nom\">Nom</label>
 						</div>
 
 						<div class='group'>
@@ -190,15 +190,20 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 					<div class='inputFile' id='add'>
 						
+						<div>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
-							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.png' alt='flecheGauche'>
+							<div class='flecheGauche clickable' onclick='translateX(this, undefined, false);'>
+								<img src='./ressources/flecheLeft.png' alt='flecheGauche'>
+							</div>
 							<div id='sliderPhoto' class='slider ombre'>
 								<div class='slides'></div>
 							</div>
-							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.png' alt='flecheDroite'>
+							<div class='flecheDroite clickable' onclick='translateX(this, undefined, false);'>
+								<img src='./ressources/flecheRight.png' alt='flecheDroite'>
+							</div>
 						</div>
 
-						<label for='fileAjoutChat'>
+						<label class='clickable' for='fileAjoutChat'>
 							<svg width='50' height='50'>
 								<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
 								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />

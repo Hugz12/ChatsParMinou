@@ -48,7 +48,7 @@ form {
 	max-height: 500px;
 	flex-wrap: wrap;
 	background-color: inherit;
-    margin: 20px 0 20px 0;
+    margin: 10px 0;
 }
 
 
@@ -184,7 +184,7 @@ form input[type="date"]~label {
     transform: translateX(-50%);
     pointer-events: none;
     transition: all 0.3s ease;
-    color: rgb(163, 163, 163);
+    color: rgb(100, 100, 100);
     background-color: var(--sec-color);
 }
 
@@ -230,7 +230,7 @@ form input[type="date"]~label {
 	position: absolute;
 	top: -24px;
 	z-index: 10;
-	color: rgb(163, 163, 163);
+	color: rgb(100, 100, 100);
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -324,6 +324,7 @@ input.checkboxFamille {
     margin: 10%;
     border-radius: 50%;
     background-color: var(--colorSelected);
+    cursor: pointer;
 }
 
 .colorPicker > .colorPickerText {
@@ -331,7 +332,7 @@ input.checkboxFamille {
     top: -17px;
     left: 50%;
     z-index: 10;
-	color: rgb(163, 163, 163);
+	color: rgb(100, 100, 100);
     transform: translateX(-50%);
 
 }

@@ -223,7 +223,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
-
+					
 					// On ajoute les photos
 					$i = 0;
 					foreach ($photos as $fichier) {
