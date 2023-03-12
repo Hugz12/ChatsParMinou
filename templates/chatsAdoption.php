@@ -198,13 +198,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.png' alt='flecheDroite'>
 						</div>
 
-						<label for='photo-upload' class='photo-upload-label'>
+						<label for='fileAjoutChat'>
 							<svg width='50' height='50'>
 								<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
 								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
 							</svg>
 						</label>
-						<input id='photo-upload' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+						<input id='fileAjoutChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
 					</div>
 

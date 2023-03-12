@@ -216,8 +216,8 @@ function setStatutDemande($id, $statut){
 /** 
  * Fonction qui met à jour le contenu d'un memo
  */
-function setMemo($id, $text, $class){
-    $SQL = "UPDATE demandeAdoption SET $class='$text' WHERE id=$id";
+function setMemo($id, $memo, $datePv, $resultatPv, $dateRencontre, $commentaire){
+    $SQL = "UPDATE demandeAdoption SET memo='$memo', datePv='$datePv', resultatPv='$resultatPv', dateRencontre='$dateRencontre', commentaire='$commentaire' WHERE id=$id";
     SQLUpdate($SQL);
 }
 
