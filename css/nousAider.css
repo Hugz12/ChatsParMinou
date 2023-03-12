@@ -2,11 +2,15 @@ html, body {
   height : 100%;
   width: 100%;
 }
+
+
 body {
-  background: linear-gradient(to top, var(--third-color), var(--sec-color));
+  
   background-repeat: no-repeat;
   margin: 0;
 }
+
+
 .flip-card {
     background-color: transparent;
     width: 305px;
@@ -65,7 +69,10 @@ body {
   }
 
 .container {
-    width: auto;
+    width: 100%;
+    height: calc(100% - 70px);
+    background: linear-gradient(to top, var(--third-color) 0%, var(--main-color) 70%);
+    box-sizing: border-box;
     align-items:center;
     justify-content: space-around;
     display: flex;

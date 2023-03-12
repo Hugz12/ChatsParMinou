@@ -25,7 +25,6 @@ function translateX(contexte, transform, overflow=false){
 		var taille = $(slides.children()[0]).outerWidth(true); // on recupere la taille d'un evenement
 		var nbElement = slides.parent().outerWidth() / taille; // on recupere le nombre d'evenement visible
 		var max = slides.outerWidth() / taille; // on recupere le nombre d'evenements
-
 		// on ajoute une transition au .slides
 		if (slides[0].style.transform) var transform = parseInt(slides[0].style.transform.split('(')[1].split('p')[0])/taille; // on recupere la position actuelle du .slides (en indice soit 0, 1, -1 etc...)
 			// on recupere la position actuelle du .slides (en indice soit 0, 1, -1 etc...)

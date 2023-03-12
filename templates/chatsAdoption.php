@@ -197,7 +197,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 							<div class='flecheGauche clickable' onclick='translateX(this, undefined, false);'>
 								<img src='./ressources/flecheLeft.png' alt='flecheGauche'>
 							</div>
-							<div id='sliderPhoto'>
+							<div id='sliderPhoto' class='slider'>
 								<div class='slides'></div>
 							</div>
 							<div class='flecheDroite clickable' onclick='translateX(this, undefined, false);'>
