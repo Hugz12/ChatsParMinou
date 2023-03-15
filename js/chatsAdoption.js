@@ -1,36 +1,7 @@
-function afficherFormAjoutChat() {
-	console.log("afficherForm");
-	$("#formAjoutChat").css("display", "flex");
-	$(".disabled").css("pointer-events", "none");
-	$("#formAjoutChat").animate({opacity: 1}, 250);
-}
-
-function cacherFormAjoutChat() {
-	console.log("enleverForm");
-	$("#formAjoutChat").animate({opacity: 0}, 250, function() {
-		$("#formAjoutChat").css("display", "none");
-		$(".disabled").css("pointer-events", "auto");
-	});
-}
-
-function afficherFormSupprimerChat(){
-	$("#formSupprimerChat").css("display", "flex");
-	$(".disabled").css("pointer-events", "none");
-	$("#formSupprimerChat").animate({opacity: 1}, 250);
-}
-
-
-function cacherFormSupprimerChat() {
-	console.log("enleverForm");
-	$("#formSupprimerChat").animate({opacity: 0}, 250, function() {
-		$("#formSupprimerChat").css("display", "none");
-		$(".disabled").css("pointer-events", "auto");
-	});
-}
-
-
-
-
+/**
+ * Fonction qui permet d'afficher tous les chats dans la page d'adoption
+ * @param {*} chats 
+ */
 function afficherChats(chats) {
 	console.log("afficherChat");
 	console.log(chats);
@@ -153,6 +124,11 @@ function afficherChats(chats) {
 }
 
 
+
+/**
+ * Fonction qui affiche le formulaire d'edition d'un chat
+ * @param {} element 
+ */
 function displayFormEditChat(element){
 	var id = element.id;
 	$.ajax({
@@ -265,22 +241,22 @@ function displayFormEditChat(element){
 }
 
 
-let selectedFiles = [];
 
+/**
+ * Fonction qui ajoute les photos de l'input file dans le slider
+ * @param {Object} contexte
+ */
+let selectedFiles = [];
 function filesAdd(contexte) {
 	slides = $(contexte).parent().find(".slides");
 	slider = $(contexte).parent().find(".slider");
 	console.log(slides);
-	console.log("contexte");
-	console.log(contexte);
-	console.log("contexte_end");
 
 	for (const file of contexte.files) { // Pour tous les fichiers sélectionnés
                
 		selectedFiles.push(file); // On les ajoute à la liste des fichiers sélectionnés
 
-
-		// Création dela balise img et ajout de l'image
+		// Création de la balise img et ajout de l'image
 		const img = document.createElement("img");
 		img.src = URL.createObjectURL(file);
 
@@ -290,13 +266,13 @@ function filesAdd(contexte) {
 		slidePhoto.classList.add("slidePhoto");
 		slidePhoto.appendChild(img);
 
-		// création du bouton de suppression
+		// Creation of delete button
 		const deleteButton = document.createElement("button");
 		deleteButton.classList.add("delete-button");
 		deleteButton.innerText = "X";
 
-		// On ajoute un écouteur d'événement au bouton de suppression
-		deleteButton.addEventListener("click", () => {
+		
+		deleteButton.addEventListener("click", () => { // add event listener to delete button
 			// On supprime le fichier de la liste des fichiers sélectionnés
 			selectedFiles = selectedFiles.filter(f => f !== file); 
 
@@ -317,10 +293,10 @@ function filesAdd(contexte) {
 			} else {
 				slider.css("border", "2px solid rgb(200, 200, 200)");
 			}
-		}); // On ajoute un écouteur d'événement au bouton de suppression
+		}); 
 
 
-		// On ajoute l'image et le bouton de suppression à la div qui les contient
+		// add image and delete button to div
 		slidePhoto.appendChild(deleteButton);
 		slides.append(slidePhoto);
 
@@ -328,8 +304,10 @@ function filesAdd(contexte) {
 		var taille = slides.children().length;
 		slides.css("width", taille*100+"px");	
 	}
-	pushSelectedFilesInInput(contexte);
-	// si il y a au moins une photo, on met le contour du slider en bleu
+
+	pushSelectedFilesInInput(contexte); // update input file with selected files
+
+	// border color change if there is at least one file
 	if (slides.children().length > 0) {
 		slider.css("border", "2px solid var(--third-color)");
 	} else {
@@ -337,6 +315,12 @@ function filesAdd(contexte) {
 	}
 }
 
+
+
+/**
+ * Fonction qui permet de recharger les fichiers sélectionnés dans l'input file
+ * @param {*} contexte
+ */
 function pushSelectedFilesInInput(contexte) {
 	const fileInput = contexte;
 	const fileData = new ClipboardEvent('').clipboardData || new DataTransfer();
@@ -347,8 +331,13 @@ function pushSelectedFilesInInput(contexte) {
 	console.log(fileInput.files);
 }
 
-var existentFiles = [];
 
+
+/**
+ * Fonction qui ajoute les photos existantes du chat dans le slider via ajax
+ * @param {*} code du chat dont on veut afficher les photos
+ */
+var existentFiles = [];
 function addPreviewOfExistentFiles(code){
 	$.ajax({
 		url: 'controleur.php',
@@ -361,7 +350,6 @@ function addPreviewOfExistentFiles(code){
 			console.log(data);
 			const slides = $(".formType #edit");
 
-			
 			for (const photo of data) {
 				existentFiles.push(photo['name']);
 				const img = document.createElement("img");

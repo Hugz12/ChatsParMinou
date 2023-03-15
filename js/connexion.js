@@ -1,6 +1,8 @@
 var sens = -1;
 
-
+/**
+ * Fonction qui permet de faire un switch entre la page de connexion et la page d'inscription
+ */
 function switchLoginRegister(){
     // decalle la div id="switchLoginRegister" de 350px vers la droite avec une animation
     // si la div est deja a 50% + 350px, on la remet a 50%
@@ -23,6 +25,4 @@ function switchLoginRegister(){
         });
     }
     sens = -sens;
-
-
 }
