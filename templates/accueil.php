@@ -129,15 +129,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 					</div>
-
 					
+					<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
 
-						
-
-					
-					<div class='inputText'>
-						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
-					</div>
 				</form>
 			</div>
 
@@ -146,16 +140,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 				<div class='buttonHideForm' onclick='hideForm(\"switchChatDuMois\");'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
-				<div class='policeTitre tailleTitre'>Changer de Chat Du Mois</div><br>
+				<div class='policeTitre tailleTitre titreForm'>Changer de Chat Du Mois</div><br>
 				<form action='controleur.php' method='get'>
-					<select class='champDeTexte'name='code' style='width: 500px;'>";
+					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){
 							echo "<option style='font-style:italic;' value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
 						}
 		echo "
 					</select>
-					
-					<div class='button' onclick='switchChatDuMois();'> Changer Chat Du Mois </div>
+
+					<div class='buttonType' onclick='switchChatDuMois();'> Changer Chat Du Mois </div>
+				
 				</form>
 			</div>";
 

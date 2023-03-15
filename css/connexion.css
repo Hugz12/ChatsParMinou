@@ -15,6 +15,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-color: inherit;
 }
 
 #allConnexion > div > form {
@@ -28,7 +29,7 @@
 	margin-bottom: 25px;
 }
 
-#allConnexion > div > form > input {
+#allConnexion > div > form > .group {
 	margin: 10px 0 10px 0;
 }
 
@@ -46,8 +47,8 @@
 	justify-content: center;
 	top: 0;
 	left: 350px;
-	z-index: 1;
-	background-color: #83bcf2;
+	z-index: 2;
+	background-color: var(--third-color) !important;
 	overflow: hidden;
 }
 

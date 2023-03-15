@@ -187,16 +187,8 @@ function afficherChatDuMois(chatDuMois){
 	);
 	//var slides = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[0];
 	//var sliderPoints = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[1];
+	
 
-	var colorChatFade = convertColor(chatDuMois['couleur'], 0.5);
-	var colorChat = convertColor(chatDuMois['couleur'], 1);
-	console.log(colorChatFade);
-	document.documentElement.style.setProperty('--third-color', colorChatFade);
-	document.documentElement.style.setProperty('--fourth-color', convertColor(chatDuMois['couleur'], 0.25));
-	document.documentElement.style.setProperty('--fifth-color', colorChat);
-
-
-	console.log(document.documentElement.style.getPropertyValue('--third-color'));
 	
 	var slides = $("#allChatDuMois .slides");
 	var sliderPoints = $("#allChatDuMois .sliderPoints");

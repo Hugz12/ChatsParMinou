@@ -20,30 +20,36 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
     <div id="login">
         <div id="titreLogin" class="policeTitre">Connexion</div>
         <form action="controleur.php" method="get"> 
-            <input type="text" class="champDeTexte" name="mail" placeholder="Mail"/>
-            <input type="password" class="champDeTexte"name="password" placeholder="Mot de passe"/>
-            <input type="submit" class="button" name="action" value="Connexion"/>
+            <div class="group">
+                <input type="text" name="mail" required/>
+                <label for="mail">Adresse mail</label>
+            </div>
+            <div class="group">
+                <input type="password" name="password" required/>
+                <label for="password">Mot de passe</label>
+            </div>
+            <input type="submit" class="buttonType" name="action" value="Connexion"/>
         </form>
     </div>
 
 
 
     <div id="register">
-    <div id="titreRegister" class="policeTitre">Inscription</div>
+        <div id="titreRegister" class="policeTitre">Inscription</div>
         <form action="controleur.php" method="post" enctype="multipart/form-data"> 
-            <input type="text" class="champDeTexte" name="mail" placeholder="Mail"/>
+            <input type="text" name="mail" placeholder="Mail"/>
 
-            <input type="password" class="champDeTexte" name="password" placeholder="Mot de passe"/>
+            <input type="password" name="password"/>
 
-            <input type="password" class="champDeTexte" name="password2" placeholder="Confirmation du mot de passe"/>
+            <input type="password" name="password2"/>
 
-            <input type="text" class="champDeTexte" name="name" placeholder="Nom"/>
+            <input type="text" name="name"/>
 
             <input type="file" class="custom-button" name="photo"/>
 
             <input type="hidden" name="action" value="Ajouter Utilisateur"/>
             
-            <input type="submit" class="button" value="S'inscrire"/>
+            <input type="submit" class="buttonType" value="S'inscrire"/>
         </form>
     </div>
 

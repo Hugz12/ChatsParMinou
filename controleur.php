@@ -239,6 +239,29 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+
+		case 'Edit Chat' : 
+			// si il y a au moins un champ non vide
+			if (($statut = valider("statut","POST")) 
+			or 	($familleAccueil = valider("familleAccueil","POST")) 
+			or	($couleur = valider("couleur","POST")) 
+			or 	($code = valider("code","POST"))
+			or	($description = valider("description","POST"))
+			or	($photos = valider_fichiers("photos"))){
+				// On ajoute le chat à la BDD
+				$nbPhotos = count($photos);
+				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+
+				// On ajoute les photos
+				$i = 0;
+				foreach ($photos as $fichier) {
+					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
+					$i++;
+				}
+				$qs = "?view=chatsAdoption";
+			}
+		break;
+
 		
 
 		// Action qui ne sont pas afficher sur la page, 
@@ -278,27 +301,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		case 'Edit Chat' : 
-			// si il y a au moins un champ non vide
-			if (($statut = valider("statut","POST")) 
-			or 	($familleAccueil = valider("familleAccueil","POST")) 
-			or	($couleur = valider("couleur","POST")) 
-			or 	($code = valider("code","POST"))
-			or	($description = valider("description","POST"))
-			or	($photos = valider_fichiers("photos"))){
-				// On ajoute le chat à la BDD
-				$nbPhotos = count($photos);
-				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
-
-				// On ajoute les photos
-				$i = 0;
-				foreach ($photos as $fichier) {
-					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
-					$i++;
-				}
-				$qs = "?view=chatsAdoption";
-			}
-		break;
+		
 
 	}
 

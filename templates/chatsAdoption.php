@@ -99,9 +99,9 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 						}
 		echo "
 					</select>
-					<div class='inputText'>
-						<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Chat'>
-					</div>
+
+					<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Chat'>
+				
 				</form>
 			</div>
 
@@ -214,16 +214,10 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 						<input id='fileAjoutChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
 					</div>
-
 					
 
-					
-
-					<div class='inputText'>
-						<input type='submit' class='buttonType' name='action' value='Ajouter un chat'>
+					<input type='submit' class='buttonType' name='action' value='Ajouter un chat'>
 						
-					</div>
-
 				</form>
 
 			</div>

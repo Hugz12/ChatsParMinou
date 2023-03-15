@@ -35,6 +35,22 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 <!-- F I N   H E A D -->
 
 
+<script>
+	$.ajax({
+		url: 'controleur.php',
+		type: 'POST',
+		data: {
+			action: 'getChatDuMois',
+		},
+		success: function (data) {
+			chatDuMois = data[0];
+			document.documentElement.style.setProperty('--third-color', convertColor(chatDuMois['couleur'], 0.5));
+			document.documentElement.style.setProperty('--fourth-color', convertColor(chatDuMois['couleur'], 0.25));
+			document.documentElement.style.setProperty('--fifth-color', convertColor(chatDuMois['couleur'], 1));
+		}
+	});
+</script>
+
 <!-- BODY -->
 <body onload="initHeader();">
 	<div id="allHeader">
