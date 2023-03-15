@@ -104,14 +104,18 @@ function afficherEvenements(evenements){
 			if (xhr.status === 200) {
 				// Récupérer le contenu du fichier SVG
 				
-				for(var k=0; k<document.getElementsByClassName("slideEvent").length; k++) {
+				for (var k=0; k<document.getElementsByClassName("slideEvent").length; k++) {
 					var elt = document.createElement("div");
 					elt.classList.add("editButton");
 					elt.id = evenements[k]['id'];
 					elt.onclick = function() {displayFormEditEvent(this);};
 					elt.innerHTML = xhr.responseText;
-					console.log(document.getElementsByClassName("slideEvent")[k]);
-					document.getElementsByClassName("slideEvent")[k].appendChild(elt);
+					elt.style.position = "absolute";
+					elt.style.bottom = "25px";
+					elt.style.right = "30px";
+					elt.style.setProperty("--third-color", convertColor(document.getElementsByClassName("slideEvent")[k].style.backgroundColor, 0.5));
+					console.log(document.getElementsByClassName("slideEvent")[k].children[0]);
+					document.getElementsByClassName("slideEvent")[k].children[0].appendChild(elt);
 				}
 			}
 		};
@@ -275,6 +279,10 @@ function afficherChatDuMois(chatDuMois){
 	);
 	//var slides = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[0];
 	//var sliderPoints = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[1];
+
+	document.documentElement.style.setProperty('--third-color', convertColor(chatDuMois['couleur'], 0.5));
+	document.documentElement.style.setProperty('--fourth-color', convertColor(chatDuMois['couleur'], 0.25));
+	document.documentElement.style.setProperty('--fifth-color', convertColor(chatDuMois['couleur'], 1));
 	
 
 	
