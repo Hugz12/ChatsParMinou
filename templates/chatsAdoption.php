@@ -156,9 +156,9 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
 									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
-									<div class='photoGauche'><img src='./ressources/logo.png'></div>
+									<div class='photoGauche'><img src='./ressources/logo_toutnoir.png'></div>
 									<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
-									<div class='photoDroite'><img src='./ressources/famille_accueil.png'></div>
+									<div class='photoDroite'><img src='./ressources/famille_accueil_noir.png'></div>
 									<input type='hidden' name='familleAccueil' value='1'> 
 								</div>
 								
@@ -197,7 +197,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 							<div class='flecheGauche clickable' onclick='translateX(this, undefined, false);'>
 								<img src='./ressources/flecheLeft.png' alt='flecheGauche'>
 							</div>
-							<div id='sliderPhoto'>
+							<div id='sliderPhoto' class='slider'>
 								<div class='slides'></div>
 							</div>
 							<div class='flecheDroite clickable' onclick='translateX(this, undefined, false);'>

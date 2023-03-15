@@ -227,17 +227,23 @@ function displayFormEditChat(element){
 					</div>
 
 					<div class='inputFile'>
-						
+						<div class='labelAllSlider'>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
 							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.png' alt='flecheGauche'>
-							<div id='sliderPhoto' class='slider ombre'>
+							<div id='sliderPhoto' class='slider'>
 								<div class='slides' id='edit'></div>
 							</div>
 							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.png' alt='flecheDroite'>
 						</div>
-
+						<label class='clickable' for='fileModifChat'>
+							<svg width='50' height='50'>
+								<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
+								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
+							</svg>
+						</label>
 						
-						<input id='photo-upload' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+						<input id='fileModifChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+						<input id='existentFiles' type='hidden' name='existentFiles'>
 
 						
 
@@ -249,7 +255,7 @@ function displayFormEditChat(element){
 
 					<input type='hidden' name='code' value='${chat['code']}'>
 			`);
-			addPreviewOfExistantFiles(chat['code']);
+			addPreviewOfExistentFiles(chat['code']);
 
 		},
 		error: function (data) {
@@ -341,9 +347,9 @@ function pushSelectedFilesInInput(contexte) {
 	console.log(fileInput.files);
 }
 
+var existentFiles = [];
 
-
-function addPreviewOfExistantFiles(code){
+function addPreviewOfExistentFiles(code){
 	$.ajax({
 		url: 'controleur.php',
 		type: 'POST',
@@ -357,6 +363,7 @@ function addPreviewOfExistantFiles(code){
 
 			
 			for (const photo of data) {
+				existentFiles.push(photo['name']);
 				const img = document.createElement("img");
 				img.src = photo['url'];
 
@@ -369,9 +376,11 @@ function addPreviewOfExistantFiles(code){
 				deleteButton.innerText = "X";
 				deleteButton.addEventListener("click", () => {
 					console.log(data);
+					existentFiles = existentFiles.filter(f => f !== photo['name']);
 					var taille = slides.children().length-1;
 					slides.css("width", taille*100+"px");
 					$(slidePhoto).remove();
+					console.log(existentFiles);
 				});
 
 				slidePhoto.appendChild(deleteButton);
@@ -379,6 +388,7 @@ function addPreviewOfExistantFiles(code){
 			}
 			var taille = slides.children().length;
 			slides.css("width", taille*100+"px");
+			console.log(existentFiles);
 		},
 		error: function (data) {
 			console.log("error");

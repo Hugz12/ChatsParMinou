@@ -119,7 +119,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 						<div class='file'>
-							<input type='file' name='photo' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
+							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
 							<label for='image' class='photo-upload-label'></label>
 							<div id='fileText'>Choisir une photo</div>
 							<svg width='180' height='180' viewBox='0 0 180 180' style='border-radius: 25px; background-color: rgba(255, 255, 255, 0.7); opacity: 0;' onmouseover='opacitySwitch(this);'>
@@ -136,7 +136,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					
 					<div class='inputText'>
-						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Chat'>
+						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
 					</div>
 				</form>
 			</div>
