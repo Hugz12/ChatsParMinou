@@ -180,8 +180,6 @@ function openDialogBox(retour, type) {
 		console.log(this.value);
 		
 		if(this.type == "color") {
-			console.log("color");
-			console.log(this);
 			retour.parentNode.style.setProperty("--colorSelected", this.value);
 		}
 	});

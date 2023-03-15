@@ -170,8 +170,8 @@ function displayFormEditEvent(elt){
 
 						<div class='colorPicker group'>
 							<label for='couleur' class='colorPickerText'>Couleur</label>
-							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
-							<input id='colorInput' type='hidden' name='couleur' value='${event['couleur']}'>
+							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
+							<input id='colorInputEdit' type='hidden' name='couleur' value='${event['couleur']}'>
 						</div>
 
 					</div>

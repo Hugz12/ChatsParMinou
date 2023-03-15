@@ -173,8 +173,8 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 								<div class='colorPicker'>
 									<label for='couleur' class='colorPickerText'>Couleur</label>
-									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
-									<input id='colorInput' type='hidden' name='couleur' value='#000000'>
+									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputAdd'), 'color');\" ><div></div></div>
+									<input id='colorInputAdd' type='hidden' name='couleur' value='#000000'>
 								</div>
 
 								
