@@ -100,6 +100,11 @@ function addEvenement($titre,$description,$date,$couleur){
     return SQLInsert($SQL); // retourne l'id de l'évènement
 }
 
+function supprimerEvenement($id){
+    $SQL = "DELETE FROM evenement WHERE id = $id";
+    return SQLDelete($SQL);
+}
+
 
 
 /*
@@ -292,6 +297,17 @@ function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code)
 function editEvent($id,$titre,$description,$date,$couleur){
     $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', couleur = '$couleur' WHERE id = $id";
     SQLUpdate($SQL);
+}
+
+
+function supprimerChat($code){
+    $SQL = "DELETE FROM chat WHERE code = $code";
+    SQLDelete($SQL);
+}
+
+
+function supprimerDossier($dir){
+    rmdir($dir);
 }
 
 ?>

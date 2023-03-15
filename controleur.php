@@ -263,6 +263,30 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
+		case "Supprimer Evenement" :
+			// On vérifie la présence des champs
+			if ($id = valider("id")){
+				// On supprime l'événement de la BDD
+				supprimerEvenement($id);
+				// on supprime l'image
+				unlink("./ressources/evenements/$id.jpg");
+				$qs = "?view=accueil";
+			}
+
+
+
+		case "Supprimer Chat" : 
+			// On vérifie la présence des champs
+			if ($code = valider("code")){
+				// On supprime le chat de la BDD
+				supprimerChat($code);
+				// On supprime le dossier du chat
+				supprimerDossier("./ressources/chats/$code");
+				$qs = "?view=chatsAdoption";
+			}
+		break;
+
+
 		case 'Edit Chat' : 
 			// si il y a au moins un champ non vide
 			if (($statut = valider("statut","POST")) 
