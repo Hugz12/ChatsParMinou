@@ -47,7 +47,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	<div id="event">
 		<div id="eventTitre" class="policeTitre">Les événements à venir</div>
 		<?php 
-			if(valider("Admin","SESSION")) echo "<button id='buttonAddEvenement' class='button' onclick='displayForm(\"addEvenement\")'>Ajouter un évènement</button>";
+			if(valider("Admin","SESSION")) {
+				echo "
+					<button id='buttonAddEvenement' class='button' onclick='displayForm(\"addEvenement\")'>Ajouter un évènement</button>
+					<button id='deleteEvenement' class='button' onclick='displayForm(\"supprimerEvenement\")'>Supprimer un évènement</button>
+				";
+			}
 		?>
 		<div id="allSliderEvent" class="allSlider">
 			<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
@@ -133,6 +138,30 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 					
 					<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
 
+				</form>
+			</div>
+
+
+			<div id='supprimerEvenement' class='formType' style='display: none'>
+
+				<div class='buttonHideForm' onclick='hideForm(\"formSupprimerChat\")'>
+					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
+				</div>
+
+				<div class='policeTitre tailleTitre titreForm' >Supprimer Un Evenement</div><br>
+				
+				<form action='controleur.php' method='get'>
+
+					<select name='id' style='width: auto;'>";
+
+						foreach(listeEvenements() as $event){
+							echo "<option style='font-style:italic;' value='".$event['id']."'>".$event['id']." -- ".$event['titre']."</option>";
+						}
+		echo "
+					</select>
+
+					<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Evenement'>
+				
 				</form>
 			</div>
 

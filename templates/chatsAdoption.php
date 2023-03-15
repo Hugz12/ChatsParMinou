@@ -55,44 +55,16 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 		// form ajout chat
 		echo "
-			
-			<div id='formAjoutChat2' class='formChats' style='display: none'>
-
-				<div class='buttonHideForm' onclick='hideForm(\"formAjoutChat2\")'>
-					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
-				</div>
-				<div class='policeTitre tailleTitre'>Ajouter Un Chat</div>
-
-				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
-					<input class='champDeTexte' type='text' name='nom' placeholder='Nom du chat' required>
-					<input class='champDeTexte' type='text' name='code' placeholder='Code du chat' required>
-					<input class='champDeTexte' type='date' name='dateNaissance' required>
-					<div>Sexe : 
-						<input type='radio' name='sexe' value='1' required>Mâle
-						<input type='radio' name='sexe' value='2' required>Femelle
-					</div>
-					<input class='champDeTexte' type='text' name='race' placeholder='Race du Chat' required>
-					<input class='champDeTexte' type='text' name='statut' placeholder='Statut du Chat' required>
-					<textarea class='champTextarea' name='description' placeholder='Description du Chat' required></textarea>
-					<div> En Famille d'accueil ?
-						<input type='radio' name='familleAccueil' value='1' required>Non
-						<input type='radio' name='familleAccueil' value='2' required>Oui
-					</div>
-					<input type='color' name='couleur' required>
-					<input type='file' name='photos[]' multiple required>
-					<input type='submit' class='button' name='action' value='Ajouter Chat'>
-				</form>
-			</div>
-
-
-
-
 			<div id='formSupprimerChat' class='formType' style='display: none'>
+
 				<div class='buttonHideForm' onclick='hideForm(\"formSupprimerChat\")'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
+
 				<div class='policeTitre tailleTitre titreForm' >Supprimer Un Chat</div><br>
+				
 				<form action='controleur.php' method='get'>
+
 					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){
 							echo "<option style='font-style:italic;' value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
