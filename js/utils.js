@@ -5,9 +5,9 @@
  */
 function translateX(contexte, transform, overflow=false){
 	// !!!! le transform marche a l'envers, 
-	// transform(taille) par exemple centre sur le 1er element
-	// transform(0) par exemple centre sur le 2eme element
-	// transform(-taille) par exemple centre sur le 3eme element
+	// transform(1) décale de 1 contenant vers la droite
+	// transform(-1) décale de 1 contenant vers la gauche
+	
 
 	
 	////////////////////////////////////////////////////////
@@ -161,6 +161,12 @@ function etatSwitch(element){
 }
 
 
+
+/**
+ * Fonction qui permet d'ouvrir une boite de dialogue pour certains types d'input
+ * @param {*} retour 
+ * @param {*} type 
+ */
 function openDialogBox(retour, type) {
 	console.log("openDialogBox");
 	console.log(retour);
@@ -185,6 +191,10 @@ function openDialogBox(retour, type) {
 }
 
 
+/**
+ * Fonction qui permet de changer la date d'un label associé à un input date
+ * @param {*} contexte 
+ */
 function changerDate(contexte) {
 	console.log(contexte);
 	console.log($(contexte).parent().children('label'));
@@ -195,6 +205,11 @@ function changerDate(contexte) {
 }
 
 
+
+/**
+ * Fonction qui permet de prévisualiser une image d'un input file dans une div associée
+ * @param {} contexte 
+ */
 function previewFile(contexte){
 	// le contexte c'est l'input file
 	if ($(contexte).parent().children(".previewImg")) {
@@ -210,6 +225,9 @@ function previewFile(contexte){
 
 	$(contexte).parent().append(img);
 }
+
+
+
 
 
 

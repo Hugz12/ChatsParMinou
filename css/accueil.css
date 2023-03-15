@@ -410,6 +410,7 @@
 #evenement {
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 30px;
 }
 #evenement > div {
 	margin: 0px 30px 0px 30px;
