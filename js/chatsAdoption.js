@@ -239,6 +239,8 @@ function displayFormEditChat(element){
 						
 						<input id='photo-upload' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
+						
+
 					</div>
 
 					<div class='inputText'>

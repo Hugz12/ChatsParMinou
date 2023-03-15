@@ -212,6 +212,18 @@ function previewFile(contexte){
 	$(contexte).parent().append(img);
 }
 
+function opacitySwitch(element) {
+	// qunad je passe la souris sur l'element l'opecité passe à 1 et quand je la retire elle passe à 0
+	$(element).hover(function() {
+		$(this).animate({opacity: 1}, 200);
+	}
+	, function() {
+		$(this).animate({opacity: 0}, 200);
+	}
+	);
+	// cette fonction, je l'inc
+}
+
 
 
 
