@@ -125,8 +125,6 @@ function addDemandeAdoptionBDD($codeChat,$nom,$prenom,$mail,$tel,$adresse,$habit
 }
 
 
-
-
 /** 
  * Fonction qui retourne la liste des chats
  * @return array
