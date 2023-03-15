@@ -239,6 +239,29 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+		case "Modifier Evenement" :
+			// On vérifie la présence des champs
+			if ($id = valider("id","POST"))
+			if ($titre = valider("titre","POST"))
+			if ($description = valider("description","POST"))
+			if ($date = valider("date","POST"))
+			if ($couleur = valider("couleur","POST")){
+				// On ajoute l'événement à la BDD
+				editEvent($id,$titre,$description,$date,$couleur);
+				// on verifie si un fichier a été uploadé
+				if ($image = valider("image","FILES")){
+					// on supprime l'ancienne image
+					unlink("./ressources/evenements/$id.jpg");
+					// on upload la nouvelle
+					if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
+						$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
+						break;
+					}
+				}
+				$qs = "?view=accueil";
+			}
+		break;
+
 
 		case 'Edit Chat' : 
 			// si il y a au moins un champ non vide
@@ -301,7 +324,37 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		
+		case 'getEvent' : 
+			// qui renvoi les infos de l'événement en json
+			if ($id = valider("id")){
+				$event = getEvent($id);
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode($event);
+				die(); 
+			}
+
+		case 'Edit Chat' : 
+			// si il y a au moins un champ non vide
+			if (($statut = valider("statut","POST")) 
+			or 	($familleAccueil = valider("familleAccueil","POST")) 
+			or	($couleur = valider("couleur","POST")) 
+			or 	($code = valider("code","POST"))
+			or	($description = valider("description","POST"))
+			or	($photos = valider_fichiers("photos"))){
+				// On ajoute le chat à la BDD
+				$nbPhotos = count($photos);
+				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+
+				// On ajoute les photos
+				$i = 0;
+				foreach ($photos as $fichier) {
+					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
+					$i++;
+				}
+				$qs = "?view=chatsAdoption";
+			}
+		break;
 
 	}
 

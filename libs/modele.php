@@ -125,8 +125,6 @@ function addDemandeAdoptionBDD($codeChat,$nom,$prenom,$mail,$tel,$adresse,$habit
 }
 
 
-
-
 /** 
  * Fonction qui retourne la liste des chats
  * @return array
@@ -242,6 +240,11 @@ function getChat($code){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function getEvent($id){
+    $SQL = "SELECT * FROM evenement WHERE id = $id";
+    return parcoursRS(SQLSelect($SQL));
+}
+
 function getPhotos($code){
     // retourne un tableau de photos du chat stocké dans le dossier ressources/chats/$code qui contient toutes les informations sur les photos pour pouvoir les afficher
     $photos = array();
@@ -284,6 +287,11 @@ function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code)
         $SQL = "UPDATE chat SET nbPhoto = '$nbPhotosActuel' WHERE code = $code";
         SQLUpdate($SQL);
     }
+}
+
+function editEvent($id,$titre,$description,$date,$couleur){
+    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', couleur = '$couleur' WHERE id = $id";
+    SQLUpdate($SQL);
 }
 
 ?>
