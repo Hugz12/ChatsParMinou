@@ -1,7 +1,10 @@
 var evenementActuel = 0;
 
 
-
+/**
+ * Fonction qui permet dde changer le chat du mois via une requête AJAX
+ * @return {void}
+ */
 function switchChatDuMois(){
 	code = $("#switchChatDuMois").children("form").children("select").val();
 	let xhttp = new XMLHttpRequest();
@@ -36,7 +39,6 @@ function switchChatDuMois(){
  */
 window.addEventListener("resize", responsive); // on appelle la fonction responsive quand on redimensionne la fenêtre
 function responsive(){
-
 	// Responsive la présentation
 	if (window.innerWidth < 800) {
 		$("#presentation").css('height', '350px');
@@ -56,12 +58,8 @@ function responsive(){
 		$("#presentationTexte1").css('width', '80%');
 		$("#presentationTexte2").css('font-size', '16px');
 	}
-
-	// Responsive le chat du mois
-	
-
-	
 }
+
 
 
 /**
@@ -74,31 +72,31 @@ function afficherEvenements(evenements){
 
 	var slides = $("#allSliderEvent .slides");
 	var sliderPoints = $("#allSliderEvent .sliderPoints");
-
-	
-
 	for (var i = 0; i < evenements.length; i++) {
 		var date = evenements[i]['date'];
 		
 		date = date.split(" ");
 		heure = date[1].split(":")[0];
 		date = date[0];
-		slides.append(
-			"<div class='slideEvent' style='background-color:"+evenements[i]['couleur']+"'>"
-				+ "<div class='texteEvent'>"
-					+ "<div class='titreEvent policeTitre'>"+evenements[i]['titre']+"</div>"
-					+ "<div class='descriptionEvent policeTexte'>"+evenements[i]['description']+"</div>"
-					+ "<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le "+date+" à "+heure+"h</div>"
-				+ "</div>"
-				+ "<div class='imgEvent'>"
-					+ "<img src='./ressources/evenements/"+evenements[i]['id']+".jpg' alt='"+evenements[i]['titre']+"'/>"
-				+ "</div>");
+
+		slides.append(`
+			<div class='slideEvent' style='background-color:${evenements[i]['couleur']}'>
+				<div class='texteEvent'>
+					<div class='titreEvent policeTitre'>${evenements[i]['titre']}</div>
+					<div class='descriptionEvent policeTexte'>${evenements[i]['description']}</div>
+					<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le ${date} à ${heure}h</div>
+				</div>
+				<div class='imgEvent'>
+					<img src='./ressources/evenements/${evenements[i]['id']}.jpg' alt='${evenements[i]['titre']}'/>
+				</div>
+		`);
+
 		if (i == 0) sliderPoints.append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		else sliderPoints.append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 	}
 	$(slides).css("width", (evenements.length*1080)+"px");
 
-	if(admin){
+	if(admin){ // si l'utilisateur est admin on affiche les boutons d'édition
 		var xhr = new XMLHttpRequest();
 		// Définir la fonction à exécuter lorsque la requête est terminée
 		xhr.onload = function() {
@@ -121,18 +119,109 @@ function afficherEvenements(evenements){
 		xhr.open("GET", "./ressources/edit.svg", true);
 		// Envoyer la requête
 		xhr.send();
-	
 	}
 }
 
 
-function displayFormEditChat(elt){
-	
+
+/**
+ * Fonction qui permet d'afficher le formulaire d'édition d'un événement dans le body
+ * @param {} elt 
+ * @return {void}
+ */
+function displayFormEditEvent(elt){
+	var id = elt.id;
+	$.ajax({
+		url: "./controleur.php",
+		type: "POST",
+		dataType: "json",
+		data: {
+			"action": "getEvent",
+			"id": id
+		},
+		success: function(data){
+
+			var event = data[0];
+
+			$("body").append("<div id='formEditEvent' class='formType' style='display:none; opacity:0;'>");
+			displayForm("formEditEvent");
+			$("#formEditEvent").append(`
+
+				<div class='buttonHideForm' onclick='deleteForm(\"formEditEvent\");'>
+					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
+				</div>
+
+				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier Evenement</div>
+				<br>
+
+				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
+
+					<div id='evenement'>
+
+						<div class='group'>
+							<input type='text' name='titre' value='${event['titre']}' required>
+							<label for=\"titre\">Titre</label>
+						</div>
+					
+						<div class='group'>
+							<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d H:i:s')."' value='${event['date']}'>
+							<label for=\"date\">Date</label>
+						</div>
+
+						<div class='colorPicker group'>
+							<label for='couleur' class='colorPickerText'>Couleur</label>
+							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInput'), 'color');\" ><div></div></div>
+							<input id='colorInput' type='hidden' name='couleur' value='${event['couleur']}'>
+						</div>
+
+					</div>
+
+
+					<div class='inputOther'>
+
+						<div class='group'>
+							<textarea name='description'required>${event['description']}</textarea>
+							<label for=\"description\">Description</label>
+						</div>
+
+						<div class='file'>
+							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
+							<label for='image' class='photo-upload-label'></label>
+							<div id='fileText'>Choisir une photo</div>
+							<svg width='180' height='180' viewBox='0 0 180 180' style='border-radius: 25px; background-color: rgba(255, 255, 255, 0.7); opacity: 0;' onmouseover='opacitySwitch(this);'>
+								<rect x='77.5' y='40' width='25' height='100' fill='rgba(200, 200, 200, 0.8)'/>
+								<rect x='40' y='77.5' width='100' height='25' fill='rgba(200, 200, 200, 0.8)'/>
+							</svg>
+						</div>
+
+					</div>
+
+					<input type='hidden' name='id' value='${event['id']}'>
+
+					
+					<div class='inputText'>
+						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
+					</div>
+
+				</form>
+
+
+			`);
+
+		},
+		error: function(data){
+			console.log("error");
+		}
+	});
 }
 
 
 
-
+/**
+ * Fonction qui permet d'afficher le chat du mois avec toutes ses informations
+ * @param {*} chatDuMois 
+ * @return {void}
+ */
 function afficherChatDuMois(chatDuMois){
 	console.log("afficherChatDuMois");
 	chatDuMois = chatDuMois[0];
@@ -208,7 +297,7 @@ function afficherChatDuMois(chatDuMois){
 	}
 	$(slides).css("width", (chatDuMois['nbPhoto']*500)+"px");
 
-	if(admin) {
+	if(admin) { // Si l'utilisateur est un administrateur on affiche le bouton d'édition du chat du mois
 		var xhr = new XMLHttpRequest();
 		// Définir la fonction à exécuter lorsque la requête est terminée
 		xhr.onload = function() {

@@ -111,6 +111,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					</div>
 
+					
 					<div class='inputOther'>
 
 						<div class='group'>
@@ -130,11 +131,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					</div>
 
-					
 
-						
-
-					
 					<div class='inputText'>
 						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
 					</div>

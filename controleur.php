@@ -278,6 +278,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+		case 'getEvent' : 
+			// qui renvoi les infos de l'événement en json
+			if ($id = valider("id")){
+				$event = getEvent($id);
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode($event);
+				die(); 
+			}
+
 		case 'Edit Chat' : 
 			// si il y a au moins un champ non vide
 			if (($statut = valider("statut","POST")) 
