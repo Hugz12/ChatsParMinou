@@ -291,6 +291,11 @@ function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code)
     }
 }
 
+function editEvent($id,$titre,$description,$date,$couleur){
+    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', couleur = '$couleur' WHERE id = $id";
+    SQLUpdate($SQL);
+}
+
 ?>
 
 

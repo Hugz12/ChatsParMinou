@@ -212,6 +212,7 @@ function changerDate(contexte) {
  */
 function previewFile(contexte){
 	// le contexte c'est l'input file
+	console.log(contexte);
 	if ($(contexte).parent().children(".previewImg")) {
 		$(contexte).parent().children(".previewImg").remove();
 	}

@@ -187,11 +187,8 @@ function displayFormEditEvent(elt){
 						<div class='file'>
 							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
 							<label for='image' class='photo-upload-label'></label>
+							<img class='previewImg' src='./ressources/evenements/${event['id']}.jpg' alt='preview'>
 							<div id='fileText'>Choisir une photo</div>
-							<svg width='180' height='180' viewBox='0 0 180 180' style='border-radius: 25px; background-color: rgba(255, 255, 255, 0.7); opacity: 0;' onmouseover='opacitySwitch(this);'>
-								<rect x='77.5' y='40' width='25' height='100' fill='rgba(200, 200, 200, 0.8)'/>
-								<rect x='40' y='77.5' width='100' height='25' fill='rgba(200, 200, 200, 0.8)'/>
-							</svg>
 						</div>
 
 					</div>
@@ -200,7 +197,7 @@ function displayFormEditEvent(elt){
 
 					
 					<div class='inputText'>
-						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
+						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Modifier Evenement'>
 					</div>
 
 				</form>
@@ -213,6 +210,7 @@ function displayFormEditEvent(elt){
 			console.log("error");
 		}
 	});
+
 }
 
 

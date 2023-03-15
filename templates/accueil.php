@@ -111,7 +111,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					</div>
 
-					
+
 					<div class='inputOther'>
 
 						<div class='group'>
@@ -120,8 +120,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 						<div class='file'>
-							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
-							<label for='image' class='photo-upload-label'></label>
+							<input type='file' name='image' id='img' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
+							<label for='img' class='photo-upload-label'></label>
 							<div id='fileText'>Choisir une photo</div>
 							<svg width='180' height='180' viewBox='0 0 180 180' style='border-radius: 25px; background-color: rgba(255, 255, 255, 0.7); opacity: 0;' onmouseover='opacitySwitch(this);'>
 								<rect x='77.5' y='40' width='25' height='100' fill='rgba(200, 200, 200, 0.8)'/>

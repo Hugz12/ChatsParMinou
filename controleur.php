@@ -239,6 +239,29 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+		case "Modifier Evenement" :
+			// On vérifie la présence des champs
+			if ($id = valider("id","POST"))
+			if ($titre = valider("titre","POST"))
+			if ($description = valider("description","POST"))
+			if ($date = valider("date","POST"))
+			if ($couleur = valider("couleur","POST")){
+				// On ajoute l'événement à la BDD
+				editEvent($id,$titre,$description,$date,$couleur);
+				// on verifie si un fichier a été uploadé
+				if ($image = valider("image","FILES")){
+					// on supprime l'ancienne image
+					unlink("./ressources/evenements/$id.jpg");
+					// on upload la nouvelle
+					if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
+						$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
+						break;
+					}
+				}
+				$qs = "?view=accueil";
+			}
+		break;
+
 		
 
 		// Action qui ne sont pas afficher sur la page, 
