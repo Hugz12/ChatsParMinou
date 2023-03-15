@@ -204,6 +204,7 @@ function displayFormEditEvent(elt){
 
 
 			`);
+			document.getElementById("colorInputEdit").parentNode.style.setProperty("--colorSelected", event['couleur']);
 
 		},
 		error: function(data){
