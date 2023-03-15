@@ -119,7 +119,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 						<div class='file'>
-							<input type='file' name='photo' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
+							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
 							<label for='image' class='photo-upload-label'></label>
 						</div>
 
@@ -131,7 +131,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					
 					<div class='inputText'>
-						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Chat'>
+						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Ajouter Evenement'>
 					</div>
 				</form>
 			</div>

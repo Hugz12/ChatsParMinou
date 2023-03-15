@@ -97,6 +97,37 @@ function afficherEvenements(evenements){
 		else sliderPoints.append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 	}
 	$(slides).css("width", (evenements.length*1080)+"px");
+
+	if(admin){
+		var xhr = new XMLHttpRequest();
+		// Définir la fonction à exécuter lorsque la requête est terminée
+		xhr.onload = function() {
+		// Vérifier que la requête a réussi
+			if (xhr.status === 200) {
+				// Récupérer le contenu du fichier SVG
+				
+				for(var k=0; k<document.getElementsByClassName("slideEvent").length; k++) {
+					var elt = document.createElement("div");
+					elt.classList.add("editButton");
+					elt.id = evenements[k]['id'];
+					elt.onclick = function() {displayFormEditEvent(this);};
+					elt.innerHTML = xhr.responseText;
+					console.log(document.getElementsByClassName("slideEvent")[k]);
+					document.getElementsByClassName("slideEvent")[k].appendChild(elt);
+				}
+			}
+		};
+		// Ouvrir la requête pour charger le fichier SVG
+		xhr.open("GET", "./ressources/edit.svg", true);
+		// Envoyer la requête
+		xhr.send();
+	
+	}
+}
+
+
+function displayFormEditChat(elt){
+	
 }
 
 
