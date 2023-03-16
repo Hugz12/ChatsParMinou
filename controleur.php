@@ -9,10 +9,9 @@ $url = ($_SERVER["HTTP_REFERER"]); // On récupère l'url de la page précédent
 $urlBase = "index.php"; 
 
 
-
 if ($action = valider("action")){ // action = valeur de l'attribut name du bouton submit d'1 form
 	ob_start (); // On démarre le tampon de sortie
-	echo "Action = '$action' <br />"; 
+	echo "Action = '$action' <br />";
 	switch($action){
 		
 		
@@ -27,6 +26,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						setcookie("mail",$mail , time()+60*60*24*30);
 						setcookie("password",$password, time()+60*60*24*30);
 						setcookie("remember",true, time()+60*60*24*30);
+						$_SESSION['mail'] = $mail;
 					} else {
 						setcookie("Pseudo","", time());
 						setcookie("Mdp","", time());
@@ -153,7 +153,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 
 		break;
-
 
 
 
@@ -309,7 +308,20 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		
+		case 'Changer la photo de profil' :
+			// On vérifie la présence des champs
+			if ($image = valider("image","FILES")){
+				// on supprime l'ancienne image
+				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
+				// on upload la nouvelle
+				if (!uploadPhoto($image, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
+					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
+					break;
+				}
+				$qs = "?view=profil";
+			
+			}
+		break;
 
 		// Action qui ne sont pas afficher sur la page, 
 		// c'est a dire qui vont etre appeler via des requetes ajax ou autre
