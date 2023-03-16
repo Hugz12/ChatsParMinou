@@ -11,20 +11,26 @@
 }
 
 #conseilText{
+    margin-left: 10vw;
+    margin-top: 5vh;
+    width: 300px;
+    height: 300px;
     font-size: 20px;
-}
-
-#viePratique{
+    border-radius: 50%;
     background-color: var(--third-color);
-    padding-left: 10vw;
-    padding-top: 5vw;
-    padding-bottom: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 100px;
+    border: 3px solid var(--third-color);
+    transition: border-color 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
-#viePratiqueTitre{
-    font-size: 50px;
-	font-weight: bold;
-    color: var(--second-color);
+#conseilText:hover{
+    border-color: var(--fifth-color);
+    transform: scale(1.1);
 }
 
 #image{
@@ -35,9 +41,4 @@
     margin-bottom: 5vh;
     clip-path:ellipse(33% 50%);
     float: right;
-}
-
-#conseilText2{
-    width: 50%;
-    font-size: 20px;
 }

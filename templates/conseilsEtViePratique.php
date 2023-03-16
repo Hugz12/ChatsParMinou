@@ -16,21 +16,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		<div id="conseilTitre" class="policeTitre">
 			<h1>Conseils et vie pratique</h1>
 		</div>
-		<div id="conseilText" class="policeTexte">
-			<a href="https://www.youtube.com">Mmmh oui c'est le conseil de la semaine</a>
-			<br/>
-			<a href="https://www.youtube.com">C'est genre le conseil mais pas le même</a>
-		</div>
+		<a href="https://www.youtube.com" id="conseilText" class="policeTexte">Votre chat chie partout ? Voici notre conseil</a>
 	</div>
-	<div id="viePratique">
-		<div id="viePratiqueTitre" class="policeTitre">
-			<h2>Vie pratique</h2>
-		</div>
-		<div id="conseilText2" class="policeTexte">
-			<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
-		<div>
-			<img src="./ressources/chats/1/0.jpg" alt="Bonsoir" id="image"></img>
-		</div>
+	<div>
+		<img src="./ressources/chats/1/0.jpg" alt="Bonsoir" id="image"></img>
 	</div>
 </div>
