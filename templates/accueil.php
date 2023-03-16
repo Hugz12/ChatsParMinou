@@ -144,7 +144,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 			<div id='supprimerEvenement' class='formType' style='display: none'>
 
-				<div class='buttonHideForm' onclick='hideForm(\"formSupprimerChat\")'>
+				<div class='buttonHideForm' onclick='hideForm(\"supprimerEvenement\")'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
 
