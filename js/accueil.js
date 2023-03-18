@@ -39,6 +39,7 @@ function switchChatDuMois(){
  */
 window.addEventListener("resize", responsive); // on appelle la fonction responsive quand on redimensionne la fenêtre
 function responsive(){
+
 	// Responsive la présentation
 	if (window.innerWidth < 800) {
 		$("#presentation").css('height', '350px');
@@ -49,6 +50,9 @@ function responsive(){
 		$("#presentationTexte1").css('width', '100%');
 		$("#presentationTexte2").css('font-size', '12px');
 
+		$("#allChatDuMoisSmall").css('display', 'flex');
+		$("#allChatDuMois").css('display', 'none');
+
 	}else{
 		$("#presentation").css('height', '500px');
 		$("#presentation img").css('height', '500px');
@@ -57,6 +61,8 @@ function responsive(){
 		$("#presentationTexte1").css('font-size', '58px');
 		$("#presentationTexte1").css('width', '80%');
 		$("#presentationTexte2").css('font-size', '16px');
+		$("#allChatDuMoisSmall").css('display', 'none');
+		$("#allChatDuMois").css('display', 'block');
 	}
 }
 
@@ -316,5 +322,99 @@ function afficherChatDuMois(chatDuMois){
 		xhr.send();
 	}
 }
+
+
+
+
+function afficherChatDuMoisSmall(chatDuMois){
+	console.log("afficherChatDuMois");
+	chatDuMois = chatDuMois[0];
+	$("#allChatDuMoisSmall").append(`
+		<div class="firstBanner">
+			<div class="tailleTitre policeTitre titreChatDuMois">${chatDuMois['name']}</div>
+			
+			<div class="chatInfoSmall">
+				<div class="policeTexte boxInfoTitle">Race</div>
+				<div class="policeTexte boxInfoSmall">${chatDuMois['race']}</div>
+			</div>
+
+			<div class="chatInfoSmall">
+				<div class="policeTexte boxInfoTitle">Sexe</div>
+				<div class="policeTexte boxInfoSmall">${(chatDuMois['sexe'] ? 'Femelle' : 'Mâle')}</div>
+			</div>
+
+			<div>
+				<div class="policeTexte boxInfoTitle">Situation</div>
+				<div class="policeTexte boxInfoSmall">${(chatDuMois['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
+			</div>
+		</div>
+
+		<div class="secondBanner">
+			<div>
+				<img src="./ressources/calendar.png" alt="calendar" style="width: 20px; height: 20px;">
+				<div class="chatTexte policeTexte"> Né le ${chatDuMois['dateDeNaissance']}</div>
+			</div>
+			<div>
+				<img src="./ressources/description.png" alt="description" style="width: 20px; height: 20px;">
+				<div class=" chatTexte policeTexte">${chatDuMois['description']}</div>
+			</div>
+		</div>
+
+		<div class="thirdBanner">
+			<div class="allSliderPhotoChatSmall allSlider">
+				<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
+				<div class="sliderPhotoChat slider">
+					<div class="slides"></div>
+					<div class="sliderPoints"></div>
+				</div>
+				<img class="flecheDroite clickable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
+			</div>
+		</div>
+
+
+
+	`
+		
+	);
+	//var slides = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[0];
+	//var sliderPoints = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[1];
+
+	document.documentElement.style.setProperty('--third-color', convertColor(chatDuMois['couleur'], 0.5));
+	document.documentElement.style.setProperty('--fourth-color', convertColor(chatDuMois['couleur'], 0.25));
+	document.documentElement.style.setProperty('--fifth-color', convertColor(chatDuMois['couleur'], 1));
+	
+
+	
+	var slides = $("#allChatDuMoisSmall .slides");
+	var sliderPoints = $("#allChatDuMoisSmall .sliderPoints");
+
+	for (var i=0; i < chatDuMois['nbPhoto']; i++) {
+		$(slides).append("<img class='slidePhotoChat' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
+		if (i == 0) $(sliderPoints).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+		else $(sliderPoints).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+	}
+	$(slides).css("width", (chatDuMois['nbPhoto']*500)+"px");
+
+	if(admin) { // Si l'utilisateur est un administrateur on affiche le bouton d'édition du chat du mois
+		var xhr = new XMLHttpRequest();
+		// Définir la fonction à exécuter lorsque la requête est terminée
+		xhr.onload = function() {
+		// Vérifier que la requête a réussi
+			if (xhr.status === 200) {
+				// Récupérer le contenu du fichier SVG
+				var elt = document.createElement("div");
+				elt.classList.add("editButton");
+				elt.innerHTML = xhr.responseText;
+				elt.onclick = function () {displayForm("switchChatDuMois");};
+				document.getElementsByClassName("firstBanner")[0].appendChild(elt);
+			}
+		};
+		// Ouvrir la requête pour charger le fichier SVG
+		xhr.open("GET", "./ressources/edit.svg", true);
+		// Envoyer la requête
+		xhr.send();
+	}
+}
+
 
 	

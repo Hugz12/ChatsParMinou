@@ -13,6 +13,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 <div class="disabled">
 
+	
 
 
 	<!-- Debut Affichage de la description de l'association -->
@@ -29,13 +30,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 	<!-- Debut Affichage du Chat du Mois -->
-	<div id="allChatDuMois">
-	</div>
+	
+	<div id="allChatDuMois"></div>
+	<div id="allChatDuMoisSmall"></div>
 
 	<script>
 		var chatDuMois = <?= json_encode(chatDuMois());?>;
 		var admin = <?= (valider("Admin","SESSION")? 1 : 0)?>;
 		afficherChatDuMois(chatDuMois);
+		afficherChatDuMoisSmall(chatDuMois);
 	</script> 
 	<!-- Fin Affichage du Chat du Mois -->
 
@@ -90,6 +93,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		<img src="./ressources/nousAider.png" alt="logo">
 		<div>Nous aider</div>
 	</div>
+
+	<script>
+		responsive();
+	</script>
+
 	
 </div>
 

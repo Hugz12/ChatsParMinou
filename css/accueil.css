@@ -78,6 +78,7 @@
 	padding: 0 0 70px 0;
 	background-color: var(--sec-color);
 	position: relative;
+	display: none;
 }
 
 
@@ -216,6 +217,87 @@
 	background-position: center;
 }
 
+
+
+
+/* CHAT DU MOIS SMALL */
+
+#allChatDuMoisSmall {
+	width: 100vw;
+	display: none;
+	flex-direction: column;
+	background-color: var(--sec-color);
+}
+
+#allChatDuMoisSmall > div{
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.titreChatDuMois {
+	font-weight: bold;
+	color: var(--fifth-color);
+}
+
+.firstBanner {
+	height: 100px;
+	justify-content: space-between;
+}
+
+.firstBanner > div {
+	margin: 0px 40px 0px 40px;
+}
+
+.chatInfoSmall {
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.boxInfoTitle {
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 5px;
+	color: var(--third-color);
+}
+
+.boxInfoSmall {
+	width: auto;
+	background-color: var(--third-color);
+	border-radius: 10px;
+	padding: 7px 10px 7px 10px;
+}
+
+.secondBanner {
+	height: 130px;
+	background-color: var(--third-color);
+	justify-content: center;
+}
+
+.secondBanner > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 15px 0px 15px;
+	min-width: 160px;
+
+}
+
+.thirdBanner {
+	height: 400px;
+	background-color: var(--sec-color);
+	justify-content: center;
+}
+
+.allSliderPhotoChatSmall {
+	position: relative;
+	top : -50px;
+}
 
 
 
