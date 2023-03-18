@@ -144,7 +144,7 @@ function displayFormEditEvent(elt){
 			"id": id
 		},
 		success: function(data){
-
+			
 			var event = data[0];
 
 			$("body").append("<div id='formEditEvent' class='formType' style='display:none; opacity:0;'>");
