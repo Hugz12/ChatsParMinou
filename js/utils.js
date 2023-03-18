@@ -7,59 +7,46 @@ function translateX(contexte, transform, overflow=false){
 	// !!!! le transform marche a l'envers, 
 	// transform(1) décale de 1 contenant vers la droite
 	// transform(-1) décale de 1 contenant vers la gauche
-	
+	console.log("translateX");
 
 	
 	////////////////////////////////////////////////////////
 	// on recupere les infos necessaires pour le défilement
 	////////////////////////////////////////////////////////
-	console.log("translateX");
+	
+	if (transform == undefined) { // si on passe par les fleches
 
+		var allSlider = contexte.parentNode // on recupere le div allSlider en partant de la fleche cliquée
 
-	if (transform == undefined) { // si on passe par le point
-		console.log("fleche");
-		if ($(contexte).hasClass("flecheDroite")) sens = 1; // on recupere le sens avec l'id de la fleche
-		else sens = -1;
-		var slides = $(contexte).parent().children(".slider").children(".slides"); // on recupere le div .slides en partant de la fleche cliquée
-		var points = $(contexte).parent().children(".slider").children(".sliderPoints"); // on recupere le div .sliderPoints en partant de la fleche cliquée
-		var taille = $(slides.children()[0]).outerWidth(true); // on recupere la taille d'un evenement
-		var nbElement = slides.parent().outerWidth() / taille; // on recupere le nombre d'evenement visible
-		var max = slides.outerWidth() / taille; // on recupere le nombre d'evenements
-		// on ajoute une transition au .slides
-		if (slides[0].style.transform) var transform = parseInt(slides[0].style.transform.split('(')[1].split('p')[0])/taille; // on recupere la position actuelle du .slides (en indice soit 0, 1, -1 etc...)
-			// on recupere la position actuelle du .slides (en indice soit 0, 1, -1 etc...)
-			//split('(')[1].split('p')[0] permet de recuperer la valeur entre les parentheses et sans le px
-		else var transform = 0; // si le .slides n'a pas de transform on le met a 0
+		var transform = getComputedStyle(allSlider).getPropertyValue("--transform"); // on recupere le transform
+		if ($(contexte).hasClass("flecheDroite")) transform--; // on recupere le sens avec l'id de la fleche
+		else transform++;
+	}
+	else { // si on passe par les points
+		var allSlider = contexte.parentNode.parentNode.parentNode; // on recupere le div allSlider en partant du point cliqué
 	}
 
-	else { // si on passe par les flèches
-		console.log("point");
-		var sens = 0;
-		var slides = $(contexte).parent().parent().children(".slides"); // on recupere le div .slides en partant de la fleche cliquée
-		var points = $(contexte).parent(); // on recupere le div .sliderPoints en partant du bouton cliqué
-		var taille = slides.children().outerWidth(true); // on recupere la taille d'un evenement
-		var nbElement = slides.parent().outerWidth() / taille; // on recupere le nombre d'evenement visible
-		var max = slides.outerWidth() / taille; // on recupere le nombre d'evenements
-		
-	}	
-	////////////////////////////////////////////////////////
-	// on fait le défilement
-	////////////////////////////////////////////////////////
+	var nbElement = getComputedStyle(allSlider).getPropertyValue("--nbElement"); // on recupere le nombre d'evenement visible
+	var max = Math.round($(contexte).parent().children(".slider").children(".slides").outerWidth(true) / $(allSlider).children(".slider").outerWidth(true)); // on recupere le nombre d'evenements
 
-	// Math.trunc(nbElement/2) permet de recuperer le nombre d'element avant le centre
-	// et de gerer les exeptions pour le premier et le dernier element
-	transform = transform - sens; // calcul de la nouvelle position du .slides
+
+	// on gere les exeptions pour le premier et le dernier element
 	if (transform > (overflow ? Math.trunc(nbElement/2) : 0)) { // si on est sur le premier element on revient au dernier
+		console.log("premier");
 		transform = (overflow ? -(max-(1+Math.trunc(nbElement/2))) : -(max - nbElement));
 		if (!overflow && transform > 0) transform = 0; // on gere l'overflow pour le premier element
 	}
 	else if (transform <= (overflow ? -(max - Math.trunc(nbElement/2)) : -(max - nbElement+1))) { // si on est sur le dernier element on revient au premier
+		console.log("dernier");
 		transform = (overflow ? Math.trunc(nbElement/2) : 0);
 	}
+	
 	console.log(transform);
-	slides.css('transform', 'translateX('+(transform)*taille +'px)'); // on applique le défilement
+	allSlider.style.setProperty("--transform", transform); // on initialise le transform
 
-	// on change la couleur du point
+
+
+	var points = $(allSlider).children(".slider").children(".sliderPoints"); // on recupere le div .sliderPoints en partant de la fleche cliquée
 	points.children()[length]
 	points.children(".slidePointSelected").removeClass("slidePointSelected");
 	$(points.children()[-(transform)]).addClass("slidePointSelected");

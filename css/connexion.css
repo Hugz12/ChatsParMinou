@@ -64,7 +64,6 @@
 
 #buttonSwitchLoginRegister{
 	width: 150px;
-	height: 50px;
 	border: solid 1px white;
 	border-radius: 46px;
 	color: var(--main-color);
@@ -82,17 +81,5 @@
 	color: var(--third-color);
 }
 
-
-
-#custom-button {
-	width: 220px;
-	height: 30px;
-	border: 1px solid rgb(166, 166, 166);
-	margin-top: 5px;
-	font-size: 16px;
-	color: black;
-	background-color: white;
-	line-height: normal;
-}
 
 

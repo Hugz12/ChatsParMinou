@@ -377,6 +377,7 @@ input.checkboxFamille {
     height: 180px;
     border-radius: 25px;
     object-fit: cover;
+    z-index: 1;
 }
 
 
@@ -389,7 +390,7 @@ input.checkboxFamille {
     left: 0;
     cursor: pointer;
     /*permet de changer le curseur quand on passe au dessus du bouton*/
-    z-index: 10;
+    z-index: 2;
     /*permet de mettre le label au dessus de l'image*/
     
 }
