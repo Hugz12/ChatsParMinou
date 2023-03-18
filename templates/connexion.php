@@ -37,15 +37,35 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
     <div id="register">
         <div id="titreRegister" class="policeTitre">Inscription</div>
         <form action="controleur.php" method="post" enctype="multipart/form-data"> 
-            <input type="text" name="mail" placeholder="Mail"/>
+        <div class="group">
+                <input type="text" name="mail" required/>
+                <label for="mail">Adresse mail</label>
+            </div>
 
-            <input type="password" name="password"/>
+            <div class="group">
+                <input type="password" name="password" required/>
+                <label for="password">Mot de passe</label>
+            </div>
 
-            <input type="password" name="password2"/>
+            <div class="group">
+                <input type="password" name="password" required/>
+                <label for="password">Confirmer votre mot de passe</label>
+            </div>
 
-            <input type="text" name="name"/>
+            <div class="group">
+                <input type="text" name="name" required/>
+                <label for="name">Nom et Prénom</label>
+            </div>
 
-            <input type="file" class="custom-button" name="photo"/>
+            <div id="previewPhotoDeProfil" class='file'>
+                <input type='file' name='image' id='img' accept='image/*' onchange="previewFile(this);" style='display:none'>
+                <label for='img' class='photo-upload-label'></label>
+                <div id='fileText'>Choisir une photo</div>
+                <svg width='180' height='180' viewBox='0 0 180 180' style='border-radius: 25px; background-color: rgba(255, 255, 255, 0.7); opacity: 0;' onmouseover='opacitySwitch(this);'>
+                    <rect x='77.5' y='40' width='25' height='100' fill='rgba(200, 200, 200, 0.8)'/>
+                    <rect x='40' y='77.5' width='100' height='25' fill='rgba(200, 200, 200, 0.8)'/>
+                </svg>
+            </div>
 
             <input type="hidden" name="action" value="Ajouter Utilisateur"/>
             
@@ -55,7 +75,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
     <div id="switchLoginRegister">
         <div id="textSwitchLoginRegister" class="policeTexte">Vous avez envie de devenir un fidèle bénévole de notre association, inscrivez vous en cliquant ici</div>
-        <div id="buttonSwitchLoginRegister" class="policeTexte" onclick="switchLoginRegister();">
+        <div id="buttonSwitchLoginRegister" class="policeTexte buttonType" onclick="switchLoginRegister();">
             <div id="textButtonSwitchLoginRegister">S'inscrire</div>
         </div>
     </div>

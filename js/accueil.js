@@ -86,7 +86,7 @@ function afficherEvenements(evenements){
 		date = date[0];
 
 		slides.append(`
-			<div class='slideEvent' style='background-color:${evenements[i]['couleur']}'>
+			<div class='slide slideEvent' style='background-color:${evenements[i]['couleur']}'>
 				<div class='texteEvent'>
 					<div class='titreEvent policeTitre'>${evenements[i]['titre']}</div>
 					<div class='descriptionEvent policeTexte'>${evenements[i]['description']}</div>
@@ -100,7 +100,6 @@ function afficherEvenements(evenements){
 		if (i == 0) sliderPoints.append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		else sliderPoints.append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 	}
-	$(slides).css("width", (evenements.length*1080)+"px");
 
 	if(admin){ // si l'utilisateur est admin on affiche les boutons d'édition
 		var xhr = new XMLHttpRequest();

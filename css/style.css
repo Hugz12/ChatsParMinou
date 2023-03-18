@@ -78,13 +78,27 @@ body{
 
 .slider {
 	overflow: hidden;
+	width: calc(var(--taille));
+	max-width: var(--tailleMax);
+	height: auto;
 }
 
 .slides {
 	overflow: hidden;
 	display: flex;
+	height: var(--hauteur);
+	transform: translatex(calc( var(--transform) * (var(--taille)/ var(--nbElement)) ));
 	transition: 0.5s;
-	width: auto;
+	width: fit-content;
+}
+
+.slide {
+	position: relative;
+	width: calc((var(--taille))/ var(--nbElement) - var(--marge) * 2);
+	max-width: var(--tailleMax);
+	margin: 10px var(--marge) 10px var(--marge);
+	height: 100%;
+	background-color: var(--fourth-color);
 }
 
 .flecheGauche {

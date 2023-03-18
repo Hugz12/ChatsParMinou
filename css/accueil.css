@@ -327,21 +327,32 @@
   
 #allSliderEvent {
 	height: 600px;
+	
+	
+	
+	--taille: calc(100vw - 60px);
+	--hauteur: 500px;
+
+	
+	--nbElement: 1;
+	--marge: 30px;
+
+	--transform: 0;
+}
+
+@media (min-width: 1080px) {
+	#allSliderEvent {
+		--taille: 1080px;
+	}
 }
 
 #sliderEvent {
-	width: 1080px;
+	max-width: 1080px;
 }
 
 
 
-.slideEvent {
-	position: relative;
-	width: 1020px;
-	margin: 10px 30px 10px 30px;
-	height: 500px;
-	background-color: var(--fourth-color);
-}
+
 
 .imgEvent {
 	z-index: 0;
