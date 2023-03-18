@@ -55,11 +55,21 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 <body onload="initHeader();">
 	<div id="allHeader">
 		<header id="header">
-			<a class="logo policeTitre" href="index.php?view=accueil">
-				<img class="logo" src="ressources/logo.png" alt="logo">
-				<div>Chats Par Minou</div>
-			</a>
-			<img id="menuDeroulant" src="ressources/menu_deroulant.png" onclick="displayNav2();"alt="logo">
+			<div>
+				<div id="menuDeroulant" class="bar" onclick="displayNav2(this);">
+					<span class="top"></span>
+					<span class="middle"></span>
+					<span class="bottom"></span>
+				</div>
+		
+				<a class="logo policeTitre" href="index.php?view=accueil">
+					
+					<img class="logo" src="ressources/logo.png" alt="logo">
+					
+				</a>
+				<div class="policeTitre">Chats Par Minou</div>
+			</div>
+			
 
 			
 		

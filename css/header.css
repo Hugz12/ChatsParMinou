@@ -24,6 +24,14 @@ header {
 
 }
 
+header > div {
+	display: flex;
+	justify-content: center;
+	font-size: 30px;
+	margin: 0px 10px 0px 10px;
+	align-items: center;
+}
+
 header > a {
 	height: 50px;
 	font-size: 30px !important;
@@ -83,7 +91,7 @@ header a {
 	font-family: "Roboto",sans-serif;
 	font-size: 20px;
 	font-weight: bold;
-	color: #83bcf2;
+	color: var(--fifth-color);
 	text-decoration: none;
 	width: 100%;
 	height: 70px;
@@ -94,6 +102,7 @@ header a {
 .logo {
 	width: auto;
 	height: 50px;
+	padding: 0px;
 }
 
 #photoDeProfil {
@@ -169,4 +178,59 @@ header a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+
+
+
+/* MENU DEROULANT */
+
+.bar {
+	position: relative;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	margin: 0 10px 0 10px;
+}
+
+.bar > span {
+	position: absolute;
+	width: 35px;
+	height: 5px;
+	background: var(--fifth-color);
+	border-radius: 100px;
+	display: inline-block;
+	transition: 0.3s ease;
+	left: 0;
+}
+
+.bar > span.top {
+	top: 0;
+}
+
+.bar > span.middle {
+	top: 13px;
+}
+
+.bar > span.bottom {
+	bottom: 0;
+}
+
+.bar.checked > span.top {
+	transform: rotate(45deg);
+	transform-origin: top left;
+	width: 36px;
+	left: 5px;
+}
+
+.bar.checked > span.bottom {
+	transform: rotate(-45deg);
+	transform-origin: top left;
+	width: 37px;
+	bottom: -1px;
+}
+
+.bar.checked > span.middle {
+	transform: translateX(-20px);
+	opacity: 0;
 }
