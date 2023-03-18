@@ -48,10 +48,23 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		<div id="eventTitre" class="policeTitre">Les événements à venir</div>
 		<?php 
 			if(valider("Admin","SESSION")) {
-				echo "
-					<button id='buttonAddEvenement' class='button' onclick='displayForm(\"addEvenement\")'>Ajouter un évènement</button>
-					<button id='deleteEvenement' class='button' onclick='displayForm(\"supprimerEvenement\")'>Supprimer un évènement</button>
+
+				echo " 
+					<div class='svgBox'>
+						<div id='svgAdd' class='svg' onclick='displayForm(\"addEvenement\")'>
 				";
+							include("ressources/add.svg");
+				echo "
+						</div>
+						<div id='svgDelete' class='svg' onclick='displayForm(\"supprimerEvenement\")'>
+				";
+							include("ressources/dustbin.svg");
+				echo "
+						</div>
+					</div>
+				";
+				// inclue le svg dans le html
+				
 			}
 		?>
 		<div id="allSliderEvent" class="allSlider">

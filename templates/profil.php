@@ -8,7 +8,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 ?>
 <link rel="stylesheet" href="./css/profil.css">
 <link rel="stylesheet" href="css/form.css">
-
+<script src="./js/profil.js"></script>
 <div class="info">
 		<div class="titre">Informations personnelles</div>
 		<form>
@@ -28,9 +28,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 <div class="pdp">
 	<div class="titre">Photo de profil</div>
-	<?php
-	echo "<img id=\"photoDeProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   />";
-	?>
+
+	<form action="controleur.php" method="post" enctype="multipart/form-data">
+		<?php
+		echo "<label for='image'><img id=\"photoDeProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   /></label>";
+		?>
+		<input type="file" name="image" style="display : none;" id="image" onchange="changerPhotoProfil(this);">
+		<input type="hidden" class="buttonType" value="Changer la photo de profil" name="action">
+	</form>
 </div>
 
 <div class="mdp">
@@ -62,20 +67,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <div class="mail">
 	<div class="titre">Changer d'adresse mails</div>
 	<form>
-			<div class='group'>
-								<input type='text' name='mailv'  required>
-								<label for="mailv">Ancien mail</label>
-			</div>
+
 
 			<div class='group'>
 								<input type='text' name='mailn' required>
 								<label for="mailn">Nouveau mail</label>
 			</div>
 
-			<div class='group'>
-								<input type='text' name='mailn2' required>
-								<label for="mailn2">Confirmer le nouveau mail</label>
-			</div>
-
+			<input type="submit" class="buttonType" value="changer d'adresse mail">
 		</form>
 </div>

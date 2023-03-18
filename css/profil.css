@@ -29,15 +29,16 @@
 
   .mail {
     position: fixed;
-    top: 54%;
+    top: 70%;
     left: 42%;
-    height: 30%;
+    height: auto;
     width: 30%;
     background-color: var(--fourth-color);
 
     border-radius: 20px;
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 10px;
   }
 
   .gestion {
@@ -65,6 +66,7 @@
     font-size: 30px;
     font-weight: bold;
     margin: 5% 1px 5% 7%;
+    cursor: default;
   }
 
   .mdp > * > .group {
@@ -73,10 +75,21 @@
     justify-content: space-between;
     margin-top: 5%;
   }
-  
+
   .mail > * > .group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5%;
+  }
+
+  .buttonType{
+    margin-top: 5%;
+
+  }
+  .pdp > #photoDeProfil{
+    margin-left: 5%;
+    width: 30%;
+    height: 60%;
+    cursor : default;
   }
