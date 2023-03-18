@@ -225,7 +225,7 @@ function displayFormEditChat(element){
 
 					</div>
 
-					<input type='submit' class='buttonType' name='action' value='Ajouter Chat'>
+					<input type='submit' class='buttonType' name='action' value='Edit Chat'>
 
 
 					<input type='hidden' name='code' value='${chat['code']}'>
