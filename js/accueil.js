@@ -41,7 +41,7 @@ window.addEventListener("resize", responsive); // on appelle la fonction respons
 function responsive(){
 
 	// Responsive la présentation
-	if (window.innerWidth < 800) {
+	if (window.innerWidth < 900) {
 		$("#presentation").css('height', '350px');
 		$("#presentation img").css('height', '350px');
 		$("#presentationTexte").css('height', '350px');
@@ -82,7 +82,7 @@ function afficherEvenements(evenements){
 		var date = evenements[i]['date'];
 		
 		date = date.split(" ");
-		heure = date[1].split(":")[0];
+		heure = date[1].split(":")[0] + "h" + date[1].split(":")[1];
 		date = date[0];
 
 		slides.append(`
@@ -90,7 +90,7 @@ function afficherEvenements(evenements){
 				<div class='texteEvent'>
 					<div class='titreEvent policeTitre'>${evenements[i]['titre']}</div>
 					<div class='descriptionEvent policeTexte'>${evenements[i]['description']}</div>
-					<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le ${date} à ${heure}h</div>
+					<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le ${date} à ${heure}</div>
 				</div>
 				<div class='imgEvent'>
 					<img src='./ressources/evenements/${evenements[i]['id']}.jpg' alt='${evenements[i]['titre']}'/>
@@ -117,7 +117,7 @@ function afficherEvenements(evenements){
 					elt.innerHTML = xhr.responseText;
 					elt.style.position = "absolute";
 					elt.style.bottom = "25px";
-					elt.style.right = "30px";
+					elt.style.left= "75%";
 					elt.style.setProperty("--third-color", convertColor(document.getElementsByClassName("slideEvent")[k].style.backgroundColor, 0.5));
 					console.log(document.getElementsByClassName("slideEvent")[k].children[0]);
 					document.getElementsByClassName("slideEvent")[k].children[0].appendChild(elt);
@@ -152,6 +152,14 @@ function displayFormEditEvent(elt){
 			
 			var event = data[0];
 
+			console.log(event['date']);
+			console.log(event['date'].split(" ")[0]);
+			date = event['date'].split(" ");
+			event['date'] = event['date'].split(" ")[0];
+			event['heure'] = date[1].split(":")[0] + ":" + date[1].split(":")[1];
+
+			
+
 			$("body").append("<div id='formEditEvent' class='formType' style='display:none; opacity:0;'>");
 			displayForm("formEditEvent");
 			$("#formEditEvent").append(`
@@ -174,7 +182,12 @@ function displayFormEditEvent(elt){
 					
 						<div class='group'>
 							<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d H:i:s')."' value='${event['date']}'>
-							<label for=\"date\">Date</label>
+							<label for=\"date\">${event['date']}</label>
+						</div>
+
+						<div class='group'>
+							<input type='time' name='heure' required value='${event['heure']}'>
+							<label for=\"date\">Horaire</label>
 						</div>
 
 						<div class='colorPicker group'>
@@ -233,6 +246,8 @@ function displayFormEditEvent(elt){
 function afficherChatDuMois(chatDuMois){
 	console.log("afficherChatDuMois");
 	chatDuMois = chatDuMois[0];
+	
+
 	$("#allChatDuMois").append(`
 		<div class="chatBanniere">
 			<div>
@@ -272,16 +287,37 @@ function afficherChatDuMois(chatDuMois){
 					</div>
 				</div>
 				<div class="allSliderPhotoChat allSlider">
-					<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
 					<div class="sliderPhotoChat slider">
+						<div class="flecheGauche clickable" onclick="translateX(this)"></div>
+
 						<div class="slides"></div>
 						<div class="sliderPoints"></div>
+
+						<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 					</div>
-					<img class="flecheDroite clickable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
 				</div>
 			</div>
 		</div>`
 	);
+
+	$.ajax({
+		url: "./ressources/flecheLeft.svg",
+		dataType: "text",
+		success: function(data) {
+			elt = document.getElementsByClassName("flecheGauche");
+			elt[0].innerHTML = data;
+		}
+	});
+
+	$.ajax({
+		url: "./ressources/flecheRight.svg",
+		dataType: "text",
+		success: function(data) {
+			elt = document.getElementsByClassName("flecheDroite");
+			console.log(elt);
+			elt[0].innerHTML = data;
+		}
+	});
 	//var slides = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[0];
 	//var sliderPoints = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[1];
 
@@ -295,11 +331,10 @@ function afficherChatDuMois(chatDuMois){
 	var sliderPoints = $("#allChatDuMois .sliderPoints");
 
 	for (var i=0; i < chatDuMois['nbPhoto']; i++) {
-		$(slides).append("<img class='slidePhotoChat' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
+		$(slides).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
 		if (i == 0) $(sliderPoints).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		else $(sliderPoints).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 	}
-	$(slides).css("width", (chatDuMois['nbPhoto']*500)+"px");
 
 	if(admin) { // Si l'utilisateur est un administrateur on affiche le bouton d'édition du chat du mois
 		var xhr = new XMLHttpRequest();
@@ -328,6 +363,25 @@ function afficherChatDuMois(chatDuMois){
 function afficherChatDuMoisSmall(chatDuMois){
 	console.log("afficherChatDuMois");
 	chatDuMois = chatDuMois[0];
+	var flecheLeft;
+	var flecheRight;
+	$.ajax({
+		url: "./ressources/flecheLeft.svg",
+		dataType: "text",
+		success: function(data) {
+			flecheLeft = data;
+		}
+	});
+
+	$.ajax({
+		url: "./ressources/flecheRight.svg",
+		dataType: "text",
+		success: function(data) {
+			flecheRight = data;
+		}
+	});
+
+
 	$("#allChatDuMoisSmall").append(`
 		<div class="firstBanner">
 			<div class="tailleTitre policeTitre titreChatDuMois">${chatDuMois['name']}</div>
@@ -361,20 +415,38 @@ function afficherChatDuMoisSmall(chatDuMois){
 
 		<div class="thirdBanner">
 			<div class="allSliderPhotoChatSmall allSlider">
-				<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
 				<div class="sliderPhotoChat slider">
+					<div class="flecheGauche clickable" onclick="translateX(this)"></div>
+
 					<div class="slides"></div>
 					<div class="sliderPoints"></div>
+
+					<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 				</div>
-				<img class="flecheDroite clickable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
 			</div>
 		</div>
-
-
-
 	`
-		
 	);
+
+	$.ajax({
+		url: "./ressources/flecheLeft.svg",
+		dataType: "text",
+		success: function(data) {
+			elt = document.getElementsByClassName("flecheGauche");
+			elt[1].innerHTML = data;
+		}
+	});
+
+	$.ajax({
+		url: "./ressources/flecheRight.svg",
+		dataType: "text",
+		success: function(data) {
+			elt = document.getElementsByClassName("flecheDroite");
+			console.log(elt);
+			elt[1].innerHTML = data;
+		}
+	});
+
 	//var slides = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[0];
 	//var sliderPoints = document.getElementById("allChatDuMois").childNodes[1].childNodes[1].childNodes[1].childNodes[1].childNodes[1];
 
@@ -388,11 +460,10 @@ function afficherChatDuMoisSmall(chatDuMois){
 	var sliderPoints = $("#allChatDuMoisSmall .sliderPoints");
 
 	for (var i=0; i < chatDuMois['nbPhoto']; i++) {
-		$(slides).append("<img class='slidePhotoChat' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
+		$(slides).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
 		if (i == 0) $(sliderPoints).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		else $(sliderPoints).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 	}
-	$(slides).css("width", (chatDuMois['nbPhoto']*500)+"px");
 
 	if(admin) { // Si l'utilisateur est un administrateur on affiche le bouton d'édition du chat du mois
 		var xhr = new XMLHttpRequest();

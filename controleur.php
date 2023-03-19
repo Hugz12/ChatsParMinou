@@ -244,7 +244,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
+			if ($heure = valider("heure","POST"))
 			if ($couleur = valider("couleur","POST")){
+				$date = $date." ".$heure.":00";
 				// On ajoute l'événement à la BDD
 				editEvent($id,$titre,$description,$date,$couleur);
 				// on verifie si un fichier a été uploadé

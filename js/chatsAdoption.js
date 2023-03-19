@@ -53,19 +53,44 @@ function afficherChats(chats) {
 							</div>
 						</div>
 						<div class="allSliderPhotoChat allSlider">
-							<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
 							<div class="sliderPhotoChat slider">
+								<div class="flecheGauche clickable" onclick="translateX(this)"></div>
+
 								<div class="slides"></div>
 								<div class="sliderPoints"></div>
+		
+								<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 							</div>
-							<img class="flecheDroite clickable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
 						</div>
 					</div>
 				</div>
 			</div>`
 		);
+
+		$.ajax({
+			url: "./ressources/flecheLeft.svg",
+			dataType: "text",
+			success: function(data) {
+				elt = document.getElementsByClassName("flecheGauche");
+				for (var i=0; i < elt.length; i++) {
+					elt[i].innerHTML = data;
+				}
+			}
+		});
+	
+		$.ajax({
+			url: "./ressources/flecheRight.svg",
+			dataType: "text",
+			success: function(data) {
+				elt = document.getElementsByClassName("flecheDroite");
+				console.log(elt);
+				for (var i=0; i < elt.length; i++) {
+					elt[i].innerHTML = data;
+				}
+			}
+		});
+
 		var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
-		var colorChatSuivantFade = convertColor(chats[(j+1)%chats.length]['couleur'], 0.5);
 		var colorChat = convertColor(chatActuel['couleur'], 1);
 
 		var slideChat = document.getElementsByClassName("slideChat")[j];
@@ -75,27 +100,24 @@ function afficherChats(chats) {
 		slideChat.style.setProperty('--fifth-color', colorChat);
 		
 		console.log($(slides.children()[j]).children(".chatBanniere"));
-		$(slides.children()[j]).children(".chatBanniere").css("background", 'linear-gradient(60deg,'+ colorChatFade +' 80%, '+ colorChatSuivantFade +' 90%)');
 		
 		
 		var slidesPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
 		var sliderPointPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
 
 		for (var i=0; i < chatActuel['nbPhoto']; i++) {
-			$(slidesPhoto).append("<img class='slidePhotoChat' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
+			$(slidesPhoto).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
 			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		}
-		$(slidesPhoto).css("width", (chatActuel['nbPhoto']*500)+"px");
 		console.log("fin afficherChat "+ j);
 
-		if (j == 0) $(sliderPoint).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+		if (j == 0) $(sliderPoint).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
 		else $(sliderPoint).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
 
 		
 		
 	}
-	$(slides).css("width", (chats.length*1100)+"px");
 
 	if(admin) {
 		var xhr = new XMLHttpRequest();
@@ -264,6 +286,7 @@ function filesAdd(contexte) {
 		// Création de la div qui contiendra l'image et le bouton de suppression
 		const slidePhoto = document.createElement("div");
 		slidePhoto.classList.add("slidePhoto");
+		slidePhoto.classList.add("slide");
 		slidePhoto.appendChild(img);
 
 		// Creation of delete button
@@ -281,7 +304,6 @@ function filesAdd(contexte) {
 			if (slides.css("transform") != "translateX(0px)") {
 				$(".formType .inputFile .flecheGauche").click();
 			}
-			slides.css("width", taille*100+"px");
 			
 
 			$(slidePhoto).remove();
@@ -302,7 +324,6 @@ function filesAdd(contexte) {
 
 
 		var taille = slides.children().length;
-		slides.css("width", taille*100+"px");	
 	}
 
 	pushSelectedFilesInInput(contexte); // update input file with selected files
@@ -357,6 +378,7 @@ function addPreviewOfExistentFiles(code){
 
 				const slidePhoto = document.createElement("div");
 				slidePhoto.classList.add("slidePhoto");
+				slidePhoto.classList.add("slide");
 				slidePhoto.appendChild(img);
 
 				const deleteButton = document.createElement("button");
@@ -366,7 +388,6 @@ function addPreviewOfExistentFiles(code){
 					console.log(data);
 					existentFiles = existentFiles.filter(f => f !== photo['name']);
 					var taille = slides.children().length-1;
-					slides.css("width", taille*100+"px");
 					$(slidePhoto).remove();
 					console.log(existentFiles);
 				});
@@ -375,7 +396,6 @@ function addPreviewOfExistentFiles(code){
 				slides.append(slidePhoto);
 			}
 			var taille = slides.children().length;
-			slides.css("width", taille*100+"px");
 			console.log(existentFiles);
 		},
 		error: function (data) {

@@ -18,26 +18,42 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <link rel="stylesheet" href="./css/accueil.css">
 
 <div class="disabled">
-	<div id="chatsTitre" class="policeTitre">Nos Chats</div>
-	<?php
-		// On affiche le bouton d'ajout de chat si l'utilisateur est un admin
-		if (valider("Admin","SESSION")){
+	<div id="chatsTitre" class="policeTitre">
+		Nos Chats
+		<div id="svgFilter" class="svg"><?php include("./ressources/filter.svg") ?></div>
+	</div>
+	<?php 
+		if(valider("Admin","SESSION")) {
+
+			echo " 
+				<div class='svgBox'>
+					<div id='svgAdd' class='svg' onclick='displayForm(\"formAjoutChat\")'>
+			";
+						include("ressources/add.svg");
 			echo "
-				<div id='containerButtonAjoutChat' class='policeTexte'>
-					<button id='buttonAjoutChat' class='button' onclick='displayForm(\"formAjoutChat\")'>Ajouter Un Chat</button>
-					<button id='buttonSupprimerChat' class='button' onclick='displayForm(\"formSupprimerChat\")'>Supprimer Un Chat</button>
+					</div>
+					<div id='svgDelete' class='svg' onclick='displayForm(\"formSupprimerChat\")'>
+			";
+						include("ressources/dustbin.svg");
+			echo "
+					</div>
 				</div>
 			";
+			// inclue le svg dans le html
+			
 		}
 	?>
 
 	<div id="allSliderChats" class="allSlider">
-		<img class="flecheGauche clickable scalable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
 		<div id="sliderChats" class="slider">
+			<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
+
 			<div class="slides"></div>
 			<div id="pointsEvent" class="sliderPoints"></div>
+
+			<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+
 		</div>
-		<img class="flecheDroite clickable " onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite"></div>
 	</div>
 
 		

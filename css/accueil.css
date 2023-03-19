@@ -201,18 +201,18 @@
 .allSliderPhotoChat {
 	width: auto;
 	height: 100%;
-}
 
-.sliderPhotoChat {
-	width: 500px;
-	height: 100%;
+	--taille: 500px;
+	--hauteur: 340px;
+
+	--nbElement: 1;
+	--marge: 10px;
+
+	--transform: 0;
+
 }
 
 .slidePhotoChat {
-    z-index: 2;
-	width: 480px;
-	height: 340px;
-	margin: 10px 10px 10px 10px;
 	object-fit: cover;
 	background-position: center;
 }
@@ -230,9 +230,10 @@
 }
 
 #allChatDuMoisSmall > div{
-	width: 100vw;
+	width: auto;
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	align-items: center;
 }
 
@@ -242,16 +243,15 @@
 }
 
 .firstBanner {
-	height: 100px;
+	margin: 10px 40px 10px 40px;
+	height: auto;
+	min-height: 80px;
 	justify-content: space-between;
 }
 
-.firstBanner > div {
-	margin: 0px 40px 0px 40px;
-}
 
 .chatInfoSmall {
-	width: auto;
+	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -296,7 +296,21 @@
 
 .allSliderPhotoChatSmall {
 	position: relative;
-	top : -50px;
+	top : -5vw;
+
+	--taille: calc(100vw - 60px);
+	--hauteur: 340px;
+
+	--nbElement: 1;
+	--marge: 10px;
+
+	--transform: 0;
+}
+
+@media (min-width: 560px) {
+	.allSliderPhotoChatSmall {
+		--taille: 500px;
+	}
 }
 
 
@@ -327,15 +341,12 @@
   
 #allSliderEvent {
 	height: 600px;
-	
-	
-	
+
 	--taille: calc(100vw - 60px);
 	--hauteur: 500px;
 
-	
 	--nbElement: 1;
-	--marge: 30px;
+	--marge: 10px;
 
 	--transform: 0;
 }
@@ -382,8 +393,16 @@
 	left: 5%;
 	min-height: 45%;
 	width: 35%;
+	min-width: 265px;
+
 	background-color: var(--main-color);
 	padding: 15px 20px 15px 30px;
+}
+
+@media (max-width: 500px) {
+	.texteEvent {
+		min-width: 0px
+	}
 }
 
 .titreEvent {
@@ -398,7 +417,8 @@
 }
 
 .dateEvent {
-	width: 230px;
+	width: 60%;
+	max-width: 230px;
 	font-size: 20px;
 	margin: 10px 0 10px 0;
 	padding: 15px;
@@ -501,20 +521,14 @@
 
 
 #evenement {
+	margin: 0px 20px 0px 20px;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 30px;
 }
-#evenement > div {
-	margin: 0px 30px 0px 30px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
 
-#onChangeraApres {
-	width: 150px;
-}
+
 
 .svgBox {
 	display: flex;
@@ -524,17 +538,17 @@
 	height: 100%;
 }
 
-.svgBox > div {
+.svg {
 	display: inline-block;
 	margin: 15px 15px 0px 15px;
 }
 
-.svgBox > div > svg path{
+.svg > svg{
 	fill: rgb(100, 100, 100);
 	transition: 0.3s;
 }
 
-.svgBox > div:hover > svg path{
+.svg:hover > svg{
 	fill: var(--third-color);
 }
 

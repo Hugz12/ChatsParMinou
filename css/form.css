@@ -45,12 +45,12 @@ form {
     position: relative;
     display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
     height: auto;
 	max-height: 500px;
 	flex-wrap: wrap;
 	background-color: inherit;
-    margin: 10px 0;
+    margin: 10px 20px 10px 20px;
 }
 
 
@@ -195,6 +195,38 @@ form input[type="date"]~label {
     color: rgb(100, 100, 100);
     background-color: var(--sec-color);
 }
+
+
+/*------------------------------------------------------------------------*/
+/*                            input type time                             */
+/*------------------------------------------------------------------------*/
+
+
+form input[type="time"] {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: transparent;
+    border-radius: 15px;
+    width: 80px;
+    height: auto;
+    box-sizing: border-box;
+}
+
+form input[type="time"]~label {
+    position: absolute;
+    width: max-content;
+    left: 50%;
+    top: -17px;
+    padding: 0.4em;
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+    background-color: var(--sec-color);
+}
+
 
 
 
@@ -363,6 +395,16 @@ input.checkboxFamille {
     transform: translateX(-50%);
 
 }
+
+
+
+/*------------------------------------------------------------------------*/
+/*                           input type file                              */
+/*------------------------------------------------------------------------*/
+
+
+
+
 
 .file {
     position: relative;

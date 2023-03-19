@@ -71,12 +71,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 			}
 		?>
 		<div id="allSliderEvent" class="allSlider">
-			<img class="flecheGauche clickable" onclick="translateX(this);" src="./ressources/flecheLeft.png" alt="flecheGauche">
 			<div id="sliderEvent" class="slider">
+				<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
+
 				<div class="slides"></div>
 				<div id="pointsEvent" class="sliderPoints"></div>
+
+				<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
 			</div>
-			<img class="flecheDroite clickable" onclick="translateX(this);" src="./ressources/flecheRight.png" alt="flecheDroite">
 		</div>
 	</div>
 	
@@ -127,6 +129,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						<div class='group'>
 							<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
 							<label for=\"date\">Date</label>
+						</div>
+
+						<div class='group'>
+							<input type='time' name='heure' required>
+							<label for=\"date\">Horaire</label>
 						</div>
 
 						<div class='colorPicker group'>

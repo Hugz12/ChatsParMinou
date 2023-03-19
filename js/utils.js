@@ -16,7 +16,7 @@ function translateX(contexte, transform, overflow=false){
 	
 	if (transform == undefined) { // si on passe par les fleches
 
-		var allSlider = contexte.parentNode // on recupere le div allSlider en partant de la fleche cliquée
+		var allSlider = contexte.parentNode.parentNode // on recupere le div allSlider en partant de la fleche cliquée
 
 		var transform = getComputedStyle(allSlider).getPropertyValue("--transform"); // on recupere le transform
 		if ($(contexte).hasClass("flecheDroite")) transform--; // on recupere le sens avec l'id de la fleche
@@ -27,17 +27,20 @@ function translateX(contexte, transform, overflow=false){
 	}
 
 	var nbElement = getComputedStyle(allSlider).getPropertyValue("--nbElement"); // on recupere le nombre d'evenement visible
-	var max = Math.round($(contexte).parent().children(".slider").children(".slides").outerWidth(true) / $(allSlider).children(".slider").outerWidth(true)); // on recupere le nombre d'evenements
+	var max = Math.round($(allSlider).children(".slider").children(".slides").outerWidth(true) / $(allSlider).children(".slider").children(".slides").children(".slide").outerWidth(true)); // on recupere le nombre d'evenements
+
+
+	console.log("nbElement : " + nbElement);
+	console.log("max : " + max);
+	console.log("transform : " + transform);
 
 
 	// on gere les exeptions pour le premier et le dernier element
 	if (transform > (overflow ? Math.trunc(nbElement/2) : 0)) { // si on est sur le premier element on revient au dernier
-		console.log("premier");
 		transform = (overflow ? -(max-(1+Math.trunc(nbElement/2))) : -(max - nbElement));
 		if (!overflow && transform > 0) transform = 0; // on gere l'overflow pour le premier element
 	}
 	else if (transform <= (overflow ? -(max - Math.trunc(nbElement/2)) : -(max - nbElement+1))) { // si on est sur le dernier element on revient au premier
-		console.log("dernier");
 		transform = (overflow ? Math.trunc(nbElement/2) : 0);
 	}
 	
