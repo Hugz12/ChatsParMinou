@@ -10,7 +10,7 @@ function hideProfil(){
 }
 
 
-function displayNav2(){
+function displayNav2(element){
     if($("#allHeader").css("height") == "70px"){
         console.log("displayNav2");
         var taille = document.getElementById("nav2").clientHeight + 70;
@@ -20,16 +20,19 @@ function displayNav2(){
         $("#allHeader").css("height", "100vh");
         // desactive le scroll
         $("body").css("overflow", "hidden");
+        element.classList.add('checked');
     }
     else{
         console.log("hideNav2");
-        hideNav2();
+        hideNav2(element);
     }
 }
 
-function hideNav2(){
+function hideNav2(element){
     $("#allHeader").css("height", "70px");
     $("body").css("overflow", "");
+    element.classList.remove('checked');
+
 }
 
 
@@ -45,11 +48,16 @@ function responsiveHeader(){
 	}else{
         $("#nav").css("display", "flex");
         $("#menuDeroulant").css("display", "none");
-        hideNav2();
+        hideNav2(document.getElementById("menuDeroulant"));
 	}
 	
 }
 
 function initHeader(){
+    var menuDeroulant = document.getElementById("menuDeroulant");
     responsiveHeader();
+    
 }
+
+
+
