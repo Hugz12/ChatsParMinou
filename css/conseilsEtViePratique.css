@@ -4,13 +4,13 @@
     padding: 5vw;
 }
 
-#conseilTitre{
+.conseilTitre{
 	font-size: 50px;
 	font-weight: bold;
 	color: var(--third-color);
 }
 
-#conseilText{
+.conseilText{
     margin-left: 10vw;
     margin-top: 5vh;
     width: 300px;
@@ -28,7 +28,7 @@
     transition: transform 0.2s ease-in-out;
 }
 
-#conseilText:hover{
+.conseilText:hover{
     border-color: var(--fifth-color);
     transform: scale(1.1);
 }

@@ -13,11 +13,21 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 <div>
 	<div id="conteneur-divs"></div>
+	
 	<div id="conseils">
-		<div id="conseilTitre" class="policeTitre">
-			<h1>Conseils et vie pratique</h1>
-		</div>
-		<a href="https://www.youtube.com" id="conseilText" class="policeTexte">Votre chat chie partout ? Voici notre conseil</a>
+
+		<a href="https://www.youtube.com">
+			<div class="conseilTitre">Bonjour</div>
+			<div class="conseilText">Au revoir</div>
+		</a>
+		
+		<a href=""></a>
 	</div>
+
 	<button id="ajouter-div" onclick="ajouterDiv()">Ajouter une div</button>
+</div>
+
+
+<div>
+	
 </div>
