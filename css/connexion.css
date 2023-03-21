@@ -26,7 +26,7 @@
 }
 
 #allConnexion > div > div {
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 }
 
 #allConnexion > div > form > .group {
@@ -82,4 +82,10 @@
 }
 
 
+
+#previewPhotoDeProfil {
+	width: 100px;
+	height: 100px;
+	margin: 20px auto 10px auto;
+}
 

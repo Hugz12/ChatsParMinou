@@ -48,8 +48,8 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
             </div>
 
             <div class="group">
-                <input type="password" name="password" required/>
-                <label for="password">Confirmer votre mot de passe</label>
+                <input type="password" name="password2" required/>
+                <label for="password2">Confirmer votre mot de passe</label>
             </div>
 
             <div class="group">
@@ -58,13 +58,10 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
             </div>
 
             <div id="previewPhotoDeProfil" class='file'>
-                <input type='file' name='image' id='img' accept='image/*' onchange="previewFile(this);" style='display:none'>
-                <label for='img' class='photo-upload-label'></label>
-                <div id='fileText'>Choisir une photo</div>
-                <svg width='180' height='180' viewBox='0 0 180 180' style='border-radius: 25px; background-color: rgba(255, 255, 255, 0.7); opacity: 0;' onmouseover='opacitySwitch(this);'>
-                    <rect x='77.5' y='40' width='25' height='100' fill='rgba(200, 200, 200, 0.8)'/>
-                    <rect x='40' y='77.5' width='100' height='25' fill='rgba(200, 200, 200, 0.8)'/>
-                </svg>
+                <input type='file' name='photo' id='photo' accept='image/*' onchange="previewFile(this);" style='display:none'>
+                <label for='photo' class='photo-upload-label'></label>
+                <div class='fileText'>Choisir une photo</div>
+                <img class="addImage" src="./ressources/add.svg" alt="add.svg">
             </div>
 
             <input type="hidden" name="action" value="Ajouter Utilisateur"/>

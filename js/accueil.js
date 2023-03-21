@@ -210,7 +210,8 @@ function displayFormEditEvent(elt){
 							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
 							<label for='image' class='photo-upload-label'></label>
 							<img class='previewImg' src='./ressources/evenements/${event['id']}.jpg' alt='preview'>
-							<div id='fileText'>Choisir une photo</div>
+							<div class='fileText'>Choisir une photo</div>
+							<img class="addImage" src="./ressources/add.svg" alt="add.svg">
 						</div>
 
 					</div>
