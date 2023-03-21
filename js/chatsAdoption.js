@@ -10,7 +10,6 @@ function afficherChats(chats) {
 	var sliderPoint = $("#allSliderChats").children(".slider").children(".sliderPoints");
 
 	for (var j = 0; j < chats.length; j++) {
-		console.log("j = " + j);
 		chatActuel = chats[j];
 
 		slides.append(`
@@ -83,7 +82,6 @@ function afficherChats(chats) {
 			dataType: "text",
 			success: function(data) {
 				elt = document.getElementsByClassName("flecheDroite");
-				console.log(elt);
 				for (var i=0; i < elt.length; i++) {
 					elt[i].innerHTML = data;
 				}
@@ -99,8 +97,6 @@ function afficherChats(chats) {
 		slideChat.style.setProperty('--fourth-color', convertColor(colorChat, 0.25));
 		slideChat.style.setProperty('--fifth-color', colorChat);
 		
-		console.log($(slides.children()[j]).children(".chatBanniere"));
-		
 		
 		var slidesPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
 		var sliderPointPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
@@ -110,7 +106,6 @@ function afficherChats(chats) {
 			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 		}
-		console.log("fin afficherChat "+ j);
 
 		if (j == 0) $(sliderPoint).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
 		else $(sliderPoint).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
@@ -133,7 +128,6 @@ function afficherChats(chats) {
 					elt.id = chats[k]['code'];
 					elt.onclick = function() {displayFormEditChat(this);};
 					elt.innerHTML = xhr.responseText;
-					console.log(document.getElementsByClassName("chatNomBlock")[k]);
 					document.getElementsByClassName("chatNomBlock")[k].appendChild(elt);
 				}
 			}
@@ -227,11 +221,11 @@ function displayFormEditChat(element){
 					<div class='inputFile'>
 						<div class='labelAllSlider'>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
-							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.png' alt='flecheGauche'>
+							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.svg' alt='flecheGauche'>
 							<div id='sliderPhoto' class='slider'>
 								<div class='slides' id='edit'></div>
 							</div>
-							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.png' alt='flecheDroite'>
+							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.svg' alt='flecheDroite'>
 						</div>
 						<label class='clickable' for='fileModifChat'>
 							<svg width='50' height='50'>
@@ -407,3 +401,13 @@ function addPreviewOfExistentFiles(code){
 
 
 
+function displayFilter() {
+	var menuFiltre = document.getElementById("menuFiltre");
+	if (menuFiltre.style.display == "none") {
+		menuFiltre.style.display = "block";
+		$("#menuFiltre").animate({right: "0px"}, 300);
+	}
+	else {
+		$("#menuFiltre").animate({right: "-300px"}, 300, function() {menuFiltre.style.display = "none";});
+	}
+}

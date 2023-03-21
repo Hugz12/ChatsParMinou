@@ -27,37 +27,33 @@ header {
 header > div {
 	display: flex;
 	justify-content: center;
-	font-size: 30px;
 	margin: 0px 10px 0px 10px;
 	align-items: center;
-}
-
-header > a {
-	height: 50px;
-	font-size: 30px !important;
-	font-weight: bold;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	
 
 }
 
-header a {
+
+
+#nomAsso {
 	text-decoration: none;
-	padding: 0 15px 0 15px;
-	font-size: 15px;
+	font-size: 30px;
 	color: black;
+	transition: 0.3s;
 }
+
 
 #nav {
 	display: none;
-	
 	justify-content: space-between;
 	align-items: center;
 }
 
 .navLink{
+	text-decoration: none;
+	padding: 0 15px 0 15px;
+	font-size: 15px;
+	color: black;
+	
 	height: 50px;
 	transition: 0.3s;
 }
@@ -175,9 +171,11 @@ header a {
 	margin: 0 10px 0 10px;
 	border-radius: 45px;
 	background-color: var(--fourth-color);
+	color: black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-decoration:  none;
 }
 
 
@@ -197,7 +195,7 @@ header a {
 	position: absolute;
 	width: 35px;
 	height: 5px;
-	background: var(--fifth-color);
+	background: var(--third-color);
 	border-radius: 100px;
 	display: inline-block;
 	transition: 0.3s ease;

@@ -47,6 +47,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 			document.documentElement.style.setProperty('--third-color', convertColor(chatDuMois['couleur'], 0.5));
 			document.documentElement.style.setProperty('--fourth-color', convertColor(chatDuMois['couleur'], 0.25));
 			document.documentElement.style.setProperty('--fifth-color', convertColor(chatDuMois['couleur'], 1));
+			document.documentElement.style.setProperty('--sixth-color', convertColor(chatDuMois['couleur'], 0.1));
 		}
 	});
 </script>
@@ -67,7 +68,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 					<img class="logo" src="ressources/logo.png" alt="logo">
 					
 				</a>
-				<div class="policeTitre">Chats Par Minou</div>
+				<a id="nomAsso" class="policeTitre" href="index.php?view=accueil">Chats Par Minou</a>
 			</div>
 			
 

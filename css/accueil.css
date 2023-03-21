@@ -530,26 +530,6 @@
 
 
 
-.svgBox {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-}
 
-.svg {
-	display: inline-block;
-	margin: 15px 15px 0px 15px;
-}
-
-.svg > svg{
-	fill: rgb(100, 100, 100);
-	transition: 0.3s;
-}
-
-.svg:hover > svg{
-	fill: var(--third-color);
-}
 
 

@@ -20,13 +20,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <div class="disabled">
 	<div id="chatsTitre" class="policeTitre">
 		Nos Chats
-		<div id="svgFilter" class="svg"><?php include("./ressources/filter.svg") ?></div>
+		<div id="svgFilter" class="svg" onclick="displayFilter();"><?php include("./ressources/filter.svg") ?></div>
 	</div>
 	<?php 
 		if(valider("Admin","SESSION")) {
 
 			echo " 
-				<div class='svgBox'>
+				<div class='svgBox' >
 					<div id='svgAdd' class='svg' onclick='displayForm(\"formAjoutChat\")'>
 			";
 						include("ressources/add.svg");
@@ -63,7 +63,18 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		afficherChats(chats);
 	</script> 
 
+	
+	<div id="menuFiltre">
+		
+	</div>
+	
+
+
+	
 </div>
+
+
+
 
 
 <?php 
@@ -182,14 +193,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 						
 						<div class='labelAllSlider'>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
-							<div class='flecheGauche clickable' onclick='translateX(this, undefined, false);'>
-								<img src='./ressources/flecheLeft.png' alt='flecheGauche'>
-							</div>
 							<div id='sliderPhoto' class='slider'>
+								<div class='flecheGauche clickable' onclick='translateX(this, undefined, false)'><?php include('./ressources/flecheLeft.svg') ?></div>
+
 								<div class='slides'></div>
-							</div>
-							<div class='flecheDroite clickable' onclick='translateX(this, undefined, false);'>
-								<img src='./ressources/flecheRight.png' alt='flecheDroite'>
+
+								<div class='flecheDroite clickable' onclick='translateX(this, undefined, false)'><?php include('./ressources/flecheRight.svg') ?></div>
+
 							</div>
 						</div>
 
