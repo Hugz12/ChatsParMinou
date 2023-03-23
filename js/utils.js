@@ -217,6 +217,47 @@ function previewFile(contexte){
 
 
 
+function move(container,direction, state, sens, x, y, sens2) {
+
+	if (state == 0) {
+		sens = Math.random() * 2 - 1; // -1 = gauche, 1 = droite
+		sens*=10;
+		state = 10;
+	}
+	console.log("sens");
+
+	direction += sens;
+	x += Math.cos(direction * Math.PI / 180) * 30 + Math.sin(direction * Math.PI / 180) * sens2 * 30;
+	y += Math.sin(direction * Math.PI / 180) * 30 + Math.cos(direction * Math.PI / 180) * sens2 * 30;
+
+	var patte = document.createElement("img");
+	patte.src = "./ressources/patte.png";
+	patte.classList.add("patte");
+	patte.style.top = y + "px";
+	patte.style.left = x + "px";
+	patte.style.transform = "rotate(" + direction + "deg)";
+	if (container.children.length > 6) container.removeChild(container.firstChild);
+	container.appendChild(patte);
+	
+	
+
+	if(y > window.innerHeight)
+		y = 0;
+	if(y < 0)
+		y = window.innerHeight;
+	if(x > window.innerWidth)
+		x = 0;
+	if(x < 0)
+		x = window.innerWidth;
+
+	state--;
+
+  
+	setTimeout(function() {
+		move(container, direction, state, sens, x, y, -sens2);
+	}, 500);
+}
+
 
 
 

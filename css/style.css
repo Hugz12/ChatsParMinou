@@ -401,3 +401,28 @@ g {
 .svg:hover > svg{
 	fill: var(--third-color);
 }
+
+
+
+.patteContainer {
+	width:100vw;
+	height: 100vh;
+	transform: translate(-50%, -50%);
+	left : 50%;
+	top : 50%;
+	position: absolute;
+}
+
+
+.patte {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+}
+
+.conteneurDeConteneurDePattes {
+	width: 100vw;
+	height: 100%;
+	position: absolute;
+	top: 70px;
+}

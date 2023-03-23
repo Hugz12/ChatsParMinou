@@ -26,3 +26,4 @@ function switchLoginRegister(){
     }
     sens = -sens;
 }
+
