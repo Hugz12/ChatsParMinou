@@ -229,7 +229,7 @@
 	background-color: var(--sec-color);
 }
 
-#allChatDuMoisSmall > div{
+.firstBanner, .secondBanner, .thirdBanner{
 	width: auto;
 	display: flex;
 	flex-direction: row;

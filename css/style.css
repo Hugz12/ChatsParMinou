@@ -100,7 +100,6 @@ body{
 	max-width: var(--tailleMax);
 	margin: 10px var(--marge);
 	height: var(--hauteur);
-	background-color: var(--fourth-color);
 }
 
 
