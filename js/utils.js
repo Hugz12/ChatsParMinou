@@ -224,11 +224,10 @@ function move(container,direction, state, sens, x, y, sens2) {
 		sens*=10;
 		state = 10;
 	}
-	console.log("sens");
 
 	direction += sens;
 	x += Math.cos(direction * Math.PI / 180) * 30 + Math.sin(direction * Math.PI / 180) * sens2 * 30;
-	y += Math.sin(direction * Math.PI / 180) * 30 + Math.cos(direction * Math.PI / 180) * sens2 * 30;
+	y += Math.sin(direction * Math.PI / 180) * 30 - Math.cos(direction * Math.PI / 180) * sens2 * 30;
 
 	var patte = document.createElement("img");
 	patte.src = "./ressources/patte.png";
@@ -255,7 +254,7 @@ function move(container,direction, state, sens, x, y, sens2) {
   
 	setTimeout(function() {
 		move(container, direction, state, sens, x, y, -sens2);
-	}, 500);
+	}, 1000);
 }
 
 
