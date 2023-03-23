@@ -235,7 +235,12 @@ function move(container,direction, state, sens, x, y, sens2) {
 	patte.style.top = y + "px";
 	patte.style.left = x + "px";
 	patte.style.transform = "rotate(" + direction + "deg)";
-	if (container.children.length > 6) container.removeChild(container.firstChild);
+	if (container.children.length > 6) {
+		$(container.childNodes[0]).animate({opacity: 0}, 300, function() {
+			$(container.childNodes[0]).remove();
+		});
+		
+	}
 	container.appendChild(patte);
 	
 	
@@ -254,7 +259,7 @@ function move(container,direction, state, sens, x, y, sens2) {
   
 	setTimeout(function() {
 		move(container, direction, state, sens, x, y, -sens2);
-	}, 1000);
+	}, 650);
 }
 
 

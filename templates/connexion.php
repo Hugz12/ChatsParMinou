@@ -18,32 +18,21 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <div class="conteneurDeConteneurDePattes">
     <div id="1" class="patteContainer"></div>
     <div id="2" class="patteContainer"></div>
+    <div id="3" class="patteContainer"></div>
+
 </div>
 
 
 <script>
-    var direction = 0; // angle de rotation
-    var state = 0; // 5 steps avant de changer de direction
-    var sens = 0; // -1 = gauche, 1 = droite
-    var sens3 = 1;
-    var Pastop = 100;
-    var Pasleft = 0;
-    var patteContainer = document.getElementById("1");
-    console.log(patteContainer);
-
-
-    var direction2 = 180; // angle de rotation
-    var state2 = 0; // 5 steps avant de changer de direction
-    var sens2 = 0; // -1 = gauche, 1 = droite
-    var sens4 = 1;
-    var Pastop2 = 200;
-    var Pasleft2 = 0;
     
+    var patteContainer = document.getElementById("1");    
     var patteContainer2 = document.getElementById("2");
+    var patteContainer3 = document.getElementById("3");
 
 
-    move(patteContainer, direction, state, sens, Pasleft, Pastop, 1);
-    move(patteContainer2, direction2, state2, sens2, Pasleft2, Pastop2, 1);
+    move(patteContainer, 0, 0, 0, 0, 500, 1);
+    move(patteContainer2, 180, 0, 0, 0, 600, 1);
+    move(patteContainer3, 270, 0, 0, 500, 0, 1);
 </script>
 
 <div id="allConnexion" class="policeTexte" >
