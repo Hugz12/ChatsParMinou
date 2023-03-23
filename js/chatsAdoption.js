@@ -66,6 +66,54 @@ function afficherChats(chats) {
 			</div>`
 		);
 
+		slides.append(`
+			<div class="slideChatSmall slide">
+				<div class="firstBanner">
+					<div class="tailleTitre policeTitre titreChatDuMois">${chatActuel['name']}</div>
+					
+					<div class="chatInfoSmall">
+						<div class="policeTexte boxInfoTitle">Race</div>
+						<div class="policeTexte boxInfoSmall">${chatActuel['race']}</div>
+					</div>
+
+					<div class="chatInfoSmall">
+						<div class="policeTexte boxInfoTitle">Sexe</div>
+						<div class="policeTexte boxInfoSmall">${(chatActuel['sexe'] ? 'Femelle' : 'Mâle')}</div>
+					</div>
+
+					<div class="chatInfoSmall">
+						<div class="policeTexte boxInfoTitle">Situation</div>
+						<div class="policeTexte boxInfoSmall">${(chatActuel['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
+					</div>
+				</div>
+
+				<div class="secondBanner">
+					<div>
+						<img src="./ressources/calendar.png" alt="calendar" style="width: 20px; height: 20px;">
+						<div class="chatTexte policeTexte"> Né le ${chatActuel['dateDeNaissance']}</div>
+					</div>
+					<div>
+						<img src="./ressources/description.png" alt="description" style="width: 20px; height: 20px;">
+						<div class=" chatTexte policeTexte">${chatActuel['description']}</div>
+					</div>
+				</div>
+
+				<div class="thirdBanner">
+					<div class="allSliderPhotoChatSmall allSlider">
+						<div class="sliderPhotoChat slider">
+							<div class="flecheGauche clickable" onclick="translateX(this)"></div>
+
+							<div class="slides"></div>
+							<div class="sliderPoints"></div>
+
+							<div class="flecheDroite clickable" onclick="translateX(this)"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		`
+		);
+
 		$.ajax({
 			url: "./ressources/flecheLeft.svg",
 			dataType: "text",
@@ -90,21 +138,37 @@ function afficherChats(chats) {
 
 		var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
 		var colorChat = convertColor(chatActuel['couleur'], 1);
+		var colorChatLight = convertColor(chatActuel['couleur'], 0.25);
 
 		var slideChat = document.getElementsByClassName("slideChat")[j];
+		var slideChatSmall = document.getElementsByClassName("slideChatSmall")[j];
 
 		slideChat.style.setProperty('--third-color', colorChatFade);
-		slideChat.style.setProperty('--fourth-color', convertColor(colorChat, 0.25));
+		slideChat.style.setProperty('--fourth-color', colorChatLight);
 		slideChat.style.setProperty('--fifth-color', colorChat);
-		
-		
-		var slidesPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
-		var sliderPointPhoto = $(slides.children()[j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
 
+		slideChatSmall.style.setProperty('--third-color', colorChatFade);
+		slideChatSmall.style.setProperty('--fourth-color', colorChatLight);
+		slideChatSmall.style.setProperty('--fifth-color', colorChat);
+		
+		
+		var slidesPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
+		var sliderPointPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
+
+		var slidesPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".sliderPhotoChat").children(".slides");
+		var sliderPointPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".sliderPhotoChat").children(".sliderPoints");
+
+		console.log($(slides.children()[2*j]).children(".slideChatSmall"));
+		console.log(slidesPhotoSmall);
+		console.log(sliderPointPhotoSmall);
 		for (var i=0; i < chatActuel['nbPhoto']; i++) {
 			$(slidesPhoto).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
 			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			$(slidesPhotoSmall).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
+			if (i == 0) $(sliderPointPhotoSmall).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			else $(sliderPointPhotoSmall).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+		
 		}
 
 		if (j == 0) $(sliderPoint).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
@@ -128,7 +192,10 @@ function afficherChats(chats) {
 					elt.id = chats[k]['code'];
 					elt.onclick = function() {displayFormEditChat(this);};
 					elt.innerHTML = xhr.responseText;
+					eltBis = elt.cloneNode(true);
+					eltBis.onclick = function() {displayFormEditChat(this);};
 					document.getElementsByClassName("chatNomBlock")[k].appendChild(elt);
+					document.getElementsByClassName("firstBanner")[k].appendChild(eltBis);
 				}
 			}
 		};

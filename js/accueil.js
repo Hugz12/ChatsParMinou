@@ -397,7 +397,7 @@ function afficherChatDuMoisSmall(chatDuMois){
 				<div class="policeTexte boxInfoSmall">${(chatDuMois['sexe'] ? 'Femelle' : 'Mâle')}</div>
 			</div>
 
-			<div>
+			<div class="chatInfoSmall">
 				<div class="policeTexte boxInfoTitle">Situation</div>
 				<div class="policeTexte boxInfoSmall">${(chatDuMois['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
 			</div>

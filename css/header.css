@@ -113,7 +113,7 @@ header > div {
 	/*je veux que cette div soit juste en dessous de la photo de profil mais ne perturbe pas le reste du header*/
 	display: none;
 	position: fixed;
-	z-index: 3;
+	z-index: 5;
 	top: 82px;
 	right: 15px;
 	width: 200px;
