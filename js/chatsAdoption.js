@@ -7,7 +7,7 @@ function afficherChats(chats) {
 	console.log(chats);
 
 	var slides = $("#allSliderChats").children(".slider").children(".slides");
-	var sliderPoint = $("#allSliderChats").children(".slider").children(".sliderPoints");
+	var sliderPoint = $("#allSliderChats").children(".slider").children("#allSliderPointsChats").children(".slider").children(".slides");
 
 	for (var j = 0; j < chats.length; j++) {
 		chatActuel = chats[j];
@@ -56,7 +56,15 @@ function afficherChats(chats) {
 								<div class="flecheGauche clickable" onclick="translateX(this)"></div>
 
 								<div class="slides"></div>
-								<div class="sliderPoints"></div>
+								<div class="allSliderPointsPhotosChats allSlider">
+									<div class="slider">
+										<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
+
+										<div class="slides"></div>
+
+										<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+									</div>
+								</div>
 		
 								<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 							</div>
@@ -104,7 +112,15 @@ function afficherChats(chats) {
 							<div class="flecheGauche clickable" onclick="translateX(this)"></div>
 
 							<div class="slides"></div>
-							<div class="sliderPoints"></div>
+							<div class="allSliderPointsPhotosChatsSmall allSlider">
+								<div class="slider">
+									<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
+
+									<div class="slides"></div>
+
+									<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+								</div>
+							</div>
 
 							<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 						</div>
@@ -171,11 +187,20 @@ function afficherChats(chats) {
 		
 		}
 
-		if (j == 0) $(sliderPoint).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
-		else $(sliderPoint).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
+		if (j == 0) $(sliderPoint).append("<img class='slidePointChats slidePointSelected slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
+		else $(sliderPoint).append("<img class='slidePointChats slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
 
 		
 		
+	}
+	var allSliderPoint = document.getElementById("allSliderPointsChats");
+	if (chats.length < parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement"))) {
+		console.log("OUIIIIIIII");
+		var taille = (parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--taille").slice(0, -2))/parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement")) * chats.length)
+		taille = taille + "px";
+
+		allSliderPoint.style.setProperty("--taille", taille);
+		allSliderPoint.style.setProperty("--nbElement", chats.length);
 	}
 
 	if(admin) {
@@ -288,11 +313,13 @@ function displayFormEditChat(element){
 					<div class='inputFile'>
 						<div class='labelAllSlider'>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
-							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.svg' alt='flecheGauche'>
 							<div id='sliderPhoto' class='slider'>
+								<div class='flecheGauche clickable' onclick='translateX(this, undefined, false)'></div>
+
 								<div class='slides' id='edit'></div>
+
+								<div class='flecheDroite clickable' onclick='translateX(this, undefined, false)'></div>
 							</div>
-							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.svg' alt='flecheDroite'>
 						</div>
 						<label class='clickable' for='fileModifChat'>
 							<svg width='50' height='50'>
@@ -313,6 +340,28 @@ function displayFormEditChat(element){
 
 					<input type='hidden' name='code' value='${chat['code']}'>
 			`);
+
+			$.ajax({
+				url: "./ressources/flecheLeft.svg",
+				dataType: "text",
+				success: function(data) {
+					elt = document.getElementsByClassName("flecheGauche");
+					for (var i=0; i < elt.length; i++) {
+						elt[i].innerHTML = data;
+					}
+				}
+			});
+		
+			$.ajax({
+				url: "./ressources/flecheRight.svg",
+				dataType: "text",
+				success: function(data) {
+					elt = document.getElementsByClassName("flecheDroite");
+					for (var i=0; i < elt.length; i++) {
+						elt[i].innerHTML = data;
+					}
+				}
+			});
 			
 			addPreviewOfExistentFiles(chat['code']);
 
@@ -361,14 +410,9 @@ function filesAdd(contexte) {
 			selectedFiles = selectedFiles.filter(f => f !== file); 
 
 			// On supprime la div qui contient l'image et le bouton de suppression
-			var taille = slides.children().length-1;
-			if (slides.css("transform") != "translateX(0px)") {
-				$(".formType .inputFile .flecheGauche").click();
-			}
-			
-
 			$(slidePhoto).remove();
 			pushSelectedFilesInInput(contexte);
+			$(".formType .inputFile .flecheGauche").click();
 			console.log(contexte.files);
 
 			if (slides.children().length > 0) {
