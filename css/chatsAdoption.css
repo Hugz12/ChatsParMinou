@@ -10,7 +10,7 @@
 #allSliderChats {
 
 	width: auto;
-	height: 100%;
+	height: auto;
 
 	--taille: 100vw;
 	--hauteur: 600px;
@@ -20,6 +20,21 @@
 
 	--transform: 0;
 }
+
+#allSliderPointsChats {
+	width: auto;
+	height: auto;
+	
+	--taille: 700px;
+	--hauteur: 70px;
+
+	--nbElement: 7;
+	--marge: 10px;
+
+	--transform: 0;
+}
+
+
 
 .slideChat {
 	background-color: var(--sec-color);

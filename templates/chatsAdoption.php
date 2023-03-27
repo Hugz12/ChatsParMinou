@@ -45,12 +45,21 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 	?>
 
 	<div id="allSliderChats" class="allSlider">
-		<div id="sliderChats" class="slider">
+		<div class="slider">
 			<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
 			<div class="slides"></div>
-			<div id="pointsEvent" class="sliderPoints"></div>
+			
+			<div id="allSliderPointsChats" class="allSlider">
+				<div class="slider">
+					<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
+					<div class="slides"></div>
+
+					<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+				</div>
+			</div>
+			
 			<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
 
 		</div>

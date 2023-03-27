@@ -23,7 +23,7 @@ function translateX(contexte, transform, overflow=false){
 		else transform++;
 	}
 	else { // si on passe par les points
-		var allSlider = contexte.parentNode.parentNode.parentNode; // on recupere le div allSlider en partant du point cliqué
+		var allSlider = contexte.parentNode.parentNode.parentNode.parentNode.parentNode; // on recupere le div allSlider en partant du point cliqué
 	}
 
 	var nbElement = getComputedStyle(allSlider).getPropertyValue("--nbElement"); // on recupere le nombre d'evenement visible

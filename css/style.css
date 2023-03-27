@@ -82,7 +82,6 @@ body{
 	position: relative;
 	overflow: hidden;
 	width: calc(var(--taille));
-	height: calc(var(--hauteur) + 35px);
 }
 
 .slides {
