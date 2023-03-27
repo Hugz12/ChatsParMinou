@@ -9,10 +9,11 @@
 }
 
 .calendar {
-    top: 50%;
-    left: 50%;
-    width: 60%;
+    margin: auto;
+    width: 80%;
+    max-width: 950px;
     height: 700px;
+    position: relative;
 }
 
 .year {
@@ -22,10 +23,21 @@
     color: var(--third-color);
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .year > * {
-    margin: 0px 0px 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.year > * > * {
+    margin: 0px 20px 0px 20px;
+}
+
+.addPassageButton {
+    margin-right: calc(0.8vw + 0.8vh);
 }
 
 .weekdays {
@@ -57,7 +69,7 @@
 .day {
     width: calc(100% / 7);
     height: calc(100% / 6);
-    font-size: calc(1.2vw + 1.2vh);
+    font-size: calc(1vw + 1vh);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,13 +79,15 @@
     background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 30%, #fff 10%, #fff 100%);
 }
 
-#prev, #next {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #000;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+
+.addPassageButton {
+    transition: 0.3s;
+}
+
+.addPassageButton:hover > svg {
+    fill: var(--third-color);
     cursor: pointer;
 }
+
+

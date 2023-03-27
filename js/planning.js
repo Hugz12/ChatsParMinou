@@ -13,15 +13,15 @@ function fillCalendar() {
         firstDay = 7;
     }
 
-    calendar.children[0].children[0].innerHTML = year;
-    calendar.children[0].children[1].innerHTML = monthString[month];
-    calendar.children[0].children[2].innerHTML = month;
+    calendar.children[1].children[0].children[0].innerHTML = year;
+    calendar.children[1].children[0].children[1].innerHTML = monthString[month];
+    calendar.children[1].children[0].children[2].innerHTML = month;
     
 
     var day = document.createElement("div");
     day.className = "day";
     for (var i = 1; i < firstDay; i++) {
-        calendar.children[2].appendChild(day.cloneNode());
+        calendar.children[3].appendChild(day.cloneNode());
     }
 
 
@@ -33,7 +33,7 @@ function fillCalendar() {
             day.className += " currentDay";
         }
         day.innerHTML = i;
-        calendar.children[2].appendChild(day);
+        calendar.children[3].appendChild(day);
     }
 }
 
@@ -43,8 +43,8 @@ function changeMonth(element){
     var calendar = document.getElementById("calendar");
     sens = element.id == "next" ? 1 : -1;
 
-    var month = parseInt(calendar.children[0].children[2].innerHTML) + sens;
-    var year = parseInt(calendar.children[0].children[0].innerHTML);
+    var month = parseInt(calendar.children[1].children[0].children[2].innerHTML) + sens;
+    var year = parseInt(calendar.children[1].children[0].children[0].innerHTML);
 
     if (month == 12) {
         month = 0;
@@ -59,15 +59,15 @@ function changeMonth(element){
         firstDay = 7;
     }
 
-    calendar.children[0].children[0].innerHTML = year;
-    calendar.children[0].children[1].innerHTML = monthString[month];
-    calendar.children[0].children[2].innerHTML = month;
+    calendar.children[1].children[0].children[0].innerHTML = year;
+    calendar.children[1].children[0].children[1].innerHTML = monthString[month];
+    calendar.children[1].children[0].children[2].innerHTML = month;
 
-    calendar.children[2].innerHTML = "";
+    calendar.children[3].innerHTML = "";
     var day = document.createElement("div");
     day.className = "day";
     for (var i = 1; i < firstDay; i++) {
-        calendar.children[2].appendChild(day.cloneNode());
+        calendar.children[3].appendChild(day.cloneNode());
     }
 
     var daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -77,9 +77,9 @@ function changeMonth(element){
         day.className = "day";
         if (i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()) {
             day.className += " currentDay";
-        }0
+        }
         day.innerHTML = i;
-        calendar.children[2].appendChild(day);
+        calendar.children[3].appendChild(day);
     }
 
 

@@ -491,3 +491,14 @@ select {
 select:focus {
     border-color: var(--third-color);
 }
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+	background: none;
+    width: 0;
+    display: none;
+    margin: 0px;
+}
+
+input[type="time"]{
+    text-align: center;
+}
