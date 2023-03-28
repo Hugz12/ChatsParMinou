@@ -162,12 +162,12 @@ function afficherChats(chats) {
 		
 		for (var i=0; i < chatActuel['nbPhoto']; i++) {
 			$(slidesPhoto).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
-			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			if (i == 0) $(sliderPointPhoto).append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+			else $(sliderPointPhoto).append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
 			
 			$(slidesPhotoSmall).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
-			if (i == 0) $(sliderPointPhotoSmall).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-			else $(sliderPointPhotoSmall).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			if (i == 0) $(sliderPointPhotoSmall).append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+			else $(sliderPointPhotoSmall).append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
 		
 		}
 
