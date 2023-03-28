@@ -326,6 +326,45 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+		case 'Edit Chat' : 
+			// si il y a au moins un champ non vide
+			if (($statut = valider("statut","POST")) 
+			or 	($familleAccueil = valider("familleAccueil","POST")) 
+			or	($couleur = valider("couleur","POST")) 
+			or 	($code = valider("code","POST"))
+			or	($description = valider("description","POST"))
+			or	($photos = valider_fichiers("photos"))){
+				// On ajoute le chat à la BDD
+				$nbPhotos = count($photos);
+				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+
+				// On ajoute les photos
+				$i = 0;
+				foreach ($photos as $fichier) {
+					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
+					$i++;
+				}
+				$qs = "?view=chatsAdoption";
+			}
+		break;
+
+
+		case 'Ajouter Un Passage' : 
+			// vérifier la présence des champs 
+			if ($date = valider("date"))
+			if ($heureDebut = valider("debut"))
+			if ($heureFin = valider("fin"))
+			if ($description = valider("description"))
+			if (isset($_SESSION["mail"]))
+			if ($heureDebut < $heureFin){
+				ajouterPassage($date,$heureDebut,$heureFin,$description,$_SESSION["mail"]);
+				$_SESSION['message'] = "Votre passage a bien été ajouté";
+			} else if ($heureDebut > $heureFin){
+				$_SESSION['message'] = "Les heures de début et de fin ne sont pas cohérentes, la ligne n'a pas était ajouté";
+			}
+			$qs = "?view=planning";
+		break;
+
 		// Action qui ne sont pas afficher sur la page, 
 		// c'est a dire qui vont etre appeler via des requetes ajax ou autre
 
@@ -372,28 +411,21 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				echo json_encode($event);
 				die(); 
 			}
-
-		case 'Edit Chat' : 
-			// si il y a au moins un champ non vide
-			if (($statut = valider("statut","POST")) 
-			or 	($familleAccueil = valider("familleAccueil","POST")) 
-			or	($couleur = valider("couleur","POST")) 
-			or 	($code = valider("code","POST"))
-			or	($description = valider("description","POST"))
-			or	($photos = valider_fichiers("photos"))){
-				// On ajoute le chat à la BDD
-				$nbPhotos = count($photos);
-				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
-
-				// On ajoute les photos
-				$i = 0;
-				foreach ($photos as $fichier) {
-					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
-					$i++;
-				}
-				$qs = "?view=chatsAdoption";
-			}
 		break;
+
+		case 'getPassages' : 
+			// qui renvoi les infos de l'événement en json
+			if ($mois = valider("mois")){
+				$passages = getPassages($mois);
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode($passages);
+				die(); 
+			}
+		break; 
+
+
+		
 
 	}
 

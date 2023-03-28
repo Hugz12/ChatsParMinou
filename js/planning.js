@@ -24,6 +24,33 @@ function fillCalendar() {
         calendar.children[3].appendChild(day.cloneNode());
     }
 
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "getPassages",
+            "mois" : month+1
+        },
+        success: function (data) {
+            console.log(data);
+            var passagesRefuge = document.getElementById("passagesRefuge");
+            passagesRefuge.innerHTML = "";
+            for(element of data){
+                var passage = document.createElement("div");
+                passage.className = "passage";
+                passage.innerHTML = element;
+                passagesRefuge.appendChild(passage);
+            }
+        },
+        error: function (data) {
+            console.log("de la merde");
+        }
+    });
+
+   
+
+
 
     var daysInMonth = new Date(year, month + 1, 0).getDate();
     for (var i = 1; i <= daysInMonth; i++) {
@@ -70,6 +97,54 @@ function changeMonth(element){
         calendar.children[3].appendChild(day.cloneNode());
     }
 
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "getPassages",
+            "mois" : month+1
+        },
+        success: function (data) {
+            console.log(data);
+            var passagesRefuge = document.getElementById("passagesRefuge");
+            passagesRefuge.innerHTML = "";
+            for(element of data){
+                var passage = document.createElement("div");
+                passage.className = "passage";
+                passagesRefuge.appendChild(passage);
+
+                var currentAttribut = document.createElement("div");
+                currentAttribut.className = "mail";
+                currentAttribut.innerHTML = element["maiBenevole"];
+                passage.appendChild(currentAttribut);
+
+                currentAttribut = document.createElement("div");
+                currentAttribut.className = "date";
+                currentAttribut.innerHTML = element["date"];
+                passage.appendChild(currentAttribut);
+
+                currentAttribut = document.createElement("div");
+                currentAttribut.className = "heureDebut";
+                currentAttribut.innerHTML = element["heureDebut"];
+                passage.appendChild(currentAttribut);
+
+                currentAttribut = document.createElement("div");
+                currentAttribut.className = "heureFin";
+                currentAttribut.innerHTML = element["heureFin"];
+                passage.appendChild(currentAttribut);
+
+                currentAttribut = document.createElement("div");
+                currentAttribut.className = "description";
+                currentAttribut.innerHTML = element["description"];
+                passage.appendChild(currentAttribut);
+            }
+        },
+        error: function (data) {
+            console.log("de la merde");
+        }
+    });
+
     var daysInMonth = new Date(year, month + 1, 0).getDate();
     
     for (var i = 1; i <= daysInMonth; i++) {
@@ -83,4 +158,9 @@ function changeMonth(element){
     }
 
 
+}
+
+function setMinDate(){
+    var date = document.getElementById("datePassage");
+    date.min = new Date().toISOString().split("T")[0];
 }
