@@ -148,10 +148,12 @@ body{
 	border-radius: 50%;
 	margin: 0 5px 0 5px;
 	transition: 0.5s;
+	border: 1px solid rgb(100, 100, 100);
 }
 
 .slidePointSelected {
-	background-color: black;
+	background-color: var(--third-color);
+	border-color: var(--third-color);
 }
 
 .clickable {
@@ -162,6 +164,11 @@ body{
 .clickable:hover {
 	cursor: pointer;
 	transform: scale(1.1);
+}
+
+.clickable:active {
+	transform: scale(0.9);
+
 }
 
 

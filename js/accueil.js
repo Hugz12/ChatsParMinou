@@ -97,8 +97,8 @@ function afficherEvenements(evenements){
 				</div>
 		`);
 
-		if (i == 0) sliderPoints.append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-		else sliderPoints.append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+		if (i == 0) sliderPoints.append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+		else sliderPoints.append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
 	}
 
 	if(admin){ // si l'utilisateur est admin on affiche les boutons d'édition
@@ -333,8 +333,8 @@ function afficherChatDuMois(chatDuMois){
 
 	for (var i=0; i < chatDuMois['nbPhoto']; i++) {
 		$(slides).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
-		if (i == 0) $(sliderPoints).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-		else $(sliderPoints).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+		if (i == 0) $(sliderPoints).append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+		else $(sliderPoints).append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
 	}
 
 	if(admin) { // Si l'utilisateur est un administrateur on affiche le bouton d'édition du chat du mois
@@ -462,8 +462,8 @@ function afficherChatDuMoisSmall(chatDuMois){
 
 	for (var i=0; i < chatDuMois['nbPhoto']; i++) {
 		$(slides).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatDuMois['code']+"/"+i+".jpg' alt='Chat du mois'/>");
-		if (i == 0) $(sliderPoints).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-		else $(sliderPoints).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+		if (i == 0) $(sliderPoints).append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+		else $(sliderPoints).append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
 	}
 
 	if(admin) { // Si l'utilisateur est un administrateur on affiche le bouton d'édition du chat du mois
