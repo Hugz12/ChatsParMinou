@@ -56,15 +56,7 @@ function afficherChats(chats) {
 								<div class="flecheGauche clickable" onclick="translateX(this)"></div>
 
 								<div class="slides"></div>
-								<div class="allSliderPointsPhotosChats allSlider">
-									<div class="slider">
-										<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
-
-										<div class="slides"></div>
-
-										<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
-									</div>
-								</div>
+								<div class="sliderPoints"></div>
 		
 								<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 							</div>
@@ -112,15 +104,7 @@ function afficherChats(chats) {
 							<div class="flecheGauche clickable" onclick="translateX(this)"></div>
 
 							<div class="slides"></div>
-							<div class="allSliderPointsPhotosChatsSmall allSlider">
-								<div class="slider">
-									<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
-
-									<div class="slides"></div>
-
-									<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
-								</div>
-							</div>
+							<div class="sliderPoints"></div>
 
 							<div class="flecheDroite clickable" onclick="translateX(this)"></div>
 						</div>
@@ -169,18 +153,18 @@ function afficherChats(chats) {
 		
 		
 		var slidesPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
-		var sliderPointPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
-
+		var sliderPointPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".slider").children(".sliderPoints");
+		
+		console.log(sliderPointPhoto);
 		var slidesPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".sliderPhotoChat").children(".slides");
-		var sliderPointPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".sliderPhotoChat").children(".sliderPoints");
+		var sliderPointPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".slider").children(".sliderPoints");
 
-		console.log($(slides.children()[2*j]).children(".slideChatSmall"));
-		console.log(slidesPhotoSmall);
-		console.log(sliderPointPhotoSmall);
+		
 		for (var i=0; i < chatActuel['nbPhoto']; i++) {
 			$(slidesPhoto).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
 			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			
 			$(slidesPhotoSmall).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
 			if (i == 0) $(sliderPointPhotoSmall).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
 			else $(sliderPointPhotoSmall).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
@@ -194,8 +178,9 @@ function afficherChats(chats) {
 		
 	}
 	var allSliderPoint = document.getElementById("allSliderPointsChats");
-	if (chats.length < parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement"))) {
-		console.log("OUIIIIIIII");
+	if (chats.length <= parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement"))) {
+		$(allSliderPoint).children(".slider").children(".flecheDroite").hide();
+		$(allSliderPoint).children(".slider").children(".flecheGauche").hide();
 		var taille = (parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--taille").slice(0, -2))/parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement")) * chats.length)
 		taille = taille + "px";
 

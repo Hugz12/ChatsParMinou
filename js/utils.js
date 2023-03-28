@@ -8,6 +8,7 @@ function translateX(contexte, transform, overflow=false){
 	// transform(1) décale de 1 contenant vers la droite
 	// transform(-1) décale de 1 contenant vers la gauche
 	console.log("translateX");
+	
 
 	
 	////////////////////////////////////////////////////////
@@ -16,6 +17,7 @@ function translateX(contexte, transform, overflow=false){
 	
 	if (transform == undefined) { // si on passe par les fleches
 
+		
 		var allSlider = contexte.parentNode.parentNode // on recupere le div allSlider en partant de la fleche cliquée
 
 		var transform = getComputedStyle(allSlider).getPropertyValue("--transform"); // on recupere le transform
@@ -23,8 +25,13 @@ function translateX(contexte, transform, overflow=false){
 		else transform++;
 	}
 	else { // si on passe par les points
-		var allSlider = contexte.parentNode.parentNode.parentNode.parentNode.parentNode; // on recupere le div allSlider en partant du point cliqué
+		var allSlider = contexte.parentNode.parentNode.parentNode;
+		if (allSlider.id == "allSliderPointsChats") // exception pour les points des chats car c'est des photos
+		{
+			allSlider = allSlider.parentNode.parentNode
+		}
 	}
+	console.log(allSlider);
 
 	var nbElement = getComputedStyle(allSlider).getPropertyValue("--nbElement"); // on recupere le nombre d'evenement visible
 	var max = Math.round($(allSlider).children(".slider").children(".slides").outerWidth(true) / $(allSlider).children(".slider").children(".slides").children(".slide").outerWidth(true)); // on recupere le nombre d'evenements

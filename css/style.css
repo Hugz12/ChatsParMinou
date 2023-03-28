@@ -111,12 +111,13 @@ body{
 	height: 50px;
 	z-index: 2;
 	border-radius: 50%;
-	background-color: rgb(200, 200, 200, 0.3);
+	background-color: rgb(200, 200, 200, 0.5);
 }
+
 
 .flecheGauche:hover, .flecheDroite:hover {
 	cursor: pointer;
-	background-color: rgb(200, 200, 200, 0.5);
+	background-color: rgb(200, 200, 200, 0.7);
 }
 
 .flecheGauche > svg, .flecheDroite > svg {

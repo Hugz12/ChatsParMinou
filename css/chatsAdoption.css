@@ -24,17 +24,20 @@
 #allSliderPointsChats {
 	width: auto;
 	height: auto;
+	margin-top: 30px;
 	
-	--taille: 700px;
+	--taille: 980px;
 	--hauteur: 70px;
 
 	--nbElement: 7;
-	--marge: 10px;
+	--marge: 20px;
 
 	--transform: 0;
 }
 
-
+.slidePointChats {
+	object-fit: cover;
+}
 
 .slideChat {
 	background-color: var(--sec-color);
