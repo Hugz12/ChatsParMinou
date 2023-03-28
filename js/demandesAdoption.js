@@ -10,36 +10,66 @@ function divDemande(date, btn, img, demande){
                             <div class="infosChat">
                                 <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
                                 <div class="idChat">
-                                    <p class="policeTitre">${demande['name']}</p>
-                                    <p>Code : ${demande["code"]}</p>
-                                    <p class="none statutChat">${demande["statut"]}</p>
+                                    <p class="nomChat policeTitre">${demande['name']}</p>
+                                    <div class="para">
+                                        <p name="code">${demande["code"]}</p>
+                                        <label for=\"code\">Code</label>
+                                    </div>
+                                    <div class="para none">
+                                        <p class="statutChat" name="statut">${demande["statut"]}</p>
+                                        <label for=\"statut\">Statut</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="infosPers">
                                 <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
-                                <p>Mail: ${demande['mail']}</p>
-                                <p>Tél.: ${demande['tel']}</p>
-                                <p class="none">Adresse: ${demande['adresse']}</p>
-                                <p class="none">Habitation: ${demande['habitation']}</p>
-                                <p class="none exterieur">${demande['exterieur']}</p>
-                                <p class="none sortie">${demande['sortie']}</p>
-                                <p class="none">${demande['situationFamiliale']}</p>
-                                <p class="none">${demande['animaux']}</p>
+                                <div class="para">
+                                    <p name="mail">${demande['mail']}</p>
+                                    <label for=\"mail\">Mail</label>
+                                </div>
+                                <div class="para">
+                                    <p name="tel">${demande['tel']}</p>
+                                    <label for=\"tel\">Tel.</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="adresse">${demande['adresse']}</p>
+                                    <label for=\"adresse\">Adresse</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="habitation">${demande['habitation']}</p>
+                                    <label for=\"habitation\">Habitation</label>
+                                </div>
+                                <div class="para none">
+                                    <p class="exterieur" name="exterieur">${demande['exterieur']}</p>
+                                    <label for=\"exterieur\">Exterieur</label>
+                                </div>
+                                <div class="para none">
+                                    <p class="sortie" name="sortie">${demande['sortie']}</p>
+                                    <label for=\"sortie\">Sortie</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="sitFam">${demande['situationFamiliale']}</p>
+                                    <label for=\"sitFam\">Situation familiale</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="animaux">${demande['animaux']}</p>
+                                    <label for=\"animaux\">Animaux</label>
+                                </div>
                             </div>
                         </div>
                         <div class="infoPlus">
                             <form>
                                 <div class='group memo'>
-                                    <textarea name='memo'>${demande['memo']}</textarea>
+                                    <textarea name='memo' required>${demande['memo']}</textarea>
                                     <label for=\"memo\">Memo</label>
                                 </div>
                                 <div class="sous-memos">
                                     <div class='group datePv'>
-                                        <textarea name='datePv'>${demande['datePv']}</textarea>
+                                        <textarea name='datePv' required>${demande['datePv']}</textarea>
                                         <label for=\"datePv\">datePv</label>
                                     </div>
                                     <div class='group resultatPv'>
-                                        <textarea name='resultatPv'>${demande['resultatPv']}</textarea>
+                                        <textarea name='resultatPv' required>${demande['resultatPv']}</textarea>
                                         <label for=\"resultatPv\">resultatPv</label>
                                     </div>
                                     <div class='group dateRencontre'>
@@ -47,15 +77,15 @@ function divDemande(date, btn, img, demande){
                                         <label for=\"dateRencontre\">dateRencontre</label>
                                     </div>
                                 </div>
-                                <div class='group commentaire none'>
-                                    <textarea name='commentaire'>${demande['commentaire']}</textarea>
+                                <div class='para commentaire none'>
+                                    <p name='commentaire'>${demande['commentaire']}</p>
                                     <label for=\"commentaire\">commentaire</label>
                                 </div>
                             </form>
                             <button class="btnMemo clickable">Enregistrer</button>
                         </div>
                     </div>
-                    <img class="btnDemande btnSupp clickable" src="./ressources/cross.png" alt="cross">
+                    <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
                 </div>
             </div>`;
 }
@@ -263,11 +293,10 @@ function changerStatut(contexte, demande) {
 }
 
 //Fonction de suppression d'une demande
-$(function() {
-    $(".btnSupp").on("click", function() {
+function supprimerDemande(contexte) {
         console.log("supprimerDemande");
 
-        var id = $(this).parent().parent().attr("id").match(/\d/g).toString().replace(',', '');
+        var id = $($(contexte).parent().parent()).attr("id").match(/\d/g).toString().replace(',', '');
         //console.log("id : " + id);
 
         $("#overlay").css("visibility", "visible");
@@ -300,8 +329,7 @@ $(function() {
             //console.log("non");
             $("#overlay").css("visibility", "hidden");
         });
-    });
-});
+    }
 
 //Fonctions d'edition des commentaires
 $(function() {
@@ -500,21 +528,24 @@ $(function() {
             $($(this).parent()).css({"display" : "block", "transform" : "scale(1.2)" , "transition" : "1s"}); //infoDemande
             $($(this).parent().parent()).css({"margin" : "3% auto 6% auto"}); //contenuDemande
             $(this).css({"width" : "100%"}); //infoMoins
-            $($(this).children(".infosChat").children("img")).css({"width" : "60%", "margin" : "auto 0"}); //infoMoins infosChat img
+            $($(this).children(".infosChat").children("img")).css({"width" : "300px", "height" : "200px"}); //infoMoins infosChat img
             $($(this).parent().children(".infoPlus")).css({"width" : "98%" , "height" : "10em", "margin" : "1em"}); //infoPlus
 
-            $($(this).children(".infosChat")).css({"display" : "flex", "justify-content" : "space-around", "width" : "45%", "margin" : "0"}); //infosChat
-            $($(this).children(".infosChat").children(".idChat")).css({"display" : "flex", "flex-direction" : "column", "justify-content" : "space-around"}); //infosChat idChat
+            $($(this).children(".infosChat")).css({"display" : "flex", "width" : "40%"}); //infosChat
+            $($(this).children(".infosChat").children(".idChat")).css({"justify-content" : "space-around"}); //infosChat idChat
+            $($(this).children(".infosChat").children(".idChat").children(".nomChat")).css({"font-size" : "3em"}); //infosChat idChat nomChat
+            $($(this).children(".infosChat").children(".idChat").children(".para")).css({"width" : "30%"}); //infosChat idChat para
             $($(this).children(".infosChat").children(".idChat").children(".none")).css({"display" : "unset"}); //infosChat idChat none
 
-            $($(this).children(".infosPers")).css({"grid-template-columns" : "repeat(2, 1fr)", "grid-template-rows" : "repeat(5, 1fr)", "width" : "45%"}); //infosPers 
+            $($(this).children(".infosPers")).css({"grid-template-columns" : "repeat(2, 1fr)", "grid-template-rows" : "repeat(5, 0.9fr)", "width" : "55%"}); //infosPers 
             $($(this).children(".infosPers").children(".nomPers")).css({"grid-area" : "1 / 1 / 2 / 3"}); //infosPers nomPers
+            $($(this).children(".infosPers").children(".para")).css({"width" : "80%"}); //infosPers para
             $($(this).children(".infosPers").children(".none")).css({"display" : "unset"}); //infosPers none
 
             $($(this).parent().children(".infoPlus").children("form").children(".none")).css({"display" : "unset"}); //infoPlus form none
-            $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).css({"display" : "unset", "width" : "45%", "height" : "120%"}); //infosPlus form commentaire
-            $($(this).parent().children(".infoPlus").children("form").children(".memo")).css({"width" : "30%", "height" : "130%"}); //infosPlus form memo
-            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos")).css({"width" : "20%", "height" : "130%"}); //infosPlus form sous-memos
+            $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).css({"display" : "unset", "width" : "45%", "height" : "100%"}); //infosPlus form commentaire
+            $($(this).parent().children(".infoPlus").children("form").children(".memo")).css({"width" : "30%", "height" : "100%"}); //infosPlus form memo
+            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos")).css({"width" : "20%", "height" : "115%"}); //infosPlus form sous-memos
             $($(this).parent().children(".infoPlus").children(".btnMemo")).css({"width" : "8%"}); //infosPlus btnMemo
             $($(this).parent().children(".tpsDate")).css({"display" : "none"}); //tpsDate
         }

@@ -3,6 +3,26 @@
     display: none;
 }
 
+.para {
+    position: relative;	
+    padding: 0.8em;
+    border: 2px solid var(--third-color);
+    background-color: inherit !important;
+    border-radius: 15px;
+    height: 1em;
+}
+
+.para label {
+    position: absolute;
+    background-color: inherit;
+    z-index: 2;
+    top: -20px;
+    margin-left: 0.5em;
+    padding: 0.4em;
+    color: rgb(100, 100, 100);
+    font-size: 100%;
+}
+
 /* Titres */
 h2 {
     margin-left: 3%;
@@ -23,7 +43,8 @@ h3 {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--fourth-color);
+    background-color: var(--sec-color);
+    box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
     border-radius: 30px;
     margin-left: 3%;
     margin-top: 1%;
@@ -113,6 +134,7 @@ https://www.w3schools.com/howto/howto_custom_select.asp
 .contenuDemande {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 90%;
     margin: 2% auto 3% auto;
     cursor: pointer;
@@ -123,37 +145,50 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     justify-content: space-around;
     position: relative;
     width: 80%;
-    background-color: var(--fourth-color);
+    background-color: var(--sec-color);
     border-radius: 30px;
+    box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
 }
 
 .infoMoins {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 45%;
 }
 
 .infosChat {
-    display: block;
-    /*flex-direction: column;
-    justify-content: space-around;*/
-    width: 35%;
-    font-size: 20px;
-    margin: auto 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    justify-content: space-around;
 }
 
 .infosChat img{
-    width: 100%;
+    width: 220px;
+    height: 140px;
     border-radius: 30px;
+    border: 2px solid var(--third-color);
+}
+
+.idChat {
+    display: flex;
+    background-color: var(--sec-color);
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .idChat p {
     margin: 0;
-    font-size: 0.7em;
 }
 
-.idChat p:first-child {
-    font-size: 1.5em;
+.idChat .para {
+    width: 50%;
+}
+
+.nomChat {
+    font-size: 2.3em;
 }
 
 .infosPers {
@@ -162,16 +197,18 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
-    width: 50%;
+    width: 55%;
     align-items: center;
+    background-color: var(--sec-color);
+    border-radius: 30px;
 }
 
 .infosPers p {
     margin: 0;
 }
 
-.infosPers p:first-child{
-    font-size: 3em;
+.nomPers {
+    font-size: 4em;
 }
 
 .infoPlus {
@@ -180,7 +217,7 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     justify-content: space-around;
     align-items: flex-end;
     position: relative;
-    width: 45%;
+    width: 50%;
     margin: 1% 0;
     background-color: inherit;
 }
@@ -205,7 +242,11 @@ https://www.w3schools.com/howto/howto_custom_select.asp
 
 .memo {
     width: 60%;
-    height: 130%;
+    height: 110%;
+}
+
+.memo textarea {
+    height: 100%;
 }
 
 .sous-memos {
@@ -214,19 +255,22 @@ https://www.w3schools.com/howto/howto_custom_select.asp
     justify-content: space-between;
     align-items: center;
     width: 38%;
-    height: 115%;
+    height: 110%;
     background-color: inherit;
 }
 
-.sous-memos > div {
+.sous-memos div {
     height: 25%;
     width: 100%;
 }
 
+.sous-memos textarea {
+    height: 50%;
+}
+
 .btnDemande {
-    width: 50px;
-    height: 50px;
-    margin: auto;
+    width: 60px;
+    height: 60px;
 }
 
 .tpsComplet {

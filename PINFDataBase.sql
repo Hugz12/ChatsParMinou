@@ -48,6 +48,7 @@ CREATE TABLE `passageRefuge` (
   `heureDebut` time,
   `heureFin` time,
   `mailBenevole` varchar(255),
+  `description` varchar(255),
   PRIMARY KEY (`date`, `heureDebut`, `heureFin`)
 )ENGINE = InnoDB;
 
