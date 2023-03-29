@@ -171,22 +171,13 @@ function afficherChats(chats) {
 		
 		}
 
-		if (j == 0) $(sliderPoint).append("<img class='slidePointChats slidePointSelected slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
-		else $(sliderPoint).append("<img class='slidePointChats slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
+		if (j == 0) $(sliderPoint).append("<img class='slidePointChats slidePointSelected slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='" + chatActuel["name"] + "' onclick='translateX(this, "+(-j)+");'/>");
+		else $(sliderPoint).append("<img class='slidePointChats slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='" + chatActuel["name"] + "' onclick='translateX(this, "+(-j)+");'/>");
 
 		
 		
 	}
-	var allSliderPoint = document.getElementById("allSliderPointsChats");
-	if (chats.length <= parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement"))) {
-		$(allSliderPoint).children(".slider").children(".flecheDroite").hide();
-		$(allSliderPoint).children(".slider").children(".flecheGauche").hide();
-		var taille = (parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--taille").slice(0, -2))/parseInt(getComputedStyle(allSliderPoint).getPropertyValue("--nbElement")) * chats.length)
-		taille = taille + "px";
-
-		allSliderPoint.style.setProperty("--taille", taille);
-		allSliderPoint.style.setProperty("--nbElement", chats.length);
-	}
+	
 
 	if(admin) {
 		var xhr = new XMLHttpRequest();
@@ -509,9 +500,93 @@ function displayFilter() {
 }
 
 function rechercheChat() {
+	console.log(event);
 	var input = document.getElementById("rechercheChats");
 	var recherche = input.value.toUpperCase();
+	console.log(recherche);
 	var allSlider = document.getElementById('allSliderChats');
-	var listeChats = allSlider.getElementsByClassName('slideChats');
+	var allSliderPoints = document.getElementById('allSliderPointsChats');
+
+	console.log(allSlider);
+	var listeChats = allSlider.getElementsByClassName('chatNom');
+	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
+	for (var i = 0; i < listeChats.length; i++) {
+
+		if (listeChats[i].innerHTML.toUpperCase().includes(recherche)) {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+		}
+		else {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "none";
+		}
+
+		if (listePoints[i].alt.toUpperCase().includes(recherche)) {
+			listePoints[i].style.display = "block";
+		}
+		else {
+			listePoints[i].style.display = "none";
+		}
+
+		if (recherche == "") {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+			listePoints[i].style.display = "block";
+		}
+
+	}
+	responsivePointsChats();
+}
+
+const rechercher = debounce(() => rechercheChat(), 500);
+
+
+const responsivePointsChatsDebounce = debounce(() => responsivePointsChats());
+
+window.addEventListener("resize", responsivePointsChatsDebounce);
+
+
+function responsivePointsChats() {
+	
+	var allSliderPoints = document.getElementById('allSliderPointsChats');
+	console.log(allSliderPoints);
+	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
+	var nbElement = 0;
+	console.log(listePoints);
+	for (var i = 0; i < listePoints.length; i++) {
+		if (window.getComputedStyle(listePoints[i]).getPropertyValue("display") == "block") {
+			nbElement += 1;
+		}
+	}
+	console.log(nbElement);
+	
+	var x = window.getComputedStyle(allSliderPoints).getPropertyValue("--taille").slice(0, -2);
+	var y = window.getComputedStyle(allSliderPoints).getPropertyValue("--nbElement");
+	var taille = x/y;
+	console.log(taille);
+	
+	
+	
+	if (window.innerWidth < 480 && nbElement > 1) {
+		nbElement = 1;
+	}
+	else if (window.innerWidth < 760 && nbElement > 3) {
+		nbElement = 3;
+	}
+	else if (window.innerWidth < 1040 && nbElement > 5) {
+		nbElement = 5;
+	}
+	else if (nbElement > 7) {
+		nbElement = 7;
+	}
+
+	taille = taille * nbElement;
+	taille = taille + "px";
+	
+	
+	allSliderPoints.style.setProperty("--taille", taille);
+	allSliderPoints.style.setProperty("--nbElement", nbElement);
 
 }
+
+
+
+
+

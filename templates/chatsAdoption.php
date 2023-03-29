@@ -19,7 +19,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 <div class="disabled">
 	<div id="chatsTitre" class="policeTexte">
-		<form id="formRechercheChats" onsubmit="rechercheChat();">
+		<form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercher();">
 				<div class="group">
 					<input type="text" id="rechercheChats" required>
 					<label for="rechercheChats">Rechercher un chat par son nom</label>
@@ -75,6 +75,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		var chats = <?= json_encode(listerChats());?>;
 		var admin = <?= (valider("Admin","SESSION")? 1 : 0)?>;
 		afficherChats(chats);
+		responsivePointsChats();
 	</script> 
 
 	
