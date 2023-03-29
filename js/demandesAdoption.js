@@ -273,7 +273,7 @@ function changerStatut(contexte, demande) {
     //console.log(demande["statutDemande"]);
     $.ajax({
         url: "./controleur.php",
-        type: "POST",
+        type: "GET",
         dataType: "html",
         data: {
             action: 'Changer Statut Demande',

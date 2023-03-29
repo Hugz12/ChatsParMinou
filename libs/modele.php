@@ -303,9 +303,20 @@ function supprimerChat($code){
     SQLDelete($SQL);
 }
 
+function ajouterPassage($date,$heureDebut,$heureFin,$description,$mail){
+    $SQL = "INSERT INTO passagerefuge (date, heureDebut, heureFin, description, mailBenevole) VALUES ('$date','$heureDebut','$heureFin','$description','$mail')";
+    SQLInsert($SQL);
+}
+
+
 
 function supprimerDossier($dir){
     rmdir($dir);
+}
+
+function getPassages($mois){
+    $SQL = "SELECT * FROM passagerefuge WHERE MONTH(date) = $mois";
+    return parcoursRS(SQLSelect($SQL));
 }
 
 ?>
