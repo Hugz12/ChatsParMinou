@@ -10,6 +10,14 @@ if (!valider('Connecte', 'SESSION')) {
 	die();
 }
 
+if(isset($_SESSION["message"])){
+	echo "<script>window.alert('" . $_SESSION['message'] . "');</script>";
+    unset($_SESSION['message']);
+}
+
+
+
+
 ?>
 <link rel="stylesheet" href="./css/planning.css">
 <script src="./js/planning.js"></script>
@@ -54,6 +62,8 @@ if (!valider('Connecte', 'SESSION')) {
 		
 	</div>
 
+	<div class="passagesRefuge" id="passagesRefuge" style="display:none"></div>
+
     <script>
         fillCalendar();
     </script>
@@ -71,39 +81,40 @@ if (!valider('Connecte', 'SESSION')) {
 				<div id='inputAddChatOther'>
 					<div class='group'>
 						<div class='group'>
-							<input type='date' name='date' required onchange="changerDate(this);" max=".date('Y-m-d').">
-							<label for=\"date\">Date</label>
+							<input id="datePassage" type='date' name='date' onchange="changerDate(this);" max=".date('Y-m-d')." required>
+							<label for="date">Date</label>
 						</div>
 					</div>
 
 					<div class='group'>
 						<div class='group'>
 							<input type='time' name='debut' required>
-							<label for="date">Début</label>
+							<label for="debut">Début</label>
 						</div>
 
 						<div class='group'>
 							<input type='time' name='fin' required>
-							<label for="date">Fin</label>
+							<label for="fin">Fin</label>
 						</div>
 					</div>
 
 				</div>
 
-			
 
 				<div class='group'>
-					<textarea name='description'required></textarea>
-					<label for=\"description\">Description</label>
+					<textarea name='description' required></textarea>
+					<label for="description">Description</label>
 				</div>
 			
 			</div>
-			<input type='submit' class='buttonType' name='action' value='Ajouter un chat'>
+			<input type='submit' class='buttonType' name='action' value='Ajouter Un Passage'>
 
 		</form>
 	</div>
 
+	<script>
+        setMinDate();
+    </script>
 
 
-		
 </div>

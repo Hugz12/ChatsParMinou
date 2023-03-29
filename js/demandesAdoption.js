@@ -181,20 +181,26 @@ function afficherTitres(demandes) {
         if (demandes[i]["statutDemande"] == 2) iC++;
         if (demandes[i]["statutDemande"] == 3) iT++;
     }
+
+    var classe = "class='policeTitre tailleTitre marginTitre'";
+    $("#nouvellesDemandes").before("<p id='titreNouvellesDemandes' " + classe + "></p>");
+    $("#demandesEnCours").before("<p id='titreEnCours' " + classe + "></p>");
+    $("#traitees").before("<p id='titreTraitees' " + classe + "></p>");
+
     if (iN != 0){
-        if (iN == 1) $("#nouvellesDemandes").before("<h2 id='titreNouvellesDemandes'>Nouvelle demande</h2>");
-        else $("#nouvellesDemandes").before("<h2 id='titreNouvellesDemandes'>Nouvelles demandes</h2>");
-    } else $("#nouvellesDemandes").before("<h2 id='titreNouvellesDemandes'>Aucune nouvelle demande</h2>");
+        if (iN == 1) $("#titreNouvellesDemandes").text("Nouvelle demande");
+        else $("#titreNouvellesDemandes").text("Nouvelles demandes");
+    } else $("#titreNouvellesDemandes").text("Aucune nouvelle demande");
 
     if (iC != 0){
-        if (iC == 1) $("#demandesEnCours").before("<h2 id='titreEnCours'>Demande en cours</h2>");
-        else $("#demandesEnCours").before("<h2 id='titreEnCours'>Demandes en cours</h2>");
-    } else $("#demandesEnCours").before("<h2 id='titreEnCours'>Aucune demande en cours</h2>");
-    
+        if (iC == 1) $("#titreEnCours").text("Demande en cours");
+        else $("#titreEnCours").text("Demandes en cours");
+    } else $("#titreEnCours").text("Aucune demande en cours");
+
     if (iT != 0){
-        if (iT == 1) $("#traitees").before("<h2 id='titreTraitees'>Demande traitée</h2>");
-        else $("#traitees").before("<h2 id='titreTraitees'>Demandes traitées</h2>");
-    } else $("#traitees").before("<h2 id='titreTraitees'>Aucune demande traitée</h2>");
+        if (iT == 1) $("#titreTraitees").text("Demande traitée");
+        else $("#titreTraitees").text("Demandes traitées");
+    } else $("#titreTraitees").text("Aucune demande traitée");
 
     montrerPlusMoins();
 }
@@ -202,24 +208,28 @@ function afficherTitres(demandes) {
 // Fonction qui change le titre en fonction du nombre de demandes
 function changerTitres() {
     console.log("changerTitres");
-    if (document.getElementById("nouvellesDemandes").childElementCount != 0) {
-        if ((document.getElementById("nouvellesDemandes").childElementCount == 1)) $("#titreNouvellesDemandes").text("Nouvelle demande");
+    var idN = document.getElementById("nouvellesDemandes");
+    var idC = document.getElementById("demandesEnCours");
+    var idT = document.getElementById("traitees");
+
+    if (idN.childElementCount != 0) {
+        if (idN.childElementCount == 1) $("#titreNouvellesDemandes").text("Nouvelle demande");
         else $("#titreNouvellesDemandes").text("Nouvelles demandes");
     } else $("#titreNouvellesDemandes").text("Aucune nouvelle demande");
 
-    if (document.getElementById("demandesEnCours").childElementCount != 0) {
-        if ((document.getElementById("demandesEnCours").childElementCount == 1)) $("#titreEnCours").text("Demande en cours");
+    if (idC.childElementCount != 0) {
+        if ((idC.childElementCount == 1)) $("#titreEnCours").text("Demande en cours");
         else $("#titreEnCours").text("Demandes en cours");
     } else $("#titreEnCours").text("Aucune demande en cours");
 
-    if (document.getElementById("traitees").childElementCount != 0) {
-        if ((document.getElementById("traitees").childElementCount == 1)) $("#titreTraitees").text("Demande traitée");
+    if (idT.childElementCount != 0) {
+        if ((idT.childElementCount == 1)) $("#titreTraitees").text("Demande traitée");
         else $("#titreTraitees").text("Demandes traitées");
     } else $("#titreTraitees").text("Aucune demande traitée");
 
-    //console.log(document.getElementById("nouvellesDemandes").childElementCount);
-    //console.log(document.getElementById("demandesEnCours").childElementCount);
-    //console.log(document.getElementById("traitees").childElementCount);
+    //console.log(idN.childElementCount);
+    //console.log(idC.childElementCount);
+    //console.log(idT.childElementCount);
 }
 
 // Tri par date
@@ -263,7 +273,7 @@ function changerStatut(contexte, demande) {
     //console.log(demande["statutDemande"]);
     $.ajax({
         url: "./controleur.php",
-        type: "POST",
+        type: "GET",
         dataType: "html",
         data: {
             action: 'Changer Statut Demande',
@@ -337,6 +347,7 @@ $(function() {
         console.log("Changer Memo");
         var id = $($(this).parent().parent().parent().parent()).attr("id").match(/\d/g).toString().replace(',', '');
         //console.log("id : " + id);
+        var parent = $(this).parent().children("form");
 
         $.ajax({
             url: "./controleur.php",
@@ -345,11 +356,10 @@ $(function() {
             data: {
                 action: "Changer Memo",
                 id: id,
-                memo: $($(this).parent().children("form").children(".memo").children("textarea")).val(),
-                datePv: $($(this).parent().children("form").children(".sous-memos").children(".datePv").children("textarea")).val(),
-                resultatPv: $($(this).parent().children("form").children(".sous-memos").children(".resultatPv").children("textarea")).val(),
-                dateRencontre: $($(this).parent().children("form").children(".sous-memos").children(".dateRencontre").children("textarea")).val(),
-                commentaire: $($(this).parent().children("form").children(".commentaire").children("textarea")).val(),
+                memo: $(parent.children(".memo").children("textarea")).val(),
+                datePv: $(parent.children(".sous-memos").children(".datePv").children("textarea")).val(),
+                resultatPv: $(parent.children(".sous-memos").children(".resultatPv").children("textarea")).val(),
+                dateRencontre: $(parent.children(".sous-memos").children(".dateRencontre").children("textarea")).val(),
             },
             success: function() {
                 console.log("success");
@@ -363,13 +373,11 @@ $(function() {
     var moveLeft = 20;
     var moveDown = 10;
 
-    $('#recherche img').hover(function(e) {
-        $('#popupInfos').show();
-    }, function() {
-        $('#popupInfos').hide();
+    $('#i').hover(function() {
+        $('#popupInfos').toggle();
     });
 
-    $('#recherche img').mousemove(function(e) {
+    $('#i').mousemove(function(e) {
         $("#popupInfos").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
     });
 });
@@ -379,47 +387,50 @@ $(function() {
     $("#contenuRecherche").on("keyup", function() {
         console.log("recherche");
         $(".nonTrouvée").remove();
+        var contenu = $("#contenuRecherche").val().toLowerCase();
 
-        switch ($("#selectRecherche").val()) {
-            case 'rchGenerale':
+        switch ($("#selectRecherche").text()) {
+            case 'Recherche générale':
                 //console.log("case rchGenerale");
                 $(".demandes").filter(function(){ 
-                    $(this).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $(this).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
-            case 'rchChat':
+            case 'Recherche d\'un chat':
                 //console.log("case rchChat");
                 $(".infosChat").filter(function(){ 
-                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
-            case 'rchPers':
+            case 'Recherche d\'une personne':
                 //console.log("case rchPers");
                 $(".infosPers").filter(function(){ 
-                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
-            case 'rchDate':
+            case 'Recherche d\'une date':
                 //console.log("case rchDate");
                 $(".tpsDate").filter(function(){ 
-                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
         }
 
+        var aucun = "<p class='nonTrouvée policeTitre'>Il n'y a aucune demande trouvée</p>";
+
         if($('#nouvellesDemandes').children(':visible').length == 0 && $("#titreNouvellesDemandes").text().match("Aucune") == null) {
-            $("#nouvellesDemandes").append("<h3 class='nonTrouvée'>Il n'y a aucune demande trouvée</h3>");
+            $("#nouvellesDemandes").append(aucun);
         }
 
         if($('#demandesEnCours').children(':visible').length == 0 && $("#titreEnCours").text().match("Aucune") == null) {
-            $("#demandesEnCours").append("<h3 class='nonTrouvée'>Il n'y a aucune demande trouvée</h3>");
+            $("#demandesEnCours").append(aucun);
         }
 
         if($('#traitees').children(':visible').length == 0 && $("#titreTraitees").text().match("Aucune") == null) {
-            $("#traitees").append("<h3 class='nonTrouvée'>Il n'y a aucune demande trouvée</h3>");
+            $("#traitees").append(aucun);
         }
     });
 });
@@ -511,12 +522,14 @@ $(function() {
             
             $($(this).children(".infosChat")).removeAttr('style'); //infosChat
             $($(this).children(".infosChat").children(".idChat")).removeAttr('style'); //infosChat idChat
+            $($(this).children(".infosChat").children(".idChat").children(".nomChat")).removeAttr('style'); //infosChat idChat nomChat
+            $($(this).children(".infosChat").children(".idChat").children(".para")).removeAttr('style'); //infosChat idChat para
             $($(this).children(".infosChat").children(".idChat").children(".none")).removeAttr('style'); //infosChat idChat none
 
             $($(this).children(".infosPers")).removeAttr('style'); //infosPers 
             $($(this).children(".infosPers").children(".nomPers")).removeAttr('style'); //infosPers nomPers
-
             $($(this).children(".infosPers").children(".none")).removeAttr('style'); //infosPers none
+            
             $($(this).parent().children(".infoPlus").children("form").children(".none")).removeAttr('style'); //infoPlus form none
             $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).removeAttr('style'); //infosPlus form commentaire
             $($(this).parent().children(".infoPlus").children("form").children(".memo")).removeAttr('style') //infosPlus form memo
@@ -539,7 +552,6 @@ $(function() {
 
             $($(this).children(".infosPers")).css({"grid-template-columns" : "repeat(2, 1fr)", "grid-template-rows" : "repeat(5, 0.9fr)", "width" : "55%"}); //infosPers 
             $($(this).children(".infosPers").children(".nomPers")).css({"grid-area" : "1 / 1 / 2 / 3"}); //infosPers nomPers
-            $($(this).children(".infosPers").children(".para")).css({"width" : "80%"}); //infosPers para
             $($(this).children(".infosPers").children(".none")).css({"display" : "unset"}); //infosPers none
 
             $($(this).parent().children(".infoPlus").children("form").children(".none")).css({"display" : "unset"}); //infoPlus form none
@@ -590,3 +602,33 @@ $(function() {
         }
     });
 });
+
+
+$(function() {
+    /*Dropdown Menu*/
+    $('.dropdown').click(function () {
+        $(this).focus();
+        $(this).toggleClass('active');
+        $(this).find('.dropdown-menu').slideToggle(300);
+    });
+    $('.dropdown').focusout(function () {
+        $(this).removeClass('active');
+        $(this).find('.dropdown-menu').slideUp(300);
+    });
+    $('.dropdown .dropdown-menu li').click(function () {
+        $(this).parents('.dropdown').find('span').text($(this).text());
+    });
+});
+
+function etatBtnTri(element){
+	if ($(element).children("input").prop("checked") == false) {
+        $(element).children("div").fadeOut(150, function() {
+            $(this).text("Récent").fadeIn(150);
+        });
+    }
+    else {
+        $(element).children("div").fadeOut(150, function() {
+            $(this).text("Ancien").fadeIn(150);
+        });
+    }
+}

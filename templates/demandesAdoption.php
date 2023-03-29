@@ -25,21 +25,30 @@ if (!valider('Admin', 'SESSION')) {
 <script src="./js/demandesAdoption.js"></script>
 
 <div id="recherche">
-	<select id="selectRecherche">
-		<option value="rchGenerale">Recherche générale</option>
-		<option value="rchChat">Recherche d'un chat</option>
-		<option value="rchPers">Recherche d'une personne</option>
-		<option value="rchDate">Recherche d'une date</option>
-	</select>
+	
+	<div class="container">
+		<div class="dropdown">
+			<div class="select">
+				<span id="selectRecherche">Recherche générale</span>
+				<i class="fa fa-chevron-left"></i>
+			</div>
+			<ul class="dropdown-menu">
+				<li>Recherche générale</li>
+				<li>Recherche d'un chat</li>
+				<li>Recherche d'une personne</li>
+				<li>Recherche d'une date</li>
+			</ul>
+		</div>
+	</div>
 
-	<input type="text" id="contenuRecherche" placeholder="Rechercher...">
+	<input type="search" id="contenuRecherche" placeholder="Rechercher...">
 
-	<p>Date d'ajout (plus récentes)</p>
-	<div class="choix-recent">
-		<button id="btnTriTps"></button>
+	<div id="btnTriTps" onclick='etatBtnTri(this);'>
+		<div>Récent</div>
+		<input type='checkbox'>
 	</div>
 	
-	<img src="./ressources/infos.png" alt="infos">
+	<div id="i">i</div>
 </div>
 
 <div id="nouvellesDemandes" class="conteneurDemandes"></div>
@@ -63,7 +72,9 @@ if (!valider('Admin', 'SESSION')) {
 </div>
 
 <div id="popupInfos">
-    <p>echap pour quitter / crtl + entrée pour sauvegarder</p>
+    <p>Sélectionnez votre type de recherche avec le menu</p>
+	<p>Tapez le contenu de la recherche dans la zone prévu</p>
+	<p>Le bouton permet de trier par date</p>
 </div>
 
 
