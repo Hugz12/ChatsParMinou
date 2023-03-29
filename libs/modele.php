@@ -304,8 +304,15 @@ function supprimerChat($code){
 }
 
 function ajouterPassage($date,$heureDebut,$heureFin,$description,$mail){
+    // si il y a un passage à la même date et heure meme personne
+    $SQL = "SELECT mailBenevole FROM passagerefuge WHERE date = '$date' AND heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND mailBenevole = '$mail'";
+    $passage = SQLGetChamp($SQL);
+    if ($passage != false){
+        return "alreadyExist";
+    }
     $SQL = "INSERT INTO passagerefuge (date, heureDebut, heureFin, description, mailBenevole) VALUES ('$date','$heureDebut','$heureFin','$description','$mail')";
     SQLInsert($SQL);
+    return "success";
 }
 
 
