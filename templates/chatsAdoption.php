@@ -18,8 +18,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <link rel="stylesheet" href="./css/accueil.css">
 
 <div class="disabled">
-	<div id="chatsTitre" class="policeTitre">
-		Nos Chats
+	<div id="chatsTitre" class="policeTexte">
+		<form id="formRechercheChats" onsubmit="rechercheChat();">
+				<div class="group">
+					<input type="text" id="rechercheChats" required>
+					<label for="rechercheChats">Rechercher un chat par son nom</label>
+				</div>
+		</form>
 		<div id="svgFilter" class="svg" onclick="displayFilter();"><?php include("./ressources/filter.svg") ?></div>
 	</div>
 	<?php 

@@ -507,3 +507,11 @@ function displayFilter() {
 		$("#menuFiltre").animate({right: "-300px"}, 300, function() {menuFiltre.style.display = "none";});
 	}
 }
+
+function rechercheChat() {
+	var input = document.getElementById("rechercheChats");
+	var recherche = input.value.toUpperCase();
+	var allSlider = document.getElementById('allSliderChats');
+	var listeChats = allSlider.getElementsByClassName('slideChats');
+
+}

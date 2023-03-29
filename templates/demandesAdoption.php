@@ -8,6 +8,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	die("");
 }
 
+if (!valider('Connecte', 'SESSION')) {
+	header("Location:./index.php?view=accueil");
+	die();
+}
+
+if (!valider('Admin', 'SESSION')) {
+	header("Location:./index.php?view=accueil");
+	die();
+}
+
+
 ?>
 
 <link rel="stylesheet" href="./css/demandesAdoption.css">
