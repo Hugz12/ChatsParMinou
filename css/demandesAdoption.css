@@ -32,7 +32,16 @@
 }
 
 .lienPlusMoins {
+    color: rgb(100, 100, 100);
+    cursor: pointer;
     margin-left: 3%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+
+.lienPlusMoins:hover {
+    color: var(--fifth-color);
+    text-decoration: underline;
 }
 
 .nonTrouvée {
@@ -42,13 +51,13 @@
 
 /* Recherche */
 #recherche {
-    width: 35%;
+    width: 40%;
     height: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: var(--sec-color);
-    box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
+    box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
     border-radius: 30px;
     margin-left: 3%;
     margin-top: 1%;
@@ -141,28 +150,6 @@ text-align: left
     background-color: #e2e2e2
 }
 /*****************************************/
-#contenuRecherche {
-    max-width: 190px;
-    background-color: #f5f5f5;
-    color: #242424;
-    padding: .15rem .5rem;
-    min-height: 40px;
-    border-radius: 4px;
-    outline: none;
-    border: none;
-    line-height: 1.15;
-    box-shadow: 0px 10px 20px -18px;
-}
-
-#contenuRecherche:focus {
-    border-bottom: 2px solid var(--third-color);
-    border-radius: 4px 4px 2px 2px;
-}
-
-#contenuRecherche:hover {
-    outline: 1px solid lightgrey;
-}
-
 #i {
     display: flex;
     justify-content: center;
@@ -239,12 +226,12 @@ text-align: left
     width: auto;
 }
 
-.contenuDemande {
+.demandes {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 90%;
-    margin: 2% auto 3% auto;
+    margin: 0 auto 5% auto;
     font-family: "Roboto",sans-serif;
 }
 
@@ -261,21 +248,22 @@ text-align: left
 
 .infoMoins {
     display: flex;
-    justify-content: space-around;
-    width: 45%;
+    justify-content: space-between;
+    width: 40%;
 }
 
 .infosChat {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
     justify-content: space-around;
+    margin: auto;
 }
 
 .infosChat img{
-    width: 220px;
-    height: 140px;
+    width: 230px;
+    height: 155px;
     border-radius: 30px;
 }
 
@@ -283,8 +271,7 @@ text-align: left
     display: flex;
     background-color: var(--sec-color);
     width: 100%;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
 }
 
 .idChat p {
@@ -305,7 +292,7 @@ text-align: left
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
-    width: 55%;
+    width: 50%;
     align-items: center;
     background-color: var(--sec-color);
     border-radius: 30px;
@@ -320,41 +307,37 @@ text-align: left
 }
 
 .infoPlus {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
     position: relative;
-    width: 50%;
+    width: 55%;
     margin: 1% 0;
     background-color: inherit;
 }
 
 .infoPlus form {
-    width: 100%;
-    height: 75%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
 }
-
-.infoPlus button {
-    width: 15%;
-    z-index: 2;
-    border: none;
-    background-color: inherit;
+/*****************************************/
+.btnMemo {
+    position: absolute;
+    right: 1%;
+    top: 105%;
+    font-size: 1.3em;
+    width: auto;
 }
 
-.infoPlus button:hover {
+.btnMemo:hover {
     color: var(--third-color);
 }
 
+/*****************************************/
 .memo {
     width: 60%;
-    height: 110%;
 }
 
 .memo textarea {
-    height: 100%;
+    height: 85%;
 }
 
 .sous-memos {
@@ -363,12 +346,10 @@ text-align: left
     justify-content: space-between;
     align-items: center;
     width: 38%;
-    height: 110%;
     background-color: inherit;
 }
 
 .sous-memos div {
-    height: 25%;
     width: 100%;
 }
 
@@ -387,47 +368,138 @@ text-align: left
 
 /* Popup overlay */
 #overlay {
-    visibility: hidden;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(246,246,252,0.5);
     z-index: 10;
 }
 
 #popupSupp {
-    background-color: var(--sec-color);
-    width: 30%;
-    height: 12%;
     position: absolute;
-    top: 35%;
-    left: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    height: 10%;
+    top: 33%;
+    left: 37.5%;
+    padding: 0.8em;
+    background-color: var(--sec-color);
+    border: 2px solid rgb(200, 200, 200);
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    font-size: 1.3em;
+    color: rgb(100, 100, 100);
+    border-radius: 15px;
+}
+
+#popupSupp:hover {
+    border-color: var(--third-color);
+}
+
+#popupSupp > div{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#popupSupp > div > div{
+    width: 25%;
+    height: auto;
     text-align: center;
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 15px;
 }
 
-.popupBtn {
-    width: 20%;
-    height: 40%;
-    border: none;
-    font-size: 20px;
-    margin: 0 10%;
+#popupSupp > div > div:hover{
+    border-color: var(--fourth-color);
+    background-color: var(--fourth-color);
 }
 
-.popupBtn:hover {
-    opacity: 0.8;
+/*****************************************/
+/* Mode zoom */
+.zoom {
+    margin: 3% auto 6% auto;
+    z-index: 2;
 }
 
-#popupBtnOui {
-    background-color: lightgreen;
+.zoom .none {
+    display: unset;
 }
 
-#popupBtnNon {
-    background-color: lightcoral;
+.zoom .tpsDate{
+    display: none;
 }
+
+.zoom .infoDemande {
+    flex-direction: column;
+    align-items: center;
+}
+
+.zoom .infoMoins {
+    width: 100%;
+}
+
+.zoom .infosChat {
+    width: 40%;
+}
+
+.zoom .infosChat img{
+    width: 230px;
+    height: 155px;
+    border-radius: 30px;
+}
+
+.zoom .idChat {
+    justify-content: space-around;
+}
+
+.zoom .idChat .para {
+    width: 30%;
+}
+
+.zoom .nomChat {
+    font-size: 3em;
+}
+
+.zoom .infoPlus {
+    width: 98%;
+    height: 10em;
+}
+
+.zoom .infosPers {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 0.9fr);
+    width: 55%;
+}
+
+.zoom .nomPers {
+    grid-area: 1 / 1 / 2 / 3;
+}
+
+.zoom .commentaire {
+    width: 45%;
+    height: 100%;
+}
+
+.zoom .memo {
+    width: 30%;
+    height: 100%;
+}
+
+.zoom .sous-memos {
+   width: 20%;
+   height: 115%;
+}
+
+/* .zoom .btnDemande {
+    display: none;
+} */
+/******************************************************/
 
 /* Popup infos */
 #popupInfos {
@@ -439,7 +511,6 @@ text-align: left
     border-radius: 30px;
     border: none;
     font-size: 90%;
-    text-align: center;
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
     opacity: 0.5;
 }
