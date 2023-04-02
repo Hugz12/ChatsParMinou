@@ -18,8 +18,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <link rel="stylesheet" href="./css/accueil.css">
 
 <div class="disabled">
-	<div id="chatsTitre" class="policeTitre">
-		Nos Chats
+	<div id="chatsTitre" class="policeTexte">
+		<form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercher();">
+				<div class="group">
+					<input type="text" id="rechercheChats" required>
+					<label for="rechercheChats">Rechercher un chat par son nom</label>
+				</div>
+		</form>
 		<div id="svgFilter" class="svg" onclick="displayFilter();"><?php include("./ressources/filter.svg") ?></div>
 	</div>
 	<?php 
@@ -70,6 +75,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		var chats = <?= json_encode(listerChats());?>;
 		var admin = <?= (valider("Admin","SESSION")? 1 : 0)?>;
 		afficherChats(chats);
+		responsivePointsChats();
 	</script> 
 
 	

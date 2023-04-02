@@ -95,6 +95,7 @@ body{
 
 .slide {
 	position: relative;
+	display: block;
 	width: calc((var(--taille))/ var(--nbElement) - var(--marge) * 2);
 	max-width: var(--tailleMax);
 	margin: 10px var(--marge);

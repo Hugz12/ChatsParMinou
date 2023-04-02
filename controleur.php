@@ -349,7 +349,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
-		case 'Ajouter Un Passage' : 
+		case 'addPassage' : 
 			// vérifier la présence des champs 
 			if ($date = valider("date"))
 			if ($heureDebut = valider("debut"))
@@ -357,12 +357,25 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($description = valider("description"))
 			if (isset($_SESSION["mail"]))
 			if ($heureDebut < $heureFin){
-				ajouterPassage($date,$heureDebut,$heureFin,$description,$_SESSION["mail"]);
-				$_SESSION['message'] = "Votre passage a bien été ajouté";
+
+				$retour = ajouterPassage($date,$heureDebut,$heureFin,$description,$_SESSION["mail"]);
+
+				if($retour == "alreadyExist"){ // Si le passage existe déjà
+					ob_clean(); 
+					header('Content-Type: application/json'); // On indique que le contenu est du json
+					echo json_encode("alreadyExist"); // On renvoie le message d'erreur
+
+				} else {
+					ob_clean(); // On vide le tampon de sortie
+					header('Content-Type: application/json'); 
+					echo json_encode("added"); // On renvoie le message de succès
+				}
 			} else if ($heureDebut > $heureFin){
-				$_SESSION['message'] = "Les heures de début et de fin ne sont pas cohérentes, la ligne n'a pas était ajouté";
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode("erreur"); // On renvoie le message d'erreur
 			}
-			$qs = "?view=planning";
+			die();
 		break;
 
 		// Action qui ne sont pas afficher sur la page, 
