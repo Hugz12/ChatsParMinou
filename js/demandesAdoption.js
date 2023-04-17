@@ -2,82 +2,84 @@
 function divDemande(date, btn, img, demande){
     return `<div id="demande${demande["id"]}" class="demandes">
                 <img class="btnDemande ${btn} clickable" onclick='changerStatut(this, ${JSON.stringify(demande)});' src="./ressources/${img}.png" alt="${img}">
-                <div class="infoDemande">
-                    <p class="tpsDate">${date}</p>
-                    <p class="tpsComplet">${demande["date"]}|</p>
-                    <div class="infoMoins">
-                        <div class="infosChat">
-                            <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
-                            <div class="idChat">
-                                <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
+                <div class="block">    
+                    <div class="infoDemande">
+                        <p class="tpsDate">${date}</p>
+                        <p class="tpsComplet">${demande["date"]}|</p>
+                        <div class="infoMoins">
+                            <div class="infosChat">
+                                <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
+                                <div class="idChat">
+                                    <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
+                                    <div class="para none">
+                                        <p class="statutChat" name="statut">${demande["statut"]}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infosPers">
+                                <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
+                                <div class="para">
+                                    <p name="mail">${demande['mail']}</p>
+                                    <label for=\"mail\">Mail</label>
+                                </div>
+                                <div class="para">
+                                    <p name="tel">${demande['tel']}</p>
+                                    <label for=\"tel\">Tel.</label>
+                                </div>
                                 <div class="para none">
-                                    <p class="statutChat" name="statut">${demande["statut"]}</p>
+                                    <p name="adresse">${demande['adresse']}</p>
+                                    <label for=\"adresse\">Adresse</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="habitation">${demande['habitation']}</p>
+                                    <label for=\"habitation\">Habitation</label>
+                                </div>
+                                <div class="para none">
+                                    <p class="exterieur" name="exterieur">${demande['exterieur']}</p>
+                                    <label for=\"exterieur\">Exterieur</label>
+                                </div>
+                                <div class="para none">
+                                    <p class="sortie" name="sortie">${demande['sortie']}</p>
+                                    <label for=\"sortie\">Sortie</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="sitFam">${demande['situationFamiliale']}</p>
+                                    <label for=\"sitFam\">Situation familiale</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="animaux">${demande['animaux']}</p>
+                                    <label for=\"animaux\">Animaux</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="infosPers">
-                            <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
-                            <div class="para">
-                                <p name="mail">${demande['mail']}</p>
-                                <label for=\"mail\">Mail</label>
-                            </div>
-                            <div class="para">
-                                <p name="tel">${demande['tel']}</p>
-                                <label for=\"tel\">Tel.</label>
-                            </div>
-                            <div class="para none">
-                                <p name="adresse">${demande['adresse']}</p>
-                                <label for=\"adresse\">Adresse</label>
-                            </div>
-                            <div class="para none">
-                                <p name="habitation">${demande['habitation']}</p>
-                                <label for=\"habitation\">Habitation</label>
-                            </div>
-                            <div class="para none">
-                                <p class="exterieur" name="exterieur">${demande['exterieur']}</p>
-                                <label for=\"exterieur\">Exterieur</label>
-                            </div>
-                            <div class="para none">
-                                <p class="sortie" name="sortie">${demande['sortie']}</p>
-                                <label for=\"sortie\">Sortie</label>
-                            </div>
-                            <div class="para none">
-                                <p name="sitFam">${demande['situationFamiliale']}</p>
-                                <label for=\"sitFam\">Situation familiale</label>
-                            </div>
-                            <div class="para none">
-                                <p name="animaux">${demande['animaux']}</p>
-                                <label for=\"animaux\">Animaux</label>
-                            </div>
+                        <div class="infoPlus">
+                            <form>
+                                <div class='group memo'>
+                                    <textarea name='memo' required>${demande['memo']}</textarea>
+                                    <label for=\"memo\">Memo</label>
+                                </div>
+                                <div class="sous-memos">
+                                    <div class='group datePv'>
+                                        <input type='text'  name='datePv' value='${demande['datePv']}' required>
+                                        <label for=\"datePv\">Date de PV</label>
+                                    </div>
+                                    <div class='group resultatPv'>
+                                        <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
+                                        <label for=\"resultatPv\">Résultat de PV</label>
+                                    </div>
+                                    <div class='group dateRencontre'>
+                                        <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
+                                        <label for=\"dateRencontre\">Date de rencontre</label>
+                                    </div>
+                                </div>
+                                <div class='para commentaire none'>
+                                    <p name='commentaire'>${demande['commentaire']}</p>
+                                    <label for=\"commentaire\">commentaire</label>
+                                </div>
+                            </form>
                         </div>
+                        <div class="btnMemo clickable">Enregistrer</div>
                     </div>
-                    <div class="infoPlus">
-                        <form>
-                            <div class='group memo'>
-                                <textarea name='memo' required>${demande['memo']}</textarea>
-                                <label for=\"memo\">Memo</label>
-                            </div>
-                            <div class="sous-memos">
-                                <div class='group datePv'>
-                                    <input type='text'  name='datePv' value='${demande['datePv']}' required>
-                                    <label for=\"datePv\">Date de PV</label>
-                                </div>
-                                <div class='group resultatPv'>
-                                    <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
-                                    <label for=\"resultatPv\">Résultat de PV</label>
-                                </div>
-                                <div class='group dateRencontre'>
-                                    <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
-                                    <label for=\"dateRencontre\">Date de rencontre</label>
-                                </div>
-                            </div>
-                            <div class='para commentaire none'>
-                                <p name='commentaire'>${demande['commentaire']}</p>
-                                <label for=\"commentaire\">commentaire</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="btnMemo clickable">Enregistrer</div>
                 </div>
                 <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
             </div>`;
@@ -506,21 +508,21 @@ $(function() {
     $(".infoMoins").on("click", function() {
         console.log("zoom");
 
-        if ($($(this).parent().parent()).hasClass("zoom")) {
-            $($(this).parent()).fadeOut("slow", function () {
-                $($(this).parent()).children(".btnDemande").fadeIn();
-                $(this).removeAttr('style');
-                $($(this).parent()).removeClass("zoom");
+        if ($($(this).parent().parent().parent()).hasClass("zoom")) {
+            $($(this).parent()).animate({left: "5%", opacity: 0}, 500, function () {
+                $($(this).parent().parent()).children(".btnDemande").animate({opacity: 1}, 200);
+                $($(this).parent().parent()).removeClass("zoom");
+                $(this).animate({left: "0%", opacity: 1}, 500);
             });
+            $($(this).parent()).removeAttr("style");
         } else {
-            $($(this).parent().parent()).children(".btnDemande").fadeOut("slow", function () {
-                $($(this).parent()).children(".infoDemande").animate({height: "500px", width: "96%"}, "slow", function () {
-                    $($(this).parent()).addClass("zoom");
-                });
+            $($(this).parent().parent().parent()).children(".btnDemande").animate({opacity: 0}, 200);
+            $($(this).parent()).animate({right: "5%", height: "500px", width: "110%", opacity: 0}, 500, function () {
+                $($(this).parent().parent()).addClass("zoom");
+                $(this).animate({opacity: 1}, 500);
             });
-            
+            $($(this).parent()).removeAttr("style");
         }
-
     });
 });
 
