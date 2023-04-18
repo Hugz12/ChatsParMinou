@@ -25,13 +25,15 @@ include_once "modele.php";	// To use isAdmin()
  */
 function verifUser($mail,$password){
 
+
 	// On vérifie si le mail existe dans la base de données
 	$SQL = "SELECT password FROM utilisateur WHERE mail='$mail'";
 	$hashed_password = SQLGetChamp($SQL);
 	if ($hashed_password == false) return false; // utilisateur innexistant 
-
+	
 	// On vérifie si le mot de passe est correct en comparant le hash
 	if (password_verify($password, $hashed_password)) {
+		
 		$_SESSION["Connecte"] = true;
 		$_SESSION["mail"] = $mail;
 		$_SESSION["Admin"] = isAdmin($mail);
