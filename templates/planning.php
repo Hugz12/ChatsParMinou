@@ -6,7 +6,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 }
 
 if (!valider('Connecte', 'SESSION')) {
-	header("Location:./index.php?view=accueil");
+	echo '<script language="Javascript">document.location.replace("./index.php?view=accueil");</script>';
 	die();
 }
 
@@ -27,7 +27,7 @@ if(isset($_SESSION["message"])){
 		
 		<div id="calendar" class="calendar">
 
-			<div id="prev" class="flecheGauche clickable" onclick="changeMonth(this)" style="left:-30px">
+			<div id="previousMonth" class="flecheGauche clickable" onclick="changeMonth(this)" style="left:-30px">
 				<?php include("./ressources/flecheLeft.svg");?>
 			</div>
 
@@ -55,7 +55,7 @@ if(isset($_SESSION["message"])){
 
 			<div class="days policeTexte"></div>
 
-			<div id="next" class="flecheDroite clickable" onclick="changeMonth(this)" style="right:-30px">
+			<div id="nextMonth" class="flecheDroite clickable" onclick="changeMonth(this)" style="right:-30px">
 				<?php include("./ressources/flecheRight.svg");?>
 			</div>
 		</div>
@@ -68,7 +68,7 @@ if(isset($_SESSION["message"])){
         fillCalendar();
     </script>
 
-	<div id="formPassageRefuge" class="formType" style="display:none;">
+	<div id="formPassageRefuge" class="formType" style="display:none; opacity:0;">
 		<div class='buttonHideForm' onclick='hideForm("formPassageRefuge");'>
 			<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 		</div>
@@ -76,7 +76,7 @@ if(isset($_SESSION["message"])){
 		<br>
 
 		
-		<form class='policeTexte' action='controleur.php'>
+		<form class='policeTexte' onsubmit="validerFormPassageRefuge(this); return false;">
 			<div class='inputOther'>
 				<div id='inputAddChatOther'>
 					<div class='group'>
@@ -88,12 +88,12 @@ if(isset($_SESSION["message"])){
 
 					<div class='group'>
 						<div class='group'>
-							<input type='time' name='debut' required>
+							<input id='debut' type='time' name='debut' required>
 							<label for="debut">Début</label>
 						</div>
 
 						<div class='group'>
-							<input type='time' name='fin' required>
+							<input id='fin' type='time' name='fin' required>
 							<label for="fin">Fin</label>
 						</div>
 					</div>
@@ -102,9 +102,10 @@ if(isset($_SESSION["message"])){
 
 
 				<div class='group'>
-					<textarea name='description' required></textarea>
+					<textarea id='description' name='description' required></textarea>
 					<label for="description">Description</label>
 				</div>
+				
 			
 			</div>
 			<input type='submit' class='buttonType' name='action' value='Ajouter Un Passage'>
