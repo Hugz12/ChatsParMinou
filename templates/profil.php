@@ -5,6 +5,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	die("");
 }
 
+if (!valider('Connecte', 'SESSION')) {
+	header("Location:./index.php?view=accueil");
+	die();
+}
+
 ?>
 <link rel="stylesheet" href="./css/profil.css">
 <link rel="stylesheet" href="css/form.css">

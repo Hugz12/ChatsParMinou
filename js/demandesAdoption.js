@@ -1,8 +1,8 @@
 //Fonction qui append une demande
 function divDemande(date, btn, img, demande){
     return `<div id="demande${demande["id"]}" class="demandes">
-                <div class="contenuDemande">
-                    <img class="btnDemande ${btn} clickable" onclick='changerStatut(this, ${JSON.stringify(demande)});' src="./ressources/${img}.png" alt="${img}">
+                <img class="btnDemande ${btn} clickable" onclick='changerStatut(this, ${JSON.stringify(demande)});' src="./ressources/${img}.png" alt="${img}">
+                <div class="block">    
                     <div class="infoDemande">
                         <p class="tpsDate">${date}</p>
                         <p class="tpsComplet">${demande["date"]}|</p>
@@ -10,53 +10,78 @@ function divDemande(date, btn, img, demande){
                             <div class="infosChat">
                                 <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
                                 <div class="idChat">
-                                    <p class="policeTitre">${demande['name']}</p>
-                                    <p>Code : ${demande["code"]}</p>
-                                    <p class="none statutChat">${demande["statut"]}</p>
+                                    <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
+                                    <div class="para none">
+                                        <p class="statutChat" name="statut">${demande["statut"]}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="infosPers">
                                 <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
-                                <p>Mail: ${demande['mail']}</p>
-                                <p>Tél.: ${demande['tel']}</p>
-                                <p class="none">Adresse: ${demande['adresse']}</p>
-                                <p class="none">Habitation: ${demande['habitation']}</p>
-                                <p class="none exterieur">${demande['exterieur']}</p>
-                                <p class="none sortie">${demande['sortie']}</p>
-                                <p class="none">${demande['situationFamiliale']}</p>
-                                <p class="none">${demande['animaux']}</p>
+                                <div class="para">
+                                    <p name="mail">${demande['mail']}</p>
+                                    <label for=\"mail\">Mail</label>
+                                </div>
+                                <div class="para">
+                                    <p name="tel">${demande['tel']}</p>
+                                    <label for=\"tel\">Tel.</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="adresse">${demande['adresse']}</p>
+                                    <label for=\"adresse\">Adresse</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="habitation">${demande['habitation']}</p>
+                                    <label for=\"habitation\">Habitation</label>
+                                </div>
+                                <div class="para none">
+                                    <p class="exterieur" name="exterieur">${demande['exterieur']}</p>
+                                    <label for=\"exterieur\">Exterieur</label>
+                                </div>
+                                <div class="para none">
+                                    <p class="sortie" name="sortie">${demande['sortie']}</p>
+                                    <label for=\"sortie\">Sortie</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="sitFam">${demande['situationFamiliale']}</p>
+                                    <label for=\"sitFam\">Situation familiale</label>
+                                </div>
+                                <div class="para none">
+                                    <p name="animaux">${demande['animaux']}</p>
+                                    <label for=\"animaux\">Animaux</label>
+                                </div>
                             </div>
                         </div>
                         <div class="infoPlus">
                             <form>
                                 <div class='group memo'>
-                                    <textarea name='memo'>${demande['memo']}</textarea>
+                                    <textarea name='memo' required>${demande['memo']}</textarea>
                                     <label for=\"memo\">Memo</label>
                                 </div>
                                 <div class="sous-memos">
                                     <div class='group datePv'>
-                                        <textarea name='datePv'>${demande['datePv']}</textarea>
-                                        <label for=\"datePv\">datePv</label>
+                                        <input type='text'  name='datePv' value='${demande['datePv']}' required>
+                                        <label for=\"datePv\">Date de PV</label>
                                     </div>
                                     <div class='group resultatPv'>
-                                        <textarea name='resultatPv'>${demande['resultatPv']}</textarea>
-                                        <label for=\"resultatPv\">resultatPv</label>
+                                        <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
+                                        <label for=\"resultatPv\">Résultat de PV</label>
                                     </div>
                                     <div class='group dateRencontre'>
-                                        <textarea name='dateRencontre'>${demande['dateRencontre']}</textarea>
-                                        <label for=\"dateRencontre\">dateRencontre</label>
+                                        <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
+                                        <label for=\"dateRencontre\">Date de rencontre</label>
                                     </div>
                                 </div>
-                                <div class='group commentaire none'>
-                                    <textarea name='commentaire'>${demande['commentaire']}</textarea>
+                                <div class='para commentaire none'>
+                                    <p name='commentaire'>${demande['commentaire']}</p>
                                     <label for=\"commentaire\">commentaire</label>
                                 </div>
                             </form>
-                            <button class="btnMemo clickable">Enregistrer</button>
                         </div>
+                        <div class="btnMemo clickable">Enregistrer</div>
                     </div>
-                    <img class="btnDemande btnSupp clickable" src="./ressources/cross.png" alt="cross">
                 </div>
+                <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
             </div>`;
 }
 
@@ -151,20 +176,26 @@ function afficherTitres(demandes) {
         if (demandes[i]["statutDemande"] == 2) iC++;
         if (demandes[i]["statutDemande"] == 3) iT++;
     }
+
+    var classe = "class='policeTitre tailleTitre marginTitre'";
+    $("#nouvellesDemandes").before("<p id='titreNouvellesDemandes' " + classe + "></p>");
+    $("#demandesEnCours").before("<p id='titreEnCours' " + classe + "></p>");
+    $("#traitees").before("<p id='titreTraitees' " + classe + "></p>");
+
     if (iN != 0){
-        if (iN == 1) $("#nouvellesDemandes").before("<h2 id='titreNouvellesDemandes'>Nouvelle demande</h2>");
-        else $("#nouvellesDemandes").before("<h2 id='titreNouvellesDemandes'>Nouvelles demandes</h2>");
-    } else $("#nouvellesDemandes").before("<h2 id='titreNouvellesDemandes'>Aucune nouvelle demande</h2>");
+        if (iN == 1) $("#titreNouvellesDemandes").text("Nouvelle demande");
+        else $("#titreNouvellesDemandes").text("Nouvelles demandes");
+    } else $("#titreNouvellesDemandes").text("Aucune nouvelle demande");
 
     if (iC != 0){
-        if (iC == 1) $("#demandesEnCours").before("<h2 id='titreEnCours'>Demande en cours</h2>");
-        else $("#demandesEnCours").before("<h2 id='titreEnCours'>Demandes en cours</h2>");
-    } else $("#demandesEnCours").before("<h2 id='titreEnCours'>Aucune demande en cours</h2>");
-    
+        if (iC == 1) $("#titreEnCours").text("Demande en cours");
+        else $("#titreEnCours").text("Demandes en cours");
+    } else $("#titreEnCours").text("Aucune demande en cours");
+
     if (iT != 0){
-        if (iT == 1) $("#traitees").before("<h2 id='titreTraitees'>Demande traitée</h2>");
-        else $("#traitees").before("<h2 id='titreTraitees'>Demandes traitées</h2>");
-    } else $("#traitees").before("<h2 id='titreTraitees'>Aucune demande traitée</h2>");
+        if (iT == 1) $("#titreTraitees").text("Demande traitée");
+        else $("#titreTraitees").text("Demandes traitées");
+    } else $("#titreTraitees").text("Aucune demande traitée");
 
     montrerPlusMoins();
 }
@@ -172,24 +203,28 @@ function afficherTitres(demandes) {
 // Fonction qui change le titre en fonction du nombre de demandes
 function changerTitres() {
     console.log("changerTitres");
-    if (document.getElementById("nouvellesDemandes").childElementCount != 0) {
-        if ((document.getElementById("nouvellesDemandes").childElementCount == 1)) $("#titreNouvellesDemandes").text("Nouvelle demande");
+    var idN = document.getElementById("nouvellesDemandes");
+    var idC = document.getElementById("demandesEnCours");
+    var idT = document.getElementById("traitees");
+
+    if (idN.childElementCount != 0) {
+        if (idN.childElementCount == 1) $("#titreNouvellesDemandes").text("Nouvelle demande");
         else $("#titreNouvellesDemandes").text("Nouvelles demandes");
     } else $("#titreNouvellesDemandes").text("Aucune nouvelle demande");
 
-    if (document.getElementById("demandesEnCours").childElementCount != 0) {
-        if ((document.getElementById("demandesEnCours").childElementCount == 1)) $("#titreEnCours").text("Demande en cours");
+    if (idC.childElementCount != 0) {
+        if ((idC.childElementCount == 1)) $("#titreEnCours").text("Demande en cours");
         else $("#titreEnCours").text("Demandes en cours");
     } else $("#titreEnCours").text("Aucune demande en cours");
 
-    if (document.getElementById("traitees").childElementCount != 0) {
-        if ((document.getElementById("traitees").childElementCount == 1)) $("#titreTraitees").text("Demande traitée");
+    if (idT.childElementCount != 0) {
+        if ((idT.childElementCount == 1)) $("#titreTraitees").text("Demande traitée");
         else $("#titreTraitees").text("Demandes traitées");
     } else $("#titreTraitees").text("Aucune demande traitée");
 
-    //console.log(document.getElementById("nouvellesDemandes").childElementCount);
-    //console.log(document.getElementById("demandesEnCours").childElementCount);
-    //console.log(document.getElementById("traitees").childElementCount);
+    //console.log(idN.childElementCount);
+    //console.log(idC.childElementCount);
+    //console.log(idT.childElementCount);
 }
 
 // Tri par date
@@ -233,7 +268,7 @@ function changerStatut(contexte, demande) {
     //console.log(demande["statutDemande"]);
     $.ajax({
         url: "./controleur.php",
-        type: "POST",
+        type: "GET",
         dataType: "html",
         data: {
             action: 'Changer Statut Demande',
@@ -263,14 +298,13 @@ function changerStatut(contexte, demande) {
 }
 
 //Fonction de suppression d'une demande
-$(function() {
-    $(".btnSupp").on("click", function() {
+function supprimerDemande(contexte) {
         console.log("supprimerDemande");
 
-        var id = $(this).parent().parent().attr("id").match(/\d/g).toString().replace(',', '');
+        var id = $($(contexte).parent()).attr("id").match(/\d/g).toString().replace(',', '');
         //console.log("id : " + id);
 
-        $("#overlay").css("visibility", "visible");
+        $("#overlay").show();
 
         $("#popupBtnOui").on("click", function() { 
             //console.log("oui");
@@ -290,7 +324,7 @@ $(function() {
                 }
             });
             $("#demande" + id).remove();
-            $("#overlay").css("visibility", "hidden");
+            $("#overlay").hide();
 
             changerTitres();
             montrerPlusMoins();
@@ -298,17 +332,17 @@ $(function() {
 
         $("#popupBtnNon").on("click", function() { 
             //console.log("non");
-            $("#overlay").css("visibility", "hidden");
+            $("#overlay").hide();
         });
-    });
-});
+    }
 
 //Fonctions d'edition des commentaires
 $(function() {
     $(".btnMemo").on("click", function() {
         console.log("Changer Memo");
-        var id = $($(this).parent().parent().parent().parent()).attr("id").match(/\d/g).toString().replace(',', '');
+        var id = $($(this).parent().parent().parent()).attr("id").match(/\d/g).toString().replace(',', '');
         //console.log("id : " + id);
+        var parent = $(this).parent().children("form");
 
         $.ajax({
             url: "./controleur.php",
@@ -317,11 +351,10 @@ $(function() {
             data: {
                 action: "Changer Memo",
                 id: id,
-                memo: $($(this).parent().children("form").children(".memo").children("textarea")).val(),
-                datePv: $($(this).parent().children("form").children(".sous-memos").children(".datePv").children("textarea")).val(),
-                resultatPv: $($(this).parent().children("form").children(".sous-memos").children(".resultatPv").children("textarea")).val(),
-                dateRencontre: $($(this).parent().children("form").children(".sous-memos").children(".dateRencontre").children("textarea")).val(),
-                commentaire: $($(this).parent().children("form").children(".commentaire").children("textarea")).val(),
+                memo: $(parent.children(".memo").children("textarea")).val(),
+                datePv: $(parent.children(".sous-memos").children(".datePv").children("textarea")).val(),
+                resultatPv: $(parent.children(".sous-memos").children(".resultatPv").children("textarea")).val(),
+                dateRencontre: $(parent.children(".sous-memos").children(".dateRencontre").children("textarea")).val(),
             },
             success: function() {
                 console.log("success");
@@ -335,13 +368,11 @@ $(function() {
     var moveLeft = 20;
     var moveDown = 10;
 
-    $('#recherche img').hover(function(e) {
-        $('#popupInfos').show();
-    }, function() {
-        $('#popupInfos').hide();
+    $('#i').hover(function() {
+        $('#popupInfos').toggle();
     });
 
-    $('#recherche img').mousemove(function(e) {
+    $('#i').mousemove(function(e) {
         $("#popupInfos").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
     });
 });
@@ -351,47 +382,50 @@ $(function() {
     $("#contenuRecherche").on("keyup", function() {
         console.log("recherche");
         $(".nonTrouvée").remove();
+        var contenu = $("#contenuRecherche").val().toLowerCase();
 
-        switch ($("#selectRecherche").val()) {
-            case 'rchGenerale':
+        switch ($("#selectRecherche").text()) {
+            case 'Recherche générale':
                 //console.log("case rchGenerale");
                 $(".demandes").filter(function(){ 
-                    $(this).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $(this).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
-            case 'rchChat':
+            case 'Recherche d\'un chat':
                 //console.log("case rchChat");
                 $(".infosChat").filter(function(){ 
-                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
-            case 'rchPers':
+            case 'Recherche d\'une personne':
                 //console.log("case rchPers");
                 $(".infosPers").filter(function(){ 
-                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
-            case 'rchDate':
+            case 'Recherche d\'une date':
                 //console.log("case rchDate");
                 $(".tpsDate").filter(function(){ 
-                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf($("#contenuRecherche").val().toLowerCase()) > -1)
+                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
         }
 
+        var aucun = "<p class='nonTrouvée policeTitre'>Il n'y a aucune demande trouvée</p>";
+
         if($('#nouvellesDemandes').children(':visible').length == 0 && $("#titreNouvellesDemandes").text().match("Aucune") == null) {
-            $("#nouvellesDemandes").append("<h3 class='nonTrouvée'>Il n'y a aucune demande trouvée</h3>");
+            $("#nouvellesDemandes").append(aucun);
         }
 
         if($('#demandesEnCours').children(':visible').length == 0 && $("#titreEnCours").text().match("Aucune") == null) {
-            $("#demandesEnCours").append("<h3 class='nonTrouvée'>Il n'y a aucune demande trouvée</h3>");
+            $("#demandesEnCours").append(aucun);
         }
 
         if($('#traitees').children(':visible').length == 0 && $("#titreTraitees").text().match("Aucune") == null) {
-            $("#traitees").append("<h3 class='nonTrouvée'>Il n'y a aucune demande trouvée</h3>");
+            $("#traitees").append(aucun);
         }
     });
 });
@@ -442,7 +476,7 @@ $(function() {
 
 // Montrer plus / montrer moins
 $(function() {
-    $("a").on("click", function() {
+    $(".lienPlusMoins").on("click", function() {
         console.log("montrer plus / moins");
         var statut;
 
@@ -474,49 +508,20 @@ $(function() {
     $(".infoMoins").on("click", function() {
         console.log("zoom");
 
-        if ($($(this).parent()).css("display") == "block") {
-            $($(this).parent()).css({"display" : "flex", "transform" : "scale(1)" , "transition" : "1s"}); //infoDemande
-            $($(this).parent().parent()).removeAttr('style'); //contenuDemande
-            $(this).removeAttr('style'); //infoMoins
-            $($(this).children(".infosChat").children("img")).removeAttr('style'); //infoMoins infosChat img
-            $($(this).parent().children(".infoPlus")).removeAttr('style'); //infoPlus
-            
-            $($(this).children(".infosChat")).removeAttr('style'); //infosChat
-            $($(this).children(".infosChat").children(".idChat")).removeAttr('style'); //infosChat idChat
-            $($(this).children(".infosChat").children(".idChat").children(".none")).removeAttr('style'); //infosChat idChat none
-
-            $($(this).children(".infosPers")).removeAttr('style'); //infosPers 
-            $($(this).children(".infosPers").children(".nomPers")).removeAttr('style'); //infosPers nomPers
-
-            $($(this).children(".infosPers").children(".none")).removeAttr('style'); //infosPers none
-            $($(this).parent().children(".infoPlus").children("form").children(".none")).removeAttr('style'); //infoPlus form none
-            $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).removeAttr('style'); //infosPlus form commentaire
-            $($(this).parent().children(".infoPlus").children("form").children(".memo")).removeAttr('style') //infosPlus form memo
-            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos")).removeAttr('style') //infosPlus form sous-memos
-            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos").children("div")).removeAttr('style'); //infosPlus form sous-memos div
-            $($(this).parent().children(".infoPlus").children(".btnMemo")).removeAttr('style'); //infosPlus btnMemo
-            $($(this).parent().children(".tpsDate")).removeAttr('style'); //tpsDate
+        if ($($(this).parent().parent().parent()).hasClass("zoom")) {
+            $($(this).parent()).animate({left: "5%", opacity: 0}, 500, function () {
+                $($(this).parent().parent()).children(".btnDemande").animate({opacity: 1}, 200);
+                $($(this).parent().parent()).removeClass("zoom");
+                $(this).animate({left: "0%", opacity: 1}, 500);
+            });
+            $($(this).parent()).removeAttr("style");
         } else {
-            $($(this).parent()).css({"display" : "block", "transform" : "scale(1.2)" , "transition" : "1s"}); //infoDemande
-            $($(this).parent().parent()).css({"margin" : "3% auto 6% auto"}); //contenuDemande
-            $(this).css({"width" : "100%"}); //infoMoins
-            $($(this).children(".infosChat").children("img")).css({"width" : "60%", "margin" : "auto 0"}); //infoMoins infosChat img
-            $($(this).parent().children(".infoPlus")).css({"width" : "98%" , "height" : "10em", "margin" : "1em"}); //infoPlus
-
-            $($(this).children(".infosChat")).css({"display" : "flex", "justify-content" : "space-around", "width" : "45%", "margin" : "0"}); //infosChat
-            $($(this).children(".infosChat").children(".idChat")).css({"display" : "flex", "flex-direction" : "column", "justify-content" : "space-around"}); //infosChat idChat
-            $($(this).children(".infosChat").children(".idChat").children(".none")).css({"display" : "unset"}); //infosChat idChat none
-
-            $($(this).children(".infosPers")).css({"grid-template-columns" : "repeat(2, 1fr)", "grid-template-rows" : "repeat(5, 1fr)", "width" : "45%"}); //infosPers 
-            $($(this).children(".infosPers").children(".nomPers")).css({"grid-area" : "1 / 1 / 2 / 3"}); //infosPers nomPers
-            $($(this).children(".infosPers").children(".none")).css({"display" : "unset"}); //infosPers none
-
-            $($(this).parent().children(".infoPlus").children("form").children(".none")).css({"display" : "unset"}); //infoPlus form none
-            $($(this).parent().children(".infoPlus").children("form").children(".commentaire")).css({"display" : "unset", "width" : "45%", "height" : "120%"}); //infosPlus form commentaire
-            $($(this).parent().children(".infoPlus").children("form").children(".memo")).css({"width" : "30%", "height" : "130%"}); //infosPlus form memo
-            $($(this).parent().children(".infoPlus").children("form").children(".sous-memos")).css({"width" : "20%", "height" : "130%"}); //infosPlus form sous-memos
-            $($(this).parent().children(".infoPlus").children(".btnMemo")).css({"width" : "8%"}); //infosPlus btnMemo
-            $($(this).parent().children(".tpsDate")).css({"display" : "none"}); //tpsDate
+            $($(this).parent().parent().parent()).children(".btnDemande").animate({opacity: 0}, 200);
+            $($(this).parent()).animate({right: "5%", height: "500px", width: "110%", opacity: 0}, 500, function () {
+                $($(this).parent().parent()).addClass("zoom");
+                $(this).animate({opacity: 1}, 500);
+            });
+            $($(this).parent()).removeAttr("style");
         }
     });
 });
@@ -559,3 +564,33 @@ $(function() {
         }
     });
 });
+
+
+$(function() {
+    /*Dropdown Menu*/
+    $('.dropdown').click(function () {
+        $(this).focus();
+        $(this).toggleClass('active');
+        $(this).find('.dropdown-menu').slideToggle(300);
+    });
+    $('.dropdown').focusout(function () {
+        $(this).removeClass('active');
+        $(this).find('.dropdown-menu').slideUp(300);
+    });
+    $('.dropdown .dropdown-menu li').click(function () {
+        $(this).parents('.dropdown').find('span').text($(this).text());
+    });
+});
+
+function etatBtnTri(element){
+	if ($(element).children("input").prop("checked") == false) {
+        $(element).children("div").fadeOut(150, function() {
+            $(this).text("Récent").fadeIn(150);
+        });
+    }
+    else {
+        $(element).children("div").fadeOut(150, function() {
+            $(this).text("Ancien").fadeIn(150);
+        });
+    }
+}

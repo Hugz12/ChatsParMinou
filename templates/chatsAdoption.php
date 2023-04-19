@@ -18,8 +18,13 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <link rel="stylesheet" href="./css/accueil.css">
 
 <div class="disabled">
-	<div id="chatsTitre" class="policeTitre">
-		Nos Chats
+	<div id="chatsTitre" class="policeTexte">
+		<form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercher();">
+				<div class="group">
+					<input type="text" id="rechercheChats" required>
+					<label for="rechercheChats">Rechercher un chat par son nom</label>
+				</div>
+		</form>
 		<div id="svgFilter" class="svg" onclick="displayFilter();"><?php include("./ressources/filter.svg") ?></div>
 	</div>
 	<?php 
@@ -45,12 +50,21 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 	?>
 
 	<div id="allSliderChats" class="allSlider">
-		<div id="sliderChats" class="slider">
+		<div class="slider">
 			<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
 			<div class="slides"></div>
-			<div id="pointsEvent" class="sliderPoints"></div>
+			
+			<div id="allSliderPointsChats" class="allSlider">
+				<div class="slider">
+					<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
+					<div class="slides"></div>
+
+					<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+				</div>
+			</div>
+			
 			<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
 
 		</div>
@@ -61,6 +75,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		var chats = <?= json_encode(listerChats());?>;
 		var admin = <?= (valider("Admin","SESSION")? 1 : 0)?>;
 		afficherChats(chats);
+		responsivePointsChats();
 	</script> 
 
 	

@@ -39,7 +39,7 @@ function userExistsBDD($mail){
 function isAdmin($mail){
 	$SQL ="SELECT role FROM utilisateur WHERE mail='$mail'";
 	$isAdmin = SQLGetChamp($SQL); 
-	if ($isAdmin == "admin") 
+	if ($isAdmin == "1" || $isAdmin == "2") 
 		return true;
 	else 
 		return false;
@@ -303,9 +303,27 @@ function supprimerChat($code){
     SQLDelete($SQL);
 }
 
+function ajouterPassage($date,$heureDebut,$heureFin,$description,$mail){
+    // si il y a un passage à la même date et heure meme personne
+    $SQL = "SELECT mailBenevole FROM passagerefuge WHERE date = '$date' AND heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND mailBenevole = '$mail'";
+    $passage = SQLGetChamp($SQL);
+    if ($passage != false){
+        return "alreadyExist";
+    }
+    $SQL = "INSERT INTO passagerefuge (date, heureDebut, heureFin, description, mailBenevole) VALUES ('$date','$heureDebut','$heureFin','$description','$mail')";
+    SQLInsert($SQL);
+    return "success";
+}
+
+
 
 function supprimerDossier($dir){
     rmdir($dir);
+}
+
+function getPassages($mois){
+    $SQL = "SELECT * FROM passagerefuge WHERE MONTH(date) = $mois";
+    return parcoursRS(SQLSelect($SQL));
 }
 
 ?>

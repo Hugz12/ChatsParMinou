@@ -7,7 +7,7 @@ function afficherChats(chats) {
 	console.log(chats);
 
 	var slides = $("#allSliderChats").children(".slider").children(".slides");
-	var sliderPoint = $("#allSliderChats").children(".slider").children(".sliderPoints");
+	var sliderPoint = $("#allSliderChats").children(".slider").children("#allSliderPointsChats").children(".slider").children(".slides");
 
 	for (var j = 0; j < chats.length; j++) {
 		chatActuel = chats[j];
@@ -153,30 +153,31 @@ function afficherChats(chats) {
 		
 		
 		var slidesPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
-		var sliderPointPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".sliderPoints");
-
+		var sliderPointPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".slider").children(".sliderPoints");
+		
+		console.log(sliderPointPhoto);
 		var slidesPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".sliderPhotoChat").children(".slides");
-		var sliderPointPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".sliderPhotoChat").children(".sliderPoints");
+		var sliderPointPhotoSmall = $(slideChatSmall).children(".thirdBanner").children(".allSliderPhotoChatSmall").children(".slider").children(".sliderPoints");
 
-		console.log($(slides.children()[2*j]).children(".slideChatSmall"));
-		console.log(slidesPhotoSmall);
-		console.log(sliderPointPhotoSmall);
+		
 		for (var i=0; i < chatActuel['nbPhoto']; i++) {
 			$(slidesPhoto).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
-			if (i == 0) $(sliderPointPhoto).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-			else $(sliderPointPhoto).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			if (i == 0) $(sliderPointPhoto).append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+			else $(sliderPointPhoto).append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
+			
 			$(slidesPhotoSmall).append("<img class='slidePhotoChat slide' src='./ressources/chats/"+chatActuel['code']+"/"+i+".jpg' alt='photo chat'/>");
-			if (i == 0) $(sliderPointPhotoSmall).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
-			else $(sliderPointPhotoSmall).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-i)+");'/>");
+			if (i == 0) $(sliderPointPhotoSmall).append("<div class='slidePoint slidePointSelected clickable' onclick='translateX(this, "+(-i)+");'></div>");
+			else $(sliderPointPhotoSmall).append("<div class='slidePoint clickable' onclick='translateX(this, "+(-i)+");'></div>");
 		
 		}
 
-		if (j == 0) $(sliderPoint).append("<img class='slidePoint slidePointSelected clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
-		else $(sliderPoint).append("<img class='slidePoint clickable' src='./ressources/point.png' alt='slidePoint' onclick='translateX(this, "+(-j)+");'/>");
+		if (j == 0) $(sliderPoint).append("<img class='slidePointChats slidePointSelected slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='" + chatActuel["name"] + "' onclick='translateX(this, "+(-j)+");'/>");
+		else $(sliderPoint).append("<img class='slidePointChats slide clickable' src='./ressources/chats/"+ chatActuel["code"] +"/0.jpg' alt='" + chatActuel["name"] + "' onclick='translateX(this, "+(-j)+");'/>");
 
 		
 		
 	}
+	
 
 	if(admin) {
 		var xhr = new XMLHttpRequest();
@@ -288,11 +289,13 @@ function displayFormEditChat(element){
 					<div class='inputFile'>
 						<div class='labelAllSlider'>Ajouter des photos</div>
 						<div id='allSliderPhoto' class='allSlider'>
-							<img class='flecheGauche clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheLeft.svg' alt='flecheGauche'>
 							<div id='sliderPhoto' class='slider'>
+								<div class='flecheGauche clickable' onclick='translateX(this, undefined, false)'></div>
+
 								<div class='slides' id='edit'></div>
+
+								<div class='flecheDroite clickable' onclick='translateX(this, undefined, false)'></div>
 							</div>
-							<img class='flecheDroite clickable' onclick='translateX(this, undefined, false);' src='./ressources/flecheRight.svg' alt='flecheDroite'>
 						</div>
 						<label class='clickable' for='fileModifChat'>
 							<svg width='50' height='50'>
@@ -313,6 +316,28 @@ function displayFormEditChat(element){
 
 					<input type='hidden' name='code' value='${chat['code']}'>
 			`);
+
+			$.ajax({
+				url: "./ressources/flecheLeft.svg",
+				dataType: "text",
+				success: function(data) {
+					elt = document.getElementsByClassName("flecheGauche");
+					for (var i=0; i < elt.length; i++) {
+						elt[i].innerHTML = data;
+					}
+				}
+			});
+		
+			$.ajax({
+				url: "./ressources/flecheRight.svg",
+				dataType: "text",
+				success: function(data) {
+					elt = document.getElementsByClassName("flecheDroite");
+					for (var i=0; i < elt.length; i++) {
+						elt[i].innerHTML = data;
+					}
+				}
+			});
 			
 			addPreviewOfExistentFiles(chat['code']);
 
@@ -361,14 +386,9 @@ function filesAdd(contexte) {
 			selectedFiles = selectedFiles.filter(f => f !== file); 
 
 			// On supprime la div qui contient l'image et le bouton de suppression
-			var taille = slides.children().length-1;
-			if (slides.css("transform") != "translateX(0px)") {
-				$(".formType .inputFile .flecheGauche").click();
-			}
-			
-
 			$(slidePhoto).remove();
 			pushSelectedFilesInInput(contexte);
+			$(".formType .inputFile .flecheGauche").click();
 			console.log(contexte.files);
 
 			if (slides.children().length > 0) {
@@ -478,3 +498,95 @@ function displayFilter() {
 		$("#menuFiltre").animate({right: "-300px"}, 300, function() {menuFiltre.style.display = "none";});
 	}
 }
+
+function rechercheChat() {
+	console.log(event);
+	var input = document.getElementById("rechercheChats");
+	var recherche = input.value.toUpperCase();
+	console.log(recherche);
+	var allSlider = document.getElementById('allSliderChats');
+	var allSliderPoints = document.getElementById('allSliderPointsChats');
+
+	console.log(allSlider);
+	var listeChats = allSlider.getElementsByClassName('chatNom');
+	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
+	for (var i = 0; i < listeChats.length; i++) {
+
+		if (listeChats[i].innerHTML.toUpperCase().includes(recherche)) {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+		}
+		else {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "none";
+		}
+
+		if (listePoints[i].alt.toUpperCase().includes(recherche)) {
+			listePoints[i].style.display = "block";
+		}
+		else {
+			listePoints[i].style.display = "none";
+		}
+
+		if (recherche == "") {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+			listePoints[i].style.display = "block";
+		}
+
+	}
+	responsivePointsChats();
+}
+
+const rechercher = debounce(() => rechercheChat(), 500);
+
+
+const responsivePointsChatsDebounce = debounce(() => responsivePointsChats());
+
+window.addEventListener("resize", responsivePointsChatsDebounce);
+
+
+function responsivePointsChats() {
+	
+	var allSliderPoints = document.getElementById('allSliderPointsChats');
+	console.log(allSliderPoints);
+	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
+	var nbElement = 0;
+	console.log(listePoints);
+	for (var i = 0; i < listePoints.length; i++) {
+		if (window.getComputedStyle(listePoints[i]).getPropertyValue("display") == "block") {
+			nbElement += 1;
+		}
+	}
+	console.log(nbElement);
+	
+	var x = window.getComputedStyle(allSliderPoints).getPropertyValue("--taille").slice(0, -2);
+	var y = window.getComputedStyle(allSliderPoints).getPropertyValue("--nbElement");
+	var taille = x/y;
+	console.log(taille);
+	
+	
+	
+	if (window.innerWidth < 480 && nbElement > 1) {
+		nbElement = 1;
+	}
+	else if (window.innerWidth < 760 && nbElement > 3) {
+		nbElement = 3;
+	}
+	else if (window.innerWidth < 1040 && nbElement > 5) {
+		nbElement = 5;
+	}
+	else if (nbElement > 7) {
+		nbElement = 7;
+	}
+
+	taille = taille * nbElement;
+	taille = taille + "px";
+	
+	
+	allSliderPoints.style.setProperty("--taille", taille);
+	allSliderPoints.style.setProperty("--nbElement", nbElement);
+
+}
+
+
+
+
+

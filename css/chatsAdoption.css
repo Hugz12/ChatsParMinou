@@ -1,6 +1,5 @@
 #chatsTitre {
 	position: relative;
-	font-size: 60px;
 	font-weight: bold;
 	text-align: center;
 	color: var(--third-color);
@@ -10,7 +9,7 @@
 #allSliderChats {
 
 	width: auto;
-	height: 100%;
+	height: auto;
 
 	--taille: 100vw;
 	--hauteur: 600px;
@@ -19,6 +18,52 @@
 	--marge: 0px;
 
 	--transform: 0;
+}
+
+#allSliderPointsChats {
+	width: auto;
+	height: auto;
+	margin-top: 30px;
+	
+	--taille: 980px;
+	--hauteur: 70px;
+
+	--nbElement: 7;
+	--marge: 20px;
+
+	--transform: 0;
+}
+
+@media (max-width: 1040px) {
+	#allSliderPointsChats {
+		--taille: 700px;
+		--nbElement: 5;
+	}
+}
+
+@media (max-width: 760px) {
+	#allSliderPointsChats {
+		--taille: 420px;
+		--nbElement: 3;
+	}
+}
+
+@media (max-width: 480px) {
+	#allSliderPointsChats {
+		--taille: 140px;
+		--nbElement: 1;
+	}
+}
+
+@media (max-width: 200px) {
+	#allSliderPointsChats {
+		--taille: calc(100vw - 60px);
+		--nbElement: 1;
+	}
+}
+
+.slidePointChats {
+	object-fit: cover;
 }
 
 .slideChat {
@@ -182,3 +227,15 @@
 	transition: transform 0.3s ease;
 }
 
+
+
+/*------------------------------------------------------------------------*/
+/*                                 Recherche                              */
+/*------------------------------------------------------------------------*/
+
+#formRechercheChats {
+	margin: 10px auto;
+	width: 400px;
+	font-size: 20px;
+	background-color: var(--main-color);
+}

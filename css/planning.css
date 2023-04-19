@@ -1,0 +1,122 @@
+.all {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.calendar {
+    margin: auto;
+    width: 80%;
+    max-width: 950px;
+    height: 700px;
+    position: relative;
+}
+
+.year {
+    width: 100%;
+    height: 15%;
+    font-size: calc(1.6vw + 1.6vh);
+    color: var(--third-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.year > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.year > * > * {
+    margin: 0px 20px 0px 20px;
+}
+
+.addPassageButton {
+    margin-right: calc(0.8vw + 0.8vh);
+}
+
+.weekdays {
+    width: 100%;
+    height: 9%;
+    background-color: var(--third-color);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.weekday {
+    width: calc(100% / 7);
+    height: 100%;
+    font-size: calc(1.2vw + 1.2vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.days {
+    width: 100%;
+    height: 76%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.day {
+    width: calc(100% / 7);
+    height: calc(100% / 6);
+    font-size: calc(1vw + 1vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.currentDay {
+    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 30%, #fff 10%, #fff 100%);
+}
+
+
+
+.addPassageButton {
+    transition: 0.3s;
+}
+
+.addPassageButton:hover > svg {
+    fill: var(--third-color);
+    cursor: pointer;
+}
+
+.passagesRefuge {
+    width: clamp(200px, 50vw, 600px);
+    height: 300px; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+
+}
+
+.passage {
+    display: none;
+    border-radius: 10px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--third-color);
+}
+
+.passageDay {
+    color: var(--third-color);
+    cursor: pointer;
+}
+
+

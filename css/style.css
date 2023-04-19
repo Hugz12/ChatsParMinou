@@ -82,7 +82,6 @@ body{
 	position: relative;
 	overflow: hidden;
 	width: calc(var(--taille));
-	height: calc(var(--hauteur) + 35px);
 }
 
 .slides {
@@ -96,6 +95,7 @@ body{
 
 .slide {
 	position: relative;
+	display: block;
 	width: calc((var(--taille))/ var(--nbElement) - var(--marge) * 2);
 	max-width: var(--tailleMax);
 	margin: 10px var(--marge);
@@ -112,12 +112,13 @@ body{
 	height: 50px;
 	z-index: 2;
 	border-radius: 50%;
-	background-color: rgb(200, 200, 200, 0.3);
+	background-color: rgb(200, 200, 200, 0.5);
 }
+
 
 .flecheGauche:hover, .flecheDroite:hover {
 	cursor: pointer;
-	background-color: rgb(200, 200, 200, 0.5);
+	background-color: rgb(200, 200, 200, 0.7);
 }
 
 .flecheGauche > svg, .flecheDroite > svg {
@@ -148,10 +149,12 @@ body{
 	border-radius: 50%;
 	margin: 0 5px 0 5px;
 	transition: 0.5s;
+	border: 1px solid rgb(100, 100, 100);
 }
 
 .slidePointSelected {
-	background-color: black;
+	background-color: var(--third-color);
+	border-color: var(--third-color);
 }
 
 .clickable {
@@ -162,6 +165,11 @@ body{
 .clickable:hover {
 	cursor: pointer;
 	transform: scale(1.1);
+}
+
+.clickable:active {
+	transform: scale(0.9);
+
 }
 
 
@@ -425,3 +433,4 @@ g {
 	position: absolute;
 	top: 70px;
 }
+

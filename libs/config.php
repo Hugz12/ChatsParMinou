@@ -14,7 +14,6 @@
 
 //  C  O  D  E  //
 
-
 $BDD_host="localhost";
 $BDD_user="root";
 $BDD_password=""; // vide sous windows

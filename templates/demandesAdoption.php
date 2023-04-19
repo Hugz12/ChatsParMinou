@@ -8,51 +8,79 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 	die("");
 }
 
+if (!valider('Connecte', 'SESSION')) {
+	header("Location:./index.php?view=accueil");
+	die();
+}
+
+if (!valider('Admin', 'SESSION')) {
+	header("Location:./index.php?view=accueil");
+	die();
+}
+
+
 ?>
 
 <link rel="stylesheet" href="./css/demandesAdoption.css">
 <script src="./js/demandesAdoption.js"></script>
 
 <div id="recherche">
-	<select id="selectRecherche">
-		<option value="rchGenerale">Recherche générale</option>
-		<option value="rchChat">Recherche d'un chat</option>
-		<option value="rchPers">Recherche d'une personne</option>
-		<option value="rchDate">Recherche d'une date</option>
-	</select>
+	
+	<div class="container">
+		<div class="dropdown">
+			<div class="select">
+				<span id="selectRecherche">Recherche générale</span>
+				<i class="fa fa-chevron-left"></i>
+			</div>
+			<ul class="dropdown-menu">
+				<li>Recherche générale</li>
+				<li>Recherche d'un chat</li>
+				<li>Recherche d'une personne</li>
+				<li>Recherche d'une date</li>
+			</ul>
+		</div>
+	</div>
 
-	<input type="text" id="contenuRecherche" placeholder="Rechercher...">
+	<form>
+		<div class='group'>
+			<input type="text" id="contenuRecherche" placeholder="Rechercher..." required>
+		</div>
+	</form>
 
-	<p>Date d'ajout (plus récentes)</p>
-	<div class="choix-recent">
-		<button id="btnTriTps"></button>
+	<div id="btnTriTps" onclick='etatBtnTri(this);'>
+		<div>Récent</div>
+		<input type='checkbox'>
 	</div>
 	
-	<img src="./ressources/infos.png" alt="infos">
+	<div id="i">i</div>
 </div>
 
 <div id="nouvellesDemandes" class="conteneurDemandes"></div>
 
-<a id="lienNouvellesDemandes" class="lienPlusMoins" href="javascript:void(0)">Montrer plus</a>
+<div id="lienNouvellesDemandes" class="lienPlusMoins">Montrer plus</div>
 
 <div id="demandesEnCours" class="conteneurDemandes"></div>
 
-<a id="lienEnCours" class="lienPlusMoins" href="javascript:void(0)">Montrer plus</a>
+<div id="lienEnCours" class="lienPlusMoins">Montrer plus</div>
 
 <div id="traitees" class="conteneurDemandes"></div>
 
-<a id="lienTraitees" class="lienPlusMoins" href="javascript:void(0)">Montrer plus</a>
+<div id="lienTraitees" class="lienPlusMoins">Montrer plus</div>
 
 <div id="overlay">
 	<div id="popupSupp">
 		<p>Êtes-vous sûr de vouloir supprimer cette demande ?</p>
-		<button id="popupBtnOui" class="popupBtn">Oui</button>
-		<button id="popupBtnNon" class="popupBtn">Non</button>
+		<div>
+			<div id="popupBtnOui" class="clickable">Oui</div>
+			<div id="popupBtnNon" class="clickable">Non</div>
+		</div>
 	</div>
 </div>
 
 <div id="popupInfos">
-    <p>echap pour quitter / crtl + entrée pour sauvegarder</p>
+    <p>Sélectionnez votre type de recherche avec le menu</p>
+	<p>Tapez le contenu de la recherche dans la zone prévu</p>
+	<p>Le bouton permet de trier par date</p>
 </div>
 
 
