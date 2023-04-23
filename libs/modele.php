@@ -39,7 +39,7 @@ function userExistsBDD($mail){
 function isAdmin($mail){
 	$SQL ="SELECT role FROM utilisateur WHERE mail='$mail'";
 	$isAdmin = SQLGetChamp($SQL); 
-	if ($isAdmin == "admin") 
+	if ($isAdmin == "1" || $isAdmin == "2") 
 		return true;
 	else 
 		return false;

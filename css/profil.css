@@ -1,74 +1,42 @@
-  .info {
-    position: fixed;
-    top: 14%;
-    left: 4%;
-    height: 40%;
-    width: 25%;
+
+  .contour{
+    position: relative;
+    top: 10%;
+    left: 2%;
+    height: 90%;
+    width: 96%;
     background-color: var(--fourth-color);
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: 20px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: stretch;
+    flex-flow: row wrap;
   }
 
+  .contour > *  {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
   .info > * > .group {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-content: space-between;
     margin-top: 5%;
   }
 
-  .pdp {
-    position: fixed;
-    top: 10%;
-    right: 28%;
-    height: 40%;
-    width: 40%;
-    background-color: var(--fourth-color);
-    border-radius: 20px;
-  }
-
-  .mail {
-    position: fixed;
-    top: 70%;
-    left: 42%;
-    height: auto;
-    width: 30%;
-    background-color: var(--fourth-color);
-
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-  }
-
-  .gestion {
-    position: fixed;
-    top: 60%;
-    left: 10%;
-    height: 30%;
-    width: 30%;
-    background-color: var(--sec-color);
-    border-radius: 20px;
-  }
-
-  .mdp {
-    position: fixed;
-    top: 18%;
-    right: 5%;
-    height: 60%;
-    width: 20%;
-    background-color: var(--fourth-color);
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
   .titre {
     font-size: 30px;
     font-weight: bold;
     margin: 5% 1px 5% 7%;
     cursor: default;
   }
-
+  .pdp {
+    cursor: default;
+  }
   .mdp > * > .group {
     display: flex;
     flex-direction: row;
@@ -87,9 +55,10 @@
     margin-top: 5%;
 
   }
-  .pdp > #photoDeProfil{
+
+  #photoDeProfil.photoProfil{
     margin-left: 5%;
-    width: 30%;
-    height: 60%;
+    width: 45%;
+    height: auto;
     cursor : default;
   }
