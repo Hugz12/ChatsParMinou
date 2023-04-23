@@ -172,7 +172,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($id = valider("id"))
 			if ($statut = valider("statut")){
 				setStatutDemande($id, $statut);
-				$qs = "?view=demandesAdoption";
 			}
 		break;
 
@@ -180,9 +179,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'Supprimer Demande' :
 			// On vérifie la présence des champs
-			if ($id = valider("id")){
-				supprimerDemande($id);
-				$qs = "?view=demandesAdoption";
+			if ($id = valider("id"))
+			if ($code = valider("code")){
+				supprimerDemande($id, $code);
 			}
 		break;
 
@@ -194,10 +193,8 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($memo = valider("memo"))
 			if ($datePv = valider("datePv"))
 			if ($resultatPv = valider("resultatPv"))
-			if ($dateRencontre = valider("dateRencontre"))
-			if ($commentaire = valider("commentaire")){
-				setMemo($id, $memo, $datePv, $resultatPv, $dateRencontre, $commentaire);
-				$qs = "?view=demandesAdoption";
+			if ($dateRencontre = valider("dateRencontre")){
+				setMemo($id, $memo, $datePv, $resultatPv, $dateRencontre);
 			}
 		break;
 

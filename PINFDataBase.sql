@@ -24,7 +24,6 @@ CREATE TABLE `chat` (
 CREATE TABLE `demandeAdoption` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `date` datetime,
-  `codeChat` varchar(255),
   `nom` varchar(255),
   `prenom` varchar(255),
   `mail` varchar(255),
