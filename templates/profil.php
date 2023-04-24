@@ -15,17 +15,17 @@ if (!valider('Connecte', 'SESSION')) {
 <link rel="stylesheet" href="css/form.css">
 <script src="./js/profil.js"></script>
 
-<div class="contour">
-
-
-<div class="pdp">
-			<div class="titre">
+<div class="titre">
 				<?php
 				$nom = "$_SESSION[mail]";
 				echo "Bonjour  " . $nom . ", voici votre profil";
 				?> 
 			</div>
+			
+<div class="contour">
 
+	<div class="pdpInfo">
+		<div class="pdp">
 			<form action="controleur.php" method="post" enctype="multipart/form-data">
 				<?php
 				echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   /></label>";
@@ -36,7 +36,6 @@ if (!valider('Connecte', 'SESSION')) {
 		</div>
 
 		<div class="info">
-				<div class="titre">Informations personnelles</div>
 				<form>
 					<div class='group'>
 										<input type='text' name='nom' value ="Albert" required>
@@ -51,11 +50,9 @@ if (!valider('Connecte', 'SESSION')) {
 				</form>
 
 		</div>
+	</div>
 
-
-
-
-
+	<div class="mdpMailGestion">
 		<div class="mdp">
 			<div class="titre">Changer de mot de passe</div>
 			<form>
