@@ -20,7 +20,7 @@ if (!valider('Connecte', 'SESSION')) {
 				$nom = "$_SESSION[mail]";
 				echo "Bonjour  " . $nom . ", voici votre profil";
 				?> 
-			</div>
+</div>
 			
 <div class="contour">
 
@@ -92,4 +92,5 @@ if (!valider('Connecte', 'SESSION')) {
 			<div class="titre">Gestion des utilisateurs</div>
 
 		</div>
+	</div>
 </div>
