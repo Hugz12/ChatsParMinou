@@ -1,3 +1,7 @@
+/* width: clamp(100px, 50%, 500px);
+object-fit: cover;
+background-position: center; (pas forcement sur )  */
+
 /* Général */
 .none {
     display: none;
@@ -31,6 +35,15 @@
     font-size: 1.2em;
 }
 
+form label {
+    background-color: var(--sec-color) !important;
+}
+
+form input[type="text"], textarea {
+    position: relative;
+    z-index: 2;
+}
+
 /* Titres */
 .marginTitre {
     margin-left: 3%;
@@ -56,7 +69,7 @@
 
 /* Recherche */
 #recherche {
-    width: 40%;
+    /* width: 40%; */
     height: 50px;
     display: flex;
     justify-content: space-around;
@@ -67,6 +80,7 @@
     margin-left: 3%;
     margin-top: 1%;
     font-family: "Roboto",sans-serif;
+    width: clamp(738.4px, 40%, 738.4px);
 }
 
 /*****************************************/
@@ -240,20 +254,34 @@ text-align: left
     font-family: "Roboto",sans-serif;
 }
 
-.infoDemande {
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    /*width: 100%;*/
+.fondDemande {
     background-color: var(--sec-color);
     border-radius: 30px;
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
     cursor: pointer;
+    height: 213px;
+    position: relative;
+    width: clamp(1329.12px, 40%, 1329.12px);
+    margin: auto;
 }
 
-.infoMoins {
+.contenuDemande {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    width: clamp(1329.12px, 40%, 1329.12px);
+}
+
+.contenuDemande form {
     display: flex;
     justify-content: space-between;
+    width: 55%;
+    margin: 1%;
+}
+
+.infos {
+    display: flex;
+    justify-content: space-around;
     width: 40%;
 }
 
@@ -266,10 +294,17 @@ text-align: left
     margin: auto;
 }
 
+.infosChat p{
+    margin: 0;
+}
+
 .infosChat img{
     width: 230px;
     height: 155px;
-    border-radius: 30px;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    /* object-fit: cover;
+    background-position: center; */
 }
 
 .idChat {
@@ -297,7 +332,7 @@ text-align: left
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
-    width: 50%;
+    width: 55%;
     align-items: center;
     background-color: var(--sec-color);
     border-radius: 30px;
@@ -309,19 +344,6 @@ text-align: left
 
 .nomPers {
     font-size: 4em;
-}
-
-.infoPlus {
-    position: relative;
-    width: 55%;
-    margin: 1% 0;
-    background-color: inherit;
-}
-
-.infoPlus form {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
 }
 /*****************************************/
 .btnMemo {
@@ -429,7 +451,6 @@ text-align: left
 /* Mode zoom */
 .zoom {
     margin: 3% auto 6% auto;
-    z-index: 2;
 }
 
 .zoom .none {
@@ -445,12 +466,13 @@ text-align: left
     align-items: center;
 }
 
-.zoom .infoMoins {
+.zoom .infos {
     width: 100%;
 }
 
 .zoom .infosChat {
-    width: 30%;
+    width: 45%;
+    margin: 0;
 }
 
 .zoom .infosChat img{
@@ -458,9 +480,13 @@ text-align: left
     height: 250px;
 }
 
+.zoom .infosChat > div{
+    width: 100%;
+}
+
 .zoom .idChat {
     width: 70%;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -472,15 +498,14 @@ text-align: left
     font-size: 3em;
 }
 
-.zoom .infoPlus {
-    width: 98%;
-    height: 10em;
+.zoom form {
+    flex-direction: column;
 }
 
 .zoom .infosPers {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 0.9fr);
-    width: 60%;
+    grid-template-rows: repeat(6, 0.9fr);
+    width: 45%;
 }
 
 .zoom .nomPers {
@@ -488,8 +513,7 @@ text-align: left
 }
 
 .zoom .commentaire {
-    width: 45%;
-    height: auto;
+    grid-area: 6 / 1 / 7 / 3;
 }
 
 .zoom .commentaire > p{
@@ -497,12 +521,13 @@ text-align: left
 }
 
 .zoom .memo {
-    width: 30%;
-    height: 100%;
+    width: 100%;
+    height: 55%;
 }
 
 .zoom .sous-memos {
-   width: 20%;
+    width: 100%;
+    height: 40%;
 }
 
 .zoom .btnDemande {
@@ -514,13 +539,18 @@ text-align: left
 #popupInfos {
     display: none;
     position: absolute;
-    width: 280px;
+    width: 20%;
     padding: 10px;
     background-color: var(--sec-color);
     border-radius: 30px;
     border: none;
-    font-size: 90%;
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
-    opacity: 0.5;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(100, 100, 100);
+    z-index: 2;
+}
+
+#popupInfos ul {
+    padding-left: 5%;
 }
 

@@ -78,9 +78,24 @@ if (!valider('Admin', 'SESSION')) {
 </div>
 
 <div id="popupInfos">
-    <p>Sélectionnez votre type de recherche avec le menu</p>
-	<p>Tapez le contenu de la recherche dans la zone prévu</p>
-	<p>Le bouton permet de trier par date</p>
+	<p>Recherche :</p>
+	<ul>
+		<li>Sélectionnez votre type de recherche avec le menu</li>
+		<li>Tapez le contenu de la recherche dans la zone prévu</li>
+	</ul>
+	<p>Bouton de tri :</p>
+	<ul>
+		<li>Permet de trier par date d'ajout (Récent ou Ancien)</li>
+	</ul>
+	<p>Gestion des demandes :</p>
+	<ul>
+		<li>Le bouton de gauche passe la demande au prochain statut</li>
+		<li>Le bouton de droite supprime définitivement la demande</li>
+	</ul>
+	<p>Bouton d'affichage plus/moins :</p>
+	<ul>
+		<li>Permet d'afficher plus ou moins de demandes</li>
+	</ul>
 </div>
 
 
@@ -89,4 +104,3 @@ if (!valider('Admin', 'SESSION')) {
 	afficherTitres(demandesAdoption);
 	afficherDemandes(demandesAdoption);
 </script>
-
