@@ -31,14 +31,20 @@
 
 /* GENERAL */
 
+html {
+	min-height: 100vh;
+}
+
 body{
 	position: relative;
 	background: var(--main-color);
 	height: 100%;
+	min-height: calc(100vh - 150px);
 	color: black;
 	font-size: 14px;
 	margin: 0;
 	padding: 0;
+	padding-bottom: 150px;
 }
 
 .policeTitre {
@@ -412,8 +418,8 @@ g {
 
 
 .patteContainer {
-	width:100vw;
-	height: 100vh;
+	width:100%;
+	height: 100%;
 	transform: translate(-50%, -50%);
 	left : 50%;
 	top : 50%;
@@ -429,7 +435,7 @@ g {
 
 .conteneurDeConteneurDePattes {
 	width: 100vw;
-	height: 100%;
+	height: calc(100% - 170px);
 	position: absolute;
 	top: 70px;
 }

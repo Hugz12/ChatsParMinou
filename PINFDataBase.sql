@@ -43,6 +43,8 @@ CREATE TABLE `demandeAdoption` (
   `dateRencontre` varchar(255)
 )ENGINE = InnoDB;
 
+
+
 CREATE TABLE `passageRefuge` (
   `date` datetime,
   `heureDebut` time,

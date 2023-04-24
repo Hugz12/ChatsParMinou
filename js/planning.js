@@ -82,6 +82,7 @@ function fillCalendar() {
             }
         },
         error: function (data) {
+            console.log(data);
             console.log("error");
         }
     });

@@ -243,6 +243,11 @@ function getChat($code){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function getRaces() {
+    $SQL = "SELECT DISTINCT race FROM chat";
+    return parcoursRS(SQLSelect($SQL));
+}
+
 function getEvent($id){
     $SQL = "SELECT * FROM evenement WHERE id = $id";
     return parcoursRS(SQLSelect($SQL));

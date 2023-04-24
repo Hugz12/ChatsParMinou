@@ -34,33 +34,7 @@
 	--transform: 0;
 }
 
-@media (max-width: 1040px) {
-	#allSliderPointsChats {
-		--taille: 700px;
-		--nbElement: 5;
-	}
-}
 
-@media (max-width: 760px) {
-	#allSliderPointsChats {
-		--taille: 420px;
-		--nbElement: 3;
-	}
-}
-
-@media (max-width: 480px) {
-	#allSliderPointsChats {
-		--taille: 140px;
-		--nbElement: 1;
-	}
-}
-
-@media (max-width: 200px) {
-	#allSliderPointsChats {
-		--taille: calc(100vw - 60px);
-		--nbElement: 1;
-	}
-}
 
 .slidePointChats {
 	object-fit: cover;
@@ -72,27 +46,12 @@
 	display: block;
 }
 
-@media (max-width: 850px) {
-	.slideChat {
-		display: none;
-	}
-	
-}
-
 
 .slideChatSmall {
 	background-color: var(--sec-color);
 	position: relative;
 	display: none;
 }
-
-@media (max-width: 850px) {
-	.slideChatSmall {
-		display: block;
-	}
-	
-}
-
 
 
 #containerButtonAjoutChat {
@@ -220,12 +179,120 @@
 	position: absolute;
 	top: 70px;
 	right: -300px;
-	bottom: 0;
+	bottom: 100px;
 	z-index: 2;
 	width: 300px;
 	background-color: var(--sixth-color);
+	padding: 10px;
 	transition: transform 0.3s ease;
+	overflow: scroll;
 }
+
+
+#filtreTitre {
+	margin: 30px 0px 50px 0px;
+	font-size: 25px;
+	font-family: "Roboto",sans-serif;
+
+}
+
+.filtre {
+	font-family: "Roboto",sans-serif;
+	margin: 40px 15px;
+
+}
+
+.filtreTitre {
+	font-size: 25px;
+}
+
+.filtreContent {
+	margin: 20px 10px;
+	font-size: 20px; 
+}
+
+.filtreAgeBox {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+}
+
+.filtreAgeBox > input{
+	text-align: center;
+	margin: 8px 10px;
+	width: 40px !important;
+	font-size: 15px !important; 
+	border-color: #666 !important;
+
+}
+
+
+/*------------------------------------------------------------------------*/
+/*                                 Checkbox                              */
+/*------------------------------------------------------------------------*/
+
+.checkbox {
+	position: relative;
+	display: block;
+	cursor: pointer;
+	width: fit-content;
+	font-size: 20px;
+	line-height: 1.5;
+	margin-bottom: 20px;
+	font-family: Arial, sans-serif;
+	user-select: none;
+  }
+  
+  .checkbox input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+  }
+  
+  .checkmark {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	height: 20px;
+	width: 20px;
+	border: 2px solid #666;
+	border-radius: 5px;
+	transition: all 0.2s ease-in-out;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .checkbox:hover .checkmark {
+	transform: translateX(-20px) translateY(-2px) rotate(10deg);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .checkbox input:checked ~ .checkmark {
+	background-color: #666;
+	border-color: #666;
+  }
+  
+  .checkbox input:checked ~ .checkmark:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 8px;
+	height: 14px;
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .text {
+	margin-left: 40px;
+	display: inline-block;
+	transition: all 0.2s ease-in-out;
+  }
+  
+
+
+
 
 
 
@@ -235,7 +302,13 @@
 
 #formRechercheChats {
 	margin: 10px auto;
-	width: 400px;
+	width: clamp(200px, 80%, 400px);
 	font-size: 20px;
 	background-color: var(--main-color);
+}
+
+#zeroChat {
+	display: none;
+	font-size: 40px;
+	margin: 100px;
 }
