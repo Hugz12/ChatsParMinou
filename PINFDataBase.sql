@@ -96,10 +96,10 @@ ALTER TABLE `divers` ADD FOREIGN KEY (`parent`) REFERENCES `divers` (`name`);
 
 /*utilisateur*/
 INSERT INTO `utilisateur` (`mail`, `password`, `name`, `role`)
-VALUES ('admin@gmail.com', 'admin', 'admin', '1');
+VALUES ('admin@gmail.com', '$2y$10$GAlmWCWPOwmv.INst19B/eTuRfCkykWnQ6rPfbGOtdN59bw9LXkAa', 'admin', '1');
 
 INSERT INTO `utilisateur` (`mail`, `password`, `name`, `role`)
-VALUES ('user@gmail.com', 'user', 'user', '3');
+VALUES ('user@gmail.com', '$2y$10$pMANbag2FYSUNdxQuyL.BeEVjHL5kwwTk0cN357TXumdBTlcsRvQC', 'user', '3');
 
 /*chat*/
 INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`) 
