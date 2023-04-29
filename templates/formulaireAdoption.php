@@ -17,9 +17,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id ="allFormulaireAdoption" class="policeTexte" >
     <div id="titreFormulaireAdoption" class ="policeTitre">formulaire d'adoption</div>
     <form action="controleur.php" method="get">
-    <div>Informations personnelles</div>
         <div id="infoPerso">
-            <input type='text' id='test' name='nom' required>
+            <div>Informations personnelles</div>
+            <input type='text' name='nom' required>
 			<label for="nom">Nom</label>
             <input type='text' name='prenom' required>
 			<label for="prenom">Prénom</label>
