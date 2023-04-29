@@ -1,11 +1,11 @@
 #allFormulaireAdoption {
-	max-width: 600px;
+	max-width: 50%;
 	height: auto;
 	background-color: var(--sec-color);
 	border-radius: 12px;
 	margin: 50px auto 0 auto;
 	z-index: 0;
-	padding : 10px 10px 10px 10px;
+	padding : 1% 1%;
 }
 
 
@@ -18,7 +18,7 @@
 }
 
 #allFormulaireAdoption > form > input {
-	margin: 10px 0 10px 0;
+	margin: 4% 0 4% 0;
 	width: auto;
 	display: flex;
 	align-items: center;
@@ -40,4 +40,10 @@
 #checkboxFormulaireAdoption{
 	width: 15px;
 	height: 15px;
+}
+
+.infoPerso{
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
