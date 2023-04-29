@@ -186,7 +186,13 @@
 	padding: 10px;
 	transition: transform 0.3s ease;
 	overflow: scroll;
+	direction: rtl;
 }
+
+#menuFiltre * {
+	direction: ltr;
+}
+
 
 
 #filtreTitre {
