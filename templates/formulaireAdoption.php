@@ -17,12 +17,18 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id ="allFormulaireAdoption" class="policeTexte" >
     <div id="titreFormulaireAdoption" class ="policeTitre">formulaire d'adoption</div>
     <form action="controleur.php" method="get">
-        <div> Je m'engage à prendre en charge les frais de vétérinaire et faire une prévisite <input id="checkboxFormulaireAdoption" type ="checkbox" name="previsite" required/></div> 
-        <input type="text" class="champDeTexte" name="nom" placeholder="Nom"required/>
-        <input type="text" class="champDeTexte" name="prenom" placeholder="prenom" required/>
+        <div id="infoPerso">
+            <div>Informations personnelles</div>
+            <input type='text' name='nom' required>
+			<label for="nom">Nom</label>
+            <input type='text' name='prenom' required>
+			<label for="prenom">Prénom</label>
+            <input type='text' name='mail' required>
+			<label for="mail">Adresse mail</label>
+            <input type='text' name='tel' required>
+			<label for="tel">Numéro de téléphone</label>
+        </div>
         <input type="text" class="champDeTexte" name="nomChat" placeholder="nomChat" required/>
-        <input type="text" class="champDeTexte" name="mail" placeholder="mail" required/>
-        <input type="text" class="champDeTexte" name="tel" placeholder="tel" required/>
         <input type="text" class="champDeTexte"  name="adresse" placeholder="adresse" required/>
         <input type="text" class="champDeTexte" name="habitation" placeholder="habitation" required/>
         <div> Je dispose d'un extérieur <input id="checkboxFormulaireAdoption" type="checkbox" class="champDeTexte" name="exterieur" required/> </div>
@@ -31,6 +37,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <input type="text" class="champDeTexte" name="situationFamiliale" placeholder="situationFamiliale" required/>
         <input type="textarea" class="champDeTexte" name="commentaire" placeholder="commentaire" required/>
         <div><input id="checkboxFormulaireAdoption" type ="checkbox" name="engagement" required/> J’ai lu et j’ai pris connaissances du <a id="lienFormulaireAdoption" href="http://jeuxstrategie.free.fr/Avalam_complet.php">Certificat d’engagement </a></div>
+        <div> Je m'engage à prendre en charge les frais de vétérinaire et faire une prévisite <input id="checkboxFormulaireAdoption" type ="checkbox" name="previsite" required/></div>
         <input id ="submitFormulaireAdoption"type="submit" name="action" value="Demande adoption"/>
     </form>
 </div>

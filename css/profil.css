@@ -32,9 +32,11 @@
     margin: 30px 1px 30px 4%;
     cursor: default;
   }
+
   .pdp {
     cursor: default;
   }
+  
   .mdp > * > .group {
     display: flex;
     flex-direction: row;
