@@ -40,6 +40,8 @@ header > div {
 	font-size: 30px;
 	color: black;
 	transition: 0.3s;
+	height: auto;
+	padding: 0;
 }
 
 
