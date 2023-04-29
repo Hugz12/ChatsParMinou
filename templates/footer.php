@@ -20,7 +20,7 @@
             <a class="footerContent" href="https://twitter.com/">Twitter</a>
         </div>
         <div id="lienImportant">
-            <div class="footerTitre">Lien important</div>
+            <div class="footerTitre">Liens importants</div>
             <a class="footerContent" href="index.php?view=formulaireAdoption">Formulaire d'adoption</a>
             <a class="footerContent" href="index.php?view=nousAider">Nous aider</a>
 
