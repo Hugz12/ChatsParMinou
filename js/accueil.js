@@ -325,6 +325,7 @@ function afficherChatDuMois(chatDuMois){
 	document.documentElement.style.setProperty('--third-color', convertColor(chatDuMois['couleur'], 0.5));
 	document.documentElement.style.setProperty('--fourth-color', convertColor(chatDuMois['couleur'], 0.25));
 	document.documentElement.style.setProperty('--fifth-color', convertColor(chatDuMois['couleur'], 1));
+	document.documentElement.style.setProperty('--sixth-color', convertColor(chatDuMois['couleur'], 0.1));
 	
 
 	

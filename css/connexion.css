@@ -1,3 +1,7 @@
+#pageContent {
+	overflow: hidden;
+}
+
 #allConnexion{
 	width: 700px;
 	height: 500px;
@@ -89,3 +93,7 @@
 	margin: 20px auto 10px auto;
 }
 
+
+#patteConnexion {
+	max-height: calc(100% - 270px);
+}
