@@ -69,7 +69,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 		</div>
 		<div id="zeroChat" class="policeTexte">
-			Aucun chats ne correspond a votre rechercher
+			Aucun chat ne correspond à votre recherche
 		</div>
 	</div>
 
@@ -83,7 +83,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 	
 	<div id="menuFiltre" onclick="updateFiltreAll();" style="right: -300px; display: none;">
-		<div id="filtreTitre">Filtrer vos rechercher</div>
+		<div id="filtreTitre">Filtrer vos recherches</div>
 
 		<div id="filtreRace" class="filtre">
 			<div class="filtreTitre">Filtrer par race</div>
