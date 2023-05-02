@@ -1,8 +1,11 @@
+// Constante
+// const screenWidth = window.innerWidth*1.1;
+
 //Fonction qui append une demande
 function divDemande(date, btn, img, demande){
     return `<div id="demande${demande["id"]}" class="demandes">
                 <img class="btnDemande ${btn} clickable" onclick='changerStatut(this, ${JSON.stringify(demande)});' src="./ressources/${img}.png" alt="${img}">
-                <div class="block">    
+                 
                     <div class="fondDemande">
                         <div class="contenuDemande">
                             <p class="tpsDate">${date}</p>
@@ -88,7 +91,7 @@ function divDemande(date, btn, img, demande){
                             <div class="btnMemo clickable">Enregistrer</div>
                         </div>
                     </div>
-                </div>
+                
                 <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
             </div>`;
 }
@@ -461,10 +464,17 @@ $(function() {
 $(function() {
     $("#btnTriTps").on("click", function() {
         console.log("tri date d'ajout");
-        $(".choix-recent").toggleClass('choix-ancien');
 
-        if ($(".choix-recent").hasClass('choix-ancien')) $("#recherche p").text("Date d'ajout (plus anciennes)");
-        else $("#recherche p").text("Date d'ajout (plus récentes)");
+        if ($(this).children("input").prop("checked") == false) {
+            $(this).parent().children("p").fadeOut(150, function() {
+                $(this).text("Récent").fadeIn(150);
+            });
+        }
+        else {
+            $(this).parent().children("p").fadeOut(150, function() {
+                $(this).text("Ancien").fadeIn(150);
+            });
+        }
 
         $("#nouvellesDemandes .demandes").each(function(){ 
             $("#nouvellesDemandes").prepend(this);
@@ -535,25 +545,20 @@ $(function() {
     $(".imageDemande").on("click", function() {
         console.log("zoom");
 
-        if ($($(this).parent().parent().parent().parent().parent().parent()).hasClass("zoom")) {
-            $($(this).parent().parent().parent()).animate({opacity: 0}, 300); // contenuDemande
-            $($(this).parent().parent().parent().parent()).animate({left: "5%", height: "213px"}, 500, function () { // fondDemande
-                $($(this).parent().parent()).children(".btnDemande").animate({opacity: 1}, 200); // btnDemande
-                $($(this).parent().parent()).removeClass("zoom"); // demandes
-                $(this).animate({left: "0%"}, 500); // fondDemande
-                $(this).children(".contenuDemande").animate({opacity: 1}, 300); // contenuDemande
+        if ($($(this).parent().parent().parent().parent().parent()).hasClass("zoom")) {
+            $($(this).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
+                $($(this).parent()).css({"width": "85%"}); // fondDemande
+                $($(this).parent().parent()).toggleClass("zoom"); // demandes
+                $(this).fadeIn(300); // contenuDemande
+                $($(this).parent().parent()).children(".btnDemande").fadeIn(200); // btnDemande
             });
-            $($(this).parent().parent().parent()).removeAttr("style"); // contenuDemande
-            $($(this).parent().parent().parent().parent()).removeAttr("style"); // fondDemande
         } else {
-            $($($(this).parent().parent().parent().parent().parent().parent())).children(".btnDemande").animate({opacity: 0}, 200); // btnDemande
-            $($(this).parent().parent().parent()).animate({opacity: 0}, 300); // contenuDemande
-            $($(this).parent().parent().parent().parent()).animate({right: "5%", width: "110%", height: "500px"}, 500, function () { // fondDemande
-                $($(this).parent().parent()).addClass("zoom"); // demandes
-                $(this).children(".contenuDemande").animate({opacity: 1, height: "500px"}, 300); // contenuDemande
+            $($(this).parent().parent().parent().parent().parent().parent()).children(".btnDemande").fadeOut(200); // btnDemande
+            $($(this).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
+                $($(this).parent()).css({"width": "90%"}); // fondDemande
+                $($(this).parent().parent()).toggleClass("zoom"); // demandes
+                $(this).fadeIn(300); // contenuDemande
             });
-            $($(this).parent().parent().parent()).removeAttr("style"); // contenuDemande
-            $($(this).parent().parent().parent().parent()).removeAttr("style"); // fondDemande
         }
     });
 });
@@ -626,15 +631,3 @@ $(function() {
     });
 });
 
-function etatBtnTri(element){
-	if ($(element).children("input").prop("checked") == false) {
-        $(element).children("div").fadeOut(150, function() {
-            $(this).text("Récent").fadeIn(150);
-        });
-    }
-    else {
-        $(element).children("div").fadeOut(150, function() {
-            $(this).text("Ancien").fadeIn(150);
-        });
-    }
-}
