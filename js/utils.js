@@ -256,10 +256,10 @@ function move(container,direction, state, sens, x, y, sens2) {
 	var maxY = parseInt(window.getComputedStyle(container).height.slice(0, -2));
 	var maxX = parseInt(window.getComputedStyle(container).width.slice(0, -2));
 
-	console.log("max Y: " + maxY);
-	console.log("max X : " + maxX);
-	console.log("y : " + y);
-	console.log("x : " + x);
+	// console.log("max Y: " + maxY);
+	// console.log("max X : " + maxX);
+	// console.log("y : " + y);
+	// console.log("x : " + x);
 
 	if(y > maxY)
 		y = 0;
