@@ -10,12 +10,14 @@
     justify-content: space-around;
     align-content: stretch;
     flex-flow: row wrap;
+    background-color: inherit;
   }
 
   .contour > *  {
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: inherit;
   }
   .info > * > .group {
     display: flex;
@@ -75,16 +77,22 @@
   
   .gestion{
     flex-grow: 3;
+    background-color: inherit;
   }
   .mdp{
     flex-grow: 1;
     width: 45%;
     min-width: 300px;
     margin: 0 2%;
+    background-color: inherit;
   }
   .mail{
     flex-grow: 1;
     width: 45%;
     min-width: 300px;
     margin: 0 2%;
+    background-color: inherit;
+  }
+  .info{ 
+    background-color: inherit;
   }

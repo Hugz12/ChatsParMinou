@@ -1,11 +1,11 @@
 #allFormulaireAdoption {
-	max-width: 50%;
+	max-width: 100%;
 	height: auto;
-	background-color: var(--sec-color);
 	border-radius: 12px;
 	margin: 50px auto 0 auto;
 	z-index: 0;
 	padding : 1% 1%;
+
 }
 
 
@@ -30,11 +30,12 @@
 }
 
 #submitFormulaireAdoption{
-	width: 100px;
-	height: 30px;
-	background-color: var(--main-color);
-	border: 1px solid black;
-	font-size: 15px;
+	margin: 4% 0 4% 0;
+	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
 #checkboxFormulaireAdoption{
@@ -42,10 +43,18 @@
 	height: 15px;
 }
 
-.infoPerso{
+.group{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 10% 10%;
-	padding: 2% 2%;
+	margin: 10px 0 10px 0;
+}
+
+#allFormulaireAdoption > form{
+	background-color: inherit;
+
+}
+
+#infoPerso{
+	background-color: inherit;
 }
