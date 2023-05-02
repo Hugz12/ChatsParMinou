@@ -81,7 +81,6 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		responsivePointsChats();
 	</script> 
 
-	
 	<div id="menuFiltre" onclick="updateFiltreAll();" style="right: -300px; display: none;">
 		<div id="filtreTitre">Filtrer vos recherches</div>
 
