@@ -210,9 +210,7 @@ function supprimerDemande($id, $code){
  * Fonction qui met le statut d'une demande d'adoption à la bonne valeur
  */
 function setStatutDemande($id, $statut){
-    if ($statut == 1 || $statut == 3) $aux = 2;
-    else $aux = 3;
-    $SQL = "UPDATE demandeAdoption SET statutDemande=$aux WHERE id=$id";
+    $SQL = "UPDATE demandeAdoption SET statutDemande=$statut WHERE id=$id";
     SQLUpdate($SQL);
 }
 

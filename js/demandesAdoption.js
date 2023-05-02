@@ -1,97 +1,98 @@
-// Constante
-// const screenWidth = window.innerWidth*1.1;
-
 //Fonction qui append une demande
 function divDemande(date, btn, img, demande){
     return `<div id="demande${demande["id"]}" class="demandes">
-                <img class="btnDemande ${btn} clickable" onclick='changerStatut(this, ${JSON.stringify(demande)});' src="./ressources/${img}.png" alt="${img}">
-                 
-                    <div class="fondDemande">
-                        <div class="contenuDemande">
-                            <p class="tpsDate">${date}</p>
-                            <p class="tpsComplet">${demande["date"]}|</p>
-                            <div class="infos">
-                                <div class="infosChat">
-                                    <img class="imageDemande" src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
-                                    <div class="idChat">
-                                        <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
-                                        <div class="para none">
-                                            <p class="statutChat" name="statut">${demande["statut"]}</p>
-                                        </div>
-                                    </div>
-                                    <div class='para none'>
-                                        <p name='description'>${demande['description']}</p>
-                                        <label for=\"description\">Description</label>
-                                    </div>
-                                    <div class='para none'>
-                                        <p name='particularite'>${demande['particularite']}</p>
-                                        <label for=\"particularite\">Particularité</label>
+                <img class="btnDemande ${btn} clickable" onclick='changerStatut(this);' src="./ressources/${img}.png" alt="${img}">
+                <div class="fondDemande">
+                    <div class="contenuDemande">
+                        <p class="tpsDate">${date}</p>
+                        <p class="tpsComplet">${demande["date"]}|</p>
+                        <div class="infos">
+                            <div class="infosChat">
+                                <img onclick='zoom(this);' src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
+                                <div class="idChat">
+                                    <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
+                                    <div class="para none">
+                                        <p class="statutChat" name="statut">${demande["statut"]}</p>
                                     </div>
                                 </div>
-                                <div class="infosPers">
-                                    <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
-                                    <div class="para">
-                                        <p name="mail">${demande['mail']}</p>
-                                        <label for=\"mail\">Mail</label>
-                                    </div>
-                                    <div class="para">
-                                        <p name="tel">${demande['tel']}</p>
-                                        <label for=\"tel\">Tel.</label>
-                                    </div>
-                                    <div class="para none">
-                                        <p name="adresse">${demande['adresse']}</p>
-                                        <label for=\"adresse\">Adresse</label>
-                                    </div>
-                                    <div class="para none">
-                                        <p name="habitation">${demande['habitation']}</p>
-                                        <label for=\"habitation\">Habitation</label>
-                                    </div>
-                                    <div class="para none">
-                                        <p class="exterieur" name="exterieur">${demande['exterieur']}</p>
-                                        <label for=\"exterieur\">Exterieur</label>
-                                    </div>
-                                    <div class="para none">
-                                        <p class="sortie" name="sortie">${demande['sortie']}</p>
-                                        <label for=\"sortie\">Sortie</label>
-                                    </div>
-                                    <div class="para none">
-                                        <p name="sitFam">${demande['situationFamiliale']}</p>
-                                        <label for=\"sitFam\">Situation familiale</label>
-                                    </div>
-                                    <div class="para none">
-                                        <p name="animaux">${demande['animaux']}</p>
-                                        <label for=\"animaux\">Animaux</label>
-                                    </div>
-                                    <div class='para commentaire none'>
-                                        <p name='commentaire'>${demande['commentaire']}</p>
-                                        <label for=\"commentaire\">Commentaire</label>
-                                    </div>
+                                <div class='para none'>
+                                    <p name='description'>${demande['description']}</p>
+                                    <label for=\"description\">Description</label>
+                                </div>
+                                <div class='para none'>
+                                    <p name='particularite'>${demande['particularite']}</p>
+                                    <label for=\"particularite\">Particularité</label>
                                 </div>
                             </div>
-                            <form>
-                                <div class='group memo'>
-                                    <textarea name='memo' required>${demande['memo']}</textarea>
-                                    <label for=\"memo\">Memo</label>
+                            <div class="infosPers">
+                                <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>
+                                <div class="flex">
+                                    <div class="column">
+                                        <div class="para">
+                                            <p name="mail">${demande['mail']}</p>
+                                            <label for=\"mail\">Mail</label>
+                                        </div>
+                                        <div class="para">
+                                            <p name="tel">${demande['tel']}</p>
+                                            <label for=\"tel\">Tel.</label>
+                                        </div>
+                                        <div class="para none">
+                                            <p name="adresse">${demande['adresse']}</p>
+                                            <label for=\"adresse\">Adresse</label>
+                                        </div>
+                                        <div class="para none">
+                                            <p name="habitation">${demande['habitation']}</p>
+                                            <label for=\"habitation\">Habitation</label>
+                                        </div>
+                                    </div>
+                                    <div class="column">
+                                        <div class="para none">
+                                            <p class="exterieur" name="exterieur">${demande['exterieur']}</p>
+                                            <label for=\"exterieur\">Exterieur</label>
+                                        </div>
+                                        <div class="para none">
+                                            <p class="sortie" name="sortie">${demande['sortie']}</p>
+                                            <label for=\"sortie\">Sortie</label>
+                                        </div>
+                                        <div class="para none">
+                                            <p name="sitFam">${demande['situationFamiliale']}</p>
+                                            <label for=\"sitFam\">Situation familiale</label>
+                                        </div>
+                                        <div class="para none">
+                                            <p name="animaux">${demande['animaux']}</p>
+                                            <label for=\"animaux\">Animaux</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="sous-memos">
-                                    <div class='group datePv'>
-                                        <input type='text'  name='datePv' value='${demande['datePv']}' required>
-                                        <label for=\"datePv\">Date de PV</label>
-                                    </div>
-                                    <div class='group resultatPv'>
-                                        <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
-                                        <label for=\"resultatPv\">Résultat de PV</label>
-                                    </div>
-                                    <div class='group dateRencontre'>
-                                        <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
-                                        <label for=\"dateRencontre\">Date de rencontre</label>
-                                    </div>
+                                <div class='para commentaire none'>
+                                    <p name='commentaire'>${demande['commentaire']}</p>
+                                    <label for=\"commentaire\">Commentaire</label>
                                 </div>
-                            </form>
-                            <div class="btnMemo clickable">Enregistrer</div>
+                            </div>
                         </div>
+                        <form>
+                            <div class='group memo'>
+                                <textarea name='memo' required>${demande['memo']}</textarea>
+                                <label for=\"memo\">Memo</label>
+                            </div>
+                            <div class="sous-memos">
+                                <div class='group datePv'>
+                                    <input type='text'  name='datePv' value='${demande['datePv']}' required>
+                                    <label for=\"datePv\">Date de PV</label>
+                                </div>
+                                <div class='group resultatPv'>
+                                    <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
+                                    <label for=\"resultatPv\">Résultat de PV</label>
+                                </div>
+                                <div class='group dateRencontre'>
+                                    <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
+                                    <label for=\"dateRencontre\">Date de rencontre</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="btnMemo clickable">Enregistrer</div>
                     </div>
-                
+                </div>
                 <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
             </div>`;
 }
@@ -260,31 +261,51 @@ function triDate(dateDemande, statut) {
 }
 
 // Fonction qui permet de changer le statut d'une demande
-function changerStatut(contexte, demande) {
+function changerStatut(contexte) {
     console.log("changerStatut");
     //console.log(contexte);
-    //console.log(demande);
+    var demande = $(contexte).parent();
+    var id = $($(contexte).parent()).attr("id").match(/\d+/g).toString().replace(',', '');
+    id = parseInt(id);
+    console.log("id : " + id);
+
     if ($(contexte).hasClass("btnNouvelleDemande") || $(contexte).hasClass("btnTraitees")) {
         var statut = "demandesEnCours";
-        var btn = "btnEnCours";
-        var img = "play";
         var statutDemande = 2;
+
+        if ($(contexte).hasClass("btnNouvelleDemande")) {
+            $($(demande).children(".btnNouvelleDemande")).attr("src", './ressources/play.png');
+            $($(demande).children(".btnNouvelleDemande")).attr("alt" , "play");
+
+            $(demande).children(".btnNouvelleDemande").addClass("btnEnCours");
+            $(demande).children(".btnNouvelleDemande").removeClass("btnNouvelleDemande");
+        } else if ($(contexte).hasClass("btnTraitees")) {
+            $($(demande).children(".btnTraitees")).attr("src", './ressources/play.png');
+            $($(demande).children(".btnTraitees")).attr("alt" , "play");
+
+            $(demande).children(".btnTraitees").addClass("btnEnCours"); 
+            $(demande).children(".btnTraitees").removeClass("btnTraitees");
+        }
     } 
-    if ($(contexte).hasClass("btnEnCours")) {
+    else if ($(contexte).hasClass("btnEnCours")) {
         var statut = "traitees";
-        var btn = "btnTraitees";
-        var img = "return";
         var statutDemande = 3;
+        
+        $($(demande).children(".btnNouvelleDemande")).attr("src", './ressources/return.png');
+        $($(demande).children(".btnNouvelleDemande")).attr("alt" , "return");
+
+        $(demande).children(".btnEnCours").addClass("btnTraitees");
+        $(demande).children(".btnEnCours").removeClass("btnEnCours");
     }
-    //console.log(demande["id"]);
-    //console.log(demande["statutDemande"]);
+    console.log("statutDemande : " + statutDemande);
+
     $.ajax({
         url: './controleur.php',
         type: 'POST',
         data: {
             action: 'Changer Statut Demande',
-            id: demande["id"],
-            statut: demande["statutDemande"]
+            id: id,
+            statut: statutDemande
         },
         success: function() {
             console.log("success");
@@ -293,16 +314,14 @@ function changerStatut(contexte, demande) {
             console.log("error");
         }
     });
-    $("#demande" + demande["id"]).remove();
+    $("#demande" + id).remove();
 
-    demande["statutDemande"] = statutDemande;
-    var dateDemande = new Date(demande["date"]);
+    var dateDemande = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".tpsComplet")).text().match("^.*?(?=|)");
     //console.log(dateDemande);
-    var date = dateCompteur(dateDemande) + ", le " + dateDemande.toLocaleDateString();
 
     var tri = triDate(dateDemande, statut);
-    if (tri != null) $($("#" + statut).children().eq(tri)).before(divDemande(date, btn, img, demande));
-    else $("#" + statut).append(divDemande(date, btn, img, demande));
+    if (tri != null) $($("#" + statut).children().eq(tri)).before(demande);
+    else $("#" + statut).append(demande);
         
     changerTitres();
     montrerPlusMoins();
@@ -316,7 +335,7 @@ function supprimerDemande(contexte) {
         id = parseInt(id);
         console.log("id : " + id);
 
-        var code = $($(contexte).parent().children(".block").children(".fondDemande").children(".contenuDemande").children(".infos")
+        var code = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".infos")
             .children(".infosChat").children(".idChat").children(".nomChat")).text().split("-");
         code = code[1].trim();
         console.log("code : " + code);
@@ -541,27 +560,25 @@ function montrerPlusMoins() {
 }
 
 // Zoom sur une demande
-$(function() {
-    $(".imageDemande").on("click", function() {
-        console.log("zoom");
+function zoom(contexte) {
+    console.log("zoom");
 
-        if ($($(this).parent().parent().parent().parent().parent()).hasClass("zoom")) {
-            $($(this).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
-                $($(this).parent()).css({"width": "85%"}); // fondDemande
-                $($(this).parent().parent()).toggleClass("zoom"); // demandes
-                $(this).fadeIn(300); // contenuDemande
-                $($(this).parent().parent()).children(".btnDemande").fadeIn(200); // btnDemande
-            });
-        } else {
-            $($(this).parent().parent().parent().parent().parent().parent()).children(".btnDemande").fadeOut(200); // btnDemande
-            $($(this).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
-                $($(this).parent()).css({"width": "90%"}); // fondDemande
-                $($(this).parent().parent()).toggleClass("zoom"); // demandes
-                $(this).fadeIn(300); // contenuDemande
-            });
-        }
-    });
-});
+    if ($($(contexte).parent().parent().parent().parent().parent()).hasClass("zoom")) {
+        $($(contexte).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
+            $($(this).parent()).css({"width": "85%"}); // fondDemande
+            $($(this).parent().parent()).toggleClass("zoom"); // demandes
+            $(this).fadeIn(300); // contenuDemande
+            $($(this).parent().parent()).children(".btnDemande").fadeIn(200); // btnDemande
+        });
+    } else {
+        $($(contexte).parent().parent().parent().parent().parent().parent()).children(".btnDemande").fadeOut(200); // btnDemande
+        $($(contexte).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
+            $($(this).parent()).css({"width": "90%"}); // fondDemande
+            $($(this).parent().parent()).toggleClass("zoom"); // demandes
+            $(this).fadeIn(300); // contenuDemande
+        });
+    }
+}
 
 // Remplacement de texte
 $(function() {
@@ -590,6 +607,17 @@ $(function() {
                 break;
             case '1':
                 $(this).text("Extérieur disponible");
+                break;
+        }
+    });
+
+    $(".sortie").each(function() {
+        switch ($(this).text()) {
+            case '0':
+                $(this).text("Pas de sortie");
+                break;
+            case '1':
+                $(this).text("Sortie autorisée");
                 break;
         }
     });
