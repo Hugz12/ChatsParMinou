@@ -60,6 +60,8 @@ function addUserBDD($mail,$password,$name){
     return SQLInsert($SQL);
 }
 
+
+
 /**
  * Fonction qui retourne les informations du chat du mois
  * @return array

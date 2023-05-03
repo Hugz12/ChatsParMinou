@@ -47,10 +47,9 @@ function fillCalendar() {
 
                 passage.innerHTML = `
                     <div class="mailBenevole">${element.mailBenevole}</div>
-                    <div class="date">${element.date.split(" ")[0]}</div>
-                    <div class="heureDebut">${element.heureDebut}</div>
-                    <div class="heureFin">${element.heureFin}</div>
-                    <div class="description">${element.description}</div>
+                    <div class="date" style="display:none;">${element.date.split(" ")[0]}</div>
+                    <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
+                    <div class="description">Motif : ${element.description}</div>
                 `;
 
                 passagesRefuge.appendChild(passage);
@@ -161,9 +160,8 @@ function changeMonth(element){
 
                 passage.innerHTML = `
                     <div class="mailBenevole">${element.mailBenevole}</div>
-                    <div class="date">${element.date.split(" ")[0]}</div>
-                    <div class="heureDebut">${element.heureDebut}</div>
-                    <div class="heureFin">${element.heureFin}</div>
+                    <div class="date" style="display:none;">${element.date.split(" ")[0]}</div>
+                    <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
                     <div class="description">${element.description}</div>
                 `;
                 
@@ -220,6 +218,7 @@ function displayPassage(element){
         }
     }
     passagesRefuge.style.display = "block";
+    displayForm("containerPassagesRefuge");
 }
 
 
