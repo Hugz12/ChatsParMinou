@@ -47,21 +47,19 @@ if (!valider('Connecte', 'SESSION')) {
 		</form>
 		</div>
 
-		<script>
-		const nomInput = document.getElementById('nom-input');
-		nomInput.addEventListener('change', function() {
-			localStorage.setItem('nom-utilisateur', nomInput.value);
-		});
-		
-		window.addEventListener('load', function() {
-			const nomUtilisateur = localStorage.getItem('nom-utilisateur');
-			if (nomUtilisateur) {
-			nomInput.value = nomUtilisateur;
-			}
-		});
-		</script>
-	</div>
+					<div class='group'>
+										<input type='text' name='prenom' required>
+										<label for="prenom">Prénom</label>
+					</div>
 
+					<div class='group'>
+										<input type='text' name='mail' value="<?php echo"$_SESSION[mail]"; ?>"required>
+										<label for="mail">Adresse mail</label>
+					</div>
+
+					<input type="submit" class="buttonType" value="Modifier mes informations personnelles">
+				</form>
+  
 	<div class="mdpMailGestion">
 		<div class="mdp">
 			<div class="titre">Changer de mot de passe</div>
