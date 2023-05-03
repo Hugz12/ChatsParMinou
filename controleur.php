@@ -62,6 +62,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				
 				if ($password == $password2) {// On vérifie que les mots de passe sont identiques
 					if (!userExistsBDD($mail)) { // Si l'utilisateur n'existe pas déjà
+
 						addUserBDD($mail,$password,$name); // On ajoute l'utilisateur à la BDD
 						
 						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
@@ -88,7 +89,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						
 					} else {
 						$_SESSION['error'] = "Ce mail est déjà utilisé"; // Sinon on affiche un message d'erreur
-						$qs = "?view=inscription";
+						$qs = "?view=connexion";
 					}
 				} else {
 					$qs = "?view=connexion";
