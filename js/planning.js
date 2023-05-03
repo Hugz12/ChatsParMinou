@@ -196,9 +196,9 @@ function changeMonth(element){
             console.log("error");
         }
     });
-
-    
 }
+
+
 
 function setMinDate(){
     var date = document.getElementById("datePassage");

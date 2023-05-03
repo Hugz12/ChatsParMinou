@@ -61,8 +61,14 @@ if(isset($_SESSION["message"])){
 		</div>
 		
 	</div>
-
-	<div class="passagesRefuge" id="passagesRefuge" style="display:none"></div>
+	
+	<div id="containerPassagesRefuge">
+		<div class='buttonHideForm' onclick='hideForm("containerPassagesRefuge");'>
+			<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
+		</div>
+		<div class="passagesRefuge" id="passagesRefuge" style="display:none"></div>
+	</div>
+	
 
     <script>
         fillCalendar();

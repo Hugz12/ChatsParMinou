@@ -86,6 +86,15 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
                 <img class="addImage" src="./ressources/add.svg" alt="add.svg">
             </div>
 
+            <script>
+                let input = document.getElementById('photo');
+
+                // réinitialiser la valeur de l'input lorsque la page est rechargée
+                window.onload = function() {
+                input.value = '';
+                }
+            </script>
+
             <input type="hidden" name="action" value="Ajouter Utilisateur"/>
             
             <input type="submit" class="buttonType" value="S'inscrire"/>
