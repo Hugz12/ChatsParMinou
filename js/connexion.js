@@ -7,7 +7,14 @@ function switchLoginRegister(){
     // decalle la div id="switchLoginRegister" de 350px vers la droite avec une animation
     // si la div est deja a 50% + 350px, on la remet a 50%
     if(sens == 1){
-        $("#switchLoginRegister").animate({left: "350px"}, 500);
+        if(window.innerWidth < 750) {
+            $("#switchLoginRegister").animate({top: "500px", left: "0px"}, 500);
+            console.log("petit");
+        }
+        else {
+            $("#switchLoginRegister").animate({left: "350px", top: "0px"}, 500);
+            console.log("grand");
+        }
         $("#textButtonSwitchLoginRegister").fadeOut(function() {
             $(this).html("S'inscrire").fadeIn();
         });
@@ -16,7 +23,14 @@ function switchLoginRegister(){
         });
     }else{
         // on retirer 350px a la position actuelle de la div
-        $("#switchLoginRegister").animate({left: "-=350px"}, 500);
+        if(window.innerWidth < 750) {
+            $("#switchLoginRegister").animate({top: "0px", left: "0px"}, 500);
+            console.log("petit");
+        }
+        else {
+            $("#switchLoginRegister").animate({left: "0px", top: "0px"}, 500);
+            console.log("grand");
+        }
         $("#textButtonSwitchLoginRegister").fadeOut(function() {
             $(this).html("Se connecter").fadeIn();
         });
@@ -27,3 +41,25 @@ function switchLoginRegister(){
     sens = -sens;
 }
 
+function responsive () {
+    console.log(window.innerWidth);
+    if(sens == -1){
+
+        if(window.innerWidth <= 750) {
+            $("#switchLoginRegister")[0].style.left = "0";
+            $("#switchLoginRegister")[0].style.top = "500px";
+            console.log("petit");
+        }
+        else {
+            $("#switchLoginRegister")[0].style.left = "350px";
+            $("#switchLoginRegister")[0].style.top = "0";
+            console.log("grand");
+        }
+    }
+}
+
+
+
+window.addEventListener("resize", responsive);
+
+window.addEventListener("onload", responsive);
