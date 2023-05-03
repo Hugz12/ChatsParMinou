@@ -49,7 +49,7 @@ function fillCalendar() {
                     <div class="mailBenevole">${element.mailBenevole}</div>
                     <div class="date" style="display:none;">${element.date.split(" ")[0]}</div>
                     <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
-                    <div class="description">Motif : ${element.description}</div>
+                    <div class="description">${element.description}</div>
                 `;
 
                 passagesRefuge.appendChild(passage);
