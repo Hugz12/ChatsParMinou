@@ -56,7 +56,7 @@ function isAdmin($mail){
  */
 function addUserBDD($mail,$password,$name){
     $hashedPassword = hashedPassword($password);
-    $SQL = "INSERT INTO utilisateur (mail,password,name,role) VALUES ('$mail','$hashedPassword','$name','NULL')";
+    $SQL = "INSERT INTO utilisateur (mail,password,name,role) VALUES ('$mail','$hashedPassword','$name',NULL)";
     return SQLInsert($SQL);
 }
 
