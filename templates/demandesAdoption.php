@@ -26,7 +26,7 @@ if (!valider('Admin', 'SESSION')) {
 
 <div id="recherche">
 	
-	<div class="container">
+	<div id="container">
 		<div class="dropdown">
 			<div class="select">
 				<span id="selectRecherche">Recherche générale</span>
@@ -47,23 +47,25 @@ if (!valider('Admin', 'SESSION')) {
 		</div>
 	</form>
 
-	<div id="btnTriTps" onclick='etatBtnTri(this);'>
-		<div>Récent</div>
-		<input type='checkbox'>
+	<div id="triTps">
+		<p>Récent</p>
+		<div id="btnTriTps">
+			<input type='checkbox'>
+		</div>
 	</div>
 	
 	<div id="i">i</div>
 </div>
 
-<div id="nouvellesDemandes" class="conteneurDemandes"></div>
+<div id="nouvellesDemandes"></div>
 
 <div id="lienNouvellesDemandes" class="lienPlusMoins">Montrer plus</div>
 
-<div id="demandesEnCours" class="conteneurDemandes"></div>
+<div id="demandesEnCours"></div>
 
 <div id="lienEnCours" class="lienPlusMoins">Montrer plus</div>
 
-<div id="traitees" class="conteneurDemandes"></div>
+<div id="traitees"></div>
 
 <div id="lienTraitees" class="lienPlusMoins">Montrer plus</div>
 
@@ -78,9 +80,24 @@ if (!valider('Admin', 'SESSION')) {
 </div>
 
 <div id="popupInfos">
-    <p>Sélectionnez votre type de recherche avec le menu</p>
-	<p>Tapez le contenu de la recherche dans la zone prévu</p>
-	<p>Le bouton permet de trier par date</p>
+	<p>Recherche :</p>
+	<ul>
+		<li>Sélectionnez votre type de recherche avec le menu</li>
+		<li>Tapez le contenu de la recherche dans la zone prévu</li>
+	</ul>
+	<p>Bouton de tri :</p>
+	<ul>
+		<li>Permet de trier par date d'ajout (Récent ou Ancien)</li>
+	</ul>
+	<p>Gestion des demandes :</p>
+	<ul>
+		<li>Le bouton de gauche passe la demande au prochain statut</li>
+		<li>Le bouton de droite supprime définitivement la demande</li>
+	</ul>
+	<p>Bouton d'affichage plus/moins :</p>
+	<ul>
+		<li>Permet d'afficher plus ou moins de demandes</li>
+	</ul>
 </div>
 
 
@@ -89,4 +106,3 @@ if (!valider('Admin', 'SESSION')) {
 	afficherTitres(demandesAdoption);
 	afficherDemandes(demandesAdoption);
 </script>
-

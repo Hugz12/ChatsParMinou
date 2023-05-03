@@ -18,13 +18,13 @@ CREATE TABLE `chat` (
   `familleAccueil` boolean,
   `vues` int,
   `nbPhoto` int,
-  `couleur` varchar(255)
+  `couleur` varchar(255),
+  `particularite` varchar(255)
 )ENGINE = InnoDB;
 
 CREATE TABLE `demandeAdoption` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `date` datetime,
-  `codeChat` varchar(255),
   `nom` varchar(255),
   `prenom` varchar(255),
   `mail` varchar(255),
@@ -42,6 +42,8 @@ CREATE TABLE `demandeAdoption` (
   `resultatPv` varchar(255),
   `dateRencontre` varchar(255)
 )ENGINE = InnoDB;
+
+
 
 CREATE TABLE `passageRefuge` (
   `date` datetime,
@@ -95,34 +97,34 @@ ALTER TABLE `divers` ADD FOREIGN KEY (`parent`) REFERENCES `divers` (`name`);
 
 /*utilisateur*/
 INSERT INTO `utilisateur` (`mail`, `password`, `name`, `role`)
-VALUES ('admin@gmail.com', 'admin', 'admin', '1');
+VALUES ('admin@gmail.com', '$2y$10$GAlmWCWPOwmv.INst19B/eTuRfCkykWnQ6rPfbGOtdN59bw9LXkAa', 'admin', '1');
 
 INSERT INTO `utilisateur` (`mail`, `password`, `name`, `role`)
-VALUES ('user@gmail.com', 'user', 'user', '3');
+VALUES ('user@gmail.com', '$2y$10$pMANbag2FYSUNdxQuyL.BeEVjHL5kwwTk0cN357TXumdBTlcsRvQC', 'user', '3');
 
 /*chat*/
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`) 
-VALUES ('1', 'Mimi', '2023-04-01', 'Chat tigré', '1', '2', "Bonjour moi c'est mimi et je cherche quelqu'un avec qui vivre pour l'eternité", '0', '1', '0', '1', '4', '#FF0000');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
+VALUES ('1', 'Mimi', '2023-04-01', 'Chat tigré', '1', '2', "Bonjour moi c'est mimi et je cherche quelqu'un avec qui vivre pour l'eternité", '0', '1', '0', '1', '4', '#FF0000', 'Je suis un chat très calin');
 
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`) 
-VALUES ('2', 'Satine', '2023-04-01', 'Chat tigré', '1', '3', "Je m'appelle satine et j'adore les calins, si tu m'adopte je te ferais pleins de calin", '0', '1', '0', '1', '2', '#A569BD');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
+VALUES ('2', 'Satine', '2023-04-01', 'Chat tigré', '1', '3', "Je m'appelle satine et j'adore les calins, si tu m'adopte je te ferais pleins de calin", '0', '1', '0', '1', '2', '#A569BD', 'Je suis un chat très calin');
 
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`) 
-VALUES ('3', 'Sunset', '2023-04-01', 'Chat blanc', '1', '1', "Je suis un peu timide mais quand on me connait bien je suis adorable", '0', '1', '0', '1', '2', '#117A65');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
+VALUES ('3', 'Sunset', '2023-04-01', 'Chat blanc', '1', '1', "Je suis un peu timide mais quand on me connait bien je suis adorable", '0', '1', '0', '1', '2', '#117A65', 'Je suis un chat très calin');
 
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`) 
-VALUES ('4', 'Salto', '2023-04-01', 'Chat roux', '1', '1', "J'adore faire la fete et sauter partout. Wouhou!", '1', '0', '1', '0', '1', '#D35400');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
+VALUES ('4', 'Salto', '2023-04-01', 'Chat roux', '1', '1', "J'adore faire la fete et sauter partout. Wouhou!", '1', '0', '1', '0', '1', '#D35400', 'Je suis un chat très calin');
 
 
 /*demandeAdoption*/
-INSERT INTO `demandeAdoption` (`id`, `date`, `codeChat`, `nom`, `prenom`, `mail`, `tel`, `adresse`, `habitation`, `exterieur`, `sortie`, `situationFamiliale`, `animaux`, `commentaire`, `statutDemande`, `memo`, `datePv`, `resultatPv`, `dateRencontre`)
-VALUES ('1', '2023-04-01 00:00:00', '1', 'Dupont', 'Jean', 'jean.dupont@gmail.com', '0606060606', '1 rue de la paix', '1', '1', '1', 'Célibataire', 'Aucun', 'Je souhaite avoir ce chat car il est trop mignon', '1', '', '', '', '');
+INSERT INTO `demandeAdoption` (`id`, `date`, `nom`, `prenom`, `mail`, `tel`, `adresse`, `habitation`, `exterieur`, `sortie`, `situationFamiliale`, `animaux`, `commentaire`, `statutDemande`, `memo`, `datePv`, `resultatPv`, `dateRencontre`)
+VALUES ('1', '2023-04-01 00:00:00', 'Dupont', 'Jean', 'jean.dupont@gmail.com', '0606060606', '1 rue de la paix', 'Maison', '1', '1', 'Célibataire', 'Aucun', 'Je souhaite avoir ce chat car il est trop mignon', '1', '', '', '', '');
 
-INSERT INTO `demandeAdoption` (`id`, `date`, `codeChat`, `nom`, `prenom`, `mail`, `tel`, `adresse`, `habitation`, `exterieur`, `sortie`, `situationFamiliale`, `animaux`, `commentaire`, `statutDemande`, `memo`, `datePv`, `resultatPv`, `dateRencontre`)
-VALUES ('2', '2023-04-01 00:00:00', '2', 'Dupont', 'Jean', 'jean.dupont@gmail.com', '0606060606', '1 rue de la paix', '1', '1', '1', 'Célibataire', 'Aucun', 'Je souhaite avoir ce chat car il est trop mignon', '1', '', '', '', '');
+INSERT INTO `demandeAdoption` (`id`, `date`, `nom`, `prenom`, `mail`, `tel`, `adresse`, `habitation`, `exterieur`, `sortie`, `situationFamiliale`, `animaux`, `commentaire`, `statutDemande`, `memo`, `datePv`, `resultatPv`, `dateRencontre`)
+VALUES ('2', '2023-04-01 00:00:00', 'Dupont', 'Jean', 'jean.dupont@gmail.com', '0606060606', '1 rue de la paix', 'Appartement', '1', '1', 'Célibataire', 'Aucun', 'Je souhaite avoir ce chat car il est trop mignon', '1', '', '', '', '');
 
-INSERT INTO `demandeAdoption` (`id`, `date`, `codeChat`, `nom`, `prenom`, `mail`, `tel`, `adresse`, `habitation`, `exterieur`, `sortie`, `situationFamiliale`, `animaux`, `commentaire`, `statutDemande`, `memo`, `datePv`, `resultatPv`, `dateRencontre`)
-VALUES ('3', '2023-04-01 00:00:00', '3', 'Dupont', 'Jean', 'jean.dupont@gmail.com', '0606060606', '1 rue de la paix', '1', '1', '1', 'Célibataire', 'Aucun', 'Je souhaite avoir ce chat car il est trop mignon', '1', '', '', '', '');
+INSERT INTO `demandeAdoption` (`id`, `date`, `nom`, `prenom`, `mail`, `tel`, `adresse`, `habitation`, `exterieur`, `sortie`, `situationFamiliale`, `animaux`, `commentaire`, `statutDemande`, `memo`, `datePv`, `resultatPv`, `dateRencontre`)
+VALUES ('3', '2023-04-01 00:00:00', 'Dupont', 'Jean', 'jean.dupont@gmail.com', '0606060606', '1 rue de la paix', 'Maison', '1', '1', 'Célibataire', 'Aucun', 'Je souhaite avoir ce chat car il est trop mignon', '1', '', '', '', '');
 
 
 /*passageRefuge*/

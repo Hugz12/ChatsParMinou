@@ -1,16 +1,27 @@
+#pageContent {
+	overflow: hidden;
+}
+
 #allConnexion{
-	width: 700px;
-	height: 500px;
+	width: fit-content;
 	background-color: var(--sec-color);
 	border-radius: 12px;
 	position: relative;
 	margin: 50px auto 0 auto;
 	display: flex;
+	flex-direction: row;
 	z-index: 0;
 }
 
+@media  (max-width: 750px) {
+	#allConnexion {
+		flex-direction: column;
+	}
+}
+
 #allConnexion > div{
-	width: 50%;
+	width: 350px;
+	height: 500px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -50,6 +61,7 @@
 	z-index: 2;
 	background-color: var(--third-color) !important;
 	overflow: hidden;
+	
 }
 
 
@@ -89,3 +101,7 @@
 	margin: 20px auto 10px auto;
 }
 
+
+#patteConnexion {
+	max-height: calc(100% - 270px);
+}

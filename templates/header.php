@@ -63,12 +63,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 					<span class="bottom"></span>
 				</div>
 		
-				<a class="logo policeTitre" href="index.php?view=accueil">
-					
-					<img class="logo" src="ressources/logo.png" alt="logo">
-					
-				</a>
-				<a id="nomAsso" class="policeTitre" href="index.php?view=accueil">Chats Par Minou</a>
+				<a id="nomAsso" class="policeTitre navLink" href="index.php?view=accueil">Chats Par Minou</a>
 			</div>
 			
 
@@ -162,5 +157,5 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 	
 	
 
-
+<div id="pageContent">
 

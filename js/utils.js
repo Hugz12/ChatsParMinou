@@ -252,14 +252,23 @@ function move(container,direction, state, sens, x, y, sens2) {
 	
 	
 
-	if(y > window.innerHeight)
+	//taille max converti en int
+	var maxY = parseInt(window.getComputedStyle(container).height.slice(0, -2));
+	var maxX = parseInt(window.getComputedStyle(container).width.slice(0, -2));
+
+	// console.log("max Y: " + maxY);
+	// console.log("max X : " + maxX);
+	// console.log("y : " + y);
+	// console.log("x : " + x);
+
+	if(y > maxY)
 		y = 0;
 	if(y < 0)
-		y = window.innerHeight;
-	if(x > window.innerWidth)
+		y = maxY;
+	if(x > maxX)
 		x = 0;
 	if(x < 0)
-		x = window.innerWidth;
+		x = maxX;
 
 	state--;
 
@@ -280,3 +289,18 @@ function debounce(func, timeout = 300){
 	};
 }
 
+
+
+function verifierCaracteres(contexte, event) {
+	 		
+	var keyCode = event.which ? event.which : event.keyCode;
+	var touche = String.fromCharCode(keyCode);
+			
+			
+	var caracteres = '0123456789';
+			
+	if(caracteres.indexOf(touche) >= 0) {
+		contexte.value += touche;
+	}
+			
+}

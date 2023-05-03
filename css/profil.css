@@ -5,19 +5,19 @@
     left: 2%;
     height: 90%;
     width: 96%;
-    background-color: var(--fourth-color);
-    border-radius: 20px; 
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: stretch;
     flex-flow: row wrap;
+    background-color: inherit;
   }
 
   .contour > *  {
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: inherit;
   }
   .info > * > .group {
     display: flex;
@@ -31,12 +31,14 @@
   .titre {
     font-size: 30px;
     font-weight: bold;
-    margin: 5% 1px 5% 7%;
+    margin: 30px 1px 30px 4%;
     cursor: default;
   }
+
   .pdp {
     cursor: default;
   }
+  
   .mdp > * > .group {
     display: flex;
     flex-direction: row;
@@ -57,8 +59,40 @@
   }
 
   #photoDeProfil.photoProfil{
-    margin-left: 5%;
-    width: 45%;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     cursor : default;
+  }
+
+  .mdpMailGestion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    flex-grow: 2;
+    margin-top: 5%;
+  }
+  
+  .gestion{
+    flex-grow: 3;
+    background-color: inherit;
+  }
+  .mdp{
+    flex-grow: 1;
+    width: 45%;
+    min-width: 300px;
+    margin: 0 2%;
+    background-color: inherit;
+  }
+  .mail{
+    flex-grow: 1;
+    width: 45%;
+    min-width: 300px;
+    margin: 0 2%;
+    background-color: inherit;
+  }
+  .info{ 
+    background-color: inherit;
   }

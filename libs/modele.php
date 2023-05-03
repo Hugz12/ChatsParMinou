@@ -56,7 +56,7 @@ function isAdmin($mail){
  */
 function addUserBDD($mail,$password,$name){
     $hashedPassword = hashedPassword($password);
-    $SQL = "INSERT INTO utilisateur (mail,password,name,role) VALUES ('$mail','$hashedPassword','$name',NULL)";
+    $SQL = "INSERT INTO utilisateur (mail,password,name,role) VALUES ('$mail','$hashedPassword','$name',3)";
     return SQLInsert($SQL);
 }
 
@@ -123,7 +123,8 @@ function supprimerEvenement($id){
 function addDemandeAdoptionBDD($codeChat,$nom,$prenom,$mail,$tel,$adresse,$habitation,$exterieur,$sortie,$situationFamiliale,$animaux,$commentaire){
     date_default_timezone_set('Europe/Paris');
     $date = date('d-m-y h:i:s');
-    $SQL = "INSERT INTO demandeadoption (date,codeChat,nom,prenom,mail,tel,adresse,habitation,exterieur,sortie,situationFamiliale,animaux,commentaire,statutDemande,memo,datePv,resultatPv,dateRencontre) VALUES ('$date','$codeChat','$nom','$prenom','$mail','$tel','$adresse','$habitation','$exterieur','$sortie','$situationFamiliale','$animaux','$commentaire',1,'','','','')";
+    $SQL = "INSERT INTO demandeAdoption (date,codeChat,nom,prenom,mail,tel,adresse,habitation,exterieur,sortie,situationFamiliale,animaux,commentaire,statutDemande) VALUES ('$date','$codeChat','$nom','$prenom','$mail','$tel','$adresse','$habitation','$exterieur','$sortie','$situationFamiliale','$animaux','$commentaire',1);
+            INSERT INTO concerne (idDemandeAdoption,codeChat) VALUES (LAST_INSERT_ID(),'$codeChat');";
     return SQLInsert($SQL);
 }
 
@@ -187,7 +188,7 @@ function uploadPhoto($photo, $rep, $name){
  * @return array
  */
 function getDemandes(){
-    $SQL = "SELECT * FROM demandeAdoption JOIN chat ON demandeAdoption.codeChat = chat.code ORDER BY date DESC";
+    $SQL = "SELECT * FROM concerne JOIN chat ON concerne.codeChat = chat.code JOIN demandeAdoption ON concerne.idDemande = demandeAdoption.id ORDER BY date DESC";
     $demandes = parcoursRS(SQLSelect($SQL));
     if ($demandes == array()){
         return false;
@@ -199,8 +200,9 @@ function getDemandes(){
 /** 
  * Fonction qui supprime une demande d'adoption
  */
-function supprimerDemande($id){
-    $SQL = "DELETE FROM demandeAdoption WHERE id=$id";
+function supprimerDemande($id, $code){
+    $SQL = "DELETE FROM concerne WHERE idDemande=$id AND codeChat=$code;
+            DELETE FROM demandeAdoption WHERE id=$id;";
     SQLDelete($SQL);
 }
 
@@ -208,17 +210,15 @@ function supprimerDemande($id){
  * Fonction qui met le statut d'une demande d'adoption à la bonne valeur
  */
 function setStatutDemande($id, $statut){
-    if ($statut == 1 || $statut == 3) $aux = 2;
-    else $aux = 3;
-    $SQL = "UPDATE demandeAdoption SET statutDemande=$aux WHERE id=$id";
+    $SQL = "UPDATE demandeAdoption SET statutDemande=$statut WHERE id=$id";
     SQLUpdate($SQL);
 }
 
 /** 
  * Fonction qui met à jour le contenu d'un memo
  */
-function setMemo($id, $memo, $datePv, $resultatPv, $dateRencontre, $commentaire){
-    $SQL = "UPDATE demandeAdoption SET memo='$memo', datePv='$datePv', resultatPv='$resultatPv', dateRencontre='$dateRencontre', commentaire='$commentaire' WHERE id=$id";
+function setMemo($id, $memo, $datePv, $resultatPv, $dateRencontre){
+    $SQL = "UPDATE demandeAdoption SET memo='$memo', datePv='$datePv', resultatPv='$resultatPv', dateRencontre='$dateRencontre' WHERE id=$id";
     SQLUpdate($SQL);
 }
 
@@ -240,6 +240,11 @@ function addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccue
 
 function getChat($code){
     $SQL = "SELECT * FROM chat WHERE code = $code";
+    return parcoursRS(SQLSelect($SQL));
+}
+
+function getRaces() {
+    $SQL = "SELECT DISTINCT race FROM chat";
     return parcoursRS(SQLSelect($SQL));
 }
 

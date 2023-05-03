@@ -68,6 +68,9 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 			<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
 
 		</div>
+		<div id="zeroChat" class="policeTexte">
+			Aucun chat ne correspond à votre recherche
+		</div>
 	</div>
 
 		
@@ -78,12 +81,53 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		responsivePointsChats();
 	</script> 
 
-	
-	<div id="menuFiltre">
-		
+	<div id="menuFiltre" onclick="updateFiltreAll();" style="right: -300px; display: none;">
+		<div id="filtreTitre">Filtrer vos recherches</div>
+
+		<div id="filtreRace" class="filtre">
+			<div class="filtreTitre">Filtrer par race</div>
+			<div class="filtreContent">
+				
+			</div>
+		</div>
+
+		<div id="filtreSexe" class="filtre">
+			<div class="filtreTitre">Filtrer par sexe</div>
+			<div class="filtreContent">
+				<label class="checkbox">
+					<input type="checkbox" id="filtreMale" checked>
+					<span class="checkmark"></span>
+					<span class="text">Mâle</span>
+				</label>
+
+				<label class="checkbox">
+					<input type="checkbox" id="filtreFemelle" checked>
+					<span class="checkmark"></span>
+					<span class="text">Femelle</span>
+				</label>
+
+			</div>
+		</div>
+
+		<div id="filtreAge" class="filtre">
+			<div class="filtreTitre">Filtrer par age</div>
+			<div class="filtreContent">
+				<form class="filtreAgeBox">
+					<label for="filtreAgeMin">Age minimum : </label>
+					<input type="text" id="filtreAgeMin" onkeypress="verifierCaracteres(this, event); return false;" onkeyup="updateFiltreAll();">
+				</form>
+				<form class="filtreAgeBox">
+					<label for="filtreAgeMax">Age maximum : </label>
+					<input type="text" id="filtreAgeMax" onkeypress="verifierCaracteres(this, event); return false;" onkeyup="updateFiltreAll();">
+				</form>
+			</div>
+		</div>
 	</div>
 	
-
+	<script>
+		var races = <?= json_encode(getRaces()) ?>;
+		addFilterRaces(races);
+	</script> 
 
 	
 </div>

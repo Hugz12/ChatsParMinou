@@ -500,20 +500,20 @@ function displayFilter() {
 }
 
 function rechercheChat() {
-	console.log(event);
+	var nbChatsShow = 0;
 	var input = document.getElementById("rechercheChats");
 	var recherche = input.value.toUpperCase();
 	console.log(recherche);
 	var allSlider = document.getElementById('allSliderChats');
 	var allSliderPoints = document.getElementById('allSliderPointsChats');
 
-	console.log(allSlider);
 	var listeChats = allSlider.getElementsByClassName('chatNom');
 	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
 	for (var i = 0; i < listeChats.length; i++) {
 
 		if (listeChats[i].innerHTML.toUpperCase().includes(recherche)) {
 			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+			nbChatsShow++;
 		}
 		else {
 			listeChats[i].parentElement.parentElement.parentElement.style.display = "none";
@@ -521,6 +521,7 @@ function rechercheChat() {
 
 		if (listePoints[i].alt.toUpperCase().includes(recherche)) {
 			listePoints[i].style.display = "block";
+			nbChatsShow++;
 		}
 		else {
 			listePoints[i].style.display = "none";
@@ -533,23 +534,33 @@ function rechercheChat() {
 
 	}
 	responsivePointsChats();
+	var allSlider = document.getElementById("allSliderChats");
+	if (nbChatsShow == 0) {
+		$(allSlider).children(".slider")[0].style.display = "none";
+		document.getElementById("zeroChat").style.display = "block";
+	}
+	else {
+		$(allSlider).children(".slider")[0].style.display = "block"
+		document.getElementById("zeroChat").style.display = "none";
+	}
+	allSlider.style.setProperty("--transform", 0);
 }
 
 const rechercher = debounce(() => rechercheChat(), 500);
 
 
 const responsivePointsChatsDebounce = debounce(() => responsivePointsChats());
+const updateFiltreDebounce = debounce(() => updateFiltre());
 
 window.addEventListener("resize", responsivePointsChatsDebounce);
+window.addEventListener("resize", updateFiltreDebounce);
 
 
 function responsivePointsChats() {
 	
 	var allSliderPoints = document.getElementById('allSliderPointsChats');
-	console.log(allSliderPoints);
 	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
 	var nbElement = 0;
-	console.log(listePoints);
 	for (var i = 0; i < listePoints.length; i++) {
 		if (window.getComputedStyle(listePoints[i]).getPropertyValue("display") == "block") {
 			nbElement += 1;
@@ -560,7 +571,6 @@ function responsivePointsChats() {
 	var x = window.getComputedStyle(allSliderPoints).getPropertyValue("--taille").slice(0, -2);
 	var y = window.getComputedStyle(allSliderPoints).getPropertyValue("--nbElement");
 	var taille = x/y;
-	console.log(taille);
 	
 	
 	
@@ -588,5 +598,231 @@ function responsivePointsChats() {
 
 
 
+function addFilterRaces(races) {
+	console.log(races);
+	var filtreContent = $("#filtreRace").children(".filtreContent");
+	for (let i = 0; i < races.length; i++) {
+		filtreContent.append(`
+			<label class="checkbox">
+				<input type="checkbox" id="filtreRaces${i}" checked>
+				<span class="checkmark"></span>
+				<span class="text">${races[i]["race"]}</span>
+			</label>
+		`);
+		
+	}
+}
 
 
+
+
+function updateFiltre () {
+	console.log("updateFiltre");
+
+	var chats = $(".slideChat");
+	var chatsSmall = $(".slideChatSmall");
+	var pointsChats = $(".slidePointChats");
+
+	if (window.innerWidth < 850) {
+		for (let i = 0; i < chats.length; i++) {
+			chats[i].style.display = "none";
+			chatsSmall[i].style.display = "block";
+			pointsChats[i].style.display = "block";
+		}
+	}
+	else {
+		for (let i = 0; i < chats.length; i++) {
+			chats[i].style.display = "block";
+			chatsSmall[i].style.display = "none";
+			pointsChats[i].style.display = "block";
+		}
+	}
+
+
+	updateFiltreRace();
+	updateFiltreSexe();
+	updateFiltreAge();
+
+	var nbChatsShow = 0;
+	var allSlider = document.getElementById("allSliderChats");
+	var slides = $(allSlider).children(".slider").children(".slides");
+	for (let i = 0; i < slides.children().length; i++) {
+		if (slides.children()[i].style.display == "block") {
+			nbChatsShow++;
+		}
+	}
+	if (nbChatsShow == 0) {
+		$(allSlider).children(".slider")[0].style.display = "none";
+		document.getElementById("zeroChat").style.display = "block";
+	}
+	else {
+		$(allSlider).children(".slider")[0].style.display = "block"
+		document.getElementById("zeroChat").style.display = "none";
+	}
+	allSlider.style.setProperty("--transform", 0);
+
+	responsivePointsChats();
+}
+
+function updateFiltreRace() {
+	console.log("updateRace");
+
+	var taille = $("#filtreRace").children(".filtreContent").children().length;
+
+	var chats = $(".slideChat");
+	var infos = $(".chatInfos1");
+	var chatsSmall = $(".slideChatSmall");
+	var infosSmall = $(".firstBanner");
+	var pointsChats = $(".slidePointChats");
+
+	if (window.innerWidth < 850) {
+		for (let i = 0; i < taille; i++) {
+			var race = $("#filtreRaces" + i).parent().children(".text")[0].innerHTML;
+			if (document.getElementById("filtreRaces" + i).checked == false) {
+				for (let j = 0; j < infos.length; j++) {
+					if ($(infosSmall[j]).children().eq(1).children().eq(1)[0].innerHTML.normalize() === race.normalize()) {
+						chatsSmall[j].style.display = "none";
+						pointsChats[j].style.display = "none";
+					}
+				}
+			}
+			
+		}
+	}
+	else {
+		for (let i = 0; i < taille; i++) {
+			var race = $("#filtreRaces" + i).parent().children(".text")[0].innerHTML;
+			if (document.getElementById("filtreRaces" + i).checked == false) {
+				for (let j = 0; j < infos.length; j++) {
+					if ($(infos[j]).children().eq(1).children().eq(1)[0].innerHTML.normalize() === race.normalize()) {
+						chats[j].style.display = "none";
+						pointsChats[j].style.display = "none";
+					}
+				}
+			}
+			
+		}
+	}
+	
+}
+
+function updateFiltreSexe() {
+	console.log("updateSexe");
+
+	var chats = $(".slideChat");
+	var infos = $(".chatInfos1");
+	var chatsSmall = $(".slideChatSmall");
+	var infosSmall = $(".firstBanner");
+	var pointsChats = $(".slidePointChats");
+
+
+	if (window.innerWidth < 850) {
+		if (document.getElementById("filtreMale").checked == false) {
+			for (let j = 0; j < infos.length; j++) {
+				if ($(infosSmall[j]).children().eq(2).children().eq(1)[0].innerHTML.normalize() === "Mâle".normalize()) {
+					chatsSmall[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+
+		if (document.getElementById("filtreFemelle").checked == false) {
+			for (let j = 0; j < infos.length; j++) {
+				if ($(infosSmall[j]).children().eq(2).children().eq(1)[0].innerHTML.normalize() === "Femelle".normalize()) {
+					chatsSmall[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+	}
+	else {
+		if (document.getElementById("filtreFemelle").checked == false) {
+			for (let j = 0; j < infos.length; j++) {
+				if ($(infos[j]).children().eq(2).children().eq(1)[0].innerHTML.normalize() === "Femelle".normalize()) {
+					chats[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+
+		if (document.getElementById("filtreMale").checked == false) {
+			for (let j = 0; j < infos.length; j++) {
+				if ($(infos[j]).children().eq(2).children().eq(1)[0].innerHTML.normalize() === "Mâle".normalize()) {
+					chats[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+	}
+}
+
+function updateFiltreAge() {
+	console.log("updateAge");
+
+	var filtreAgeMin = document.getElementById("filtreAgeMin");
+	var filtreAgeMax = document.getElementById("filtreAgeMax");
+
+	var chats = $(".slideChat");
+	var infos = $(".chatInfos2");
+	var chatsSmall = $(".slideChatSmall");
+	var infosSmall = $(".secondBanner");
+	var pointsChats = $(".slidePointChats");
+	
+	
+
+	if(filtreAgeMin.value != "") {
+		console.log(filtreAgeMin.value);
+		var ageMin = parseInt(filtreAgeMin.value);
+		if (window.innerWidth < 850) {
+			for (let j = 0; j < infos.length; j++) {
+				var age = (Date.now() - Date.parse($(infosSmall[j]).children().eq(0).children().eq(1)[0].innerHTML.slice(7, 17)))/(60*60*24*365.25*1000);
+				console.log(age);
+				if (age < ageMin) {
+					chatsSmall[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+		else {
+			for (let j = 0; j < infos.length; j++) {
+				console.log($(infos[j]).children().eq(0).children().eq(1)[0].innerHTML.slice(6, 16));
+				var age = (Date.now() - Date.parse($(infos[j]).children().eq(0).children().eq(1)[0].innerHTML.slice(6, 16)))/(60*60*24*365.25*1000);
+				console.log(age);
+				if (age < ageMin) {
+					chats[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+	}
+
+	if(filtreAgeMax.value != "") {
+		console.log(filtreAgeMax.value);
+		var ageMax = parseInt(filtreAgeMax.value);
+		if (window.innerWidth < 850) {
+			for (let j = 0; j < infos.length; j++) {
+				var age = (Date.now() - Date.parse($(infosSmall[j]).children().eq(0).children().eq(1)[0].innerHTML.slice(7, 17)))/(60*60*24*365.25*1000);
+				console.log(age);
+				if (age > ageMax) {
+					chatsSmall[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+		else {
+			for (let j = 0; j < infos.length; j++) {
+				var age = (Date.now() - Date.parse($(infos[j]).children().eq(0).children().eq(1)[0].innerHTML.slice(6, 16)))/(60*60*24*365.25*1000);
+				console.log(age);
+				if (age > ageMax) {
+					chats[j].style.display = "none";
+					pointsChats[j].style.display = "none";
+				}
+			}
+		}
+
+	}
+
+}
+
+
+const updateFiltreAll = debounce(() => updateFiltre(), 500);
