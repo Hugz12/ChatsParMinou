@@ -17,42 +17,58 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id ="allFormulaireAdoption" class="policeTexte" >
     <div id="titreFormulaireAdoption" class ="policeTitre">formulaire d'adoption</div>
     <form action="controleur.php" method="get">
+        <div id="titre">Informations personnelles</div>
         <div id="infoPerso">
-            <div>Informations personnelles</div>
-            <div class='group'>
-                <input type='text' name='nom' required>
-                <label for="nom">Nom</label>
+            <div class='p1'>
+                <div class='group'>
+                    <input type='text' name='nom' required>
+                    <label for="nom">Nom</label>
+                </div>
+                <div class='group'>
+                    <input type='text' name='prenom' required>
+                    <label for="prenom">Prénom</label>
+                </div>
+                <div class='group'>
+                    <input type='text' name='mail' required>
+                    <label for="mail">Adresse mail</label>
+                </div>
             </div>
-            <div class='group'>
-                <input type='text' name='prenom' required>
-                <label for="prenom">Prénom</label>
-            </div>
-            <div class='group'>
-                <input type='text' name='mail' required>
-                <label for="mail">Adresse mail</label>
-            </div>
-            <div class='group'>
-                <input type='text' name='tel' required>
-                <label for="tel">Numéro de téléphone</label>
-            </div>
-            <div class='group'>
-                <input type='text' name='adresse' required>
-                <label for="adresse">Adresse</label>
-            </div>
-            <div class='group'>
-                <input type='text' name='habitation' required>
-                <label for="habitation">Type d'habitation</label>
+            <div class='p2'>
+                <div class='group'>
+                    <input type='text' name='tel' required>
+                    <label for="tel">Numéro de téléphone</label>
+                </div>
+                <div class='group'>
+                    <input type='text' name='adresse' required>
+                    <label for="adresse">Adresse</label>
+                </div>
+                <div class='group'>
+                    <input type='text' name='habitation' required>
+                    <label for="habitation">Type d'habitation</label>
+                </div>
             </div>
         </div>
         <div id="infoChat">
-            <div>Informations sur le chat</div>
+            <div id="titre">Choix des chats</div>
             <div class='group'>
                 <input type='text' name='nomChat' required>
                 <label for="nomChat">Nom du chat</label>
             </div>
-
-            <div> <input id="checkboxFormulaireAdoption" type="checkbox" class="champDeTexte" name="exterieur" required/>Je dispose d'un extérieur  </div>
-            <div> <input id="checkboxFormulaireAdoption" type="checkbox" class="champDeTexte" name="sortie" required/> Le chat pourra sortir ? </div>
+        </div>
+        <div id="infoAdoption">
+            <div id="titre">Informations pratiques</div>
+            <div id="coche">
+                <label class="checkbox">
+                        <input type="checkbox" id="filtreFemelle">
+                        <span class="checkmark"></span>
+                        <span class="textP">Je dispose d'un espace extérieur</span>
+                </label>
+                <label class="checkbox">
+                        <input type="checkbox" id="filtreFemelle">
+                        <span class="checkmark"></span>
+                        <span class="textP">Le chat aura la possibilité de sortir</span>
+                </label>
+            </div>
             <div class='group'>
                 <input type='text' name='animaux' required>
                 <label for="animaux">Animaux</label>
@@ -62,12 +78,21 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 <label for="situationFamiliale">Situation familiale</label>
             </div>
             <div class='group'>
-                <input type='textarea' name='commentaire' required>
-                <label for="commentaire">Commentaire</label>
-            </div>
-            <div><input id="checkboxFormulaireAdoption" type ="checkbox" name="engagement" required/> J’ai lu et j’ai pris connaissances du <a id="lienFormulaireAdoption" href="http://jeuxstrategie.free.fr/Avalam_complet.php">Certificat d’engagement </a></div>
-            <div><input id="checkboxFormulaireAdoption" type ="checkbox" name="previsite" required/> Je m'engage à prendre en charge les frais de vétérinaire et faire une prévisite </div>
-            <input id ="submitFormulaireAdoption"type="submit" name="action" value="Demande adoption"/>
+                <input type='text' name='commentaire' required>
+                <label for="commentaire">Commentaire libre</label>
+            </div>           
+
+            <label class="checkbox">
+					<input type="checkbox" id="filtreFemelle" required>
+					<span class="checkmark"></span>
+					<span class="text">Je m'engage à faire une prévisite et à prendre en charge les frais de vétérinaire </span>
+			</label>
+            <label class="checkbox">
+					<input type="checkbox" id="filtreFemelle" required>
+					<span class="checkmark"></span>
+					<span class="text">J'ai pris conscience du certificat d'engagement</span>
+			</label>
         </div>
+        <input id ="submitFormulaireAdoption"type="submit" name="action" value="Demande adoption"/>
     </form>
 </div>

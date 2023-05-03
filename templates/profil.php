@@ -17,8 +17,8 @@ if (!valider('Connecte', 'SESSION')) {
 
 <div class="titre">
 				<?php
-				$nom = "$_SESSION[mail]";
-				echo "Bonjour  " . $nom . ", voici votre profil";
+				$mail = "$_SESSION[mail]";
+				echo "Bonjour  " .$mail. ", voici votre profil";
 				?> 
 </div>
 			
