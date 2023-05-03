@@ -36,25 +36,26 @@ if (!valider('Connecte', 'SESSION')) {
 		</div>
 
 		<div class="info">
-				<form>
-					<div class='group'>
-										<input type='text' name='nom' required>
-										<label for="nom">Nom</label>
-					</div>
+			<form>
+				<div class='group'>
+									<input type='text' name='nom' required>
+									<label for="nom">Nom</label>
+				</div>
 
-					<div class='group'>
-										<input type='text' name='prenom' required>
-										<label for="prenom">Prénom</label>
-					</div>
+				<div class='group'>
+									<input type='text' name='prenom' required>
+									<label for="prenom">Prénom</label>
+				</div>
 
-					<div class='group'>
-										<input type='text' name='mail' value="<?php echo"$_SESSION[mail]"; ?>"required>
-										<label for="mail">Adresse mail</label>
-					</div>
+				<div class='group'>
+									<input type='text' name='mail' value="<?php echo"$_SESSION[mail]"; ?>"required>
+									<label for="mail">Adresse mail</label>
+				</div>
 
-					<input type="submit" class="buttonType" value="Modifier mes informations personnelles">
-				</form>
-  
+				<input type="submit" class="buttonType" value="Modifier mes informations personnelles">
+			</form>
+		</div>
+	</div>
 	<div class="mdpMailGestion">
 		<div class="mdp">
 			<div class="titre">Changer de mot de passe</div>

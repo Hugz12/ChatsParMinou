@@ -62,4 +62,4 @@ function responsive () {
 
 window.addEventListener("resize", responsive);
 
-window.addEventListener("onload", responsive);
+window.addEventListener("load", responsive);

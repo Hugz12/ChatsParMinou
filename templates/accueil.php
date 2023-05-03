@@ -30,7 +30,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 	<!-- Debut Affichage du Chat du Mois -->
-	
+	<div id="boxTitreChatDuMois">
+		<div id="titreChatDuMois" class="policeTitre">Notre chat du mois</div>
+		<div id="sousTitreChatDuMois" class="policeTexte">Il a besoins de vous. Venez l'adopter</div>
+	</div>
 	<div id="allChatDuMois"></div>
 	<div id="allChatDuMoisSmall"></div>
 
@@ -127,7 +130,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 					
 						<div class='group'>
-							<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d')."'>
+							<input type='date' name='date' required onchange=\"changerDate(this);\" min='".date('Y-m-d')."'>
 							<label for=\"date\">Date</label>
 						</div>
 

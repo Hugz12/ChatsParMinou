@@ -138,8 +138,10 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
+			if ($heure = valider("heure","POST"))
 			if ($couleur = valider("couleur","POST"))
 			if ($image = valider("image","FILES")){
+				$date = $date." ".$heure.":00"; // On concatène la date et l'heure
 				// On ajoute l'événement à la BDD
 				$id = addEvenement($titre,$description,$date,$couleur);
 				if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg

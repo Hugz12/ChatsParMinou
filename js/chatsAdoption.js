@@ -23,6 +23,8 @@ function afficherChats(chats) {
 				<div class="chatBox">
 					<div class="chatNomBlock">
 						<div class="chatNom policeTitre">${chatActuel['name']}</div>
+						${chatActuel['chatDuMois'] ? '<div class="tailleTitre policeTitre titreChatDuMois">Notre chat du mois</div>' : ''}
+
 					</div>
 					<div class="chatContent policeTexte">
 						<div class="chatInfos">
@@ -70,6 +72,7 @@ function afficherChats(chats) {
 			<div class="slideChatSmall slide">
 				<div class="firstBanner">
 					<div class="tailleTitre policeTitre titreChatDuMois">${chatActuel['name']}</div>
+
 					
 					<div class="chatInfoSmall">
 						<div class="policeTexte boxInfoTitle">Race</div>
@@ -177,6 +180,7 @@ function afficherChats(chats) {
 		
 		
 	}
+
 	
 
 	if(admin) {
@@ -264,9 +268,9 @@ function displayFormEditChat(element){
 
 								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
 									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
-									<div class='photoGauche'><img src='./ressources/logo.png'></div>
+									<div class='photoGauche'><img src='./ressources/logo_toutnoir.png'></div>
 									<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
-									<div class='photoDroite'><img src='./ressources/famille_accueil.png'></div>
+									<div class='photoDroite'><img src='./ressources/famille_accueil_noir.png'></div>
 									<input type='hidden' name='familleAccueil' value='1'> 
 								</div>
 
@@ -549,7 +553,7 @@ function rechercheChat() {
 const rechercher = debounce(() => rechercheChat(), 500);
 
 
-const responsivePointsChatsDebounce = debounce(() => responsivePointsChats());
+const responsivePointsChatsDebounce = debounce(() => responsivePointsChats(), 10);
 const updateFiltreDebounce = debounce(() => updateFiltre());
 
 window.addEventListener("resize", responsivePointsChatsDebounce);
@@ -619,6 +623,16 @@ function addFilterRaces(races) {
 function updateFiltre () {
 	console.log("updateFiltre");
 
+	var nbChatsShowBefore = 0;
+	var allSlider = document.getElementById("allSliderChats");
+	var slides = $(allSlider).children(".slider").children(".slides");
+	for (let i = 0; i < slides.children().length; i++) {
+		if (slides.children()[i].style.display == "block") {
+			nbChatsShowBefore++;
+		}
+	}
+
+
 	var chats = $(".slideChat");
 	var chatsSmall = $(".slideChatSmall");
 	var pointsChats = $(".slidePointChats");
@@ -644,8 +658,7 @@ function updateFiltre () {
 	updateFiltreAge();
 
 	var nbChatsShow = 0;
-	var allSlider = document.getElementById("allSliderChats");
-	var slides = $(allSlider).children(".slider").children(".slides");
+	
 	for (let i = 0; i < slides.children().length; i++) {
 		if (slides.children()[i].style.display == "block") {
 			nbChatsShow++;
@@ -659,7 +672,9 @@ function updateFiltre () {
 		$(allSlider).children(".slider")[0].style.display = "block"
 		document.getElementById("zeroChat").style.display = "none";
 	}
-	allSlider.style.setProperty("--transform", 0);
+	if (nbChatsShow != nbChatsShowBefore) {
+		allSlider.style.setProperty("--transform", 0);
+	}
 
 	responsivePointsChats();
 }
@@ -825,4 +840,4 @@ function updateFiltreAge() {
 }
 
 
-const updateFiltreAll = debounce(() => updateFiltre(), 500);
+const updateFiltreAll = debounce(() => updateFiltre(), 10);
