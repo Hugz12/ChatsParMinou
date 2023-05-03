@@ -15,7 +15,9 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 <link rel="stylesheet" href="./css/connexion.css">
 <script src="./js/connexion.js"></script>
 
-<div class="conteneurDeConteneurDePattes">
+
+
+<div id="patteConnexion" class="conteneurDeConteneurDePattes">
     <div id="1" class="patteContainer"></div>
     <div id="2" class="patteContainer"></div>
     <div id="3" class="patteContainer"></div>
@@ -108,5 +110,3 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 
 </div>
-
-

@@ -26,7 +26,7 @@ if (!valider('Admin', 'SESSION')) {
 
 <div id="recherche">
 	
-	<div class="container">
+	<div id="container">
 		<div class="dropdown">
 			<div class="select">
 				<span id="selectRecherche">Recherche générale</span>
@@ -47,23 +47,25 @@ if (!valider('Admin', 'SESSION')) {
 		</div>
 	</form>
 
-	<div id="btnTriTps" onclick='etatBtnTri(this);'>
-		<div>Récent</div>
-		<input type='checkbox'>
+	<div id="triTps">
+		<p>Récent</p>
+		<div id="btnTriTps">
+			<input type='checkbox'>
+		</div>
 	</div>
 	
 	<div id="i">i</div>
 </div>
 
-<div id="nouvellesDemandes" class="conteneurDemandes"></div>
+<div id="nouvellesDemandes"></div>
 
 <div id="lienNouvellesDemandes" class="lienPlusMoins">Montrer plus</div>
 
-<div id="demandesEnCours" class="conteneurDemandes"></div>
+<div id="demandesEnCours"></div>
 
 <div id="lienEnCours" class="lienPlusMoins">Montrer plus</div>
 
-<div id="traitees" class="conteneurDemandes"></div>
+<div id="traitees"></div>
 
 <div id="lienTraitees" class="lienPlusMoins">Montrer plus</div>
 

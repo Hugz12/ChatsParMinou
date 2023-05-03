@@ -179,14 +179,20 @@
 	position: absolute;
 	top: 70px;
 	right: -300px;
-	bottom: 100px;
+	bottom: 200px;
 	z-index: 2;
 	width: 300px;
 	background-color: var(--sixth-color);
 	padding: 10px;
 	transition: transform 0.3s ease;
 	overflow: scroll;
+	direction: rtl;
 }
+
+#menuFiltre * {
+	direction: ltr;
+}
+
 
 
 #filtreTitre {

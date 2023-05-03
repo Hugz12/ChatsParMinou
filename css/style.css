@@ -7,6 +7,7 @@
 	--third-color: #83BCF2;
 	--fourth-color: #CDE4FA;
 	--fifth-color: #1486f2;
+	--sixth-color: #DBE7F2;
 }
 /*
 @font-face {
@@ -33,18 +34,23 @@
 
 html {
 	min-height: 100vh;
+
 }
 
 body{
 	position: relative;
 	background: var(--main-color);
 	height: 100%;
-	min-height: calc(100vh - 150px);
+	min-height: 100vh;
+	box-sizing: border-box;
 	color: black;
 	font-size: 14px;
 	margin: 0;
-	padding: 0;
-	padding-bottom: 150px;
+	padding: 70px 0 0 0;
+}
+
+#pageContent {
+	min-height: calc(100vh - 320px);
 }
 
 .policeTitre {
@@ -424,6 +430,7 @@ g {
 	left : 50%;
 	top : 50%;
 	position: absolute;
+	overflow: hidden;
 }
 
 
@@ -435,7 +442,7 @@ g {
 
 .conteneurDeConteneurDePattes {
 	width: 100vw;
-	height: calc(100% - 170px);
+	height: calc(100%);
 	position: absolute;
 	top: 70px;
 }

@@ -13,8 +13,8 @@ body {
 
 .flip-card {
     background-color: transparent;
-    width: 305px;
-    height: 406px;
+    width: 455px;
+    height: 656px;
     perspective: 1000px;
     font-family: sans-serif;
     margin: 100px 20px 100px 20px;
@@ -51,19 +51,19 @@ body {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border: 1px solid var(--third-color);
+    border: 1px solid var(--sixth-color);
     border-radius: 1rem;
   }
   
 .flip-card-front {
-    background: linear-gradient(120deg, var(--sec-color) 60%, var(--fourth-color) 88%,
-       var(--main-color) 40%, var(--third-color) 48%);
+    background: linear-gradient(120deg, var(--sec-color) 60%, var(--sixth-color) 88%,
+       var(--main-color) 40%, var(--sixth-color) 48%);
     color: black;
   }
   
 .flip-card-back {
-    background: linear-gradient(120deg, var(--third-color) 30%, var(--sec-color) 88%,
-       var(--fourth-color) 40%, var(--third-color) 78%);
+    background: linear-gradient(120deg, var(--sec-color) 60%, var(--sixth-color) 88%,
+    var(--main-color) 40%, var(--sixth-color) 48%);
     color: black;
     transform: rotateY(180deg);
   }
@@ -71,7 +71,7 @@ body {
 .container {
     width: 100%;
     height: calc(100% - 70px);
-    background: linear-gradient(to top, var(--third-color) 0%, var(--main-color) 70%);
+    background: linear-gradient(to top, var(--sixth-color) 0%, var(--main-color) 50%);
     box-sizing: border-box;
     align-items:center;
     justify-content: space-around;
@@ -80,13 +80,6 @@ body {
     padding: 50px 100px;
   }
 
-#cardG {
-    transform : rotate(-12deg) translateY(50px);
-  }
-
-#cardD {
-    transform : rotate(12deg) translateY(50px);    
-  }
 
 /* pour les écrans de petite taille */
 @media (max-width: 1210px) {
@@ -97,14 +90,6 @@ body {
 
   .flip-card {
     margin-bottom: 50px;
-  }
-
-  #cardG {
-    transform : rotate(0deg) translateY(0px);
-  }
-
-  #cardD {
-    transform : rotate(0deg) translateY(0px);    
   }
 
   html, body {
