@@ -185,8 +185,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-
-
+				
 		case 'Changer Memo' :
 			// On vérifie la présence des champs
 			if ($id = valider("id"))
@@ -433,8 +432,25 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				die(); 
 			}
 		break; 
+		
+		case 'changerNom' :
+			if ($nom = valider("nom")){
+				changerNom($nom);
+				ob_clean();
+				header('Content-Type: application/json');
+				echo json_encode("ok");
+				die();
+			}
+		break;
 
-
+		case 'changerMail' :
+			if ($mail = valider("mail")){
+				changerMail($mail);
+				ob_clean();
+				header('Content-Type: application/json');
+				echo json_encode("ok");
+				die();
+			}
 		
 
 	}

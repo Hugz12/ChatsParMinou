@@ -9,8 +9,8 @@ if (!valider('Connecte', 'SESSION')) {
 	header("Location:./index.php?view=accueil");
 	die();
 }
-
 ?>
+
 <link rel="stylesheet" href="./css/profil.css">
 <link rel="stylesheet" href="css/form.css">
 <script src="./js/profil.js"></script>
@@ -34,32 +34,19 @@ if (!valider('Connecte', 'SESSION')) {
 			</form>
 		</div>
 
-		<div class="info">
-		<form>
-			<div class='group'>
-			<?php
-			$nom=getNomUtilisateur($_SESSION['mail']);
-			echo "<input type='text' name='nom' value='$nom' id='nom-input' required>";
-			?>
-			<label for="nom">Nom et prénom</label>
-			</div>
-			<input type="submit" onclick="changerNomUtilisateur('<?php echo $_SESSION['mail']; ?>', document.getElementsByName('nom')[0].value); console.log('<?php echo $_SESSION['mail']; ?>', document.getElementsByName('nom')[0].value);" class="buttonType" value="Modifier mes informations personnelles">
-		</form>
-		</div>
+				<div class="info">
+			<form>
+				<div class='group'>
+					<?php
+						$nom=getNomUtilisateur($_SESSION['mail']);
+						echo "<input type='text' name='nom' value='$nom' id='nom-input' required>";
+					?>
+					<label for="nom">Nom et prénom</label>
+				</div>
+				<input type="button" class="buttonType" value="changer de nom" onclick="changerNom();" >
 
-		<script>
-		const nomInput = document.getElementById('nom-input');
-		nomInput.addEventListener('change', function() {
-			localStorage.setItem('nom-utilisateur', nomInput.value);
-		});
-		
-		window.addEventListener('load', function() {
-			const nomUtilisateur = localStorage.getItem('nom-utilisateur');
-			if (nomUtilisateur) {
-			nomInput.value = nomUtilisateur;
-			}
-		});
-		</script>
+			</form>
+
 	</div>
 
 	<div class="mdpMailGestion">
@@ -91,11 +78,11 @@ if (!valider('Connecte', 'SESSION')) {
 
 
 					<div class='group'>
-										<input type='text' name='mailn' required>
+										<input type='text' name='mailn' id="mail-input" required>
 										<label for="mailn">Nouveau mail</label>
 					</div>
 
-					<input type="submit" class="buttonType" value="changer d'adresse mail">
+					<input type="button" class="buttonType" value="changer d'adresse mail" onclick="changerMail();">
 				</form>
 		</div>
 		<?php
