@@ -27,7 +27,7 @@ if(isset($_SESSION["message"])){
 		
 		<div id="calendar" class="calendar">
 
-			<div id="previousMonth" class="flecheGauche clickable" onclick="changeMonth(this)" style="left:-30px">
+			<div id="previousMonth" class="flecheGauche clickable" onclick="changeMonth(this); hideForm('containerPassagesRefuge')" style="left:-30px">
 				<?php include("./ressources/flecheLeft.svg");?>
 			</div>
 
@@ -55,7 +55,7 @@ if(isset($_SESSION["message"])){
 
 			<div class="days policeTexte"></div>
 
-			<div id="nextMonth" class="flecheDroite clickable" onclick="changeMonth(this)" style="right:-30px">
+			<div id="nextMonth" class="flecheDroite clickable" onclick="changeMonth(this); hideForm('containerPassagesRefuge')" style="right:-30px">
 				<?php include("./ressources/flecheRight.svg");?>
 			</div>
 		</div>
@@ -63,6 +63,7 @@ if(isset($_SESSION["message"])){
 	</div>
 	
 	<div id="containerPassagesRefuge">
+		<div class="dayPassageRefuge"></div>
 		<div class='buttonHideForm' onclick='hideForm("containerPassagesRefuge");'>
 			<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 		</div>

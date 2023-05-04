@@ -47,9 +47,8 @@ function fillCalendar() {
 
                 passage.innerHTML = `
                     <div class="mailBenevole">${element.mailBenevole}</div>
-                    <div class="date">${element.date.split(" ")[0]}</div>
-                    <div class="heureDebut">${element.heureDebut}</div>
-                    <div class="heureFin">${element.heureFin}</div>
+                    <div class="date" style="display:none;">${element.date.split(" ")[0]}</div>
+                    <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
                     <div class="description">${element.description}</div>
                 `;
 
@@ -161,9 +160,8 @@ function changeMonth(element){
 
                 passage.innerHTML = `
                     <div class="mailBenevole">${element.mailBenevole}</div>
-                    <div class="date">${element.date.split(" ")[0]}</div>
-                    <div class="heureDebut">${element.heureDebut}</div>
-                    <div class="heureFin">${element.heureFin}</div>
+                    <div class="date" style="display:none;">${element.date.split(" ")[0]}</div>
+                    <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
                     <div class="description">${element.description}</div>
                 `;
                 
@@ -208,6 +206,7 @@ function setMinDate(){
 
 function displayPassage(element){
     var passagesRefuge = document.getElementById("passagesRefuge");
+    var dayPassageRefuge = document.getElementById("containerPassagesRefuge").children[0];
     var id = element.innerHTML;
     for(elt of passagesRefuge.children){
         // recupere le jour de la date du passage qui est sous format yyy-mm-dd hh:mm:ss
@@ -219,7 +218,11 @@ function displayPassage(element){
             elt.style.display = "none";
         }
     }
+
+    dayPassageRefuge.innerText = "Passages du " + id + " " + monthString[parseInt(calendar.children[1].children[0].children[2].innerHTML)] + " " + calendar.children[1].children[0].children[0].innerHTML;
+    
     passagesRefuge.style.display = "block";
+    displayForm("containerPassagesRefuge");
 }
 
 
