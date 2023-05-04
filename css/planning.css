@@ -106,6 +106,16 @@
     padding: 10px;
 }
 
+.dayPassageRefuge {
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--third-color);
+    margin: 10px;
+    text-align: center;
+
+}
+
 .passage {
     display: none;
     border-radius: 10px;

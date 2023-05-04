@@ -63,6 +63,7 @@ if(isset($_SESSION["message"])){
 	</div>
 	
 	<div id="containerPassagesRefuge">
+		<div class="dayPassageRefuge"></div>
 		<div class='buttonHideForm' onclick='hideForm("containerPassagesRefuge");'>
 			<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 		</div>
