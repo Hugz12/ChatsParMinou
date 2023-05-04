@@ -76,7 +76,7 @@
 }
 
 .currentDay {
-    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 30%, #fff 10%, #fff 100%);
+    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 25%, #fff 10%, #fff 100%);
 }
 
 
@@ -91,10 +91,11 @@
 }
 
 #containerPassagesRefuge {
-    width: clamp(200px, 50vw, 600px);
+    width: clamp(250px, 50vw, 600px);
     height: auto;
     position: absolute;
-    top: 50%;
+    max-height: 500px;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
@@ -104,6 +105,12 @@
     border-radius: 15px;
     opacity: 0;
     padding: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    #containerPassagesRefuge {
+        top: 37%;
+    }
 }
 
 .dayPassageRefuge {
@@ -126,9 +133,15 @@
     background-color: var(--main-color);
 }
 
+
 .passageDay {
     color: var(--third-color);
     cursor: pointer;
+}
+
+.passagesRefuge{
+    max-height: 420px;
+    overflow-y: scroll;
 }
 
 .mailBenevole {
@@ -156,6 +169,39 @@
 
 }
 
+.deletePassage{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 10px;
+    padding: 5px;
+    background-color: var(--fourth-color);
+    text-align: center;
+    border-radius: 0px 10px 0px 10px;
+}
 
+.deletePassage:hover{
+    background-color: var(--third-color);
+}
+
+
+@media screen and (max-width: 600px) {
+    .passage {
+        height: 200px;
+    }
+    .mailBenevole{
+        font-size: 20px;
+    }
+
+    .dayPassageRefuge{
+        font-size: 20px;
+    }
+    
+}
 
 

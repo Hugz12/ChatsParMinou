@@ -4,25 +4,45 @@ function changerPhotoProfil(contexte){
     form.submit();
 }
 
-/**
- * 
- * Fonction qui retourne la liste des utilisateurs
- */
-function listerUtilisateurs(){
-    $SQL = "SELECT name FROM utilisateur";
-    return parcoursRS(SQLSelect($SQL));
+function changerNom() {
+    var inputValue = document.getElementById("nom-input").value;
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "changerNom",
+            "nom" : inputValue,
+        },
+        success: function(retour) {
+            console.log("Votre nom a bien été changé");
+            alert ("Votre nom a bien été changé");
+        },
+        error: function(retour) {
+            console.log("erreur");
+            alert ("Erreur lors du changement de nom");
+        }
+    }) 
 }
 
-/**
- * fonction qui retourne le nom dse l'utilisateur courant
- */
-function getNomUtilisateur($mail){
-    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
-    return SQLGetChamp($SQL);
+function changerMail() {
+    var inputValue2 = document.getElementById("mail-input").value;
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "changerMail",
+            "mail" : inputValue2,
+        },
+        success: function(retour) {
+            console.log("Votre mail a bien été changé");
+            alert ("Votre mail a bien été changé");
+        },
+        error: function(retour) {
+            console.log("erreur");
+            alert ("Erreur lors du changement de mail");
+        }
+    }) 
 }
-
-function changerNomUtilisateur($mail, $nom) {
-    $nom = SQLProteger($nom);
-    $SQL = "UPDATE utilisateur SET name = '$nom' WHERE mail = '$mail'";
-    return SQLExec($SQL);
-  }
+// Path: js\profil.js

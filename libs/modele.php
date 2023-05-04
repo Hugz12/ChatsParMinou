@@ -87,8 +87,17 @@ function listeEvenements(){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function changerNom($name){
+    $mail = $_SESSION['mail'];
+    $SQL = "UPDATE utilisateur SET name = '$name' WHERE mail = '$mail'";
+    return SQLUpdate($SQL);
+}
 
-
+function changerMail($mail){
+    $mailv = $_SESSION['mail'];
+    $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
+    return SQLUpdate($SQL);
+}
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
  * @param $nom
@@ -138,6 +147,24 @@ function addDemandeAdoptionBDD($codeChat,$nom,$prenom,$mail,$tel,$adresse,$habit
 function listerChats(){
     $SQL = "SELECT * FROM chat";
     return parcoursRS(SQLSelect($SQL));
+}
+
+
+/**
+ * 
+ * Fonction qui retourne la liste des utilisateurs
+ */
+function listerUtilisateurs(){
+    $SQL = "SELECT name FROM utilisateur";
+    return parcoursRS(SQLSelect($SQL));
+}
+
+/**
+ * fonction qui retourne le nom dse l'utilisateur courant
+ */
+function getNomUtilisateur($mail){
+    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
 }
 
 
@@ -319,9 +346,14 @@ function supprimerDossier($dir){
     rmdir($dir);
 }
 
-function getPassages($mois){
-    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois";
+function getPassages($mois, $annee){
+    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois AND YEAR(date) = $annee";
     return parcoursRS(SQLSelect($SQL));
+}
+
+function deletePassage($date,$heureDebut,$heureFin){
+    $SQL = "DELETE FROM passageRefuge WHERE heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND date = '$date' AND mailBenevole = '".$_SESSION["mail"]."'";
+    SQLDelete($SQL);
 }
 
 ?>

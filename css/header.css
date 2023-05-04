@@ -45,6 +45,14 @@ header > div {
 	margin: 0 0 0 60px;
 }
 
+@media screen and (max-width: 800px) {
+	#nomAsso {
+		font-size: 25px;
+	}
+}
+	
+
+
 #nomAsso::before {
 	background-image: url("../ressources/logo.png");
 	background-size: 60px 50px;
