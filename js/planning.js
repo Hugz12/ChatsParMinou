@@ -1,8 +1,12 @@
 const monthString = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 //var calendar = document.getElementById("calendar");
+// recupere le localStorage
+var userConnected = localStorage.getItem("userConnected");
+var test = 0;
 
 
-function fillPassagesRefuge(year, month, userConnected){
+
+function fillPassagesRefuge(year, month){
     $.ajax({
         url: "./controleur.php",
         type: "POST",
@@ -32,7 +36,7 @@ function fillPassagesRefuge(year, month, userConnected){
                     <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
                     <div class="description">${element.description}</div>
                 `;
-
+                // recupere le 
                 if(userConnected == element.mailBenevole){
                     var btnSupprimer = document.createElement("div");
                     btnSupprimer.className = "deletePassage";
@@ -69,6 +73,7 @@ function fillPassagesRefuge(year, month, userConnected){
                 }
                 calendar.children[3].appendChild(day);
             }
+            test = 1;
         },
         error: function (data) {
             console.log(data);
@@ -83,7 +88,7 @@ function fillPassagesRefuge(year, month, userConnected){
 
 
 
-function fillCalendar(userConnected) {
+function fillCalendar() {
     var calendar = document.getElementById("calendar");
     // on recupere le mois et l'année actuelle
     var month = new Date().getMonth(); // 0 = janvier, 1 = fevrier, etc...
@@ -107,15 +112,13 @@ function fillCalendar(userConnected) {
         calendar.children[3].appendChild(day.cloneNode());
     }
 
-    console.log(userConnected);
-
     // On remplit 
-    fillPassagesRefuge(year, month, userConnected);
+    fillPassagesRefuge(year, month);
 }
 
 
 
-function changeMonth(element,userConnected){
+function changeMonth(element){
     var calendar = document.getElementById("calendar");
     switch(element.id){
         case "previousMonth":
@@ -161,7 +164,7 @@ function changeMonth(element,userConnected){
 
     
 
-    fillPassagesRefuge(year, month, userConnected);
+    fillPassagesRefuge(year, month);
 }
 
 
@@ -177,17 +180,13 @@ function displayPassage(element){
     var dayPassageRefuge = document.getElementById("containerPassagesRefuge").children[0];
     var id = element.innerHTML;
     id = parseInt(id);
-    console.log(id);
     for(elt of passagesRefuge.children){
 
         // recupere le jour de la date du passage qui est sous format yyy-mm-dd hh:mm:ss
         var jour = elt.children[1].innerHTML.split(" ")[0].split("-")[2];
         jour = parseInt(jour);
-        console.log(jour);
-        console.log(id);
         if(jour === id){
             elt.style.display = "block";
-            console.log("ok");
         }else{
             elt.style.display = "none";
         }
@@ -201,7 +200,7 @@ function displayPassage(element){
 
 
 
-function validerFormPassageRefuge(userConnected){
+function validerFormPassageRefuge(){
     var debut = document.getElementById("debut").value;
     var fin = document.getElementById("fin").value;
     var date = document.getElementById("datePassage").value;
@@ -233,7 +232,7 @@ function validerFormPassageRefuge(userConnected){
             }
             var elt = document.createElement("div");
             elt.id = "refreshMonth";
-            changeMonth(elt,userConnected);
+            changeMonth(elt);
         },
         error: function (data) {
             console.log("error");
@@ -263,25 +262,19 @@ function deletePassage(element){
             "heureFin" : heureFin
         },
         success: function (data) {
+           
             var elt = document.createElement("div");
             elt.id = "refreshMonth";
-            changeMonth(elt,userConnected);
-            elt.innerHTML = date.split("-")[2];
-            if (elt.innerHTML.charAt(0) == "0") {
-                elt.innerHTML = elt.innerHTML.charAt(1);
-            }
-            console.log(elt.innerHTML);
-            // met le en int 
-            displayPassage(elt);
+            
+            changeMonth(elt);
+            alert("Le passage a bien été supprimé");
+            
+            
             
         },
         error: function (data) {
             console.log("error");
         }
     });
-
-
-
-
 }
 
