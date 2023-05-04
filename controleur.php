@@ -356,7 +356,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($heureFin = valider("fin"))
 			if ($description = valider("description"))
 			if (isset($_SESSION["mail"]))
-			if ($heureDebut < $heureFin){
+			if ($heureDebut <= $heureFin){
 
 				$retour = ajouterPassage($date,$heureDebut,$heureFin,$description,$_SESSION["mail"]);
 
@@ -377,6 +377,21 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 			die();
 		break;
+
+		case 'deletePassage' : 
+			if ($date = valider("date"))
+			if ($heureDebut = valider("heureDebut"))
+			if ($heureFin = valider("heureFin")){
+				deletePassage($date,$heureDebut,$heureFin);
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode("deleted"); // On renvoie le message de succès
+				die();
+			}
+			
+		break;
+
+
 
 		// Action qui ne sont pas afficher sur la page, 
 		// c'est a dire qui vont etre appeler via des requetes ajax ou autre
@@ -428,14 +443,25 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'getPassages' : 
 			// qui renvoi les infos de l'événement en json
-			if ($mois = valider("mois")){
-				$passages = getPassages($mois);
+			if ($mois = valider("mois"))
+			if ($annee = valider("annee")){
+				$passages = getPassages($mois,$annee);
 				ob_clean(); // On vide le tampon de sortie
 				header('Content-Type: application/json');
 				echo json_encode($passages);
 				die(); 
 			}
 		break; 
+
+		case 'getConnectedUser' : 
+			// qui renvoi les infos de l'événement en json
+			if (isset($_SESSION["mail"])){
+				$user = $_SESSION["mail"];
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode($user);
+				die(); 
+			}
 
 
 		

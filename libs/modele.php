@@ -328,9 +328,14 @@ function supprimerDossier($dir){
     rmdir($dir);
 }
 
-function getPassages($mois){
-    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois";
+function getPassages($mois, $annee){
+    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois AND YEAR(date) = $annee";
     return parcoursRS(SQLSelect($SQL));
+}
+
+function deletePassage($date,$heureDebut,$heureFin){
+    $SQL = "DELETE FROM passageRefuge WHERE heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND date = '$date' AND mailBenevole = '".$_SESSION["mail"]."'";
+    SQLDelete($SQL);
 }
 
 ?>
