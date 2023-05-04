@@ -1,5 +1,92 @@
 const monthString = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 //var calendar = document.getElementById("calendar");
+// recupere le localStorage
+var userConnected = localStorage.getItem("userConnected");
+var test = 0;
+
+
+
+function fillPassagesRefuge(year, month){
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "getPassages",
+            "mois" : month+1,
+            "annee" : year
+        },
+        success: function (data) {
+            var passagesRefuge = document.getElementById("passagesRefuge"); // On recupere le div des passages
+            passagesRefuge.innerHTML = ""; // On vide le div des passages
+            
+            // ON ajoute les passages dans le conteneur des passages en indiquant le mail du benevole, la date, l'horaire et la description
+            for(element of data){
+
+                // On ajoute le passage
+                var passage = document.createElement("div");
+                passage.className = "passage";
+                // enleve les secondes des heures
+                element.heureDebut = element.heureDebut.split(":")[0] + ":" + element.heureDebut.split(":")[1];
+                element.heureFin = element.heureFin.split(":")[0] + ":" + element.heureFin.split(":")[1];
+
+                passage.innerHTML = `
+                    <div class="mailBenevole">${element.mailBenevole}</div>
+                    <div class="date" style="display:none;">${element.date.split(" ")[0]}</div>
+                    <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
+                    <div class="description">${element.description}</div>
+                `;
+                // recupere le 
+                if(userConnected == element.mailBenevole){
+                    var btnSupprimer = document.createElement("div");
+                    btnSupprimer.className = "deletePassage";
+                    btnSupprimer.innerHTML = "❌";
+                    btnSupprimer.onclick = function(){deletePassage(this)};
+                    passage.appendChild(btnSupprimer);
+                }
+
+                passagesRefuge.appendChild(passage);
+
+                
+            }
+
+
+            // On ajoute les jours du mois dans le calendrier en mettant les classes & les onclicks pour les jours de passages
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+            for (var i = 1; i <= daysInMonth; i++) {
+                var day = document.createElement("div");
+                day.className = "day";
+                if (i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()) {
+                    day.className += " currentDay";
+                }
+                day.innerHTML = i;
+                for(elt of passagesRefuge.children){
+                    // recupere le jour de la date du passage qui est sous format yyy-mm-dd hh:mm:ss
+                    var jour = elt.children[1].innerHTML.split(" ")[0].split("-")[2];
+                    jour = parseInt(jour);
+
+                    // Si le jour du passage est le meme que le jour du calendrier, on ajoute la classe passageDay
+                    if(jour == i && day.classList.contains("passageDay") == false){
+                        day.onclick = function(){displayPassage(this);}
+                        day.className += " passageDay";
+                    }
+                }
+                calendar.children[3].appendChild(day);
+            }
+            test = 1;
+        },
+        error: function (data) {
+            console.log(data);
+            console.log("error");
+        }
+    });
+}
+
+
+
+
+
+
 
 function fillCalendar() {
     var calendar = document.getElementById("calendar");
@@ -12,85 +99,21 @@ function fillCalendar() {
         firstDay = 7;
     }
 
-    // on change le mois et l'année
+    // on set le mois et l'année 
     calendar.children[1].children[0].children[0].innerHTML = year;
     calendar.children[1].children[0].children[1].innerHTML = monthString[month];
     calendar.children[1].children[0].children[2].innerHTML = month;
     
 
-    // on remplit les jours vides
+    // On remplit les jours vides du mois
     var day = document.createElement("div");
     day.className = "day";
     for (var i = 1; i < firstDay; i++) {
         calendar.children[3].appendChild(day.cloneNode());
     }
 
-    $.ajax({
-        url: "./controleur.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            "action" : "getPassages",
-            "mois" : month+1
-        },
-        success: function (data) {
-            var passagesRefuge = document.getElementById("passagesRefuge"); // On recupere le div des passages
-            passagesRefuge.innerHTML = ""; // On vide le div des passages
-            for(element of data){
-
-                // On ajoute le passage
-                var passage = document.createElement("div");
-                passage.className = "passage";
-                // enleve les secondes des heures
-                element.heureDebut = element.heureDebut.split(":")[0] + ":" + element.heureDebut.split(":")[1];
-                element.heureFin = element.heureFin.split(":")[0] + ":" + element.heureFin.split(":")[1];
-
-                passage.innerHTML = `
-                    <div class="mailBenevole">${element.mailBenevole}</div>
-                    <div class="date">${element.date.split(" ")[0]}</div>
-                    <div class="heureDebut">${element.heureDebut}</div>
-                    <div class="heureFin">${element.heureFin}</div>
-                    <div class="description">${element.description}</div>
-                `;
-
-                passagesRefuge.appendChild(passage);
-
-                
-            }
-
-            // On ajoute les jours du mois & les jours avec des passages
-            var daysInMonth = new Date(year, month + 1, 0).getDate();
-            for (var i = 1; i <= daysInMonth; i++) {
-                var day = document.createElement("div");
-                day.className = "day";
-                if (i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()) {
-                    day.className += " currentDay";
-                }
-                day.innerHTML = i;
-                for(var j = 0; j < passagesRefuge.children.length; j++){
-                    // recupere le jour de la date du passage qui est sous format yyy-mm-dd hh:mm:ss
-                    var jour = passagesRefuge.children[j].children[1].innerHTML.split(" ")[0].split("-")[2];
-                    jour = parseInt(jour);
-                    if(jour == i){
-                        day.onclick = function(){displayPassage(this);}
-                        day.className += " passageDay";
-                    }
-                    
-                
-                }
-                calendar.children[3].appendChild(day);
-            }
-        },
-        error: function (data) {
-            console.log(data);
-            console.log("error");
-        }
-    });
-
-   
-
-
-    
+    // On remplit 
+    fillPassagesRefuge(year, month);
 }
 
 
@@ -137,68 +160,14 @@ function changeMonth(element){
     day.className = "day";
     for (var i = 1; i < firstDay; i++) {
         calendar.children[3].appendChild(day.cloneNode());
-
     }
 
-    $.ajax({
-        url: "./controleur.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            "action" : "getPassages",
-            "mois" : month+1
-        },
-        success: function (data) {
-            var passagesRefuge = document.getElementById("passagesRefuge");
-            passagesRefuge.innerHTML = "";
-            for(element of data){
-                var passage = document.createElement("div");
-                passage.className = "passage";
-                // enleve les heures et minutes de la date
-
-                element.heureDebut = element.heureDebut.split(":")[0] + ":" + element.heureDebut.split(":")[1];
-                element.heureFin = element.heureFin.split(":")[0] + ":" + element.heureFin.split(":")[1];
-
-                passage.innerHTML = `
-                    <div class="mailBenevole">${element.mailBenevole}</div>
-                    <div class="date">${element.date.split(" ")[0]}</div>
-                    <div class="heureDebut">${element.heureDebut}</div>
-                    <div class="heureFin">${element.heureFin}</div>
-                    <div class="description">${element.description}</div>
-                `;
-                
-                passagesRefuge.appendChild(passage);
-            }
-
-            var daysInMonth = new Date(year, month + 1, 0).getDate();
-            var passagesRefuge = document.getElementById("passagesRefuge");
-            
-            for (var i = 1; i <= daysInMonth; i++) {
-                var day = document.createElement("div");
-                day.className = "day";
-                if (i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()) {
-                    day.className += " currentDay";
-                }
-                day.innerHTML = i;
-                for(elt of passagesRefuge.children){
-                    // recupere le jour de la date du passage qui est sous format yyy-mm-dd hh:mm:ss
-                    var jour = elt.children[1].innerHTML.split(" ")[0].split("-")[2];
-                    jour = parseInt(jour);
-                    if(jour == i && day.className != "currentDay passageDay"){
-                        day.onclick = function(){displayPassage(this);}
-                        day.className += " passageDay";
-                    }
-                }
-                calendar.children[3].appendChild(day);
-            }
-        },
-        error: function (data) {
-            console.log("error");
-        }
-    });
-
     
+
+    fillPassagesRefuge(year, month);
 }
+
+
 
 function setMinDate(){
     var date = document.getElementById("datePassage");
@@ -208,18 +177,25 @@ function setMinDate(){
 
 function displayPassage(element){
     var passagesRefuge = document.getElementById("passagesRefuge");
+    var dayPassageRefuge = document.getElementById("containerPassagesRefuge").children[0];
     var id = element.innerHTML;
+    id = parseInt(id);
     for(elt of passagesRefuge.children){
+
         // recupere le jour de la date du passage qui est sous format yyy-mm-dd hh:mm:ss
         var jour = elt.children[1].innerHTML.split(" ")[0].split("-")[2];
         jour = parseInt(jour);
-        if(jour == id){
+        if(jour === id){
             elt.style.display = "block";
         }else{
             elt.style.display = "none";
         }
     }
+
+    dayPassageRefuge.innerText = "Passages du " + id + " " + monthString[parseInt(calendar.children[1].children[0].children[2].innerHTML)] + " " + calendar.children[1].children[0].children[0].innerHTML;
+    
     passagesRefuge.style.display = "block";
+    displayForm("containerPassagesRefuge");
 }
 
 
@@ -264,3 +240,41 @@ function validerFormPassageRefuge(){
     });
 
 }
+
+
+function deletePassage(element){
+    var passage = element.parentNode;
+    var date = passage.children[1].innerHTML;
+    var heureDebut = passage.children[2].innerHTML.split(" ")[1];
+    var heureFin = passage.children[2].innerHTML.split(" ")[3];
+    console.log(date);
+    console.log(heureDebut);
+    console.log(heureFin);
+
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "deletePassage",
+            "date" : date,
+            "heureDebut" : heureDebut,
+            "heureFin" : heureFin
+        },
+        success: function (data) {
+           
+            var elt = document.createElement("div");
+            elt.id = "refreshMonth";
+            
+            changeMonth(elt);
+            alert("Le passage a bien été supprimé");
+            
+            
+            
+        },
+        error: function (data) {
+            console.log("error");
+        }
+    });
+}
+

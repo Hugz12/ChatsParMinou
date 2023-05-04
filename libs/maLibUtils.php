@@ -50,7 +50,7 @@ function valider($nom,$type="REQUEST"){
 			return $_SERVER[$nom]; 		
 		break;
 		case 'FILES':
-		if(isset($_FILES[$nom]) && !($_FILES[$nom] == "")) 	
+		if(isset($_FILES[$nom]) && !($_FILES[$nom] == "") && is_uploaded_file($_FILES[$nom]['tmp_name']))
 			return $_FILES[$nom];
 		break;
 	}

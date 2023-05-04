@@ -76,7 +76,7 @@
 }
 
 .currentDay {
-    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 30%, #fff 10%, #fff 100%);
+    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 25%, #fff 10%, #fff 100%);
 }
 
 
@@ -90,33 +90,118 @@
     cursor: pointer;
 }
 
-.passagesRefuge {
-    width: clamp(200px, 50vw, 600px);
-    height: 300px; 
+#containerPassagesRefuge {
+    width: clamp(250px, 50vw, 600px);
+    height: auto;
     position: absolute;
-    top: 50%;
+    max-height: 500px;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
+    display: none;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background-color: transparent;
+    background-color: var(--sixth-color);
+    border-radius: 15px;
+    opacity: 0;
+    padding: 10px;
+}
+
+@media screen and (max-width: 900px) {
+    #containerPassagesRefuge {
+        top: 37%;
+    }
+}
+
+.dayPassageRefuge {
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--third-color);
+    margin: 10px;
+    text-align: center;
 
 }
 
 .passage {
     display: none;
     border-radius: 10px;
+    position: relative;
     height: 100px;
-    margin: 10px;
+    margin: 20px;
     padding: 10px;
-    background-color: var(--third-color);
+    background-color: var(--main-color);
 }
+
 
 .passageDay {
     color: var(--third-color);
     cursor: pointer;
+}
+
+.passagesRefuge{
+    max-height: 420px;
+    overflow-y: scroll;
+}
+
+.mailBenevole {
+    color: var(--third-color);
+    font-size: 30px;
+    font-family: "Amatic SC", cursive;
+}
+
+.description {
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+}
+
+.horaire {
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    color: var(--main-color);
+    position : absolute;
+    bottom: 0;
+    /* arrondi en haut à gauche et en bas à droite */
+    border-radius: 10px 0 10px 0px;
+    right: 0;
+    padding: 10px;
+    background-color: var(--third-color);
+
+}
+
+.deletePassage{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 10px;
+    padding: 5px;
+    background-color: var(--fourth-color);
+    text-align: center;
+    border-radius: 0px 10px 0px 10px;
+}
+
+.deletePassage:hover{
+    background-color: var(--third-color);
+}
+
+
+@media screen and (max-width: 600px) {
+    .passage {
+        height: 200px;
+    }
+    .mailBenevole{
+        font-size: 20px;
+    }
+
+    .dayPassageRefuge{
+        font-size: 20px;
+    }
+    
 }
 
 

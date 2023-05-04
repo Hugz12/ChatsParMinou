@@ -34,20 +34,34 @@ if (!valider('Connecte', 'SESSION')) {
 			</form>
 		</div>
 
-				<div class="info">
-			<form>
-				<div class='group'>
-					<?php
-						$nom=getNomUtilisateur($_SESSION['mail']);
-						echo "<input type='text' name='nom' value='$nom' id='nom-input' required>";
-					?>
-					<label for="nom">Nom et prénom</label>
-				</div>
-				<input type="button" class="buttonType" value="changer de nom" onclick="changerNom();" >
+		<div class="info">
+		<form>
+			<div class='group'>
+			<?php
+			$nom=getNomUtilisateur($_SESSION['mail']);
+			echo "<input type='text' name='nom' value='$nom' id='nom-input' required>";
+			?>
+			<label for="nom">Nom et prénom</label>
+			</div>
+			<input type="submit" onclick="changerNomUtilisateur('<?php echo $_SESSION['mail']; ?>', document.getElementsByName('nom')[0].value); console.log('<?php echo $_SESSION['mail']; ?>', document.getElementsByName('nom')[0].value);" class="buttonType" value="Modifier mes informations personnelles">
+		</form>
+		</div>
 
-			</form>
-
+		<script>
+		const nomInput = document.getElementById('nom-input');
+		nomInput.addEventListener('change', function() {
+			localStorage.setItem('nom-utilisateur', nomInput.value);
+		});
+		
+		window.addEventListener('load', function() {
+			const nomUtilisateur = localStorage.getItem('nom-utilisateur');
+			if (nomUtilisateur) {
+			nomInput.value = nomUtilisateur;
+			}
+		});
+		</script>
 	</div>
+
 
 	<div class="mdpMailGestion">
 		<div class="mdp">

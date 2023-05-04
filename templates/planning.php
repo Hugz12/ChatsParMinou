@@ -19,7 +19,15 @@ if(isset($_SESSION["message"])){
 
 
 ?>
+
+
 <link rel="stylesheet" href="./css/planning.css">
+
+
+<script>
+	localStorage.setItem("userConnected", "<?php echo $_SESSION["mail"]; ?>");
+</script>
+
 <script src="./js/planning.js"></script>
 
 <div>
@@ -27,7 +35,7 @@ if(isset($_SESSION["message"])){
 		
 		<div id="calendar" class="calendar">
 
-			<div id="previousMonth" class="flecheGauche clickable" onclick="changeMonth(this)" style="left:-30px">
+			<div id="previousMonth" class="flecheGauche clickable" onclick="changeMonth(this); hideForm('containerPassagesRefuge')" style="left:-30px">
 				<?php include("./ressources/flecheLeft.svg");?>
 			</div>
 
@@ -55,14 +63,21 @@ if(isset($_SESSION["message"])){
 
 			<div class="days policeTexte"></div>
 
-			<div id="nextMonth" class="flecheDroite clickable" onclick="changeMonth(this)" style="right:-30px">
+			<div id="nextMonth" class="flecheDroite clickable" onclick="changeMonth(this); hideForm('containerPassagesRefuge')" style="right:-30px">
 				<?php include("./ressources/flecheRight.svg");?>
 			</div>
 		</div>
 		
 	</div>
-
-	<div class="passagesRefuge" id="passagesRefuge" style="display:none"></div>
+	
+	<div id="containerPassagesRefuge">
+		<div class="dayPassageRefuge"></div>
+		<div class='buttonHideForm' onclick='hideForm("containerPassagesRefuge");'>
+			<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
+		</div>
+		<div class="passagesRefuge" id="passagesRefuge" style="display:none"></div>
+	</div>
+	
 
     <script>
         fillCalendar();
@@ -76,7 +91,7 @@ if(isset($_SESSION["message"])){
 		<br>
 
 		
-		<form class='policeTexte' onsubmit="validerFormPassageRefuge(this); return false;">
+		<form class='policeTexte' onsubmit="validerFormPassageRefuge(); return false;">
 			<div class='inputOther'>
 				<div id='inputAddChatOther'>
 					<div class='group'>

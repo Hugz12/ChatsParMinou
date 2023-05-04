@@ -8,12 +8,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 ?>
 
+
 <!DOCTYPE html> 
 <html>
 
 <!--  H E A D  -->
 <head>	
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <!-- encodage des caractères -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ChatsParMinou</title>
 	<link rel="stylesheet" href="css/style.css"> <!-- inclure la fiche style : stylesheet.css -->
 	<link rel="stylesheet" href="css/header.css"> 

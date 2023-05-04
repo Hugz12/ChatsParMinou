@@ -60,6 +60,8 @@ function addUserBDD($mail,$password,$name){
     return SQLInsert($SQL);
 }
 
+
+
 /**
  * Fonction qui retourne les informations du chat du mois
  * @return array
@@ -280,24 +282,18 @@ function getEvent($id){
     return parcoursRS(SQLSelect($SQL));
 }
 
-function getPhotos($code){
+function getNbPhotos($code){
     // retourne un tableau de photos du chat stocké dans le dossier ressources/chats/$code qui contient toutes les informations sur les photos pour pouvoir les afficher
-    $photos = array();
-    $dir = "ressources/chats/$code";
-    $files = scandir($dir);
-    foreach ($files as $file){
-        if ($file != "." && $file != ".."){
-            $photo = array();
-            $photo["name"] = $file;
-            $photo["url"] = "$dir/$file";
-            $photos[] = $photo;
-        }
-    }
-    return $photos;
+    $SQL = "SELECT nbPhoto FROM chat WHERE code = $code";
+    return SQLGetChamp($SQL);
 }
 
-function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
+function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
 
+    if ($nom != false){
+        $SQL = "UPDATE chat SET name = '$nom' WHERE code = $code";
+        SQLUpdate($SQL);
+    }
     if ($statut != false){
         $SQL = "UPDATE chat SET statut = '$statut' WHERE code = $code";
         SQLUpdate($SQL);
@@ -316,10 +312,7 @@ function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code)
         SQLUpdate($SQL);
     }
     if ($nbPhotos != false){
-        $SQL = "SELECT nbPhoto FROM chat WHERE code = $code";
-        $nbPhotosActuel = SQLGetChamp($SQL);
-        $nbPhotosActuel += $nbPhotos;
-        $SQL = "UPDATE chat SET nbPhoto = '$nbPhotosActuel' WHERE code = $code";
+        $SQL = "UPDATE chat SET nbPhoto = '$nbPhotos' WHERE code = $code";
         SQLUpdate($SQL);
     }
 }
@@ -337,12 +330,12 @@ function supprimerChat($code){
 
 function ajouterPassage($date,$heureDebut,$heureFin,$description,$mail){
     // si il y a un passage à la même date et heure meme personne
-    $SQL = "SELECT mailBenevole FROM passagerefuge WHERE date = '$date' AND heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND mailBenevole = '$mail'";
+    $SQL = "SELECT mailBenevole FROM passageRefuge WHERE date = '$date' AND heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND mailBenevole = '$mail'";
     $passage = SQLGetChamp($SQL);
     if ($passage != false){
         return "alreadyExist";
     }
-    $SQL = "INSERT INTO passagerefuge (date, heureDebut, heureFin, description, mailBenevole) VALUES ('$date','$heureDebut','$heureFin','$description','$mail')";
+    $SQL = "INSERT INTO passageRefuge (date, heureDebut, heureFin, description, mailBenevole) VALUES ('$date','$heureDebut','$heureFin','$description','$mail')";
     SQLInsert($SQL);
     return "success";
 }
@@ -353,9 +346,14 @@ function supprimerDossier($dir){
     rmdir($dir);
 }
 
-function getPassages($mois){
-    $SQL = "SELECT * FROM passagerefuge WHERE MONTH(date) = $mois";
+function getPassages($mois, $annee){
+    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois AND YEAR(date) = $annee";
     return parcoursRS(SQLSelect($SQL));
+}
+
+function deletePassage($date,$heureDebut,$heureFin){
+    $SQL = "DELETE FROM passageRefuge WHERE heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND date = '$date' AND mailBenevole = '".$_SESSION["mail"]."'";
+    SQLDelete($SQL);
 }
 
 ?>

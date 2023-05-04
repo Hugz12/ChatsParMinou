@@ -8,9 +8,6 @@
 	width: 100vw;
 	height: 500px;
 	position: relative;
-	
-	
-
 }
 
 #presentation img {
@@ -68,7 +65,30 @@
 
 
 
+/* TITRE CHAT DU MOIS */
 
+#boxTitreChatDuMois {
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: var(--sec-color);
+	padding: 20px 0;
+}
+
+#titreChatDuMois {
+	text-align: center;
+	font-size: 70px;
+	font-weight: bold;
+	color: var(--fifth-color);
+}
+
+#sousTitreChatDuMois {
+	text-align: center;
+	font-size: 20px;
+	color: var(--third-color);
+}
 
 
 /* CHAT DU MOIS */
@@ -243,7 +263,7 @@
 }
 
 .firstBanner {
-	margin: 10px 40px 10px 40px;
+	margin: 50px 40px 10px 40px;
 	height: auto;
 	min-height: 80px;
 	justify-content: space-between;
@@ -329,6 +349,7 @@
 #event {
 	background-color: var(--main-color);
 	padding: 50px 0 0 0;
+	width: auto;
 }
 
 
@@ -336,7 +357,7 @@
 	font-size: 60px;
 	font-weight: bold;
 	text-align: center;
-	color: var(--third-color);
+	color: var(--fifth-color);
 }
   
 #allSliderEvent {
@@ -385,18 +406,16 @@
 
 .texteEvent {
 	z-index: 1;
-	position: absolute;
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	top: 30%;
-	left: 5%;
 	min-height: 45%;
 	width: 35%;
 	min-width: 265px;
-
 	background-color: var(--main-color);
 	padding: 15px 20px 15px 30px;
+	margin-left: 5%;
 }
 
 @media (max-width: 500px) {
@@ -428,7 +447,11 @@
 
 
 
-
+.slideEvent {
+	display: flex;
+	align-items: center;
+	padding-top: 50px;
+}
 
 
 
