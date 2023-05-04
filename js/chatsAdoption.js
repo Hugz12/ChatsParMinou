@@ -268,15 +268,15 @@ function displayFormEditChat(element){
 
 								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
 									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
-									<div class='photoGauche'><img src='./ressources/logo_toutnoir.png'></div>
-									<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
-									<div class='photoDroite'><img src='./ressources/famille_accueil_noir.png'></div>
+									<div class='photoGauche'style='opacity : ${chat['familleAccueil'] ? "0" : "1"}'><img src='./ressources/logo_toutnoir.png'></div>
+									<input type='checkbox' class='checkbox checkboxFamille' ${chat['familleAccueil'] ? "checked": ""} name='familleAccueil' value='2'>
+									<div class='photoDroite' style='opacity : ${chat['familleAccueil'] ? "1" : "0"}'><img src='./ressources/famille_accueil_noir.png'></div>
 									<input type='hidden' name='familleAccueil' value='1'> 
 								</div>
 
 								<div class='colorPicker'>
 									<label for='couleur' class='colorPickerText'>Couleur</label>
-									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
+									<div class='colorPickerColor' style='--colorSelected: ${chat['couleur']}' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
 									<input id='colorInputEdit' type='hidden' name='couleur' value='${chat['couleur']}'>
 								</div>
 
@@ -309,13 +309,13 @@ function displayFormEditChat(element){
 						</label>
 						
 						<input id='fileModifChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
-						<input id='existentFiles' type='hidden' name='existentFiles'>
+						<input id='existentFiles' type='hidden' name='existentFiles' value="${listePhoto(chat['nbPhoto'])}">
 
 						
 
 					</div>
 
-					<input type='submit' class='buttonType' name='action' value='Edit Chat'>
+					<input type='submit' class='buttonType' name='action' value='Modifier le chat'>
 
 
 					<input type='hidden' name='code' value='${chat['code']}'>
@@ -443,25 +443,26 @@ function pushSelectedFilesInInput(contexte) {
  * Fonction qui ajoute les photos existantes du chat dans le slider via ajax
  * @param {*} code du chat dont on veut afficher les photos
  */
-var existentFiles = [];
 function addPreviewOfExistentFiles(code){
 	$.ajax({
 		url: 'controleur.php',
 		type: 'POST',
 		data: {
-			action: 'getPhotos',
+			action: 'getNbPhotos',
 			code: code
 		},
 		success: function (data) {
 			console.log(data);
+			var nbPhoto = data;
+			$("#existentFiles").val(listePhoto(nbPhoto));
 			const slides = $(".formType #edit");
-
-			for (const photo of data) {
-				existentFiles.push(photo['name']);
+			
+			for (var i=0; i < nbPhoto; i++	) {
 				const img = document.createElement("img");
-				img.src = photo['url'];
+				img.src = "./ressources/chats/" + code + "/" + i + ".jpg";
 
 				const slidePhoto = document.createElement("div");
+				slidePhoto.value = i;
 				slidePhoto.classList.add("slidePhoto");
 				slidePhoto.classList.add("slide");
 				slidePhoto.appendChild(img);
@@ -471,10 +472,26 @@ function addPreviewOfExistentFiles(code){
 				deleteButton.innerText = "X";
 				deleteButton.addEventListener("click", () => {
 					console.log(data);
-					existentFiles = existentFiles.filter(f => f !== photo['name']);
-					var taille = slides.children().length-1;
-					$(slidePhoto).remove();
+					console.log(slides[0].childNodes);
+					for(j = 0; j < slides[0].childNodes.length; j++) {
+						console.log(slides[0].childNodes[j].value);
+						console.log(slidePhoto.value);
+						if (slides[0].childNodes[j].value == slidePhoto.value) {
+							index = j;
+							console.log("trouvé");
+						} 
+					}
+					existentFiles = $("#existentFiles").val();
+					console.log("existentFiles : " + existentFiles);
+					console.log("substring 1 : " + existentFiles.substring(0, 2*index));
+					console.log("substring 2 : " + existentFiles.substring(2*index+2, existentFiles.length));
+					console.log("index : " + index);
+					existentFiles = existentFiles.substring(0, 2*index) + existentFiles.substring(2*index+2, existentFiles.length);
+					console.log("existentFiles final : " + existentFiles);
+
 					console.log(existentFiles);
+					$("#existentFiles").val(existentFiles);
+					$(slidePhoto).remove();
 				});
 
 				slidePhoto.appendChild(deleteButton);
@@ -486,7 +503,9 @@ function addPreviewOfExistentFiles(code){
 		error: function (data) {
 			console.log("error");
 		}
+		
 	});
+	
 }
 
 
@@ -841,3 +860,14 @@ function updateFiltreAge() {
 
 
 const updateFiltreAll = debounce(() => updateFiltre(), 10);
+
+
+function listePhoto(nbPhoto) {
+	// renvoie une chaine de 0 a nbPhoto-1
+	var liste = "";
+	for (let i = 0; i < nbPhoto; i++) {
+		liste += i + " ";
+	}
+	console.log(liste);
+	return liste;
+}
