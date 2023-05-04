@@ -48,30 +48,33 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 			
 		}
 	?>
+	<form action="index.php?view=formulaireAdoption" method="post"> 
+		<div id="allSliderChats" class="allSlider">
+			<div class="slider">
+				<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
-	<div id="allSliderChats" class="allSlider">
-		<div class="slider">
-			<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
+				<div class="slides"></div>
+				
+				<div id="allSliderPointsChats" class="allSlider">
+					<div class="slider">
+						<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
-			<div class="slides"></div>
-			
-			<div id="allSliderPointsChats" class="allSlider">
-				<div class="slider">
-					<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
+						<div class="slides"></div>
 
-					<div class="slides"></div>
-
-					<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+						<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+					</div>
 				</div>
-			</div>
-			
-			<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
+				
+				<div class="flecheDroite clickable" onclick="translateX(this)"><?php include("./ressources/flecheRight.svg") ?></div>
 
+			</div>
+			<div id="zeroChat" class="policeTexte">
+				Aucun chat ne correspond à votre recherche
+			</div>
 		</div>
-		<div id="zeroChat" class="policeTexte">
-			Aucun chat ne correspond à votre recherche
-		</div>
-	</div>
+		<input id="validerAdoption" class="buttonType" type="submit" name="action" value="Accedez au formulaire d'adoption">
+		<select name="chatsSelected[]" id="chatsSelected" multiple></select>
+	</form>
 
 		
 	<script>
@@ -191,11 +194,6 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 						<div class='group'>
 							<input type='text' name='race' required>
 							<label for=\"race\">Race</label>
-						</div>
-
-						<div class='group'>
-							<input type='text' name='statut' required>
-							<label for=\"statut\">Statut</label>
 						</div>
 
 					</div>

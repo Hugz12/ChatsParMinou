@@ -233,10 +233,10 @@ function existChat($code){
         return true;
 }
 
-function addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos){
+function addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos){
     $sexe--;
     $familleAccueil--;
-    $SQL = "INSERT INTO chat (code, name, dateDeNaissance, race, sexe, statut, description, familleAccueil, nbPhoto, couleur) VALUES ('$code','$nom','$date','$race','$sexe','$statut','$description','$familleAccueil','$nbPhotos','$couleur')";
+    $SQL = "INSERT INTO chat (code, name, dateDeNaissance, race, sexe, statut, description, chatDuMois, nbDemande, familleAccueil, vues, nbPhoto, couleur) VALUES ('$code','$nom','$date','$race','$sexe','1','$description','0','0','$familleAccueil','0','$nbPhotos','$couleur')";
     return SQLInsert($SQL);
 }
 

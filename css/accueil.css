@@ -263,10 +263,14 @@
 }
 
 .firstBanner {
-	margin: 50px 40px 10px 40px;
+	margin: 30px 40px 10px 40px;
 	height: auto;
 	min-height: 80px;
-	justify-content: space-between;
+	justify-content: space-around;
+}
+
+.firstBanner > * {
+	margin: 10px 10px 10px 10px;
 }
 
 

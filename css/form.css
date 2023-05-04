@@ -41,13 +41,16 @@ form {
     position: relative;
     display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
+    align-items: center;
     height: auto;
 	max-height: 500px;
 	flex-wrap: wrap;
 	background-color: inherit;
     margin: 10px 20px 10px 20px;
 }
+
+
 
 
 .formType > form > .inputText > .group{
@@ -130,7 +133,7 @@ input:autofill {
 }
 
 
-form :is(input[type="text"], input[type="password"], textarea)~label {
+form :is(input[type="text"], input[type="password"], textarea)~label, .labelFocused {
     font-size: 100%;
     position: absolute;
     left: 0;
@@ -143,7 +146,7 @@ form :is(input[type="text"], input[type="password"], textarea)~label {
     background-color: initial;
 }
 
-form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="password"]:focus, input[type="password"]:valid, textarea:focus, textarea:valid)~label {
+form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="password"]:focus, input[type="password"]:valid, textarea:focus, textarea:valid)~label, .labelFocused {
     transform: translateY(-50%) scale(.9);
     z-index: 2;
     margin: 0em;
@@ -153,7 +156,7 @@ form :is(input[type="text"]:focus, input[type="text"]:valid, input[type="passwor
     
 }
 
-form :is(input[type="text"]:focus, input[type="password"]:focus, textarea:focus)~label {
+form :is(input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus)~label {
     color: var(--third-color);
 }
 
@@ -479,8 +482,8 @@ select {
     border: 2px solid rgb(200, 200, 200);
     background-color: transparent;
     border-radius: 15px;
-    width: 54px;
-    height: 54px;
+    width: 100%;
+    height: auto;
     box-sizing: border-box;
 }
 

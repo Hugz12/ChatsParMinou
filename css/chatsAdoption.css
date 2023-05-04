@@ -318,3 +318,37 @@
 	font-size: 40px;
 	margin: 100px;
 }
+
+
+/*------------------------------------------------------------------------*/
+/*                               Adoption                                 */
+/*------------------------------------------------------------------------*/
+
+.adoptBtn, .adoptBtnSmall{
+	background-color: var(--third-color);
+	border: none;
+	border-radius: 10px;
+}
+
+.adoptBtnSmall{
+	width: fit-content;
+	
+}
+
+
+#chatsSelected {
+	display: none;
+}
+
+#validerAdoption {
+	display: block;
+	width: 90%;
+	max-width: fit-content;
+	font-size: 20px;
+	text-align: center;
+	background-color: var(--third-color);
+	margin: 50px auto 100px auto;
+	border: none;
+	white-space: pre-wrap;
+	
+}

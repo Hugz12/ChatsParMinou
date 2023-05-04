@@ -351,9 +351,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				}
 				$nbPhotos = count($photos) + count($tabExistentFiles);
 				//echo $nbPhotos;
-				echo $familleAccueil . "<br/>";
 				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
-				die();
 				// On ajoute les photos
 				$qs = "?view=chatsAdoption";
 			}

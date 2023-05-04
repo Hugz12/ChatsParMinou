@@ -11,7 +11,6 @@ function afficherChats(chats) {
 
 	for (var j = 0; j < chats.length; j++) {
 		chatActuel = chats[j];
-
 		slides.append(`
 			<div class="slideChat slide">
 				<div class="chatBanniere">
@@ -24,6 +23,8 @@ function afficherChats(chats) {
 					<div class="chatNomBlock">
 						<div class="chatNom policeTitre">${chatActuel['name']}</div>
 						${chatActuel['chatDuMois'] ? '<div class="tailleTitre policeTitre titreChatDuMois">Notre chat du mois</div>' : ''}
+						<div class="buttonType adoptBtn" onclick="adopterChat(this, ${chatActuel['code']});">Adopter ce chat</div>
+
 
 					</div>
 					<div class="chatContent policeTexte">
@@ -88,7 +89,10 @@ function afficherChats(chats) {
 						<div class="policeTexte boxInfoTitle">Situation</div>
 						<div class="policeTexte boxInfoSmall">${(chatActuel['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
 					</div>
+					<div class="buttonType adoptBtnSmall" onclick="adopterChat(this, ${chatActuel['code']});">Adopter ce chat</div>
 				</div>
+
+				
 
 				<div class="secondBanner">
 					<div>
@@ -117,27 +121,11 @@ function afficherChats(chats) {
 		`
 		);
 
-		$.ajax({
-			url: "./ressources/flecheLeft.svg",
-			dataType: "text",
-			success: function(data) {
-				elt = document.getElementsByClassName("flecheGauche");
-				for (var i=0; i < elt.length; i++) {
-					elt[i].innerHTML = data;
-				}
-			}
-		});
-	
-		$.ajax({
-			url: "./ressources/flecheRight.svg",
-			dataType: "text",
-			success: function(data) {
-				elt = document.getElementsByClassName("flecheDroite");
-				for (var i=0; i < elt.length; i++) {
-					elt[i].innerHTML = data;
-				}
-			}
-		});
+		var chatsSelected = document.getElementById("chatsSelected");
+		var option = document.createElement("option");
+		option.value = chatActuel['code'];
+		option.innerHTML = chatActuel['code'];
+		chatsSelected.appendChild(option);
 
 		var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
 		var colorChat = convertColor(chatActuel['couleur'], 1);
@@ -180,6 +168,28 @@ function afficherChats(chats) {
 		
 		
 	}
+
+	$.ajax({
+		url: "./ressources/flecheLeft.svg",
+		dataType: "text",
+		success: function(data) {
+			elt = document.getElementsByClassName("flecheGauche");
+			for (var i=0; i < elt.length; i++) {
+				elt[i].innerHTML = data;
+			}
+		}
+	});
+
+	$.ajax({
+		url: "./ressources/flecheRight.svg",
+		dataType: "text",
+		success: function(data) {
+			elt = document.getElementsByClassName("flecheDroite");
+			for (var i=0; i < elt.length; i++) {
+				elt[i].innerHTML = data;
+			}
+		}
+	});
 
 	
 
@@ -255,9 +265,14 @@ function displayFormEditChat(element){
 						</div>
 
 						<div class='group'>
-							<input type='text' name='statut' value='${chat['statut']}'required>
-							<label for=\"statut\">Statut</label>
+							<select name='statut'>
+								<option value='1' ${chat['statut'] == 1 ? "selected" : ""}>A adopter</option>
+								<option value='2' ${chat['statut'] == 2 ? "selected" : ""}>En cours d'adoption</option>
+								<option value='3' ${chat['statut'] == 3 ? "selected" : ""}>Adopté</option>
+							</select>
+							<label class='labelFocused' for='statut'>Statut</label>
 						</div>
+
 
 					</div>
 
@@ -572,11 +587,7 @@ function rechercheChat() {
 const rechercher = debounce(() => rechercheChat(), 500);
 
 
-const responsivePointsChatsDebounce = debounce(() => responsivePointsChats(), 10);
-const updateFiltreDebounce = debounce(() => updateFiltre());
 
-window.addEventListener("resize", responsivePointsChatsDebounce);
-window.addEventListener("resize", updateFiltreDebounce);
 
 
 function responsivePointsChats() {
@@ -792,7 +803,6 @@ function updateFiltreSexe() {
 
 function updateFiltreAge() {
 	console.log("updateAge");
-
 	var filtreAgeMin = document.getElementById("filtreAgeMin");
 	var filtreAgeMax = document.getElementById("filtreAgeMax");
 
@@ -859,7 +869,6 @@ function updateFiltreAge() {
 }
 
 
-const updateFiltreAll = debounce(() => updateFiltre(), 10);
 
 
 function listePhoto(nbPhoto) {
@@ -871,3 +880,32 @@ function listePhoto(nbPhoto) {
 	console.log(liste);
 	return liste;
 }
+
+
+function adopterChat(contexte, code) {
+	console.log("adopterChat");
+	console.log(code);
+	var chatsSelected = document.getElementById("chatsSelected");
+	for (let i = 0; i < chatsSelected.children.length; i++) {
+		if (chatsSelected.children[i].value == code) {
+			if (chatsSelected.children[i].selected) {
+				chatsSelected.children[i].selected = false;
+				contexte.innerHTML = "Adopter ce chat"
+
+			}
+			else {
+				chatsSelected.children[i].selected = true;
+				contexte.innerHTML = "Ne plus adopter ce chat"
+			}
+		}
+	}
+
+}
+
+const updateFiltreAll = debounce(() => updateFiltre(), 30);
+const responsivePointsChatsDebounce = debounce(() => responsivePointsChats(), 30);
+
+window.addEventListener("resize", responsivePointsChatsDebounce);
+window.addEventListener("resize", updateFiltreAll);
+
+window.addEventListener('load', updateFiltreAll);
