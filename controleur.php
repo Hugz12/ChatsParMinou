@@ -67,10 +67,8 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						
 						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
 						if($photo = valider("photo","FILES")){
-							if(is_uploaded_file($photo['tmp_name'])){
-								if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
-									$_SESSION['error'] = "Extension non autorisée, vous pourrez changer votre photo depuis la page profil";
-								}
+							if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
+								$_SESSION['error'] = "Extension non autorisée, vous pourrez changer votre photo depuis la page profil";
 							}
 						}
 
@@ -154,7 +152,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				
 				
 				$qs = "?view=accueil";
+
 			}
+
 		break;
 
 
@@ -202,18 +202,25 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 		case 'Ajouter un chat' : 
+
+			echo "sexe " . $sexe = valider("sexe","POST");
+			echo "familleAccueil " . $familleAccueil = valider("familleAccueil","POST");
+			die();
 			// On vérifie la présence des champs
 			if (($nom = valider("nom","POST"))
 			&& ($code = valider("code","POST"))
 			&& ($date = valider("dateNaissance","POST"))
 			&& ($sexe = valider("sexe","POST"))
 			&& ($race = valider("race","POST"))
+			&& ($statut = valider("statut","POST"))
 			&& ($description = valider("description","POST"))
 			&& ($familleAccueil = valider("familleAccueil","POST"))
 			&& ($couleur = valider("couleur","POST"))
 			&& ($photos = valider_fichiers("photos")))
 			{
-				
+				echo $sexe;
+				echo $familleAccueil;
+				die();
 				if(existChat($code)){ // On vérifie que le code n'est pas déjà utilisé
 					$_SESSION['error'] = "Ce code est déjà utilisé";
 					$qs = "?view=chatsAdoption";
@@ -222,7 +229,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
-					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
+					addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos);					
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
@@ -238,7 +245,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-
 		case "Modifier Evenement" :
 			// On vérifie la présence des champs
 			if ($id = valider("id","POST"))
@@ -252,7 +258,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				editEvent($id,$titre,$description,$date,$couleur);
 				// on verifie si un fichier a été uploadé
 				$image = valider("image","FILES");
-				if (is_uploaded_file($image['tmp_name'])){
+				if ($image["name"] !== ""){
 					// on supprime l'ancienne image
 					unlink("./ressources/evenements/$id.jpg");
 					// on upload la nouvelle
@@ -276,7 +282,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				$qs = "?view=accueil";
 			}
 		break;
-		break;
 
 
 
@@ -292,7 +297,31 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
-		case 'Modifier le chat' : 
+		case "Ajouter Bulle" :
+			// On vérifie la présence des champs
+			if ($name = valider("name","POST"))
+			if ($value = valider_fichiers("value")){
+				// On ajoute la bulle à la BDD
+				$nomdestination = './ressources/bulles/'.$name.'.pdf';
+				move_uploaded_file($value['tmp_name'], $nomdestination);
+				addConseil($name, $nomdestination);
+				$qs = "?view=bulles";
+			}
+		break;
+
+		case "Supprimer Bulle" :
+			// On vérifie la présence des champs
+			if ($name = valider("name")){
+				// On supprime la bulle de la BDD
+				delConseil($name);
+				// On supprime le fichier
+				unlink("./ressources/bulles/$name.pdf");
+				$qs = "?view=bulles";
+			}
+		break;
+
+
+		case 'Edit Chat' : 
 			// si il y a au moins un champ non vide
 			
 			if  ($statut = valider("statut","POST"))
