@@ -495,18 +495,15 @@ function afficherChatDuMoisSmall(chatDuMois){
 
 	
 function adopterChatDuMois(code) {
-	console.log(code);
 	var input = document.createElement("input");
 	input.type = "hidden";
 	input.name = "chatsSelected[]";
 	input.value = code;
-	console.log(input);
 	var form = document.createElement("form");
 	form.method = "post";
 	form.action = "./index.php?view=formulaireAdoption";
 	form.style.display = "none";
 	form.appendChild(input);
 	document.body.appendChild(form);
-	console.log(form);
 	form.submit();
 } 
