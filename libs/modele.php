@@ -302,7 +302,6 @@ function getNbPhotos($code){
 }
 
 function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
-
     if ($nom != false){
         $SQL = "UPDATE chat SET name = '$nom' WHERE code = $code";
         SQLUpdate($SQL);

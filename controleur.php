@@ -154,9 +154,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				
 				
 				$qs = "?view=accueil";
-
 			}
-
 		break;
 
 
@@ -204,10 +202,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 		case 'Ajouter un chat' : 
-
-			echo "sexe " . $sexe = valider("sexe","POST");
-			echo "familleAccueil " . $familleAccueil = valider("familleAccueil","POST");
-			die();
 			// On vérifie la présence des champs
 			if (($nom = valider("nom","POST"))
 			&& ($code = valider("code","POST"))
@@ -220,9 +214,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			&& ($couleur = valider("couleur","POST"))
 			&& ($photos = valider_fichiers("photos")))
 			{
-				echo $sexe;
-				echo $familleAccueil;
-				die();
+				
 				if(existChat($code)){ // On vérifie que le code n'est pas déjà utilisé
 					$_SESSION['error'] = "Ce code est déjà utilisé";
 					$qs = "?view=chatsAdoption";
@@ -231,7 +223,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
-					addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos);					
+					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
@@ -247,6 +239,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+
 		case "Modifier Evenement" :
 			// On vérifie la présence des champs
 			if ($id = valider("id","POST"))
@@ -259,16 +252,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On ajoute l'événement à la BDD
 				editEvent($id,$titre,$description,$date,$couleur);
 				// on verifie si un fichier a été uploadé
-				$image = valider("image","FILES");
-				if ($image["name"] !== ""){
-					// on supprime l'ancienne image
-					unlink("./ressources/evenements/$id.jpg");
-					// on upload la nouvelle
-					if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
-						$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
-						break;
-					}
-				}
+				// $image = valider("image","FILES");
+				// if ($image["name"] !== ""){
+				// 	// on supprime l'ancienne image
+				// 	unlink("./ressources/evenements/$id.jpg");
+				// 	// on upload la nouvelle
+				// 	if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
+				// 		$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
+				// 		break;
+				// 	}
+				// }
 				$qs = "?view=accueil";
 			}
 		break;
@@ -283,6 +276,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				unlink("./ressources/evenements/$id.jpg");
 				$qs = "?view=accueil";
 			}
+		break;
 		break;
 
 
