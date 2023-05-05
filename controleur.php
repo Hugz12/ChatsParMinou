@@ -276,7 +276,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				$qs = "?view=accueil";
 			}
 		break;
-		break;
 
 
 
