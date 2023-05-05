@@ -45,4 +45,25 @@ function changerMail() {
         }
     }) 
 }
+
+function changerMdp(){
+    var inputValue5 = document.getElementById("mdpN2").value;
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "changerMdp",
+            "mdp" : inputValue5,
+        },
+        success: function(retour) {
+            console.log("Votre mot de passe a bien été changé");
+            alert ("Votre mot de passe a bien été changé");
+        },
+        error: function(retour) {
+            console.log("erreur");
+            alert ("Erreur lors du changement de mot de passe");
+        }
+    }) 
+}
 // Path: js\profil.js
