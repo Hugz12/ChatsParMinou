@@ -235,6 +235,11 @@
 	background-position: center;
 }
 
+.adoptBtnChatDuMois {
+	border-color: var(--third-color);
+	border-radius: 10px;
+}
+
 
 
 
@@ -557,6 +562,9 @@
 
 
 
+
+
 @media screen and (max-width: 900px) {
 	
 }
+
