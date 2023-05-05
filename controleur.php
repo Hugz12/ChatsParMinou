@@ -297,35 +297,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
-<<<<<<< HEAD
-		case "Ajouter Bulle" :
-			// On vérifie la présence des champs
-			if ($name = valider("name","POST"))
-			if ($value = valider_fichiers("value")){
-				// On ajoute la bulle à la BDD
-				$nomdestination = './ressources/bulles/'.$name.'.pdf';
-				move_uploaded_file($value['tmp_name'], $nomdestination);
-				addConseil($name, $nomdestination);
-				$qs = "?view=bulles";
-			}
-		break;
-
-		case "Supprimer Bulle" :
-			// On vérifie la présence des champs
-			if ($name = valider("name")){
-				// On supprime la bulle de la BDD
-				delConseil($name);
-				// On supprime le fichier
-				unlink("./ressources/bulles/$name.pdf");
-				$qs = "?view=bulles";
-			}
-		break;
-
-
-		case 'Edit Chat' : 
-=======
 		case 'Modifier le chat' : 
->>>>>>> 100fe8d300f1333ea8cad6917aa0c025402dd7b9
 			// si il y a au moins un champ non vide
 			
 			if  ($statut = valider("statut","POST"))
