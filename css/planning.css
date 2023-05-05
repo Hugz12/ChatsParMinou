@@ -76,7 +76,7 @@
 }
 
 .currentDay {
-    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 25%, #fff 10%, #fff 100%);
+    background-image: radial-gradient(circle at center, var(--third-color) 0%, var(--third-color) 30%, #fff 10%, #fff 100%);
 }
 
 
@@ -137,6 +137,10 @@
 .passageDay {
     color: var(--third-color);
     cursor: pointer;
+}
+
+.currentDay.passageDay {
+    color: var(--main-color);
 }
 
 .passagesRefuge{

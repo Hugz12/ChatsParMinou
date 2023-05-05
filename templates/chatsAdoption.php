@@ -72,7 +72,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 				Aucun chat ne correspond à votre recherche
 			</div>
 		</div>
-		<input id="validerAdoption" class="buttonType" type="submit" name="action" value="Accedez au formulaire d'adoption">
+		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire d'adoption">
 		<select name="chatsSelected[]" id="chatsSelected" multiple></select>
 	</form>
 
