@@ -252,16 +252,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On ajoute l'événement à la BDD
 				editEvent($id,$titre,$description,$date,$couleur);
 				// on verifie si un fichier a été uploadé
-				// $image = valider("image","FILES");
-				// if ($image["name"] !== ""){
-				// 	// on supprime l'ancienne image
-				// 	unlink("./ressources/evenements/$id.jpg");
-				// 	// on upload la nouvelle
-				// 	if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
-				// 		$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
-				// 		break;
-				// 	}
-				// }
+				$image = valider("image","FILES");
+				if (is_uploaded_file($image['tmp_name'])){
+					// on supprime l'ancienne image
+					unlink("./ressources/evenements/$id.jpg");
+					// on upload la nouvelle
+					if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
+						$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
+						break;
+					}
+				}
 				$qs = "?view=accueil";
 			}
 		break;
