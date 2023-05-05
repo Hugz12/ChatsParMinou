@@ -105,7 +105,7 @@ function changerMdp($passwordV,$passwordN,$passwordN2){
     
     // Vérifier que le mot de passe actuel est correct
     $SQL = "SELECT password FROM utilisateur WHERE mail = '$mail'";
-    $currentPassword = SQLGet($SQL);
+    $currentPassword = SQLGetChamp($SQL);
     if ($currentPassword !== $hashedPasswordV) {
         return false;
     }

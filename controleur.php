@@ -202,24 +202,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'Ajouter un chat' : 
 
-			echo "sexe " . $sexe = valider("sexe","POST");
-			echo "familleAccueil " . $familleAccueil = valider("familleAccueil","POST");
-			die();
 			// On vérifie la présence des champs
 			if (($nom = valider("nom","POST"))
 			&& ($code = valider("code","POST"))
 			&& ($date = valider("dateNaissance","POST"))
 			&& ($sexe = valider("sexe","POST"))
 			&& ($race = valider("race","POST"))
-			&& ($statut = valider("statut","POST"))
 			&& ($description = valider("description","POST"))
 			&& ($familleAccueil = valider("familleAccueil","POST"))
 			&& ($couleur = valider("couleur","POST"))
 			&& ($photos = valider_fichiers("photos")))
 			{
-				echo $sexe;
-				echo $familleAccueil;
-				die();
 				if(existChat($code)){ // On vérifie que le code n'est pas déjà utilisé
 					$_SESSION['error'] = "Ce code est déjà utilisé";
 					$qs = "?view=chatsAdoption";
@@ -228,7 +221,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
-					addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos);					
+					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
