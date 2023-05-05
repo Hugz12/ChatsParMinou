@@ -98,28 +98,6 @@ function changerMail($mail){
     $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
     return SQLUpdate($SQL);
 }
-function changerMdp($passwordV,$passwordN,$passwordN2){
-    $mail = $_SESSION['mail'];
-    $hashedPasswordV = hashedPassword($passwordV);
-    $hashedPasswordN = hashedPassword($passwordN);
-    
-    // Vérifier que le mot de passe actuel est correct
-    $SQL = "SELECT password FROM utilisateur WHERE mail = '$mail'";
-    $currentPassword = SQLGetChamp($SQL);
-    if ($currentPassword !== $hashedPasswordV) {
-        return false;
-    }
-    
-    // Vérifier que les nouveaux mots de passe sont identiques
-    if ($passwordN !== $passwordN2) {
-        return false;
-    }
-    
-    // Mettre à jour le mot de passe de l'utilisateur
-    $SQL = "UPDATE utilisateur SET password = '$hashedPasswordN' WHERE mail = '$mail'";
-    return SQLUpdate($SQL);
-}
-
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
  * @param $nom
@@ -136,6 +114,15 @@ function supprimerEvenement($id){
     return SQLDelete($SQL);
 }
 
+function addConseil($name, $nomdestination){
+    $SQL = "INSERT INTO bulle (name, parent, value) VALUES ('$name', 'conseil', '$nomdestination')";
+    return SQLInsert($SQL);
+}
+
+function delConseil($name){
+    $SQL = "DELETE FROM bulle WHERE name = '$name'";
+    return SQLDelete($SQL);
+}
 
 
 /*
@@ -171,6 +158,10 @@ function listerChats(){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function getConseils(){
+    $SQL = "SELECT * FROM divers WHERE parent = 'conseil'";
+    return parcoursRS(SQLSelect($SQL));
+}
 
 /**
  * 
@@ -378,6 +369,3 @@ function deletePassage($date,$heureDebut,$heureFin){
 }
 
 ?>
-
-
-

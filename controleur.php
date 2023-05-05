@@ -48,7 +48,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		case 'Deconnexion' :
 			session_destroy(); // On détruit la session
 			$qs = "?view=accueil";
-
+		break;
 
 
 		
@@ -157,6 +157,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 
 
+
 		case 'Changer Chat Du Mois' :
 			// On vérifie la présence des champs
 			if ($code = valider("code")){
@@ -205,6 +206,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			&& ($date = valider("dateNaissance","POST"))
 			&& ($sexe = valider("sexe","POST"))
 			&& ($race = valider("race","POST"))
+			&& ($statut = valider("statut","POST"))
 			&& ($description = valider("description","POST"))
 			&& ($familleAccueil = valider("familleAccueil","POST"))
 			&& ($couleur = valider("couleur","POST"))
@@ -220,6 +222,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
 					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
+
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
 					
@@ -271,6 +274,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				unlink("./ressources/evenements/$id.jpg");
 				$qs = "?view=accueil";
 			}
+		break;
 		break;
 
 
@@ -519,13 +523,3 @@ if ($qs) {
 ob_end_flush(); // On vide le tampon de sortie
 	
 ?>
-
-
-
-
-
-
-
-
-
-

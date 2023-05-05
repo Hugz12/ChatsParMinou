@@ -12,34 +12,38 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <link rel="stylesheet" href="css/conseilsEtViePratique.css"> 
 
 <div>
-	<div id="conteneur-divs"></div>
-	
+	<div class="conseilTitre policeTitre">Conseils et vie pratique</div>
 	<div id="conseils">
-		<div class="conseilTitre policeTitre">Conseils et vie pratique</div>
+		<div id="conteneur-divs"></div>
 		<div class="bulle">
-			<a href="https://www.youtube.com">
-				<div class="conseilText">Au revoir</div>
+			<a class="conseilText" href="https://www.youtube.com">
+				Au revoir
 			</a>
 		</div>
 		<div class="bulle">
-			<a href="https://www.youtube.com">
-				<div class="conseilText">Au revoir</div>
+			<a class="conseilText" href="https://www.youtube.com">
+				Au revoir
 			</a>
 		</div>
-		<a href=""></a>
 	</div>
+
+	<script>
+		var conseils = <?= json_encode(getConseils());?>;
+		afficherConseils(conseils);
+	</script>
+
 
 	<?php 
 			if(valider("Admin","SESSION")) {
 
 				echo " 
 					<div class='svgBox'>
-						<div id='svgAddB' class='svg' onclick='displayForm(\"addBulle\")'>
+						<div id='svgAdd' class='svg' onclick='displayForm(\"addConseil\")'>
 				";
 							include("ressources/add.svg");
 				echo "
 						</div>
-						<div id='svgDeleteB' class='svg' onclick='displayForm(\"supprimerBulle\")'>
+						<div id='svgDelete' class='svg' onclick='displayForm(\"delConseil\")'>
 				";
 							include("ressources/dustbin.svg");
 				echo "
@@ -50,14 +54,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 				
 			}
 	?>
-
-	<!-- <button id="ajouter-div" onclick="ajouterDiv()">Ajouter une bulle</button> -->
-	
-	
-</div>
-
-
-<div>
 	
 </div>
 
@@ -65,9 +61,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	if(valider("Admin","SESSION")) {
 		echo "
 			
-			<div id='addBulle' class='formType' style='display: none'>
+			<div id='addEvenement' class='formType' style='display: none'>
 
-				<div class='buttonHideForm' onclick='hideForm(\"addBulle\");'>
+				<div class='buttonHideForm' onclick='hideForm(\"addConseil\");'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
 
@@ -76,35 +72,33 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
 					
 
-					<div id='bulle'>
+					<div id='bulleForm'>
 
 						<div class='group'>
-							<input type='text' name='texte' required>
+							<input type='text' name='name' required>
 							<label for=\"titre\">Texte</label>
 						</div>
 					
 						<div class='group'>
 							<label for=\"fiche\" class='label-fiche'>Choisir une fiche</label>
-							<input id='fiche' class='input-fiche' type='file'>
+							<input id='fiche' name='value' class='input-fiche' type='file'>
 						</div>
 
 					</div>
-
-					</div>
 					
-					<input type='submit' class='buttonType' onclick='undisplayAddBulle();' name='action' value='Ajouter Bulle'>
+					<input type='submit' class='buttonType' name='action' value='Ajouter Bulle'>
 
 				</form>
 			</div>
 
 
-			<div id='supprimerBulle' class='formType' style='display: none'>
+			<div id='supprimerEvenement' class='formType' style='display: none'>
 
-				<div class='buttonHideForm' onclick='hideForm(\"supprimerBulle\")'>
+				<div class='buttonHideForm' onclick='hideForm(\"delConseil\")'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
 
-				<div class='policeTitre tailleTitre titreForm' >Supprimer Une Bulle</div><br>
+				<div class='policeTitre tailleTitre titreForm'>Supprimer Une Bulle</div><br>
 				
 				<form action='controleur.php' method='get'>
 
@@ -116,7 +110,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		echo "
 					</select>
 
-					<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Bulle'>
+					<input type='submit' class='buttonType' name='action' value='Supprimer Bulle'>
 				
 				</form>
 			</div>

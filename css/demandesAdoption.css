@@ -79,11 +79,15 @@ form input[type="text"], textarea {
     background-color: var(--sec-color);
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
     border-radius: 30px;
-    margin : 10px 0px 0px 50px;
+    margin : 30px auto;
     font-family: "Roboto",sans-serif;
-    width: clamp(250px, 40%, 1000px);
+    width: 750px;
     padding: 5px;
+    flex-basis: 100%
 }
+
+
+    
 
 #recherche > form {
     margin: 2px 5px;
@@ -633,5 +637,28 @@ text-align: left
     .zoom .sous-memos {
         width: 45%;
         height: 200px;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    #recherche {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 570px) {
+    #recherche {
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+
+    }
+
+    #recherche > * {
+        width : 90%;
+
+    }
+    .dropdown {
+        width: 100%;
     }
 }
