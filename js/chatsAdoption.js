@@ -23,7 +23,7 @@ function afficherChats(chats) {
 					<div class="chatNomBlock">
 						<div class="chatNom policeTitre">${chatActuel['name']}</div>
 						${chatActuel['chatDuMois'] ? '<div class="tailleTitre policeTitre titreChatDuMois">Notre chat du mois</div>' : ''}
-						<div class="buttonType adoptBtn policeTexte" onclick="adopterChat(this, ${chatActuel['code']});">Adopter ce chat</div>
+						<div class="buttonType adoptBtn policeTexte" onclick="adopterChat(this, ${chatActuel['code']});">Ajouter a ma liste d'adoption</div>
 
 
 					</div>
@@ -89,7 +89,7 @@ function afficherChats(chats) {
 						<div class="policeTexte boxInfoTitle">Situation</div>
 						<div class="policeTexte boxInfoSmall">${(chatActuel['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
 					</div>
-					<div class="buttonType adoptBtnSmall" onclick="adopterChat(this, ${chatActuel['code']});">Adopter ce chat</div>
+					<div class="buttonType adoptBtnSmall" onclick="adopterChat(this, ${chatActuel['code']});">Ajouter a ma liste d'adoption</div>
 				</div>
 
 				
@@ -890,7 +890,7 @@ function adopterChat(contexte, code) {
 		if (chatsSelected.children[i].value == code) {
 			if (chatsSelected.children[i].selected) {
 				chatsSelected.children[i].selected = false;
-				contexte.innerHTML = "Adopter ce chat"
+				contexte.innerHTML = "Ajouter a ma liste d'adoption"
 				contexte.style.backgroundColor = "initial";
 
 			}

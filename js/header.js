@@ -41,6 +41,7 @@ window.addEventListener("resize", responsiveHeader);
 
 
 function responsiveHeader(){
+    console.log("responsiveHeader");
 	if (window.innerWidth < 1200) {
         // display none header nav 
         $("#nav").css("display", "none");
