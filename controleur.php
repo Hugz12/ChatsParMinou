@@ -250,9 +250,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				$date = $date." ".$heure.":00";
 				// On ajoute l'événement à la BDD
 				editEvent($id,$titre,$description,$date,$couleur);
-				//on verifie si un fichier a été uploadé
+				// on verifie si un fichier a été uploadé
 				$image = valider("image","FILES");
-				if ($image["name"] !== ""){
+				if (is_uploaded_file($image['tmp_name'])){
 					// on supprime l'ancienne image
 					unlink("./ressources/evenements/$id.jpg");
 					// on upload la nouvelle
