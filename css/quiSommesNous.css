@@ -1,5 +1,35 @@
 .qsnStats{
     background-color: var(--third-color);
-    border-radius: 40%;
+    border-radius: 10vw;
     width: 20vw;
+}
+
+.qsnContent{
+    width: 50vw;
+}
+
+.qsnTitre{
+    font-size: 3vw;
+    margin-bottom: 1vw;
+}
+
+.qsnCadre{
+    background-color: var(--third-color);
+    border-radius: 10vw;
+    padding: 2vw;
+    margin: 1vw;
+}
+
+.svg{
+    width: 5vw;
+    height: 5vw;
+    margin: 1vw;
+}
+
+.qsnTexte{
+    font-size: 1vw;
+}
+
+img{
+    border-radius: 10%;
 }
