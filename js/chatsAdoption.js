@@ -23,7 +23,7 @@ function afficherChats(chats) {
 					<div class="chatNomBlock">
 						<div class="chatNom policeTitre">${chatActuel['name']}</div>
 						${chatActuel['chatDuMois'] ? '<div class="tailleTitre policeTitre titreChatDuMois">Notre chat du mois</div>' : ''}
-						<div class="buttonType adoptBtn policeTexte" onclick="adopterChat(this, ${chatActuel['code']});">Adopter ce chat</div>
+						<div class="buttonType adoptBtn policeTexte" onclick="adopterChat(this, ${chatActuel['code']});">Ajouter a ma liste d'adoption</div>
 
 
 					</div>
@@ -89,7 +89,7 @@ function afficherChats(chats) {
 						<div class="policeTexte boxInfoTitle">Situation</div>
 						<div class="policeTexte boxInfoSmall">${(chatActuel['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
 					</div>
-					<div class="buttonType adoptBtnSmall" onclick="adopterChat(this, ${chatActuel['code']});">Adopter ce chat</div>
+					<div class="buttonType adoptBtnSmall" onclick="adopterChat(this, ${chatActuel['code']});">Ajouter a ma liste d'adoption</div>
 				</div>
 
 				
@@ -486,27 +486,16 @@ function addPreviewOfExistentFiles(code){
 				deleteButton.classList.add("delete-button");
 				deleteButton.innerText = "X";
 				deleteButton.addEventListener("click", () => {
-					console.log(data);
-					console.log(slides[0].childNodes);
 					for(j = 0; j < slides[0].childNodes.length; j++) {
-						console.log(slides[0].childNodes[j].value);
-						console.log(slidePhoto.value);
 						if (slides[0].childNodes[j].value == slidePhoto.value) {
 							index = j;
 							console.log("trouvé");
 						} 
 					}
 					existentFiles = $("#existentFiles").val();
-					console.log("existentFiles : " + existentFiles);
-					console.log("substring 1 : " + existentFiles.substring(0, 2*index));
-					console.log("substring 2 : " + existentFiles.substring(2*index+2, existentFiles.length));
-					console.log("index : " + index);
-					existentFiles = existentFiles.substring(0, 2*index) + existentFiles.substring(2*index+2, existentFiles.length);
-					console.log("existentFiles final : " + existentFiles);
-
-					console.log(existentFiles);
 					$("#existentFiles").val(existentFiles);
 					$(slidePhoto).remove();
+					$(".formType .inputFile .flecheGauche").click();
 				});
 
 				slidePhoto.appendChild(deleteButton);
@@ -890,7 +879,7 @@ function adopterChat(contexte, code) {
 		if (chatsSelected.children[i].value == code) {
 			if (chatsSelected.children[i].selected) {
 				chatsSelected.children[i].selected = false;
-				contexte.innerHTML = "Adopter ce chat"
+				contexte.innerHTML = "Ajouter a ma liste d'adoption"
 				contexte.style.backgroundColor = "initial";
 
 			}
