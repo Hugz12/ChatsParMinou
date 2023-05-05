@@ -67,8 +67,10 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						
 						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
 						if($photo = valider("photo","FILES")){
-							if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
-								$_SESSION['error'] = "Extension non autorisée, vous pourrez changer votre photo depuis la page profil";
+							if(is_uploaded_file($photo['tmp_name'])){
+								if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
+									$_SESSION['error'] = "Extension non autorisée, vous pourrez changer votre photo depuis la page profil";
+								}
 							}
 						}
 
