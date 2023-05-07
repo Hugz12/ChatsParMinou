@@ -14,6 +14,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <link rel="stylesheet" href="./css/formulaireAdoption.css">
 
+
+<script>
+
+    var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
+    console.log(retour);
+
+</script>
+
+
 <div id ="allFormulaireAdoption" class="policeTexte" >
     <div id="titreFormulaireAdoption" class ="policeTitre">formulaire d'adoption</div>
     <form action="controleur.php" method="get">

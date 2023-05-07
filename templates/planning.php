@@ -19,7 +19,15 @@ if(isset($_SESSION["message"])){
 
 
 ?>
+
+
 <link rel="stylesheet" href="./css/planning.css">
+
+
+<script>
+	localStorage.setItem("userConnected", "<?php echo $_SESSION["mail"]; ?>");
+</script>
+
 <script src="./js/planning.js"></script>
 
 <div>
@@ -83,7 +91,7 @@ if(isset($_SESSION["message"])){
 		<br>
 
 		
-		<form class='policeTexte' onsubmit="validerFormPassageRefuge(this); return false;">
+		<form class='policeTexte' onsubmit="validerFormPassageRefuge(); return false;">
 			<div class='inputOther'>
 				<div id='inputAddChatOther'>
 					<div class='group'>

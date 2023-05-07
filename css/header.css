@@ -45,6 +45,14 @@ header > div {
 	margin: 0 0 0 60px;
 }
 
+@media screen and (max-width: 800px) {
+	#nomAsso {
+		font-size: 25px;
+	}
+}
+	
+
+
 #nomAsso::before {
 	background-image: url("../ressources/logo.png");
 	background-size: 60px 50px;
@@ -59,7 +67,7 @@ header > div {
 
 
 #nav {
-	display: none;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -268,3 +276,14 @@ header > div {
 #menuDeroulant {
 	display: none;
 }
+
+@media screen and (max-width: 1200px) {
+	#nav {
+		display: none;
+	}
+	#menuDeroulant {
+		display: block;
+	}
+    
+}
+

@@ -48,7 +48,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		case 'Deconnexion' :
 			session_destroy(); // On détruit la session
 			$qs = "?view=accueil";
-
+		break;
 
 
 		
@@ -159,6 +159,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 
 
+
 		case 'Changer Chat Du Mois' :
 			// On vérifie la présence des champs
 			if ($code = valider("code")){
@@ -188,8 +189,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-
-
+				
 		case 'Changer Memo' :
 			// On vérifie la présence des champs
 			if ($id = valider("id"))
@@ -202,13 +202,13 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 		case 'Ajouter un chat' : 
+
 			// On vérifie la présence des champs
 			if (($nom = valider("nom","POST"))
 			&& ($code = valider("code","POST"))
 			&& ($date = valider("dateNaissance","POST"))
 			&& ($sexe = valider("sexe","POST"))
 			&& ($race = valider("race","POST"))
-			&& ($statut = valider("statut","POST"))
 			&& ($description = valider("description","POST"))
 			&& ($familleAccueil = valider("familleAccueil","POST"))
 			&& ($couleur = valider("couleur","POST"))
@@ -222,7 +222,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
-					addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos);					
+					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
@@ -274,6 +274,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				unlink("./ressources/evenements/$id.jpg");
 				$qs = "?view=accueil";
 			}
+		break;
 
 
 
@@ -289,24 +290,148 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
-		case 'Edit Chat' : 
-			// si il y a au moins un champ non vide
-			if (($statut = valider("statut","POST")) 
-			or 	($familleAccueil = valider("familleAccueil","POST")) 
-			or	($couleur = valider("couleur","POST")) 
-			or 	($code = valider("code","POST"))
-			or	($description = valider("description","POST"))
-			or	($photos = valider_fichiers("photos"))){
-				// On ajoute le chat à la BDD
-				$nbPhotos = count($photos);
-				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+		case "Ajouter Bulle" :
+			// On vérifie la présence des champs
+			if ($name = valider("name","POST"))
+			if ($value = valider_fichiers("value")){
+				// On ajoute la bulle à la BDD
+				$nomdestination = './ressources/bulles/'.$name.'.pdf';
+				move_uploaded_file($value['tmp_name'], $nomdestination);
+				addConseil($name, $nomdestination);
+				$qs = "?view=bulles";
+			}
+		break;
 
-				// On ajoute les photos
-				$i = 0;
-				foreach ($photos as $fichier) {
-					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
-					$i++;
+		case "Supprimer Bulle" :
+			// On vérifie la présence des champs
+			if ($name = valider("name")){
+				// On supprime la bulle de la BDD
+				delConseil($name);
+				// On supprime le fichier
+				unlink("./ressources/bulles/$name.pdf");
+				$qs = "?view=bulles";
+			}
+		break;
+
+
+		case 'Modifier le chat' : 
+			// si il y a au moins un champ non vide
+			
+			if  ($statut = valider("statut","POST"))
+			if  ($nom = valider("nom", "POST")) 
+			if 	($familleAccueil = valider("familleAccueil","POST")) 
+			if	($couleur = valider("couleur","POST")) 
+			if 	($code = valider("code","POST"))
+			if	($description = valider("description","POST")){
+				
+				// On ajoute le chat à la BDD
+				if($existentFiles = valider("existentFiles", "POST")) {
+					$tabExistentFiles = (explode(" ", $existentFiles));
+					array_pop($tabExistentFiles);
+					$nbPhotos = count(scandir("./ressources/chats/$code")) - 2;
+					for($i = 0; $i < $nbPhotos; $i++) {
+						if (!in_array($i, $tabExistentFiles)) {
+							//echo "unlink ./ressources/chats/$code/$i.jpg <br/>";
+							unlink("./ressources/chats/$code/$i.jpg");
+						}
+					}
 				}
+				else {
+					$tabExistentFiles = array();
+					for($i = 0; $i < count($tabExistentFiles); $i++) {
+						//echo "unlink ./ressources/chats/$code/$i <br/>";
+						unlink("./ressources/chats/$code/$i");
+					}
+				}
+				
+				
+				$i = 0;
+				
+				$fichiers = scandir("./ressources/chats/$code");
+				foreach ($fichiers as $fichier) {
+					if ($fichier != "." && $fichier != "..") {
+						//echo "rename ./ressources/chats/$code/$fichier as ./ressources/chats/$code/$i.jpg <br/>";
+						rename("./ressources/chats/$code/$fichier", "./ressources/chats/$code/$i.jpg");
+						$i++;
+					}
+				}
+				
+				if($photos = valider_fichiers("photos")) {
+					$i = count($tabExistentFiles);
+					foreach ($photos as $fichier) {
+						//echo "upload " . $fichier['nom'] . " as ./ressources/chats/$code/$i.jpg <br/>";
+						uploadPhoto($fichier, "./ressources/chats/$code/", $i);
+						$i++;
+					}
+				}
+				else {
+					$photos = array();
+				}
+				$nbPhotos = count($photos) + count($tabExistentFiles);
+				//echo $nbPhotos;
+				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+				// On ajoute les photos
+				$qs = "?view=chatsAdoption";
+			}
+		break;
+		
+		case 'Modifier le chat' : 
+			// si il y a au moins un champ non vide
+			
+			if  ($statut = valider("statut","POST"))
+			if  ($nom = valider("nom", "POST")) 
+			if 	($familleAccueil = valider("familleAccueil","POST")) 
+			if	($couleur = valider("couleur","POST")) 
+			if 	($code = valider("code","POST"))
+			if	($description = valider("description","POST")){
+				
+				// On ajoute le chat à la BDD
+				if($existentFiles = valider("existentFiles", "POST")) {
+					$tabExistentFiles = (explode(" ", $existentFiles));
+					array_pop($tabExistentFiles);
+					$nbPhotos = count(scandir("./ressources/chats/$code")) - 2;
+					for($i = 0; $i < $nbPhotos; $i++) {
+						if (!in_array($i, $tabExistentFiles)) {
+							//echo "unlink ./ressources/chats/$code/$i.jpg <br/>";
+							unlink("./ressources/chats/$code/$i.jpg");
+						}
+					}
+				}
+				else {
+					$tabExistentFiles = array();
+					for($i = 0; $i < count($tabExistentFiles); $i++) {
+						//echo "unlink ./ressources/chats/$code/$i <br/>";
+						unlink("./ressources/chats/$code/$i");
+					}
+				}
+				
+				
+				$i = 0;
+				
+				$fichiers = scandir("./ressources/chats/$code");
+				foreach ($fichiers as $fichier) {
+					if ($fichier != "." && $fichier != "..") {
+						//echo "rename ./ressources/chats/$code/$fichier as ./ressources/chats/$code/$i.jpg <br/>";
+						rename("./ressources/chats/$code/$fichier", "./ressources/chats/$code/$i.jpg");
+						$i++;
+					}
+				}
+				
+				if($photos = valider_fichiers("photos")) {
+					$i = count($tabExistentFiles);
+					foreach ($photos as $fichier) {
+						//echo "upload " . $fichier['nom'] . " as ./ressources/chats/$code/$i.jpg <br/>";
+						uploadPhoto($fichier, "./ressources/chats/$code/", $i);
+						$i++;
+					}
+				}
+				else {
+					$photos = array();
+				}
+				$nbPhotos = count($photos) + count($tabExistentFiles);
+				//echo $nbPhotos;
+				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+				// On ajoute les photos
 				$qs = "?view=chatsAdoption";
 			}
 		break;
@@ -326,28 +451,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		case 'Edit Chat' : 
-			// si il y a au moins un champ non vide
-			if (($statut = valider("statut","POST")) 
-			or 	($familleAccueil = valider("familleAccueil","POST")) 
-			or	($couleur = valider("couleur","POST")) 
-			or 	($code = valider("code","POST"))
-			or	($description = valider("description","POST"))
-			or	($photos = valider_fichiers("photos"))){
-				// On ajoute le chat à la BDD
-				$nbPhotos = count($photos);
-				editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
-
-				// On ajoute les photos
-				$i = 0;
-				foreach ($photos as $fichier) {
-					uploadPhoto($fichier, "./ressources/chats/$code/", $i);
-					$i++;
-				}
-				$qs = "?view=chatsAdoption";
-			}
-		break;
-
 
 		case 'addPassage' : 
 			// vérifier la présence des champs 
@@ -356,7 +459,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($heureFin = valider("fin"))
 			if ($description = valider("description"))
 			if (isset($_SESSION["mail"]))
-			if ($heureDebut < $heureFin){
+			if ($heureDebut <= $heureFin){
 
 				$retour = ajouterPassage($date,$heureDebut,$heureFin,$description,$_SESSION["mail"]);
 
@@ -377,6 +480,21 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 			die();
 		break;
+
+		case 'deletePassage' : 
+			if ($date = valider("date"))
+			if ($heureDebut = valider("heureDebut"))
+			if ($heureFin = valider("heureFin")){
+				deletePassage($date,$heureDebut,$heureFin);
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode("deleted"); // On renvoie le message de succès
+				die();
+			}
+			
+		break;
+
+
 
 		// Action qui ne sont pas afficher sur la page, 
 		// c'est a dire qui vont etre appeler via des requetes ajax ou autre
@@ -404,13 +522,13 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
-		case 'getPhotos' : 
-			// qui renvoi les photos du chat stocké dans un dossier
+		case 'getNbPhotos' : 
+			// qui renvoi le nombre photos du chat stocké dans un dossier
 			if ($code = valider("code")){
-				$photos = getPhotos($code);
+				$nbPhotos = getNbPhotos($code);
 				ob_clean(); // On vide le tampon de sortie
 				header('Content-Type: application/json');
-				echo json_encode($photos);
+				echo json_encode($nbPhotos);
 				die(); 
 			}
 		break;
@@ -428,16 +546,44 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'getPassages' : 
 			// qui renvoi les infos de l'événement en json
-			if ($mois = valider("mois")){
-				$passages = getPassages($mois);
+			if ($mois = valider("mois"))
+			if ($annee = valider("annee")){
+				$passages = getPassages($mois,$annee);
 				ob_clean(); // On vide le tampon de sortie
 				header('Content-Type: application/json');
 				echo json_encode($passages);
 				die(); 
 			}
 		break; 
+		
+		case 'changerNom' :
+			if ($nom = valider("nom")){
+				changerNom($nom);
+				ob_clean();
+				header('Content-Type: application/json');
+				echo json_encode("ok");
+				die();
+			}
+		break;
+		case 'getConnectedUser' : 
+			// qui renvoi les infos de l'événement en json
+			if (isset($_SESSION["mail"])){
+				$user = $_SESSION["mail"];
+				ob_clean(); // On vide le tampon de sortie
+				header('Content-Type: application/json');
+				echo json_encode($user);
+				die(); 
+			}
 
 
+		case 'changerMail' :
+			if ($mail = valider("mail")){
+				changerMail($mail);
+				ob_clean();
+				header('Content-Type: application/json');
+				echo json_encode("ok");
+				die();
+			}
 		
 
 	}
@@ -461,13 +607,3 @@ if ($qs) {
 ob_end_flush(); // On vide le tampon de sortie
 	
 ?>
-
-
-
-
-
-
-
-
-
-

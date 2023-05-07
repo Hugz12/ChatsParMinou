@@ -87,8 +87,17 @@ function listeEvenements(){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function changerNom($name){
+    $mail = $_SESSION['mail'];
+    $SQL = "UPDATE utilisateur SET name = '$name' WHERE mail = '$mail'";
+    return SQLUpdate($SQL);
+}
 
-
+function changerMail($mail){
+    $mailv = $_SESSION['mail'];
+    $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
+    return SQLUpdate($SQL);
+}
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
  * @param $nom
@@ -105,6 +114,15 @@ function supprimerEvenement($id){
     return SQLDelete($SQL);
 }
 
+function addConseil($name, $nomdestination){
+    $SQL = "INSERT INTO bulle (name, parent, value) VALUES ('$name', 'conseil', '$nomdestination')";
+    return SQLInsert($SQL);
+}
+
+function delConseil($name){
+    $SQL = "DELETE FROM bulle WHERE name = '$name'";
+    return SQLDelete($SQL);
+}
 
 
 /*
@@ -138,6 +156,28 @@ function addDemandeAdoptionBDD($codeChat,$nom,$prenom,$mail,$tel,$adresse,$habit
 function listerChats(){
     $SQL = "SELECT * FROM chat";
     return parcoursRS(SQLSelect($SQL));
+}
+
+function getConseils(){
+    $SQL = "SELECT * FROM divers WHERE parent = 'conseil'";
+    return parcoursRS(SQLSelect($SQL));
+}
+
+/**
+ * 
+ * Fonction qui retourne la liste des utilisateurs
+ */
+function listerUtilisateurs(){
+    $SQL = "SELECT name FROM utilisateur";
+    return parcoursRS(SQLSelect($SQL));
+}
+
+/**
+ * fonction qui retourne le nom dse l'utilisateur courant
+ */
+function getNomUtilisateur($mail){
+    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
 }
 
 
@@ -233,10 +273,10 @@ function existChat($code){
         return true;
 }
 
-function addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos){
+function addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos){
     $sexe--;
     $familleAccueil--;
-    $SQL = "INSERT INTO chat (code, name, dateDeNaissance, race, sexe, statut, description, familleAccueil, nbPhoto, couleur) VALUES ('$code','$nom','$date','$race','$sexe','$statut','$description','$familleAccueil','$nbPhotos','$couleur')";
+    $SQL = "INSERT INTO chat (code, name, dateDeNaissance, race, sexe, statut, description, chatDuMois, nbDemande, familleAccueil, vues, nbPhoto, couleur) VALUES ('$code','$nom','$date','$race','$sexe','1','$description','0','0','$familleAccueil','0','$nbPhotos','$couleur')";
     return SQLInsert($SQL);
 }
 
@@ -255,24 +295,17 @@ function getEvent($id){
     return parcoursRS(SQLSelect($SQL));
 }
 
-function getPhotos($code){
+function getNbPhotos($code){
     // retourne un tableau de photos du chat stocké dans le dossier ressources/chats/$code qui contient toutes les informations sur les photos pour pouvoir les afficher
-    $photos = array();
-    $dir = "ressources/chats/$code";
-    $files = scandir($dir);
-    foreach ($files as $file){
-        if ($file != "." && $file != ".."){
-            $photo = array();
-            $photo["name"] = $file;
-            $photo["url"] = "$dir/$file";
-            $photos[] = $photo;
-        }
-    }
-    return $photos;
+    $SQL = "SELECT nbPhoto FROM chat WHERE code = $code";
+    return SQLGetChamp($SQL);
 }
 
-function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
-
+function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
+    if ($nom != false){
+        $SQL = "UPDATE chat SET name = '$nom' WHERE code = $code";
+        SQLUpdate($SQL);
+    }
     if ($statut != false){
         $SQL = "UPDATE chat SET statut = '$statut' WHERE code = $code";
         SQLUpdate($SQL);
@@ -291,10 +324,7 @@ function editChat($statut,$description,$familleAccueil,$couleur,$nbPhotos,$code)
         SQLUpdate($SQL);
     }
     if ($nbPhotos != false){
-        $SQL = "SELECT nbPhoto FROM chat WHERE code = $code";
-        $nbPhotosActuel = SQLGetChamp($SQL);
-        $nbPhotosActuel += $nbPhotos;
-        $SQL = "UPDATE chat SET nbPhoto = '$nbPhotosActuel' WHERE code = $code";
+        $SQL = "UPDATE chat SET nbPhoto = '$nbPhotos' WHERE code = $code";
         SQLUpdate($SQL);
     }
 }
@@ -328,13 +358,14 @@ function supprimerDossier($dir){
     rmdir($dir);
 }
 
-function getPassages($mois){
-    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois";
+function getPassages($mois, $annee){
+    $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois AND YEAR(date) = $annee";
     return parcoursRS(SQLSelect($SQL));
 }
 
+function deletePassage($date,$heureDebut,$heureFin){
+    $SQL = "DELETE FROM passageRefuge WHERE heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND date = '$date' AND mailBenevole = '".$_SESSION["mail"]."'";
+    SQLDelete($SQL);
+}
+
 ?>
-
-
-
-

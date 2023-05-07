@@ -118,12 +118,16 @@ function deleteForm(id){
 
 
 function checkboxPhotoSwitch(element){
+	console.log($(element).children("input").prop("checked"));
 	if($(element).children("input").prop("checked") == false) {
 		$(element).children(".photoDroite").animate({opacity: 0}, 300);
 		$(element).children(".photoGauche").animate({opacity: 1}, 300);
+
 	} else {
 		$(element).children(".photoDroite").animate({opacity: 1}, 300);
 		$(element).children(".photoGauche").animate({opacity: 0}, 300);
+
+		
 	}
 }
 
@@ -132,6 +136,7 @@ function etatSwitch(element){
 	if ($(element).children("#etatSexe")) {
 		// si il est coché
 		if ($(element).children("input").prop("checked") == false) {
+
 			$(element).children("#etatSexe").fadeOut(150, function() {
 				$(this).text("Femelle").fadeIn(150);
 			});

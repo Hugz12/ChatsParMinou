@@ -95,7 +95,6 @@
 
 #allChatDuMois {
 	width: 100vw;
-	padding: 0 0 70px 0;
 	background-color: var(--sec-color);
 	position: relative;
 	display: none;
@@ -139,9 +138,8 @@
 
 .chatBox {
 	width: calc(100% - 90px);
-	height: calc(100% - 30px);
 	max-width: 1080px;
-	padding: 30px 45px 0 45px;
+	padding: 30px 45px 45px 45px;
 	margin: 0 auto 0 auto;
 }
 
@@ -237,6 +235,11 @@
 	background-position: center;
 }
 
+.adoptBtnChatDuMois {
+	border-color: var(--third-color);
+	border-radius: 10px;
+}
+
 
 
 
@@ -263,10 +266,14 @@
 }
 
 .firstBanner {
-	margin: 50px 40px 10px 40px;
+	margin: 30px 40px 10px 40px;
 	height: auto;
 	min-height: 80px;
-	justify-content: space-between;
+	justify-content: space-around;
+}
+
+.firstBanner > * {
+	margin: 10px 10px 10px 10px;
 }
 
 
@@ -555,4 +562,9 @@
 
 
 
+
+
+@media screen and (max-width: 900px) {
+	
+}
 

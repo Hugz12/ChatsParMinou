@@ -9,8 +9,8 @@ if (!valider('Connecte', 'SESSION')) {
 	header("Location:./index.php?view=accueil");
 	die();
 }
-
 ?>
+
 <link rel="stylesheet" href="./css/profil.css">
 <link rel="stylesheet" href="css/form.css">
 <script src="./js/profil.js"></script>
@@ -43,43 +43,32 @@ if (!valider('Connecte', 'SESSION')) {
 			?>
 			<label for="nom">Nom et prénom</label>
 			</div>
-			<input type="submit" onclick="changerNomUtilisateur('<?php echo $_SESSION['mail']; ?>', document.getElementsByName('nom')[0].value); console.log('<?php echo $_SESSION['mail']; ?>', document.getElementsByName('nom')[0].value);" class="buttonType" value="Modifier mes informations personnelles">
+			<input type="button" onclick="changerNom();" class="buttonType" value="Modifier mes informations personnelles">
 		</form>
 		</div>
+	</div>
 
-					<div class='group'>
-										<input type='text' name='prenom' required>
-										<label for="prenom">Prénom</label>
-					</div>
 
-					<div class='group'>
-										<input type='text' name='mail' value="<?php echo"$_SESSION[mail]"; ?>"required>
-										<label for="mail">Adresse mail</label>
-					</div>
-
-					<input type="submit" class="buttonType" value="Modifier mes informations personnelles">
-				</form>
-  
 	<div class="mdpMailGestion">
 		<div class="mdp">
 			<div class="titre">Changer de mot de passe</div>
 			<form>
 					<div class='group'>
-										<input type='text' name='mdpv'  required>
-										<label for="mdpv">Ancien mdp</label>
+						<input type='text' name='mdpv' id='mdpV' required>
+						<label for="mdpv">Ancien mdp</label>
 					</div>
 
 					<div class='group'>
-										<input type='text' name='mdpn' required>
-										<label for="mdpn">Nouveau mdp</label>
+						<input type='text' name='mdpn' id='mdpN' required>
+						<label for="mdpn">Nouveau mdp</label>
 					</div>
 
 					<div class='group'>
-										<input type='text' name='mdpn2' required>
-										<label for="mdpn2">Confirmer le nouveau mdp</label>
+						<input type='text' name='mdpn2' id='mdpN2'required>
+						<label for="mdpn2">Confirmer le nouveau mdp</label>
 					</div>
 
-					<input type="submit" class="buttonType" value="changer de mot de passe">
+					<input type="button" class="buttonType" value="changer de mot de passe" onclick="changerMdp()">
 				</form>
 		</div>
 
@@ -89,11 +78,11 @@ if (!valider('Connecte', 'SESSION')) {
 
 
 					<div class='group'>
-										<input type='text' name='mailn' required>
-										<label for="mailn">Nouveau mail</label>
+						<input type='text' name='mailn' id="mail-input" required>
+						<label for="mailn">Nouveau mail</label>
 					</div>
 
-					<input type="submit" class="buttonType" value="changer d'adresse mail">
+					<input type="button" class="buttonType" value="changer d'adresse mail" onclick="changerMail();">
 				</form>
 		</div>
 		<?php
