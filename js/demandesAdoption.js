@@ -1,6 +1,6 @@
 //Fonction qui append une demande
-function divDemande(date, btn, img, demande){
-    return `<div id="demande${demande["id"]}" class="demandes">
+function appendDemande(statut, date, btn, img, demande){
+    $(statut).append(`<div id="demande${demande["id"]}" class="demandes">
                 <img class="btnDemande ${btn} clickable" onclick='changerStatut(this);' src="./ressources/${img}.png" alt="${img}">
                 <div class="fondDemande">
                     <div class="contenuDemande">
@@ -18,10 +18,6 @@ function divDemande(date, btn, img, demande){
                                 <div class='para none'>
                                     <p name='description'>${demande['description']}</p>
                                     <label for=\"description\">Description</label>
-                                </div>
-                                <div class='para none'>
-                                    <p name='particularite'>${demande['particularite']}</p>
-                                    <label for=\"particularite\">Particularité</label>
                                 </div>
                             </div>
                             <div class="infosPers">
@@ -72,29 +68,29 @@ function divDemande(date, btn, img, demande){
                         </div>
                         <form>
                             <div class='group memo'>
-                                <textarea name='memo' required>${demande['memo']}</textarea>
+                                <textarea name='memo' maxlength="255" required>${demande['memo']}</textarea>
                                 <label for=\"memo\">Memo</label>
                             </div>
                             <div class="sous-memos">
                                 <div class='group datePv'>
-                                    <input type='text'  name='datePv' value='${demande['datePv']}' required>
+                                    <input type='text' name='datePv' value='${demande['datePv']}' maxlength="255" required>
                                     <label for=\"datePv\">Date de PV</label>
                                 </div>
                                 <div class='group resultatPv'>
-                                    <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
+                                    <input type='text' name='resultatPv' value='${demande['resultatPv']}' maxlength="255" required>
                                     <label for=\"resultatPv\">Résultat de PV</label>
                                 </div>
                                 <div class='group dateRencontre'>
-                                    <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
+                                    <input type='text' name='dateRencontre' value='${demande['dateRencontre']}' maxlength="255" required>
                                     <label for=\"dateRencontre\">Date de rencontre</label>
                                 </div>
                             </div>
                         </form>
-                        <div class="btnMemo clickable">Enregistrer</div>
+                        <div onclick='enregistrerMemo(this);' class="btnMemo clickable">Enregistrer</div>
                     </div>
                 </div>
                 <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
-            </div>`;
+            </div>`);
 }
 
 //Fonction qui calcule le temps écoulé depuis la date de la demande
@@ -103,13 +99,13 @@ function dateCompteur(dateDemande){
 
     const difference = new Date() - dateDemande;
 
-    const secondes = Math.round(difference / 1000);
-    const minutes = Math.round(difference / (1000 * 60));
-    const heures = Math.round(difference / (1000 * 60 * 60));
-    const jours = Math.round(difference / (1000 * 60 * 60 * 24));
-    const semaines = Math.round(difference / (1000 * 60 * 60 * 24 * 7));
-    const mois = Math.round(difference / (1000 * 60 * 60 * 24 * 30));
-    const annees = Math.round(difference / (1000 * 60 * 60 * 24 * 30 * 12));
+    const secondes = Math.floor(difference / 1000);
+    const minutes = Math.floor(difference / (1000 * 60));
+    const heures = Math.floor((difference / (1000 * 60 * 60)));
+    const jours = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const semaines = Math.floor(difference / (1000 * 60 * 60 * 24 * 7));
+    const mois = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
+    const annees = Math.floor(difference / (1000 * 60 * 60 * 24 * 30 * 12));
 
     if (secondes < 60) tps = 'il y a quelques secondes';
     else if (minutes < 60) tps = `il y a ${minutes} minute${minutes === 1 ? '' : 's'}`;
@@ -142,9 +138,9 @@ function afficherDemandes(demandes) {
                 img = "check";
                 iN++;
 
-                if (iN <= 10) $(statut).append(divDemande(date, btn, img, demandes[i]));
+                if (iN <= 10) appendDemande(statut,date, btn, img, demandes[i]);
                 else {
-                    $(statut).append(divDemande(date, btn, img, demandes[i]));
+                    appendDemande(statut,date, btn, img, demandes[i]);
                     $("#demande" + demandes[i]["id"]).css("display", "none");
                 }
                 break;
@@ -155,9 +151,9 @@ function afficherDemandes(demandes) {
                 img = "play";
                 iC++;
 
-                if (iC <= 10) $(statut).append(divDemande(date, btn, img, demandes[i]));
+                if (iC <= 10) appendDemande(statut,date, btn, img, demandes[i]);
                 else {
-                    $(statut).append(divDemande(date, btn, img, demandes[i]));
+                    appendDemande(statut,date, btn, img, demandes[i]);
                     $("#demande" + demandes[i]["id"]).css("display", "none");
                 }
                 break;
@@ -168,9 +164,9 @@ function afficherDemandes(demandes) {
                 img = "return";
                 iT++;
 
-                if (iT <= 10) $(statut).append(divDemande(date, btn, img, demandes[i]));
+                if (iT <= 10) appendDemande(statut,date, btn, img, demandes[i]);
                 else {
-                    $(statut).append(divDemande(date, btn, img, demandes[i]));
+                    appendDemande(statut,date, btn, img, demandes[i]);
                     $("#demande" + demandes[i]["id"]).css("display", "none");
                 }
                 break;
@@ -244,14 +240,19 @@ function changerTitres() {
 function triDate(dateDemande, statut) {
     console.log("triDate");
     var count = document.getElementById(statut).childElementCount;
+    count = parseInt(count);
     var split = $("#" + statut + " .tpsComplet").text().split("|", count);
+    // console.log("count : " + count);
+    // console.log("split : " + split);
 
-    if (document.getElementById(statut).childElementCount != null) {
-        for (var i=0; i < document.getElementById(statut).childElementCount; i++) {
-            var dateStatut = new Date(split[i]);
-            if ($(".choix-recent").hasClass('choix-ancien')) {
+    if (count != null) {
+        for (var i=0; i < count; i++) {
+            var dateStatut = new Date(split[i]).getTime();
+            // console.log("dateStatut : " + dateStatut);
+            if ($($("#triTps").children("p")).text() == 'Ancien') {
                 if (dateDemande < dateStatut) return i;
-            } else {
+            }
+            else if ($($("#triTps").children("p")).text() == 'Récent') {
                 if (dateDemande > dateStatut) return i;
             }
         }
@@ -267,7 +268,7 @@ function changerStatut(contexte) {
     var demande = $(contexte).parent();
     var id = $($(contexte).parent()).attr("id").match(/\d+/g).toString().replace(',', '');
     id = parseInt(id);
-    console.log("id : " + id);
+    // console.log("id : " + id);
 
     if ($(contexte).hasClass("btnNouvelleDemande") || $(contexte).hasClass("btnTraitees")) {
         var statut = "demandesEnCours";
@@ -291,13 +292,13 @@ function changerStatut(contexte) {
         var statut = "traitees";
         var statutDemande = 3;
         
-        $($(demande).children(".btnNouvelleDemande")).attr("src", './ressources/return.png');
-        $($(demande).children(".btnNouvelleDemande")).attr("alt" , "return");
+        $($(demande).children(".btnEnCours")).attr("src", './ressources/return.png');
+        $($(demande).children(".btnEnCours")).attr("alt" , "return");
 
         $(demande).children(".btnEnCours").addClass("btnTraitees");
         $(demande).children(".btnEnCours").removeClass("btnEnCours");
     }
-    console.log("statutDemande : " + statutDemande);
+    // console.log("statutDemande : " + statutDemande);
 
     $.ajax({
         url: './controleur.php',
@@ -316,12 +317,15 @@ function changerStatut(contexte) {
     });
     $("#demande" + id).remove();
 
-    var dateDemande = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".tpsComplet")).text().match("^.*?(?=|)");
-    //console.log(dateDemande);
+    var dateDemande = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".tpsComplet")).text().match(/^(.*).$/);
+    console.log("dateDemande : " + dateDemande[1]);
+    dateDemande = new Date (dateDemande[1]).getTime();
+    console.log("dateDemande : " + dateDemande);
 
     var tri = triDate(dateDemande, statut);
     if (tri != null) $($("#" + statut).children().eq(tri)).before(demande);
     else $("#" + statut).append(demande);
+    console.log("tri : " + tri);
         
     changerTitres();
     montrerPlusMoins();
@@ -373,44 +377,42 @@ function supprimerDemande(contexte) {
     }
 
 //Fonctions d'edition des commentaires
-$(function() {
-    $(".btnMemo").on("click", function() {
-        console.log("Changer Memo");
-        var id = $($(this).parent().parent().parent().parent()).attr("id").match(/\d+/g).toString().replace(',', '');
-        id = parseInt(id);
-        //console.log("id : " + id);
-        var parent = $($(this).parent()).children("form");
+function enregistrerMemo(contexte) {
+    console.log("Changer Memo");
+    var id = $($(contexte).parent().parent().parent()).attr("id").match(/\d+/g).toString().replace(',', '');
+    id = parseInt(id);
+    //console.log("id : " + id);
+    var parent = $($(contexte).parent()).children("form");
 
-        var memo = $(parent).children(".memo").children("textarea").val();
-        var datePv = $(parent).children(".sous-memos").children(".datePv").children("input").val();
-        var resultatPv = $(parent).children(".sous-memos").children(".resultatPv").children("input").val();
-        var dateRencontre = $(parent).children(".sous-memos").children(".dateRencontre").children("input").val();
+    var memo = $(parent).children(".memo").children("textarea").val();
+    var datePv = $(parent).children(".sous-memos").children(".datePv").children("input").val();
+    var resultatPv = $(parent).children(".sous-memos").children(".resultatPv").children("input").val();
+    var dateRencontre = $(parent).children(".sous-memos").children(".dateRencontre").children("input").val();
 
-        if (memo == "") memo = "null";
-        if (datePv == "") datePv = "null";
-        if (resultatPv == "") resultatPv = "null";
-        if (dateRencontre == "") dateRencontre = "null";
+    if (memo == "") memo = "null";
+    if (datePv == "") datePv = "null";
+    if (resultatPv == "") resultatPv = "null";
+    if (dateRencontre == "") dateRencontre = "null";
 
-        $.ajax({
-            url: './controleur.php',
-            type: 'POST',
-            data: {
-                action: 'Changer Memo',
-                id: id,
-                memo: memo,
-                datePv: datePv,
-                resultatPv: resultatPv,
-                dateRencontre: dateRencontre
-            },
-            success: function() {
-                console.log("success");
-            },
-            error: function() {
-                console.log("error");
-            }
-        });
+    $.ajax({
+        url: './controleur.php',
+        type: 'POST',
+        data: {
+            action: 'Changer Memo',
+            id: id,
+            memo: memo,
+            datePv: datePv,
+            resultatPv: resultatPv,
+            dateRencontre: dateRencontre
+        },
+        success: function() {
+            console.log("success");
+        },
+        error: function() {
+            console.log("error");
+        }
     });
-});
+}
 
 // Fonction qui permet d'afficher la popup d'infos
 $(function() {
@@ -444,7 +446,7 @@ $(function() {
             case 'Recherche d\'un chat':
                 //console.log("case rchChat");
                 $(".infosChat").filter(function(){ 
-                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
+                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
@@ -458,7 +460,7 @@ $(function() {
             case 'Recherche d\'une date':
                 //console.log("case rchDate");
                 $(".tpsDate").filter(function(){ 
-                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
+                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
         }

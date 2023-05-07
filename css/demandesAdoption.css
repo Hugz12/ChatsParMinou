@@ -49,15 +49,16 @@ form input[type="text"], textarea {
 
 /* Titres */
 .marginTitre {
-    margin-left: 3%;
+    margin-left: 50px;
 }
 
 .lienPlusMoins {
     color: rgb(100, 100, 100);
     cursor: pointer;
-    margin-left: 3%;
+    margin-left: 50px;
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
+    width: fit-content;
 }
 
 .lienPlusMoins:hover {
@@ -66,7 +67,7 @@ form input[type="text"], textarea {
 }
 
 .nonTrouvée {
-    margin-left: 4%;
+    margin-left: 60px;
     font-size: 2em;
 }
 
@@ -79,10 +80,11 @@ form input[type="text"], textarea {
     background-color: var(--sec-color);
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
     border-radius: 30px;
-    margin : 10px 0px 0px 50px;
+    margin : 30px auto;
     font-family: "Roboto",sans-serif;
-    width: clamp(250px, 40%, 1000px);
-    padding: 5px;
+    width: 750px;
+    padding: 10px;
+    min-width: 250px;
 }
 
 #recherche > form {
@@ -98,16 +100,18 @@ form input[type="text"], textarea {
 }
 
 .dropdown {
-width: 220px;
-display: inline-block;
-background-color: #fff;
-border-radius: 2px;
-box-shadow: 0 0 2px rgb(204, 204, 204);
-transition: all .5s ease;
-position: relative;
-font-size: 14px;
-color: #474747;
-text-align: left
+    width: 220px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgb(204, 204, 204);
+    transition: all .5s ease;
+    position: relative;
+    font-size: 14px;
+    color: #474747;
+    text-align: left;
+    border-radius: 15px;
+
 }
 
 .dropdown .select {
@@ -122,22 +126,22 @@ text-align: left
     cursor: pointer;
     transition: all .3s ease-in-out;
     float: right;
-    line-height: 20px
+    line-height: 20px;
 }
 
 .dropdown:hover {
-    box-shadow: 0 0 4px rgb(204, 204, 204)
+    box-shadow: 0 0 4px rgb(204, 204, 204);
 }
 
 .dropdown:active {
-    background-color: #f8f8f8
+    background-color: #f8f8f8;
 }
 
 .dropdown.active:hover,
 .dropdown.active {
     box-shadow: 0 0 4px rgb(204, 204, 204);
-    border-radius: 2px 2px 0 0;
-    background-color: #f8f8f8
+    border-radius: 15px 15px 0 0;
+    background-color: #f8f8f8;
 }
 
 .dropdown.active .select > i {
@@ -156,7 +160,8 @@ text-align: left
     display: none;
     max-height: 144px;
     overflow-y: auto;
-    z-index: 9
+    z-index: 9;
+    border-radius: 0 0 15px 15px;
 }
 
 .dropdown .dropdown-menu li {
@@ -179,6 +184,13 @@ text-align: left
 }
 
 /*****************************************/
+#triI {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+    min-width: 160px;
+}
+
 #triTps {
     display: flex;
     justify-content: space-between;
@@ -270,7 +282,6 @@ text-align: left
     background-color: var(--sec-color);
     border-radius: 30px;
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
-    cursor: pointer;
     position: relative;
     padding: 10px 0;
     min-width: 250px;
@@ -328,6 +339,7 @@ text-align: left
     border-bottom-right-radius: 30px;
     object-fit: cover;
     background-position: center;
+    cursor: pointer;
 }
 
 .idChat {
@@ -344,6 +356,7 @@ text-align: left
 
 .idChat .para {
     width: 50%;
+    margin: 0;
 }
 
 .nomChat {
@@ -581,11 +594,15 @@ text-align: left
 
 /******************************************************/
 
-@media (max-width: 1465px) {
+@media (max-width: 1500px) {
     .infos {
         width: 90%;
-        min-width: 480px;
+        min-width: 230px;
         justify-content: space-around;
+    }
+
+    .contenuDemande {
+        padding: 0;
     }
 
     .contenuDemande form {
@@ -633,5 +650,28 @@ text-align: left
     .zoom .sous-memos {
         width: 45%;
         height: 200px;
+    }
+}
+
+@media (max-width: 900px) {
+    #recherche {
+        width: 80%;
+    }
+}
+
+@media (max-width: 570px) {
+    #recherche {
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+
+    }
+
+    #recherche > * {
+        width : 90%;
+
+    }
+    .dropdown {
+        width: 100%;
     }
 }
