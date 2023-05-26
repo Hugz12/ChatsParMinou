@@ -67,7 +67,7 @@ header > div {
 
 
 #nav {
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -276,14 +276,3 @@ header > div {
 #menuDeroulant {
 	display: none;
 }
-
-@media screen and (max-width: 1200px) {
-	#nav {
-		display: none;
-	}
-	#menuDeroulant {
-		display: block;
-	}
-    
-}
-

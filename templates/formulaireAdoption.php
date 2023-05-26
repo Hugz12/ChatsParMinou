@@ -13,7 +13,28 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 ?>
 
 <link rel="stylesheet" href="./css/formulaireAdoption.css">
+<script src="./js/formulaireAdoption.js"></script>
+<div id="patteFormulaireAdoption" class="conteneurDeConteneurDePattes">
+    <div id="1" class="patteContainer"></div>
+    <div id="2" class="patteContainer"></div>
+    <div id="3" class="patteContainer"></div>
+    <div id="4" class="patteContainer"></div>
+</div>
 
+
+<script>
+    
+    var patteContainer = document.getElementById("1");    
+    var patteContainer2 = document.getElementById("2");
+    var patteContainer3 = document.getElementById("3");
+    var patteContainer4 = document.getElementById("4");
+
+
+    move(patteContainer, 0, 0, 0, 0, 500, 1);
+    move(patteContainer2, 180, 0, 0, 0, 600, 1);
+    move(patteContainer3, 270, 0, 0, 500, 0, 1);
+    move(patteContainer4, 180, 0, 0, 250, 0, 1);
+</script>
 
 <script>
 
@@ -26,7 +47,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 <div id ="allFormulaireAdoption" class="policeTexte" >
     <div id="titreFormulaireAdoption" class ="policeTitre">formulaire d'adoption</div>
     <form action="controleur.php" method="get">
-        <div id="titre">Informations personnelles</div>
+        <div class="titre">Informations personnelles</div>
         <div id="infoPerso">
             <div class='p1'>
                 <div class='group'>
@@ -58,14 +79,14 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             </div>
         </div>
         <div id="infoChat">
-            <div id="titre">Choix des chats</div>
+            <div class="titre">Choix des chats</div>
             <div class='group'>
                 <input type='text' name='nomChat' required>
                 <label for="nomChat">Nom du chat</label>
             </div>
         </div>
         <div id="infoAdoption">
-            <div id="titre">Informations pratiques</div>
+            <div class="titre">Informations pratiques</div>
             <div id="coche">
                 <label class="checkbox">
                         <input type="checkbox" id="filtreFemelle">

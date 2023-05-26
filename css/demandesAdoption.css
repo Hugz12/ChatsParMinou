@@ -1,4 +1,4 @@
-/* Classes générales */
+/* Général */
 .none {
     display: none;
 }
@@ -6,15 +6,13 @@
 .flex {
     display: flex;
     justify-content: space-between;
-    width: fit-content;
+    height: 60%;
 }
 
 .column {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    width: 50%;
 }
 
 .para {
@@ -49,7 +47,30 @@ form input[type="text"], textarea {
     z-index: 2;
 }
 
-/* Barre de recherche */
+/* Titres */
+.marginTitre {
+    margin-left: 3%;
+}
+
+.lienPlusMoins {
+    color: rgb(100, 100, 100);
+    cursor: pointer;
+    margin-left: 3%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+
+.lienPlusMoins:hover {
+    color: var(--fifth-color);
+    text-decoration: underline;
+}
+
+.nonTrouvée {
+    margin-left: 4%;
+    font-size: 2em;
+}
+
+/* Recherche */
 #recherche {
     display: flex;
     flex-wrap: wrap;
@@ -58,41 +79,41 @@ form input[type="text"], textarea {
     background-color: var(--sec-color);
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
     border-radius: 30px;
-    margin : 30px auto;
+    margin : 10px 0px 0px 50px;
     font-family: "Roboto",sans-serif;
-    width: 750px;
-    padding: 10px;
-    min-width: 250px;
+    width: clamp(250px, 40%, 1000px);
+    padding: 5px;
 }
 
 #recherche > form {
     margin: 2px 5px;
 }
 
-/* Menu déroulant de recherche */
+/*****************************************/
+/*Styling Selectbox*/
 #container {
+    min-width: 200px;
     max-width: 400px;
     margin: 2px 5px;
 }
 
 .dropdown {
-    width: 220px;
-    display: inline-block;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 0 2px rgb(204, 204, 204);
-    transition: all .5s ease;
-    position: relative;
-    font-size: 14px;
-    color: #474747;
-    text-align: left;
-    border-radius: 15px;
+width: 220px;
+display: inline-block;
+background-color: #fff;
+border-radius: 2px;
+box-shadow: 0 0 2px rgb(204, 204, 204);
+transition: all .5s ease;
+position: relative;
+font-size: 14px;
+color: #474747;
+text-align: left
 }
 
 .dropdown .select {
     cursor: pointer;
     display: block;
-    padding: 10px;
+    padding: 10px
 }
 
 .dropdown .select > i {
@@ -101,26 +122,26 @@ form input[type="text"], textarea {
     cursor: pointer;
     transition: all .3s ease-in-out;
     float: right;
-    line-height: 20px;
+    line-height: 20px
 }
 
 .dropdown:hover {
-    box-shadow: 0 0 4px rgb(204, 204, 204);
+    box-shadow: 0 0 4px rgb(204, 204, 204)
 }
 
 .dropdown:active {
-    background-color: #f8f8f8;
+    background-color: #f8f8f8
 }
 
 .dropdown.active:hover,
 .dropdown.active {
     box-shadow: 0 0 4px rgb(204, 204, 204);
-    border-radius: 15px 15px 0 0;
-    background-color: #f8f8f8;
+    border-radius: 2px 2px 0 0;
+    background-color: #f8f8f8
 }
 
 .dropdown.active .select > i {
-    transform: rotate(-90deg);
+    transform: rotate(-90deg)
 }
 
 .dropdown .dropdown-menu {
@@ -135,36 +156,29 @@ form input[type="text"], textarea {
     display: none;
     max-height: 144px;
     overflow-y: auto;
-    z-index: 9;
-    border-radius: 0 0 15px 15px;
+    z-index: 9
 }
 
 .dropdown .dropdown-menu li {
     padding: 10px;
     transition: all .2s ease-in-out;
-    cursor: pointer;
+    cursor: pointer
 }
 
 .dropdown .dropdown-menu {
     padding: 0;
-    list-style: none;
+    list-style: none
 }
 
 .dropdown .dropdown-menu li:hover {
-    background-color: #f2f2f2;
+    background-color: #f2f2f2
 }
 
 .dropdown .dropdown-menu li:active {
-    background-color: #e2e2e2;
+    background-color: #e2e2e2
 }
 
-/* Conteneur avec le switch de tri et le i */
-#triI {
-    display: flex;
-    justify-content: space-between;
-    width: 25%;
-}
-
+/*****************************************/
 #triTps {
     display: flex;
     justify-content: space-between;
@@ -224,7 +238,6 @@ form input[type="text"], textarea {
     font-size: 1.5em;
     color: rgb(100, 100, 100);
     margin: 2px 5px;
-    transition-duration: 0.3s;
 }
 
 #i:hover {
@@ -232,31 +245,7 @@ form input[type="text"], textarea {
     border-color: var(--third-color);
 }
 
-/* Titres */
-.marginTitre {
-    margin-left: 50px;
-}
-
-/* Lien plus/moins */
-.lienPlusMoins {
-    color: rgb(100, 100, 100);
-    cursor: pointer;
-    margin-left: 50px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2em;
-    width: fit-content;
-}
-
-.lienPlusMoins:hover {
-    color: var(--fifth-color);
-    text-decoration: underline;
-}
-
-.nonTrouvée {
-    margin-left: 60px;
-    font-size: 2em;
-}
-
+/*****************************************/
 /* Demandes */
 .tpsDate{
     position: absolute;
@@ -264,6 +253,7 @@ form input[type="text"], textarea {
     top: -2.2em;
     font-size: 16px;
     margin: 0;
+    min-width: 227px;
 }
 
 .demandes {
@@ -271,7 +261,7 @@ form input[type="text"], textarea {
     justify-content: center;
     align-items: center;
     width: 90%;
-    min-width: 390px;
+    min-width: 420px;
     margin: 0 auto 100px auto;
     font-family: "Roboto",sans-serif;
 }
@@ -280,6 +270,7 @@ form input[type="text"], textarea {
     background-color: var(--sec-color);
     border-radius: 30px;
     box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.3);
+    cursor: pointer;
     position: relative;
     padding: 10px 0;
     min-width: 250px;
@@ -287,6 +278,7 @@ form input[type="text"], textarea {
     width: 85%;
     transition-duration: 1s;
     transition-property: width;
+    margin: 0 40px 0 50px;
 }
 
 .contenuDemande {
@@ -298,21 +290,31 @@ form input[type="text"], textarea {
     padding: 0 25px;
 }
 
+.contenuDemande form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 50%;
+    min-width: 550px;
+    margin: 10px;
+}
+
 .infos {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     width: 45%;
+    min-width: 500px;
     margin: 0 10px;
 }
 
-/* infosChats */
 .infosChat {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: clamp(230px, 35%, 400px);
     justify-content: space-between;
-    margin: auto;
+    margin: 10px 0;
 }
 
 .infosChat p{
@@ -320,13 +322,12 @@ form input[type="text"], textarea {
 }
 
 .infosChat img{
-    width: 100%;
-    height: 180px;
+    width: 230px;
+    height: 155px;
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;
     object-fit: cover;
     background-position: center;
-    cursor: pointer;
 }
 
 .idChat {
@@ -343,23 +344,20 @@ form input[type="text"], textarea {
 
 .idChat .para {
     width: 50%;
-    margin: 0;
 }
 
 .nomChat {
     font-size: 2.3em;
 }
 
-
-/* infosPers */
 .infosPers {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 45%;
+    min-width: 230px;
     background-color: var(--sec-color);
     border-radius: 30px;
-    margin: 0 auto;
 }
 
 .infosPers p {
@@ -369,18 +367,23 @@ form input[type="text"], textarea {
 .nomPers {
     font-size: 4em;
 }
-
-/* form */
-.contenuDemande form {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 50%;
-    margin: 10px;
+/*****************************************/
+.btnMemo {
+    position: absolute;
+    right: 2em;
+    bottom: -2.2em;
+    font-size: 1.3em;
+    width: auto;
 }
 
+.btnMemo:hover {
+    color: var(--third-color);
+}
+
+/*****************************************/
 .memo {
     width: 55%;
+    min-width: 230px;
 }
 
 .memo textarea {
@@ -395,6 +398,7 @@ form input[type="text"], textarea {
     justify-content: space-between;
     align-items: center;
     width: 38%;
+    min-width: 230px;
     background-color: inherit;
 }
 
@@ -402,33 +406,9 @@ form input[type="text"], textarea {
     width: 100%;
 }
 
-/* btnMemo */
-.btnMemo {
-    position: absolute;
-    right: 2em;
-    bottom: -2.2em;
-    font-size: 1.3em;
-    width: auto;
-}
-
-.btnMemo:hover {
-    color: var(--third-color);
-}
-
-/* btnDemande */
 .btnDemande {
-    width: 70px;
-    height: 70px;
-    margin: auto;
-}
-
-.btnDemande:hover > svg {
-    fill: var(--third-color);
-}
-
-svg {
-    width: inherit !important;
-    height: inherit !important;
+    width: 60px;
+    height: 60px;
 }
 
 .tpsComplet {
@@ -453,9 +433,10 @@ svg {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 250px;
+    width: 25%;
+    min-width: 225px;
     top: 350px;
-    left: calc((100% - 250px) / 2);
+    left: calc((100% - 25%) / 2);
     padding: 0.8em;
     background-color: var(--sec-color);
     border: 2px solid rgb(200, 200, 200);
@@ -485,7 +466,6 @@ svg {
     text-align: center;
     border: 2px solid rgb(200, 200, 200);
     border-radius: 15px;
-    cursor: pointer;
 }
 
 #popupSupp > div > div:hover{
@@ -493,25 +473,7 @@ svg {
     background-color: var(--fourth-color);
 }
 
-/* Popup infos */
-#popupInfos {
-    display: none;
-    position: absolute;
-    width: 400px;
-    padding: 10px;
-    background-color: var(--sec-color);
-    border-radius: 30px;
-    border: none;
-    box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
-    font-family: 'Roboto', sans-serif;
-    color: rgb(100, 100, 100);
-    z-index: 2;
-}
-
-#popupInfos ul {
-    padding-left: 25px;
-}
-
+/*****************************************/
 /* Mode zoom */
 .zoom {
     margin: 50px auto 100px auto;
@@ -525,20 +487,32 @@ svg {
     display: none;
 }
 
+.zoom .fondDemande {
+    min-width: 450px;
+}
+
+.zoom .contenuDemande {
+    min-width: 450px;
+}
+
 .zoom .infos {
     width: 60%;
+    min-width: 450px;
 }
 
 .zoom form {
     flex-direction: column;
     width: 35%;
+    min-width: 500px;
 }
 
 .zoom .infosChat {
     width: clamp(400px, 40%, 1000px);
+    margin: 10px 0 0 0;
 }
 
 .zoom .infosChat img{
+    width: 400px;
     height: 250px;
 }
 
@@ -572,18 +546,71 @@ svg {
 .zoom .memo {
     width: 100%;
     height: 55%;
+    min-width: 415px;
 }
 
 .zoom .sous-memos {
     width: 100%;
     height: 40%;
+    min-width: 415px;
 }
 
 .zoom .btnDemande {
     display: none;
 }
+/******************************************************/
 
-/* @media */
+/* Popup infos */
+#popupInfos {
+    display: none;
+    position: absolute;
+    width: 400px;
+    padding: 10px;
+    background-color: var(--sec-color);
+    border-radius: 30px;
+    border: none;
+    box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
+    font-family: 'Roboto', sans-serif;
+    color: rgb(100, 100, 100);
+    z-index: 2;
+}
+
+#popupInfos ul {
+    padding-left: 25px;
+}
+
+/******************************************************/
+
+@media (max-width: 1465px) {
+    .infos {
+        width: 90%;
+        min-width: 480px;
+        justify-content: space-around;
+    }
+
+    .contenuDemande form {
+        width: 90%;
+        min-width: 450px;
+        justify-content: space-around;
+    }
+
+    .infosPers {
+        width: 30%;
+    }
+
+    .memo {
+        width: 45%;
+    }
+
+    .sous-memos {
+        width: 45%;
+    }
+
+    .sous-memos div {
+        margin: 2px 0;
+    }
+}
+
 @media (max-width: 1820px) {
     .zoom .infos {
         width: 90%;
@@ -599,114 +626,12 @@ svg {
     }
 
     .zoom .memo {
-        width: 50%;
+        width: 45%;
         height: 200px;
     }
 
     .zoom .sous-memos {
         width: 45%;
         height: 200px;
-    }
-}
-
-@media (max-width: 1500px) {
-    .infos {
-        width: 90%;
-    }
-
-    .contenuDemande {
-        padding: 0;
-    }
-
-    .contenuDemande form {
-        width: 90%;
-    }
-
-    .infosPers {
-        width: auto;
-    }
-
-    .memo {
-        width: 45%;
-        margin: 0 auto;
-    }
-
-    .sous-memos {
-        width: 45%;
-        margin: 0 auto;
-    }
-
-    .sous-memos div {
-        margin: 2px 0;
-    }
-}
-
-@media (max-width: 900px) {
-    #recherche {
-        width: 80%;
-    }
-
-    #triI {
-        margin-top: 5px;
-        width: 65%;
-    }
-
-    .contenuDemande form {
-        flex-direction: column;
-    }
-
-    .memo {
-        width: 100%;
-        margin-bottom: 2px;
-    }
-
-    .sous-memos {
-        width: 100%;
-    }
-
-    .zoom form {
-        flex-direction: column;
-    }
-
-    .zoom .memo {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .zoom .sous-memos {
-        width: 100%;
-        height: 150px;
-    }
-}
-
-@media (max-width: 570px) {
-    #recherche {
-        flex-direction: column;
-        justify-content: center;
-        width: 70%;
-
-    }
-
-    #recherche > * {
-        width : 90%;
-
-    }
-
-    #container {
-        margin-bottom: 5px;
-    }
-
-    .dropdown {
-        width: 100%;
-    }
-
-    .tpsDate {
-        right: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    .zoom .infosPers p {
-        overflow: auto;
     }
 }

@@ -41,7 +41,13 @@ window.addEventListener("resize", responsiveHeader);
 
 
 function responsiveHeader(){
-	if (window.innerWidth >= 1200) {
+	if (window.innerWidth < 1200) {
+        // display none header nav 
+        $("#nav").css("display", "none");
+        $("#menuDeroulant").css("display", "block");
+	}else{
+        $("#nav").css("display", "flex");
+        $("#menuDeroulant").css("display", "none");
         hideNav2(document.getElementById("menuDeroulant"));
 	}
 	

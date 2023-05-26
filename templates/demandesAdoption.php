@@ -43,21 +43,18 @@ if (!valider('Admin', 'SESSION')) {
 
 	<form>
 		<div class='group'>
-			<input type="text" id="contenuRecherche" placeholder="Rechercher..." maxlength="255" required>
+			<input type="text" id="contenuRecherche" placeholder="Rechercher..." required>
 		</div>
 	</form>
 
-
-	<div id="triI">
-		<div id="triTps">
-			<p>Récent</p>
-			<div id="btnTriTps">
-				<input type='checkbox'>
-			</div>
+	<div id="triTps">
+		<p>Récent</p>
+		<div id="btnTriTps">
+			<input type='checkbox'>
 		</div>
-		
-		<div id="i">i</div>
 	</div>
+	
+	<div id="i">i</div>
 </div>
 
 <div id="nouvellesDemandes"></div>
@@ -88,9 +85,9 @@ if (!valider('Admin', 'SESSION')) {
 		<li>Sélectionnez votre type de recherche avec le menu</li>
 		<li>Tapez le contenu de la recherche dans la zone prévu</li>
 	</ul>
-	<p>Bouton de tri Récent/Ancien :</p>
+	<p>Bouton de tri :</p>
 	<ul>
-		<li>Permet de trier par date d'ajout</li>
+		<li>Permet de trier par date d'ajout (Récent ou Ancien)</li>
 	</ul>
 	<p>Gestion des demandes :</p>
 	<ul>
@@ -100,10 +97,6 @@ if (!valider('Admin', 'SESSION')) {
 	<p>Bouton d'affichage plus/moins :</p>
 	<ul>
 		<li>Permet d'afficher plus ou moins de demandes</li>
-	</ul>
-	<p>Zoomer une demande :</p>
-	<ul>
-		<li>Cliquer sur l'image de la demande pour l'aggrandir</li>
 	</ul>
 </div>
 

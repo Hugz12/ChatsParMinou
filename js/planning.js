@@ -36,7 +36,7 @@ function fillPassagesRefuge(year, month){
                     <div class="horaire">De ${element.heureDebut} à ${element.heureFin}</div>
                     <div class="description">${element.description}</div>
                 `;
-                
+                // recupere le 
                 if(userConnected == element.mailBenevole){
                     var btnSupprimer = document.createElement("div");
                     btnSupprimer.className = "deletePassage";
