@@ -1,5 +1,4 @@
-
-  .contour{
+.contour {
     position: relative;
     top: 10%;
     left: 2%;
@@ -11,72 +10,75 @@
     align-content: stretch;
     flex-flow: row wrap;
     background-color: inherit;
-  }
+}
 
-  #patteProfil{
-    z-index: 1;
-  }
-  #pageContent{
+#patteProfil {
+    z-index: 2;
+}
+
+#pageContent {
     background-color: inherit;
-  }
-  .contour > *  {
+}
+
+.contour>* {
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
     background-color: inherit;
-    z-index : 2;
-  }
+    z-index: 2;
+}
 
-  .info > * > .group {
+.info>*>.group {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
     margin-top: 5%;
-  }
+}
 
-  input {
-    z-index: 2;
-  }
-  .titre {
+input {
+    z-index: 3;
+}
+
+.titre {
     font-size: 30px;
     font-weight: bold;
     margin: 30px 1px 30px 4%;
     cursor: default;
-  }
+}
 
-  .pdp {
+.pdp {
     cursor: default;
-  }
-  
-  .mdp > * > .group {
+}
+
+.mdp>*>.group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5%;
-  }
+}
 
-  .mail > * > .group {
+.mail>*>.group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5%;
-  }
+}
 
-  .buttonType{
+.buttonType {
     margin-top: 5%;
 
-  }
+}
 
-  #photoDeProfil.photoProfil{
+#photoDeProfil.photoProfil {
     width: 300px;
     height: 300px;
     object-fit: cover;
-    cursor : default;
-  }
+    cursor: default;
+}
 
-  .mdpMailGestion{
+.mdpMailGestion {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -84,83 +86,88 @@
     flex-wrap: wrap;
     flex-grow: 2;
     margin-top: 5%;
-  }
-  
-  .gestion{
+}
+
+.gestion {
     flex-grow: 3;
     background-color: inherit;
-  }
-  .mdp{
-    flex-grow: 1;
-    width: 45%;
-    min-width: 300px;
-    margin: 0 2%;
-    background-color: inherit;
-  }
-  .mail{
-    flex-grow: 1;
-    width: 45%;
-    min-width: 300px;
-    margin: 0 2%;
-    background-color: inherit;
-  }
-  .info{ 
-    background-color: inherit;
-  }
+}
 
-  .utilisateur { 
+.mdp {
+    flex-grow: 1;
+    width: 45%;
+    min-width: 300px;
+    margin: 0 2%;
+    background-color: inherit;
+}
+
+.mail {
+    flex-grow: 1;
+    width: 45%;
+    min-width: 300px;
+    margin: 0 2%;
+    background-color: inherit;
+}
+
+.info {
+    background-color: inherit;
+}
+
+.utilisateur {
     border-radius: 1px;
     border-color: var(--sixth-color);
     border-style: solid;
     display: inline-block;
-    padding : 0 2%;
-  }
-  .tabGestion{
-    display: fit-content;
-  }
+    padding: 0 2%;
+}
 
-  .role-1{
-    color: rgb(255,215,0);
-  }
-  .role-2{
+.tabGestion {
+    display: fit-content;
+}
+
+.role-1 {
+    color: rgb(255, 215, 0);
+}
+
+.role-2 {
     color: var(--third-color);
-  }
+}
 
 
 #i {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  border-radius: 30px;
-  border: solid rgb(100, 100, 100) 1px;
-  color: rgb(100, 100, 100);
-  margin: 2px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 30px;
+    border: solid rgb(100, 100, 100) 1px;
+    color: rgb(100, 100, 100);
+    margin: 2px 5px;
 }
 
 #i:hover {
-  color: var(--third-color);
-  border-color: var(--third-color);
+    color: var(--third-color);
+    border-color: var(--third-color);
 }
 
 /* Popup infos */
 #popupInfos {
-  display: none;
-  position: absolute;
-  width: auto;
-  padding: 10px;
-  background-color: var(--sec-color);
-  border-radius: 30px;
-  border: none;
-  box-shadow: 3px 3px 15px 3px rgba(0,0,0,0.5);
-  font-family: 'Roboto', sans-serif;
-  color: rgb(100, 100, 100);
-  font-size: 15px;
-  z-index: 11;
+    display: none;
+    position: absolute;
+    width: auto;
+    padding: 10px;
+    background-color: var(--sec-color);
+    border-radius: 30px;
+    border: none;
+    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.5);
+    font-family: 'Roboto', sans-serif;
+    color: rgb(100, 100, 100);
+    font-size: 15px;
+    z-index: 11;
 }
 
 #popupInfos ul {
-  padding-left: 25px;
+    padding-left: 25px;
 }
