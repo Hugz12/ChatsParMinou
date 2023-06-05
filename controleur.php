@@ -159,6 +159,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 
 
+
 		case 'Changer Chat Du Mois' :
 			// On vérifie la présence des champs
 			if ($code = valider("code")){
@@ -202,24 +203,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'Ajouter un chat' : 
 
-			echo "sexe " . $sexe = valider("sexe","POST");
-			echo "familleAccueil " . $familleAccueil = valider("familleAccueil","POST");
-			die();
 			// On vérifie la présence des champs
 			if (($nom = valider("nom","POST"))
 			&& ($code = valider("code","POST"))
 			&& ($date = valider("dateNaissance","POST"))
 			&& ($sexe = valider("sexe","POST"))
 			&& ($race = valider("race","POST"))
-			&& ($statut = valider("statut","POST"))
 			&& ($description = valider("description","POST"))
 			&& ($familleAccueil = valider("familleAccueil","POST"))
 			&& ($couleur = valider("couleur","POST"))
 			&& ($photos = valider_fichiers("photos")))
 			{
-				echo $sexe;
-				echo $familleAccueil;
-				die();
 				if(existChat($code)){ // On vérifie que le code n'est pas déjà utilisé
 					$_SESSION['error'] = "Ce code est déjà utilisé";
 					$qs = "?view=chatsAdoption";
@@ -228,7 +222,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
-					addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos);					
+					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
@@ -280,6 +274,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				unlink("./ressources/evenements/$id.jpg");
 				$qs = "?view=accueil";
 			}
+		break;
 
 
 
@@ -291,6 +286,30 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On supprime le dossier du chat
 				supprimerDossier("./ressources/chats/$code");
 				$qs = "?view=chatsAdoption";
+			}
+		break;
+
+
+		case "Ajouter Bulle" :
+			// On vérifie la présence des champs
+			if ($name = valider("name","POST"))
+			if ($value = valider_fichiers("value")){
+				// On ajoute la bulle à la BDD
+				$nomdestination = './ressources/bulles/'.$name.'.pdf';
+				move_uploaded_file($value['tmp_name'], $nomdestination);
+				addConseil($name, $nomdestination);
+				$qs = "?view=bulles";
+			}
+		break;
+
+		case "Supprimer Bulle" :
+			// On vérifie la présence des champs
+			if ($name = valider("name")){
+				// On supprime la bulle de la BDD
+				delConseil($name);
+				// On supprime le fichier
+				unlink("./ressources/bulles/$name.pdf");
+				$qs = "?view=bulles";
 			}
 		break;
 
@@ -355,8 +374,69 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				$qs = "?view=chatsAdoption";
 			}
 		break;
+		
+		case 'Modifier le chat' : 
+			// si il y a au moins un champ non vide
+			
+			if  ($statut = valider("statut","POST"))
+			if  ($nom = valider("nom", "POST")) 
+			if 	($familleAccueil = valider("familleAccueil","POST")) 
+			if	($couleur = valider("couleur","POST")) 
+			if 	($code = valider("code","POST"))
+			if	($description = valider("description","POST")){
+				
+				// On ajoute le chat à la BDD
+				if($existentFiles = valider("existentFiles", "POST")) {
+					$tabExistentFiles = (explode(" ", $existentFiles));
+					array_pop($tabExistentFiles);
+					$nbPhotos = count(scandir("./ressources/chats/$code")) - 2;
+					for($i = 0; $i < $nbPhotos; $i++) {
+						if (!in_array($i, $tabExistentFiles)) {
+							//echo "unlink ./ressources/chats/$code/$i.jpg <br/>";
+							unlink("./ressources/chats/$code/$i.jpg");
+						}
+					}
+				}
+				else {
+					$tabExistentFiles = array();
+					for($i = 0; $i < count($tabExistentFiles); $i++) {
+						//echo "unlink ./ressources/chats/$code/$i <br/>";
+						unlink("./ressources/chats/$code/$i");
+					}
+				}
+				
+				
+				$i = 0;
+				
+				$fichiers = scandir("./ressources/chats/$code");
+				foreach ($fichiers as $fichier) {
+					if ($fichier != "." && $fichier != "..") {
+						//echo "rename ./ressources/chats/$code/$fichier as ./ressources/chats/$code/$i.jpg <br/>";
+						rename("./ressources/chats/$code/$fichier", "./ressources/chats/$code/$i.jpg");
+						$i++;
+					}
+				}
+				
+				if($photos = valider_fichiers("photos")) {
+					$i = count($tabExistentFiles);
+					foreach ($photos as $fichier) {
+						//echo "upload " . $fichier['nom'] . " as ./ressources/chats/$code/$i.jpg <br/>";
+						uploadPhoto($fichier, "./ressources/chats/$code/", $i);
+						$i++;
+					}
+				}
+				else {
+					$photos = array();
+				}
+				$nbPhotos = count($photos) + count($tabExistentFiles);
+				//echo $nbPhotos;
+				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
+				// On ajoute les photos
+				$qs = "?view=chatsAdoption";
+			}
+		break;
 
-		case 'changerLaPhotoDeProfil' :
+		case 'Changer la photo de profil' :
 			// On vérifie la présence des champs
 			if ($image = valider("image","FILES")){
 				// on supprime l'ancienne image
@@ -478,17 +558,11 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		
 		case 'changerNom' :
 			if ($nom = valider("nom")){
-				if (countName($nom) > 0){
-					ob_clean();
-					header('Content-Type: application/json');
-					echo json_encode("ce nom existe déja");
-				} else {
 				changerNom($nom);
 				ob_clean();
 				header('Content-Type: application/json');
 				echo json_encode("ok");
 				die();
-				}
 			}
 		break;
 		case 'getConnectedUser' : 
@@ -500,71 +574,18 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				echo json_encode($user);
 				die(); 
 			}
-		break;
+
 
 		case 'changerMail' :
 			if ($mail = valider("mail")){
 				changerMail($mail);
 				ob_clean();
+				header('Content-Type: application/json');
 				echo json_encode("ok");
-				session_destroy(); // On détruit la session
-				$qs = "?view=accueil";
 				die();
 			}
-		break;
 		
-		case 'changerMdp' :
-			if($mdpV = valider("mdpV","POST"))
-			if($mdpN = valider("mdpN","POST"))
-			echo "test";
-			if($mdpN2 = valider("mdpN2","POST")){
-				if(password_verify($mdpV,getPassword($_SESSION["mail"])) && $mdpN === $mdpN2){
-					changerMdp($mdpN2);
-					ob_clean();
-					echo json_encode("ok");
-					session_destroy(); // On détruit la session
-					$qs = "?view=accueil";
-					var_dump($nom, $isUp, $isDown, $role);
-					die();
-				}
-				else {
-					ob_clean();
-					echo json_encode("erreur");
-				}
-			}
-			else {
-				ob_clean();
-				echo json_encode("erreur");
-			}
-		break;
-		
-		case 'changerRole' :
-			if ($up = valider("up"))
-			if ($down= valider("down"))
-			if ($noms= valider("noms"))
-			if ($role = valider("role"))
-			for ($i=0;$i<=count($noms);$i++){
-				$nom = $noms[$i];
-				$isUp = $up[$i];
-				$isDown = $down[$i];
-				$role = $role[$i];
-				var_dump($i,$nom, $isUp, $isDown, $role,$noms);
-				if ($isUp == 1){
-					changerRole($nom,$role);
-				}
-				if ($isDown == 1){
-					if ($role == 4){
-						supprimerUtilisateur($nom);
-					}
-					else{
-					changerRole($nom,$role);
-					}
-				}
-			}
-			ob_clean();
-			echo json_encode("ok");
-			die();
-		break;
+
 	}
 
 
@@ -586,12 +607,3 @@ if ($qs) {
 ob_end_flush(); // On vide le tampon de sortie
 	
 ?>
-
-
-
-
-
-
-
-
-

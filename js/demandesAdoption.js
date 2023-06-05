@@ -1,7 +1,21 @@
-//Fonction qui append une demande
-function divDemande(date, btn, img, demande){
-    return `<div id="demande${demande["id"]}" class="demandes">
-                <img class="btnDemande ${btn} clickable" onclick='changerStatut(this);' src="./ressources/${img}.png" alt="${img}">
+// Fonction qui recupére des images svg
+function getSVG(img) {
+    var svg;
+    $.ajax({
+        url: `./ressources/${img}.svg`,
+        dataType: "text",
+        async: false,
+        success: function(data) {
+            svg =  data;
+        }
+    });
+    return svg;
+}
+
+// Fonction qui append une demande
+function appendDemande(statut, date, btn, img, demande){
+    $(statut).append(`<div id="demande${demande["id"]}" class="demandes">
+                <div class="btnDemande ${btn} clickable" onclick='changerStatut(this);'>${img}</div>
                 <div class="fondDemande">
                     <div class="contenuDemande">
                         <p class="tpsDate">${date}</p>
@@ -72,44 +86,43 @@ function divDemande(date, btn, img, demande){
                         </div>
                         <form>
                             <div class='group memo'>
-                                <textarea name='memo' required>${demande['memo']}</textarea>
-                                <label for=\"memo\">Memo</label>
+                                <textarea name='memo' maxlength="255" required>${demande['memo']}</textarea>
+                                <label for=\"memo\">Mémo</label>
                             </div>
                             <div class="sous-memos">
                                 <div class='group datePv'>
-                                    <input type='text'  name='datePv' value='${demande['datePv']}' required>
+                                    <input type='text' name='datePv' value='${demande['datePv']}' maxlength="255" required>
                                     <label for=\"datePv\">Date de PV</label>
                                 </div>
                                 <div class='group resultatPv'>
-                                    <input type='text'  name='resultatPv' value='${demande['resultatPv']}' required>
+                                    <input type='text' name='resultatPv' value='${demande['resultatPv']}' maxlength="255" required>
                                     <label for=\"resultatPv\">Résultat de PV</label>
                                 </div>
                                 <div class='group dateRencontre'>
-                                    <input type='text'  name='dateRencontre' value='${demande['dateRencontre']}' required>
+                                    <input type='text' name='dateRencontre' value='${demande['dateRencontre']}' maxlength="255" required>
                                     <label for=\"dateRencontre\">Date de rencontre</label>
                                 </div>
                             </div>
                         </form>
-                        <div class="btnMemo clickable">Enregistrer</div>
+                        <div onclick='enregistrerMemo(this);' class="btnMemo clickable">Enregistrer</div>
                     </div>
                 </div>
-                <img class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);' src="./ressources/cross.png" alt="cross">
-            </div>`;
+                <div class="btnDemande btnSupp clickable" onclick='supprimerDemande(this);'>${getSVG("cross")}</div>
+            </div>`);
 }
 
 //Fonction qui calcule le temps écoulé depuis la date de la demande
 function dateCompteur(dateDemande){ 
-    var tps = "";
-
+    var tps;
     const difference = new Date() - dateDemande;
 
-    const secondes = Math.round(difference / 1000);
-    const minutes = Math.round(difference / (1000 * 60));
-    const heures = Math.round(difference / (1000 * 60 * 60));
-    const jours = Math.round(difference / (1000 * 60 * 60 * 24));
-    const semaines = Math.round(difference / (1000 * 60 * 60 * 24 * 7));
-    const mois = Math.round(difference / (1000 * 60 * 60 * 24 * 30));
-    const annees = Math.round(difference / (1000 * 60 * 60 * 24 * 30 * 12));
+    const secondes = Math.floor(difference / 1000);
+    const minutes = Math.floor(difference / (1000 * 60));
+    const heures = Math.floor(difference / (1000 * 60 * 60));
+    const jours = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const semaines = Math.floor(difference / (1000 * 60 * 60 * 24 * 7));
+    const mois = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
+    const annees = Math.floor(difference / (1000 * 60 * 60 * 24 * 30 * 12));
 
     if (secondes < 60) tps = 'il y a quelques secondes';
     else if (minutes < 60) tps = `il y a ${minutes} minute${minutes === 1 ? '' : 's'}`;
@@ -122,67 +135,57 @@ function dateCompteur(dateDemande){
     return tps;
 }
 
-//Fonction qui affiche les demandes
+// Fonction qui affiche les demandes
 function afficherDemandes(demandes) {
-    console.log("afficherDemandes");
-    //console.log(demandes);
     var statut, btn, img;
     var iN = 0, iC = 0, iT = 0;
-	//console.log(demandes);
     for (var i=0; i < demandes.length; i++) {
         var dateDemande = new Date(demandes[i]["date"]);
-        //console.log(dateDemande);
         var date = dateCompteur(dateDemande) + ", le " + dateDemande.toLocaleDateString();
 
         switch (demandes[i]["statutDemande"]) {
             case '1':
-                //console.log("case 1");
                 statut = "#nouvellesDemandes";
                 btn = "btnNouvelleDemande";
                 img = "check";
                 iN++;
 
-                if (iN <= 10) $(statut).append(divDemande(date, btn, img, demandes[i]));
+                if (iN <= 10) appendDemande(statut,date, btn, getSVG(img), demandes[i]);
                 else {
-                    $(statut).append(divDemande(date, btn, img, demandes[i]));
+                    appendDemande(statut,date, btn, getSVG(img), demandes[i]);
                     $("#demande" + demandes[i]["id"]).css("display", "none");
                 }
                 break;
             case '2':
-                //console.log("case 2");
                 statut = "#demandesEnCours";
                 btn = "btnEnCours";
                 img = "play";
                 iC++;
 
-                if (iC <= 10) $(statut).append(divDemande(date, btn, img, demandes[i]));
+                if (iC <= 10) appendDemande(statut,date, btn, getSVG(img), demandes[i]);
                 else {
-                    $(statut).append(divDemande(date, btn, img, demandes[i]));
+                    appendDemande(statut,date, btn, getSVG(img), demandes[i]);
                     $("#demande" + demandes[i]["id"]).css("display", "none");
                 }
                 break;
             case '3':
-                //console.log("case 3");
                 statut = "#traitees";
                 btn = "btnTraitees";
                 img = "return";
                 iT++;
 
-                if (iT <= 10) $(statut).append(divDemande(date, btn, img, demandes[i]));
+                if (iT <= 10) appendDemande(statut,date, btn, getSVG(img), demandes[i]);
                 else {
-                    $(statut).append(divDemande(date, btn, img, demandes[i]));
+                    appendDemande(statut,date, btn, getSVG(img), demandes[i]);
                     $("#demande" + demandes[i]["id"]).css("display", "none");
                 }
                 break;
         }
-        //console.log(demandes[i]);
     }
 }
 
 //Fonction qui affiche les titres des demandes
 function afficherTitres(demandes) {
-    console.log("afficherTitres");
-	//console.log(demandes);
     var iC = 0 , iN = 0 , iT = 0; 
     for (var i=0; i < demandes.length; i++) {
         if (demandes[i]["statutDemande"] == 1) iN++;
@@ -215,7 +218,6 @@ function afficherTitres(demandes) {
 
 // Fonction qui change le titre en fonction du nombre de demandes
 function changerTitres() {
-    console.log("changerTitres");
     var idN = document.getElementById("nouvellesDemandes");
     var idC = document.getElementById("demandesEnCours");
     var idT = document.getElementById("traitees");
@@ -234,24 +236,21 @@ function changerTitres() {
         if ((idT.childElementCount == 1)) $("#titreTraitees").text("Demande traitée");
         else $("#titreTraitees").text("Demandes traitées");
     } else $("#titreTraitees").text("Aucune demande traitée");
-
-    //console.log(idN.childElementCount);
-    //console.log(idC.childElementCount);
-    //console.log(idT.childElementCount);
 }
 
 // Tri par date
 function triDate(dateDemande, statut) {
-    console.log("triDate");
     var count = document.getElementById(statut).childElementCount;
+    count = parseInt(count);
     var split = $("#" + statut + " .tpsComplet").text().split("|", count);
 
-    if (document.getElementById(statut).childElementCount != null) {
-        for (var i=0; i < document.getElementById(statut).childElementCount; i++) {
-            var dateStatut = new Date(split[i]);
-            if ($(".choix-recent").hasClass('choix-ancien')) {
+    if (count != null) {
+        for (var i=0; i < count; i++) {
+            var dateStatut = new Date(split[i]).getTime();
+            if ($($("#triTps").children("p")).text() == 'Ancien') {
                 if (dateDemande < dateStatut) return i;
-            } else {
+            }
+            else if ($($("#triTps").children("p")).text() == 'Récent') {
                 if (dateDemande > dateStatut) return i;
             }
         }
@@ -262,26 +261,21 @@ function triDate(dateDemande, statut) {
 
 // Fonction qui permet de changer le statut d'une demande
 function changerStatut(contexte) {
-    console.log("changerStatut");
-    //console.log(contexte);
     var demande = $(contexte).parent();
     var id = $($(contexte).parent()).attr("id").match(/\d+/g).toString().replace(',', '');
     id = parseInt(id);
-    console.log("id : " + id);
 
     if ($(contexte).hasClass("btnNouvelleDemande") || $(contexte).hasClass("btnTraitees")) {
         var statut = "demandesEnCours";
         var statutDemande = 2;
 
         if ($(contexte).hasClass("btnNouvelleDemande")) {
-            $($(demande).children(".btnNouvelleDemande")).attr("src", './ressources/play.png');
-            $($(demande).children(".btnNouvelleDemande")).attr("alt" , "play");
+            $($(demande).children(".btnNouvelleDemande")).html(getSVG("play"));
 
             $(demande).children(".btnNouvelleDemande").addClass("btnEnCours");
             $(demande).children(".btnNouvelleDemande").removeClass("btnNouvelleDemande");
         } else if ($(contexte).hasClass("btnTraitees")) {
-            $($(demande).children(".btnTraitees")).attr("src", './ressources/play.png');
-            $($(demande).children(".btnTraitees")).attr("alt" , "play");
+            $($(demande).children(".btnTraitees")).html(getSVG("play"));
 
             $(demande).children(".btnTraitees").addClass("btnEnCours"); 
             $(demande).children(".btnTraitees").removeClass("btnTraitees");
@@ -291,13 +285,11 @@ function changerStatut(contexte) {
         var statut = "traitees";
         var statutDemande = 3;
         
-        $($(demande).children(".btnNouvelleDemande")).attr("src", './ressources/return.png');
-        $($(demande).children(".btnNouvelleDemande")).attr("alt" , "return");
+        $($(demande).children(".btnEnCours")).html(getSVG("return"));
 
         $(demande).children(".btnEnCours").addClass("btnTraitees");
         $(demande).children(".btnEnCours").removeClass("btnEnCours");
     }
-    console.log("statutDemande : " + statutDemande);
 
     $.ajax({
         url: './controleur.php',
@@ -306,18 +298,12 @@ function changerStatut(contexte) {
             action: 'Changer Statut Demande',
             id: id,
             statut: statutDemande
-        },
-        success: function() {
-            console.log("success");
-        },
-        error: function() {
-            console.log("error");
         }
     });
     $("#demande" + id).remove();
 
-    var dateDemande = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".tpsComplet")).text().match("^.*?(?=|)");
-    //console.log(dateDemande);
+    var dateDemande = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".tpsComplet")).text().match(/^(.*).$/);
+    dateDemande = new Date (dateDemande[1]).getTime();
 
     var tri = triDate(dateDemande, statut);
     if (tri != null) $($("#" + statut).children().eq(tri)).before(demande);
@@ -329,136 +315,113 @@ function changerStatut(contexte) {
 
 //Fonction de suppression d'une demande
 function supprimerDemande(contexte) {
-        console.log("supprimerDemande");
+    var id = $($(contexte).parent()).attr("id").match(/\d/g).toString().replace(',', '');
+    id = parseInt(id);
 
-        var id = $($(contexte).parent()).attr("id").match(/\d/g).toString().replace(',', '');
-        id = parseInt(id);
-        console.log("id : " + id);
+    var code = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".infos")
+        .children(".infosChat").children(".idChat").children(".nomChat")).text().split("-");
+    code = code[1].trim();
 
-        var code = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".infos")
-            .children(".infosChat").children(".idChat").children(".nomChat")).text().split("-");
-        code = code[1].trim();
-        console.log("code : " + code);
+    $("#overlay").show();
 
-        $("#overlay").show();
-
-        $("#popupBtnOui").on("click", function() { 
-            //console.log("oui");
-            $.ajax({
-                url: './controleur.php',
-                type: 'POST',
-                data: {
-                    action: 'Supprimer Demande',
-                    id: id,
-                    code : code
-                },
-                success: function() {
-                    console.log("success");                 
-                },
-                error: function() {
-                    console.log("error");
-                }
-            });
-            $("#demande" + id).remove();
-            $("#overlay").hide();
-
-            changerTitres();
-            montrerPlusMoins();
-        });
-
-        $("#popupBtnNon").on("click", function() { 
-            //console.log("non");
-            $("#overlay").hide();
-        });
-    }
-
-//Fonctions d'edition des commentaires
-$(function() {
-    $(".btnMemo").on("click", function() {
-        console.log("Changer Memo");
-        var id = $($(this).parent().parent().parent().parent()).attr("id").match(/\d+/g).toString().replace(',', '');
-        id = parseInt(id);
-        //console.log("id : " + id);
-        var parent = $($(this).parent()).children("form");
-
-        var memo = $(parent).children(".memo").children("textarea").val();
-        var datePv = $(parent).children(".sous-memos").children(".datePv").children("input").val();
-        var resultatPv = $(parent).children(".sous-memos").children(".resultatPv").children("input").val();
-        var dateRencontre = $(parent).children(".sous-memos").children(".dateRencontre").children("input").val();
-
-        if (memo == "") memo = "null";
-        if (datePv == "") datePv = "null";
-        if (resultatPv == "") resultatPv = "null";
-        if (dateRencontre == "") dateRencontre = "null";
-
+    $("#popupBtnOui").on("click", function() { 
         $.ajax({
             url: './controleur.php',
             type: 'POST',
             data: {
-                action: 'Changer Memo',
+                action: 'Supprimer Demande',
                 id: id,
-                memo: memo,
-                datePv: datePv,
-                resultatPv: resultatPv,
-                dateRencontre: dateRencontre
-            },
-            success: function() {
-                console.log("success");
-            },
-            error: function() {
-                console.log("error");
+                code : code
             }
         });
+        $("#demande" + id).remove();
+        $("#overlay").hide();
+
+        changerTitres();
+        montrerPlusMoins();
     });
-});
+
+    $("#popupBtnNon").on("click", function() { 
+        $("#overlay").hide();
+    });
+}
+
+//Fonctions d'edition des commentaires
+function enregistrerMemo(contexte) {
+    var id = $($(contexte).parent().parent().parent()).attr("id").match(/\d+/g).toString().replace(',', '');
+    id = parseInt(id);
+    var parent = $($(contexte).parent()).children("form");
+
+    var memo = $(parent).children(".memo").children("textarea").val();
+    var datePv = $(parent).children(".sous-memos").children(".datePv").children("input").val();
+    var resultatPv = $(parent).children(".sous-memos").children(".resultatPv").children("input").val();
+    var dateRencontre = $(parent).children(".sous-memos").children(".dateRencontre").children("input").val();
+
+    if (memo == "") memo = "null";
+    if (datePv == "") datePv = "null";
+    if (resultatPv == "") resultatPv = "null";
+    if (dateRencontre == "") dateRencontre = "null";
+
+    $.ajax({
+        url: './controleur.php',
+        type: 'POST',
+        data: {
+            action: 'Changer Memo',
+            id: id,
+            memo: memo,
+            datePv: datePv,
+            resultatPv: resultatPv,
+            dateRencontre: dateRencontre
+        }
+    });
+}
 
 // Fonction qui permet d'afficher la popup d'infos
 $(function() {
-    var moveLeft = 20;
-    var moveDown = 10;
-
-    $('#i').hover(function() {
-        $('#popupInfos').toggle();
+    window.addEventListener("resize", function() {
+        offset = $("#i").offset();
+        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - 420)/2);
     });
 
-    $('#i').mousemove(function(e) {
-        $("#popupInfos").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+    $('#i').click(function() {
+        offset = $("#i").offset();
+
+        $('#popupInfos').toggle();
+        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - 420)/2);
+
+        if ($("#popupInfos").css("display") == "block") $("#i").css({'color': 'var(--third-color)', 'border-color': 'var(--third-color)'});
+        else $('#i').removeAttr('style');
     });
 });
 
 // Fonctions de recherche
 $(function() {
     $("#contenuRecherche").on("keyup", function() {
-        console.log("recherche");
         $(".nonTrouvée").remove();
         var contenu = $("#contenuRecherche").val().toLowerCase();
 
         switch ($("#selectRecherche").text()) {
             case 'Recherche générale':
-                //console.log("case rchGenerale");
                 $(".demandes").filter(function(){ 
                     $(this).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
             case 'Recherche d\'un chat':
-                //console.log("case rchChat");
                 $(".infosChat").filter(function(){ 
-                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
+                    $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
             case 'Recherche d\'une personne':
-                //console.log("case rchPers");
                 $(".infosPers").filter(function(){ 
                     $($(this).parent().parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
 
             case 'Recherche d\'une date':
-                //console.log("case rchDate");
                 $(".tpsDate").filter(function(){ 
-                    $($(this).parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
+                    $($(this).parent().parent().parent()).toggle($(this).text().toLowerCase().indexOf(contenu) > -1)
                 });
                 break;
         }
@@ -482,8 +445,6 @@ $(function() {
 // Tri par date d'ajout
 $(function() {
     $("#btnTriTps").on("click", function() {
-        console.log("tri date d'ajout");
-
         if ($(this).children("input").prop("checked") == false) {
             $(this).parent().children("p").fadeOut(150, function() {
                 $(this).text("Récent").fadeIn(150);
@@ -533,7 +494,6 @@ $(function() {
 // Montrer plus / montrer moins
 $(function() {
     $(".lienPlusMoins").on("click", function() {
-        console.log("montrer plus / moins");
         var statut;
 
         if ($(this).attr("id") == "lienNouvellesDemandes") statut = "#nouvellesDemandes";
@@ -561,8 +521,6 @@ function montrerPlusMoins() {
 
 // Zoom sur une demande
 function zoom(contexte) {
-    console.log("zoom");
-
     if ($($(contexte).parent().parent().parent().parent().parent()).hasClass("zoom")) {
         $($(contexte).parent().parent().parent()).fadeOut(300, function() { // contenuDemande
             $($(this).parent()).css({"width": "85%"}); // fondDemande
@@ -642,9 +600,8 @@ $(function() {
     });
 });
 
-
+/* Dropdown Menu */
 $(function() {
-    /*Dropdown Menu*/
     $('.dropdown').click(function () {
         $(this).focus();
         $(this).toggleClass('active');
@@ -658,4 +615,3 @@ $(function() {
         $(this).parents('.dropdown').find('span').text($(this).text());
     });
 });
-

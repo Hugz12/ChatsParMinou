@@ -3,7 +3,7 @@
 	height: auto;
 	border-radius: 12px;
 	margin: 50px 250px 0 250px;
-	z-index: 1;
+	z-index: 0;
 	padding : 1% 1%;
 }
 
@@ -15,7 +15,6 @@
 	justify-content: center;
 	font-weight: bold;
 	color:var(--fifth-color);
-	background-color: var(--main-color);
 }
 
 #allFormulaireAdoption > form > input {
@@ -61,14 +60,12 @@
 
 }
 
-.titre{
+#titre{
 	font-size: 30px;
 	margin-top: 2%;
 	cursor: default;
 	font-family: "Roboto",sans-serif;
 	color: var(--third-color);
-	z-index: 1;
-	background-color: var(--main-color);
 }
 #infoPerso{
 	display: flex;
@@ -161,8 +158,4 @@
 	transition: all 0.2s ease-in-out;
 	font-size: 16px;
 	color: rgb(100,100,100);
-  }
-
-  #patteFormulaireAdoption{
-	z-index: 0;
   }

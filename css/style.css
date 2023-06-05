@@ -446,6 +446,5 @@ g {
 	height: calc(100%);
 	position: absolute;
 	top: 70px;
-	max-height: calc(100% - 270px);
 }
 

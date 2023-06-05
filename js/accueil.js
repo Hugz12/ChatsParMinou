@@ -259,6 +259,7 @@ function afficherChatDuMois(chatDuMois){
 		<div class="chatBox">
 			<div class="chatNomBlock">
 				<div class="chatNom policeTitre">${chatDuMois['name']}</div>
+				<div class="buttonType adoptBtnChatDuMois policeTexte" onclick="adopterChatDuMois(${chatDuMois['code']});">Adopter ce chat</div>
 			</div>
 			<div class="chatContent policeTexte">
 				<div class="chatInfos">
@@ -402,6 +403,9 @@ function afficherChatDuMoisSmall(chatDuMois){
 				<div class="policeTexte boxInfoTitle">Situation</div>
 				<div class="policeTexte boxInfoSmall">${(chatDuMois['familleAccueil'] ? 'En famille' : 'Au refuge')}</div>
 			</div>
+
+			<div class="buttonType adoptBtnChatDuMois policeTexte" onclick="adopterChatDuMois(${chatDuMois['code']});">Adopter ce chat</div>
+
 		</div>
 
 		<div class="secondBanner">
@@ -490,3 +494,16 @@ function afficherChatDuMoisSmall(chatDuMois){
 
 
 	
+function adopterChatDuMois(code) {
+	var input = document.createElement("input");
+	input.type = "hidden";
+	input.name = "chatsSelected[]";
+	input.value = code;
+	var form = document.createElement("form");
+	form.method = "post";
+	form.action = "./index.php?view=formulaireAdoption";
+	form.style.display = "none";
+	form.appendChild(input);
+	document.body.appendChild(form);
+	form.submit();
+} 

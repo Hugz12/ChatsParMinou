@@ -283,4 +283,3 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		
 	}
 ?>
-

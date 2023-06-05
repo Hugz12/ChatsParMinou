@@ -56,19 +56,22 @@ body {
   }
   
 .flip-card-front {
-    background: var(--main-color);
-    color: var(--third-color);
+    background: linear-gradient(120deg, var(--sec-color) 60%, var(--sixth-color) 88%,
+       var(--main-color) 40%, var(--sixth-color) 48%);
+    color: black;
   }
   
 .flip-card-back {
-    background: var(--main-color);
-    color: var(--third-color);
+    background: linear-gradient(120deg, var(--sec-color) 60%, var(--sixth-color) 88%,
+    var(--main-color) 40%, var(--sixth-color) 48%);
+    color: black;
     transform: rotateY(180deg);
   }
 
 .container {
     width: 100%;
     height: calc(100% - 70px);
+    background: linear-gradient(to top, var(--sixth-color) 0%, var(--main-color) 50%);
     box-sizing: border-box;
     align-items:center;
     justify-content: space-around;
@@ -77,14 +80,6 @@ body {
     padding: 50px 100px;
   }
 
-  .petitTxt {
-    font-size: 1em;
-    font-weight: 900;
-    font-family: "Roboto",sans-serif;
-    text-align: center;
-    margin: 15%;
-    
-  }
 
 /* pour les écrans de petite taille */
 @media (max-width: 1210px) {
@@ -102,4 +97,3 @@ body {
     width: 100%;
   }
 }
-

@@ -98,32 +98,6 @@ function changerMail($mail){
     $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
     return SQLUpdate($SQL);
 }
-function changerMdp($password){
-    $mail = $_SESSION['mail'];
-    $hashedPassword = hashedPassword($password);
-    $SQL = "UPDATE utilisateur SET password = '$hashedPassword' WHERE mail = '$mail'";
-    return SQLUpdate($SQL);
-
-}
-function getPassword($mail){
-    $SQL = "SELECT password FROM utilisateur WHERE mail = '$mail'";
-    return SQLGetChamp($SQL);
-}
-
-
-function changerRole($nom,$role){
-    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom'";
-    return SQLUpdate($SQL);
-}
-
-function supprimerUtilisateur($nom){
-    $SQL = "DELETE FROM utilisateur WHERE name = '$nom'";
-    return SQLDelete($SQL);
-}
-function countName($name){
-    $SQL = "SELECT COUNT(*) FROM utilisateur WHERE name = '$name'";
-    return SQLGetChamp($SQL);
-}
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
  * @param $nom
@@ -140,6 +114,15 @@ function supprimerEvenement($id){
     return SQLDelete($SQL);
 }
 
+function addConseil($name, $nomdestination){
+    $SQL = "INSERT INTO bulle (name, parent, value) VALUES ('$name', 'conseil', '$nomdestination')";
+    return SQLInsert($SQL);
+}
+
+function delConseil($name){
+    $SQL = "DELETE FROM bulle WHERE name = '$name'";
+    return SQLDelete($SQL);
+}
 
 
 /*
@@ -175,13 +158,17 @@ function listerChats(){
     return parcoursRS(SQLSelect($SQL));
 }
 
+function getConseils(){
+    $SQL = "SELECT * FROM divers WHERE parent = 'conseil'";
+    return parcoursRS(SQLSelect($SQL));
+}
 
 /**
  * 
  * Fonction qui retourne la liste des utilisateurs
  */
 function listerUtilisateurs(){
-    $SQL = "SELECT name,role FROM utilisateur";
+    $SQL = "SELECT name FROM utilisateur";
     return parcoursRS(SQLSelect($SQL));
 }
 
@@ -315,7 +302,6 @@ function getNbPhotos($code){
 }
 
 function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
-
     if ($nom != false){
         $SQL = "UPDATE chat SET name = '$nom' WHERE code = $code";
         SQLUpdate($SQL);
@@ -383,6 +369,3 @@ function deletePassage($date,$heureDebut,$heureFin){
 }
 
 ?>
-
-
-
