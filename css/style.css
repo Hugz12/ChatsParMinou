@@ -48,10 +48,11 @@ body{
 	font-size: 14px;
 	margin: 0;
 	padding: 70px 0 0 0;
+	font-family: "Roboto",sans-serif;
 }
 
 #pageContent {
-	min-height: calc(100vh - 320px);
+	min-height: calc(100vh - 270px);
 }
 
 .policeTitre {
@@ -192,57 +193,7 @@ body{
 
 
 
-
-
-
-
-
-
-/* QUI SOMMES NOUS ? */
-.qsn {
-	display: flex;
-	justify-content: space-around;
-	margin: 5% 0;
-}
-
-.qsn a {
-	width: 20%;
-}
-
-.qsn a img{
-	width: 100%;
-}
-
-.qsnContent{
-	vertical-align: auto;
-}
-
-.qsnStats{
-	vertical-align: auto;
-	text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
 /* formulaireAdoption */
-
-
-
-
-
-
-
-
-
-
-
 
 .champTextarea {
 	width:100%;
