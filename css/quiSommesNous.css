@@ -36,7 +36,7 @@
     font-family: 'Roboto', sans-serif !important;
 }
 
-.content > p {
+.content > p:not(.listContent) {
     all: unset;
 }
 
@@ -121,6 +121,7 @@
     margin: 20px 0;
     padding: 15px;
     border-radius: 25px;
+    box-sizing: border-box;
 }
 
 
@@ -330,7 +331,7 @@
     width: 100%;
 }
 
-#rejoignezNous p:is(:nth-child(1),:nth-child(7)) {
+#rejoignezNous > .directContent > .content > p:is(:nth-child(1),:nth-child(7)) {
     color: var(--fifth-color);
 }
 

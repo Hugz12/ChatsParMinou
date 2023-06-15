@@ -126,13 +126,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 			efficaces, dans un contexte associatif <i>serein et épanouissant</i> ?
 			<b>Alors vous avez le choix !</b></p><br>
 			<br>
-			<p class="pCenter">Plusieurs possibilités s’offrent à vous : </p><br>
-			<br>
-			<p class="pCenter">Simplement adhérer pour suivre la vie et le devenir de notre association (adhésion valable un
-			an, de janvier à janvier) : c’est par ici ! ; (mettre le lien hypertexte sur “c’est par ici”) </p><br>
-			<br>
-			<p class="pCenter">Investir un peu de votre temps dans les différentes actions de l’association, à votre
-			convenance et en fonction de vos possibilités en devenant bénévole. </p><br>
+			<p class="pCenter">Plusieurs possibilités s’offrent à vous : </p>
+			<div>
+				<p class="pCenter listContent">Simplement adhérer pour suivre la vie et le devenir de notre association (adhésion valable un
+				an, de janvier à janvier) : c’est par ici ! ; (mettre le lien hypertexte sur “c’est par ici”) </p>
+				<p class="pCenter listContent">Investir un peu de votre temps dans les différentes actions de l’association, à votre
+				convenance et en fonction de vos possibilités en devenant bénévole. </p>
+			</div>
 			<br>
 			<p> Si vous souhaitez avoir plus d’informations et en discuter, alors venez nous rencontrer à la Maison des
 			Chats par Minou - 21 rue de Condé à Loos-en-Gohelle ! <br>

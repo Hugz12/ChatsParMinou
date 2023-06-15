@@ -22,7 +22,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		<form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercher();">
 				<div class="group">
 					<input type="text" id="rechercheChats" required>
-					<label for="rechercheChats">Rechercher un chat par son nom</label>
+					<label for="rechercheChats">Rechercher</label>
 				</div>
 		</form>
 		<div id="svgFilter" class="svg" onclick="displayFilter();"><?php include("./ressources/filter.svg") ?></div>

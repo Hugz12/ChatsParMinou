@@ -368,6 +368,7 @@
 }
   
 #allSliderEvent {
+	margin-bottom: 50px;
 	height: 600px;
 
 	--taille: calc(100vw - 60px);

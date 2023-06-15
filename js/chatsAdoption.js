@@ -127,20 +127,20 @@ function afficherChats(chats) {
 		option.innerHTML = chatActuel['code'];
 		chatsSelected.appendChild(option);
 
-		var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
-		var colorChat = convertColor(chatActuel['couleur'], 1);
-		var colorChatLight = convertColor(chatActuel['couleur'], 0.25);
+		// var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
+		// var colorChat = convertColor(chatActuel['couleur'], 1);
+		// var colorChatLight = convertColor(chatActuel['couleur'], 0.25);
 
 		var slideChat = document.getElementsByClassName("slideChat")[j];
 		var slideChatSmall = document.getElementsByClassName("slideChatSmall")[j];
 
-		slideChat.style.setProperty('--third-color', colorChatFade);
-		slideChat.style.setProperty('--fourth-color', colorChatLight);
-		slideChat.style.setProperty('--fifth-color', colorChat);
+		// slideChat.style.setProperty('--third-color', colorChatFade);
+		// slideChat.style.setProperty('--fourth-color', colorChatLight);
+		// slideChat.style.setProperty('--fifth-color', colorChat);
 
-		slideChatSmall.style.setProperty('--third-color', colorChatFade);
-		slideChatSmall.style.setProperty('--fourth-color', colorChatLight);
-		slideChatSmall.style.setProperty('--fifth-color', colorChat);
+		// slideChatSmall.style.setProperty('--third-color', colorChatFade);
+		// slideChatSmall.style.setProperty('--fourth-color', colorChatLight);
+		// slideChatSmall.style.setProperty('--fifth-color', colorChat);
 		
 		
 		var slidesPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
