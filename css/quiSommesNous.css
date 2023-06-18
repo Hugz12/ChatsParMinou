@@ -1,44 +1,351 @@
-.qsnContent{
-    width: 50vw;
+
+.category {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 50px;
 }
 
-.qsnTitre{
-    font-size: 3vw;
-    margin-bottom: 1vw;
+
+.categoryColor1 {
+    background-color: var(--main-color);
 }
 
-.qsnCadre{
-    background-color: var(--third-color);
-    padding: 5vw;
+.categoryColor2 {
+    background-color: var(--fourth-color);
 }
 
-.svg{
-    width: 5vw;
-    height: 5vw;
-    margin: 1vw;
-}
-
-.qsnTexte{
-    font-size: 1vw;
-}
-
-img{
-    border-radius: 10%;
-}
-
-.qsnStats {
-    border-radius: 10vw;
-    width: 20vw;
-    border-color: var(--third-color);
-    border-style: solid;
-    border-width: 0.5vw;
-    font-size: 1.25vw;
+.title {
+    text-align: center;
+    font-size: 70px;
     font-weight: bold;
+    font-family: 'Amatic SC', cursive;
+    margin: 0 0 30px 0;
 }
-.qsnStats:hover{
-    background-color: var(--third-color);
-    color: var(--main-color);
-    cursor: pointer;
-    box-shadow: 0.2vw 0.2vw 0.2vw black;
-    transition-duration: 0.4s;
+
+
+.categoryColor1 .title {
+    color: var(--fifth-color);
+}
+
+
+.content {
+    text-align: justify;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.content > p:not(.listContent) {
+    all: unset;
+}
+
+.pCenter {
+    text-align: center !important;
+}
+
+
+
+/********************************************************************/
+/****************************  SLIDER  ******************************/
+/********************************************************************/
+
+#outerImage {
+    background: linear-gradient(180deg, var(--main-color) 50%, var(--fourth-color) 50%);
+}
+
+#allSliderQuiSommesNous {
+    padding: 0 50px;
+    --taille: 1200px;
+    --hauteur: 200px;
+
+	--nbElement: 3;
+	--marge: 20px;
+
+	--transform: 0;
+}
+
+@media (max-width: 1280px) {
+    #allSliderQuiSommesNous {
+        --taille: 800px;
+        --nbElement: 2;
+    }
+    
+}
+
+@media (max-width: 880px) {
+    #allSliderQuiSommesNous {
+        --taille: 400px;
+        --nbElement: 1;
+    }
+    
+}
+
+
+.slideQuiSommesNous > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/********************************************************************/
+/*************************  LIST CONTENT  ***************************/
+/********************************************************************/
+
+
+
+.categoryColor1 .listContent, .listContent:not(:last-child)::after {
+    background-color: var(--fourth-color);
+    
+}
+
+
+.categoryColor2 .listContent, .listContent:not(:last-child)::after {
+    background-color: var(--sixth-color);
+}
+
+
+.categoryColor1 .listContent:not(:last-child)::after {
+    background-color: var(--fourth-color);
+}
+
+.categoryColor2 .listContent:not(:last-child)::after {
+    background-color: var(--sixth-color);
+}
+
+.listContent {
+    position: relative;
+    font-size: 17px;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+
+.listContent:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 50px;
+    width: 10px;
+    height: 30px;
+
+}
+
+
+/********************************************************************/
+/*************************  QUI SOMMES NOUS  ************************/
+/********************************************************************/
+
+#quiSommesNous {
+    padding: 0px;
+    max-width: 1280px;
+    margin: 0 auto 0 auto;
+}
+
+
+#quiSommesNous > .category {
+    min-height: calc(100vh - 70px);
+    margin: 0 0 10vh 0;
+    padding: 0px;
+    position: sticky;
+    top: 50px;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#quiSommesNous > .category:last-child {
+    margin: 0px;
+}
+
+
+#quiSommesNous > div > img {
+    width: 50%;
+    height: 500px;
+    object-fit: cover;
+    margin: 25px 20px;
+}
+
+
+#quiSommesNous > div > .directContent {
+    width: 40%;
+    height: auto;
+    margin: 15px 20px;
+}
+
+@media (max-width: 1020px) {
+
+    #quiSommesNous > div > img {
+        width: 80%;
+        height: 400px;
+    }
+    
+    #quiSommesNous > div > .directContent {
+        width: 80%;
+    }
+
+    #quiSommesNous .listContent {
+        font-size: 15px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 840px) {
+    #quiSommesNous > div > img {
+        height: 300px;
+    }
+    
+    
+    #quiSommesNous .title {
+        font-size: 45px;
+    }
+
+    #quiSommesNous .content {
+        font-size: 15px;
+    }   
+}
+
+
+@media (max-width: 500px) {
+    #quiSommesNous > div > .directContent {
+        margin: 5px 15px;
+    }
+
+    #quiSommesNous > div > img {
+        height: 250px;
+        margin: 5px 15px;
+    }
+
+    #quiSommesNous .listContent {
+        font-size: 12px;
+
+    }
+}
+
+
+/********************************************************************/
+/**************************  NOS ACTIONS  ***************************/
+/********************************************************************/
+
+#action {
+    padding: 100px 0 100px 0;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+
+#action > .directContent {
+    width: 400px;
+    margin: 50px;
+    height: auto;
+}
+
+#action > img {
+    width: 400px;
+    margin: 50px;
+    object-fit: cover;
+}
+
+@media (max-width: 1500px) {
+    
+    #action > img {
+        width: 900px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 1000px) {
+    
+    #action > img {
+        width: 90%;
+        height: 400px;
+    }
+}
+
+
+
+/********************************************************************/
+/**************************  NOS CHIFFRES  **************************/
+/********************************************************************/
+
+#chiffres {
+    flex-direction: column;
+
+}
+
+
+#chiffres > .directContent {
+    margin: 50px 0 0 0;
+    width: 100%;
+    max-width: 1280px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.chiffre {
+    margin: 50px 50px;
+    width: 300px;
+}
+
+.chiffreDescription {    
+    text-align: center;
+    font-size: 20px;
+}
+
+/********************************************************************/
+/*************************  REJOIGNEZ-NOUS  *************************/
+/********************************************************************/
+
+#rejoignezNous {
+    padding: 0;
+    flex-direction: column;
+}
+
+
+#rejoignezNous > .directContent {
+    max-width: 1040px;
+    width: 90%;
+    height: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+
+#rejoignezNous > video {
+    width: 80%;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+#rejoignezNous p {
+    display: block;
+    width: 100%;
+}
+
+#rejoignezNous > .directContent > .content > p:is(:nth-child(1),:nth-child(7)) {
+    color: var(--fifth-color);
+}
+
+
+
+
+
+@media (max-width: 380px) {
+
+    #rejoignezNous .content {
+        font-size: 15px;
+    }
+
+    #rejoignezNous .title {
+        font-size: 40px;
+    }
 }
