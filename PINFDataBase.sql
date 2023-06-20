@@ -74,10 +74,9 @@ CREATE TABLE `hebergement` (
   PRIMARY KEY (`mailHebergeur`, `codeChat`)
 )ENGINE = InnoDB;
 
-CREATE TABLE `divers` (
+CREATE TABLE `conseils` (
   `name` varchar(255) PRIMARY KEY,
-  `parent` varchar(255),
-  `value` varchar(255)
+  `description` varchar(255),
 )ENGINE = InnoDB;
 
 ALTER TABLE `passageRefuge` ADD FOREIGN KEY (`mailBenevole`) REFERENCES `utilisateur` (`mail`);
@@ -89,8 +88,6 @@ ALTER TABLE `concerne` ADD FOREIGN KEY (`idDemande`) REFERENCES `demandeAdoption
 ALTER TABLE `hebergement` ADD FOREIGN KEY (`mailHebergeur`) REFERENCES `utilisateur` (`mail`);
 
 ALTER TABLE `hebergement` ADD FOREIGN KEY (`codeChat`) REFERENCES `chat` (`code`);
-
-ALTER TABLE `divers` ADD FOREIGN KEY (`parent`) REFERENCES `divers` (`name`);
 
 
 /*INSERTION DES DONNEES*/

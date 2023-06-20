@@ -1,34 +1,52 @@
 #container {
     position: relative;
     padding: 30px;
-    width: 100%;
+    margin: auto;
+    max-width: 1280px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
     
 
 }
 
 #container > div {
+    --position : 0;
     position: relative;
-    margin: 25px;
-    width: 200px;
-    height: 200px;
-    min-width: 200px;
-    min-height: 200px;
-    border-radius: 50%;
+    margin: 25px 0px;
+    padding: 15px;
+    height: 150px;
+    width: 100%;
+    font-size: 17px;
+    border-radius: 100px;
+    box-sizing: border-box;
     transition-duration: 0.3s;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
+    background-color: var(--fourth-color);   
 }
 
 #container > div:hover {
-    scale: 1.5;
+    transform: scale(1.1);
+    background-color: var(--third-color);
 }
+
+#container > div:not(:last-child)::after {
+    
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: var(--position);
+    width: 30px;
+    height: 60px;
+    background-color: var(--fourth-color);
+
+}
+
 
 
 #container > div > a{
