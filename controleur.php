@@ -293,12 +293,11 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		case "Ajouter Bulle" :
 			// On vérifie la présence des champs
 			if ($name = valider("name","POST"))
-			if ($value = valider_fichiers("value")){
-				// On ajoute la bulle à la BDD
-				$nomdestination = './ressources/bulles/'.$name.'.pdf';
-				move_uploaded_file($value['tmp_name'], $nomdestination);
-				addConseil($name, $nomdestination);
-				$qs = "?view=bulles";
+			if ($description = valider("description","POST"))
+			if ($fichier = valider_fichiers("fichier")){
+				move_uploaded_file($fichier['tmp_name'], './ressources/conseils/'.$name.'.pdf');
+				addConseil($name, $description);
+				$qs = "?view=conseilsEtViePratique";
 			}
 		break;
 
@@ -308,8 +307,8 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On supprime la bulle de la BDD
 				delConseil($name);
 				// On supprime le fichier
-				unlink("./ressources/bulles/$name.pdf");
-				$qs = "?view=bulles";
+				unlink("./ressources/conseils/$name.pdf");
+				$qs = "?view=conseilsEtViePratique";
 			}
 		break;
 
