@@ -114,8 +114,8 @@ function supprimerEvenement($id){
     return SQLDelete($SQL);
 }
 
-function addConseil($name, $nomdestination){
-    $SQL = "INSERT INTO bulle (name, parent, value) VALUES ('$name', 'conseil', '$nomdestination')";
+function addConseil($name, $description){
+    $SQL = "INSERT INTO bulle (name, description) VALUES ('$name', '$description')";
     return SQLInsert($SQL);
 }
 
