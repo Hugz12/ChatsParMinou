@@ -3,7 +3,7 @@
 	font-weight: bold;
 	text-align: center;
 	color: var(--third-color);
-	padding: 0 60px;
+	padding: 10px 60px;
 }
 
 
@@ -308,7 +308,7 @@
 /*------------------------------------------------------------------------*/
 
 #formRechercheChats {
-	margin: 10px auto;
+	margin: 0px auto;
 	width: clamp(200px, 80%, 400px);
 	font-size: 20px;
 	background-color: var(--main-color);

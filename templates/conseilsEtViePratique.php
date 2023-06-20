@@ -8,12 +8,61 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 ?>
 
 <script src="./js/utils.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="./js/conseilsEtViePratique.js"></script>
 <link rel="stylesheet" href="css/conseilsEtViePratique.css"> 
 
-<div id="container">
-    <svg id="svg-container"></svg>
+<div id="rechercher">
+	<form>
+        <div class="group">
+            <input id="rechercheBubble" type="text" required>
+            <label for="rechercheBubble">Rechercher</label>
+        </div>
+        
+		
+	</form>
 </div>
 
-<script src="./js/conseilsEtViePratique.js"></script>
+<div id="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
 
