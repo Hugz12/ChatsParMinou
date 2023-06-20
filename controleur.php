@@ -295,9 +295,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($name = valider("name","POST"))
 			if ($description = valider("description","POST"))
 			if ($fichier = valider_fichiers("fichier")){
-				move_uploaded_file($fichier['tmp_name'], './ressources/bulles/'.$name.'.pdf');
+				move_uploaded_file($fichier['tmp_name'], './ressources/conseils/'.$name.'.pdf');
 				addConseil($name, $description);
-				$qs = "?view=bulles";
+				$qs = "?view=conseilsEtViePratique";
 			}
 		break;
 
@@ -307,8 +307,8 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On supprime la bulle de la BDD
 				delConseil($name);
 				// On supprime le fichier
-				unlink("./ressources/bulles/$name.pdf");
-				$qs = "?view=bulles";
+				unlink("./ressources/conseils/$name.pdf");
+				$qs = "?view=conseilsEtViePratique";
 			}
 		break;
 
