@@ -132,29 +132,32 @@ function checkboxPhotoSwitch(element){
 }
 
 function etatSwitch(element){
-	
-	if ($(element).children("#etatSexe")) {
+	if ($(element).children("#etatSexe").length > 0) {
 		// si il est coché
-		if ($(element).children("input").prop("checked") == false) {
-
+		if ($(element).children("#etatSexe").text() == "Mâle") {
+			$(element).children("input").val("2");
 			$(element).children("#etatSexe").fadeOut(150, function() {
 				$(this).text("Femelle").fadeIn(150);
 			});
 		}
 		else {
+			$(element).children("input").val("1");
 			$(element).children("#etatSexe").fadeOut(150, function() {
-				$(this).text("Male").fadeIn(150);
+				$(this).text("Mâle").fadeIn(150);
 			});
 		}
 	}
 
-	if ($(element).children("#etatFamilleAccueil")) {
-		if ($(element).children("input").prop("checked") == false) {
+	if ($(element).children("#etatFamilleAccueil").length > 0) {
+		// si il est coché
+		if ($(element).children("#etatFamilleAccueil").text() == "Famille") {
+			$(element).children("input").val("1");
 			$(element).children("#etatFamilleAccueil").fadeOut(150, function() {
 				$(this).text("Refuge").fadeIn(150);
 			});
 		}
 		else {
+			$(element).children("input").val("2");
 			$(element).children("#etatFamilleAccueil").fadeOut(150, function() {
 				$(this).text("Famille").fadeIn(150);
 			});

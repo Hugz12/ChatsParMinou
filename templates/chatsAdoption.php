@@ -207,7 +207,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 									<div class='photoGauche'><img src='./ressources/femelle.png'></div>
 									<input type='checkbox' class='checkbox checkboxSexe' checked='' name='sexe' value='1'>
 									<div class='photoDroite'><img src='./ressources/male.png'></div>
-									<input type='hidden' name='sexe' value='2'> 
+									<input type='hidden' name='sexe' value='1'>
 								</div>
 
 								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
@@ -215,7 +215,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 									<div class='photoGauche'><img src='./ressources/logo_toutnoir.png'></div>
 									<input type='checkbox' class='checkbox checkboxFamille' checked='' name='familleAccueil' value='2'>
 									<div class='photoDroite'><img src='./ressources/famille_accueil_noir.png'></div>
-									<input type='hidden' name='familleAccueil' value='1'> 
+									<input type='hidden' name='familleAccueil' value='2'>
 								</div>
 								
 								
@@ -266,12 +266,12 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
 							</svg>
 						</label>
-						<input id='fileAjoutChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+						<input id='fileAjoutChat' type='file' required name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
 
 					</div>
 					
 
-					<input type='submit' class='buttonType' name='action' value='Ajouter un chat'>
+					<input type='submit' class='buttonType' name='action' value='Ajouter un chat' onclick='if(document.getElementById(\"fileAjoutChat\").value == \"\") alert(\"Vous devez ajouter des photos pour continuer\");'>
 						
 				</form>
 

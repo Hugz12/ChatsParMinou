@@ -214,6 +214,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			&& ($couleur = valider("couleur","POST"))
 			&& ($photos = valider_fichiers("photos")))
 			{
+
 				if(existChat($code)){ // On vérifie que le code n'est pas déjà utilisé
 					$_SESSION['error'] = "Ce code est déjà utilisé";
 					$qs = "?view=chatsAdoption";
@@ -312,17 +313,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
+		case 'Modifier le chat' : 
+			// si il y a au moins un champ non vide
+			
+			if  ($statut = valider("statut","POST"))
+			if  ($nom = valider("nom", "POST")) 
+			if 	($familleAccueil = valider("familleAccueil","POST")) 
+			if	($couleur = valider("couleur","POST")) 
+			if 	($code = valider("code","POST"))
+			if	($description = valider("description","POST")){
+				
 
-		case 'Modifier le chat' : 
-			// si il y a au moins un champ non vide
-			
-			if  ($statut = valider("statut","POST"))
-			if  ($nom = valider("nom", "POST")) 
-			if 	($familleAccueil = valider("familleAccueil","POST")) 
-			if	($couleur = valider("couleur","POST")) 
-			if 	($code = valider("code","POST"))
-			if	($description = valider("description","POST")){
-				
 				// On ajoute le chat à la BDD
 				if($existentFiles = valider("existentFiles", "POST")) {
 					$tabExistentFiles = (explode(" ", $existentFiles));
@@ -368,67 +369,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				}
 				$nbPhotos = count($photos) + count($tabExistentFiles);
 				//echo $nbPhotos;
-				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
-				// On ajoute les photos
-				$qs = "?view=chatsAdoption";
-			}
-		break;
-		
-		case 'Modifier le chat' : 
-			// si il y a au moins un champ non vide
-			
-			if  ($statut = valider("statut","POST"))
-			if  ($nom = valider("nom", "POST")) 
-			if 	($familleAccueil = valider("familleAccueil","POST")) 
-			if	($couleur = valider("couleur","POST")) 
-			if 	($code = valider("code","POST"))
-			if	($description = valider("description","POST")){
 				
-				// On ajoute le chat à la BDD
-				if($existentFiles = valider("existentFiles", "POST")) {
-					$tabExistentFiles = (explode(" ", $existentFiles));
-					array_pop($tabExistentFiles);
-					$nbPhotos = count(scandir("./ressources/chats/$code")) - 2;
-					for($i = 0; $i < $nbPhotos; $i++) {
-						if (!in_array($i, $tabExistentFiles)) {
-							//echo "unlink ./ressources/chats/$code/$i.jpg <br/>";
-							unlink("./ressources/chats/$code/$i.jpg");
-						}
-					}
-				}
-				else {
-					$tabExistentFiles = array();
-					for($i = 0; $i < count($tabExistentFiles); $i++) {
-						//echo "unlink ./ressources/chats/$code/$i <br/>";
-						unlink("./ressources/chats/$code/$i");
-					}
-				}
-				
-				
-				$i = 0;
-				
-				$fichiers = scandir("./ressources/chats/$code");
-				foreach ($fichiers as $fichier) {
-					if ($fichier != "." && $fichier != "..") {
-						//echo "rename ./ressources/chats/$code/$fichier as ./ressources/chats/$code/$i.jpg <br/>";
-						rename("./ressources/chats/$code/$fichier", "./ressources/chats/$code/$i.jpg");
-						$i++;
-					}
-				}
-				
-				if($photos = valider_fichiers("photos")) {
-					$i = count($tabExistentFiles);
-					foreach ($photos as $fichier) {
-						//echo "upload " . $fichier['nom'] . " as ./ressources/chats/$code/$i.jpg <br/>";
-						uploadPhoto($fichier, "./ressources/chats/$code/", $i);
-						$i++;
-					}
-				}
-				else {
-					$photos = array();
-				}
-				$nbPhotos = count($photos) + count($tabExistentFiles);
-				//echo $nbPhotos;
 				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
 				// On ajoute les photos
 				$qs = "?view=chatsAdoption";

@@ -255,7 +255,7 @@ function displayFormEditChat(element){
 				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier ${chat['name']} - ${chat['code']} </div>
 				<br>
 
-				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
+				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data' onsubmit='if(document.getElementById(\"fileAjoutChat\").value == \"\" && document.getElementById(\"existentFiles\").value == \"\") return false;'>
 
 					<div class='inputText'>
 
@@ -282,11 +282,11 @@ function displayFormEditChat(element){
 							<div class='group'>	
 
 								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
-									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
+									<div id='etatFamilleAccueil' class='checkboxText'>${chat['familleAccueil'] ? "Famille" : "Refuge"}</div>
 									<div class='photoGauche'style='opacity : ${chat['familleAccueil'] ? "0" : "1"}'><img src='./ressources/logo_toutnoir.png'></div>
 									<input type='checkbox' class='checkbox checkboxFamille' ${chat['familleAccueil'] ? "checked": ""} name='familleAccueil' value='2'>
 									<div class='photoDroite' style='opacity : ${chat['familleAccueil'] ? "1" : "0"}'><img src='./ressources/famille_accueil_noir.png'></div>
-									<input type='hidden' name='familleAccueil' value='1'> 
+									<input type='hidden' name='familleAccueil' value='2'>	
 								</div>
 
 								<div class='colorPicker'>
@@ -330,7 +330,7 @@ function displayFormEditChat(element){
 
 					</div>
 
-					<input type='submit' class='buttonType' name='action' value='Modifier le chat'>
+					<input type='submit' class='buttonType' name='action' value='Modifier le chat' onclick='if(document.getElementById(\"fileAjoutChat\").value == \"\" && document.getElementById(\"existentFiles\").value == \"\") alert(\"Vous devez ajouter des photos pour continuer\");'>
 
 
 					<input type='hidden' name='code' value='${chat['code']}'>
@@ -912,3 +912,4 @@ window.addEventListener("resize", responsivePointsChatsDebounce);
 window.addEventListener("resize", updateFiltreAll);
 
 window.addEventListener('load', updateFiltreAll);
+
