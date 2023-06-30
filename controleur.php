@@ -291,13 +291,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
-		case "Ajouter Bulle" :
+		case "Ajouter Conseil" :
 			// On vérifie la présence des champs
+			
 			if ($name = valider("name","POST"))
 			if ($description = valider("description","POST"))
-			if ($fichier = valider_fichiers("fichier")){
+			if ($fichier = verifyPDF("fichier")){
+				$name = str_replace(" ", "_", $name);
+				// On ajoute le conseil à la BDD
+				addConseil($name,$description);
 				move_uploaded_file($fichier['tmp_name'], './ressources/conseils/'.$name.'.pdf');
-				addConseil($name, $description);
 				$qs = "?view=conseilsEtViePratique";
 			}
 		break;
@@ -514,6 +517,18 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				echo json_encode($user);
 				die(); 
 			}
+
+		case 'getConseils' :
+			$conseils = getConseils();
+			ob_clean(); // On vide le tampon de sortie
+			header('Content-Type: application/json');
+			if ($conseils == null)
+				echo json_encode(null);
+			else
+				echo json_encode($conseils);
+			die();
+			
+		break;
 
 
 		case 'changerMail' :

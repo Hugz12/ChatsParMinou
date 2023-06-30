@@ -115,12 +115,12 @@ function supprimerEvenement($id){
 }
 
 function addConseil($name, $description){
-    $SQL = "INSERT INTO bulle (name, description) VALUES ('$name', '$description')";
+    $SQL = "INSERT INTO conseils (name, description) VALUES ('$name', '$description')";
     return SQLInsert($SQL);
 }
 
 function delConseil($name){
-    $SQL = "DELETE FROM bulle WHERE name = '$name'";
+    $SQL = "DELETE FROM conseils WHERE name = '$name'";
     return SQLDelete($SQL);
 }
 
@@ -158,10 +158,7 @@ function listerChats(){
     return parcoursRS(SQLSelect($SQL));
 }
 
-function getConseils(){
-    $SQL = "SELECT * FROM divers WHERE parent = 'conseil'";
-    return parcoursRS(SQLSelect($SQL));
-}
+
 
 /**
  * 
@@ -366,6 +363,18 @@ function getPassages($mois, $annee){
 function deletePassage($date,$heureDebut,$heureFin){
     $SQL = "DELETE FROM passageRefuge WHERE heureDebut = '$heureDebut' AND heureFin = '$heureFin' AND date = '$date' AND mailBenevole = '".$_SESSION["mail"]."'";
     SQLDelete($SQL);
+}
+
+function getConseils(){
+    $SQL = "SELECT * FROM conseils";
+    return parcoursRS(SQLSelect($SQL));
+}
+
+function verifyPDF($file){
+    if ($_FILES[$file]['type'] != "application/pdf"){
+        return false;
+    }
+    return $_FILES[$file];
 }
 
 ?>
