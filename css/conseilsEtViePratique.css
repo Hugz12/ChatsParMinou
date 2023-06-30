@@ -58,10 +58,17 @@
 .conseil {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 } 
 
-.conseil > titreConseil
+.conseil > div {
+    width: 50%;
+    text-align: center;
+}
+
+.conseil > .titreConseil {
+    font-size: 70px;
+}
+
 
 
 /***********************************************************/

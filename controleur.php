@@ -305,7 +305,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		case "Supprimer Bulle" :
+		case "Supprimer Conseil" :
 			// On vérifie la présence des champs
 			if ($name = valider("name")){
 				// On supprime la bulle de la BDD

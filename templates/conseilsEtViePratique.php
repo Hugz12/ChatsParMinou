@@ -36,6 +36,10 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
                 <div id='svgAdd' class='svg' onclick='displayForm(\"addConseil\")'>";
                     include("ressources/add.svg");
         echo " </div>
+                <div id='svgDelete' class='svg' onclick='displayForm(\"supprimerConseil\")'>";
+                    include("ressources/dustbin.svg");
+        echo " </div>
+
             </div>
             
             <div id='addConseil' class='formType' style='display: none'>
@@ -75,7 +79,33 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
                 </form>
             </div>
 
+            <div id='supprimerConseil' class='formType' style='display: none'>
+
+				<div class='buttonHideForm' onclick='hideForm(\"supprimerConseil\")'>
+					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
+				</div>
+
+				<div class='policeTitre tailleTitre titreForm' >Supprimer Conseil</div><br>
+				
+				<form action='controleur.php' method='get'>
+
+					<select name='name' style='width: auto;'>";
+
+						foreach(getConseils() as $conseil){
+							echo "<option style='font-style:italic;' value='".$conseil["name"]."'>".$conseil["name"]."</option>";
+						}
+		echo "
+					</select>
+
+					<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Conseil'>
+				
+				</form>
+			</div>
+
         ";
+
+
+        
 
     }
 ?>

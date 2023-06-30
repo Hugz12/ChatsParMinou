@@ -119,6 +119,12 @@ function addConseil($name, $description){
     return SQLInsert($SQL);
 }
 
+
+function getConseils(){
+    $SQL = "SELECT * FROM conseils";
+    return parcoursRS(SQLSelect($SQL));
+}
+
 function delConseil($name){
     $SQL = "DELETE FROM conseils WHERE name = '$name'";
     return SQLDelete($SQL);
@@ -365,10 +371,6 @@ function deletePassage($date,$heureDebut,$heureFin){
     SQLDelete($SQL);
 }
 
-function getConseils(){
-    $SQL = "SELECT * FROM conseils";
-    return parcoursRS(SQLSelect($SQL));
-}
 
 function verifyPDF($file){
     if ($_FILES[$file]['type'] != "application/pdf"){

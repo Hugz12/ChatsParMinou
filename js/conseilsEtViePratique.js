@@ -27,14 +27,22 @@ async function createConseils () {
         conseils.forEach(conseil => {
             var div = document.createElement("div");
             div.classList.add("conseil");
-            div.innerHTML = `
-            <div class="titreConseil titre">${conseil.name}</div>
-            <div class="descriptionConseil">${conseil.description}</div>`
-            // ajoute le pdf quand on clique sur la div
+            // alterne le sens des divs 
+            if(conseils.indexOf(conseil) % 2 == 0) {
+                div.innerHTML = `
+                <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>
+                <div class="descriptionConseil">${conseil.description}</div>`
+            } else {
+                div.innerHTML = `
+                <div class="descriptionConseil">${conseil.description}</div>
+                <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>`
+            }
             div.addEventListener("click", () => {
                 window.open("./ressources/conseils/" + conseil.name);
             });
+            div.style.setProperty("--position", Math.random() * 80 + 10 + "%");
             container.appendChild(div);
+
         });
     }
     
