@@ -7,8 +7,8 @@
     flex-direction: column;
     box-sizing: border-box;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center; 
+    cursor: pointer;
 
 }
 
@@ -53,6 +53,22 @@
     display: flex;
     
 }
+
+
+.conseil {
+    display: flex;
+    flex-direction: row;
+} 
+
+.conseil > div {
+    width: 50%;
+    text-align: center;
+}
+
+.conseil > .titreConseil {
+    font-size: 70px;
+}
+
 
 
 /***********************************************************/
