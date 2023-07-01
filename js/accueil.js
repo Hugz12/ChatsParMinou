@@ -34,37 +34,37 @@ function switchChatDuMois(){
 
 
 
-/**
- * Fonction qui gère le responsive de la page d'accueil
- */
-window.addEventListener("resize", responsive); // on appelle la fonction responsive quand on redimensionne la fenêtre
-function responsive(){
+// /**
+//  * Fonction qui gère le responsive de la page d'accueil
+//  */
+// window.addEventListener("resize", responsive); // on appelle la fonction responsive quand on redimensionne la fenêtre
+// function responsive(){
 
-	// Responsive la présentation
-	if (window.innerWidth < 900) {
-		$("#presentation").css('height', '350px');
-		$("#presentation img").css('height', '350px');
-		$("#presentationTexte").css('height', '350px');
-		$("#presentationTexte").css('left', '10%');
-		$("#presentationTexte1").css('font-size', '35px');
-		$("#presentationTexte1").css('width', '100%');
-		$("#presentationTexte2").css('font-size', '12px');
+// 	// Responsive la présentation
+// 	if (window.innerWidth < 900) {
+// 		$("#presentation").css('height', '350px');
+// 		$("#presentation img").css('height', '350px');
+// 		$("#presentationTexte").css('height', '350px');
+// 		$("#presentationTexte").css('left', '10%');
+// 		$("#presentationTexte1").css('font-size', '35px');
+// 		$("#presentationTexte1").css('width', '100%');
+// 		$("#presentationTexte2").css('font-size', '12px');
 
-		$("#allChatDuMoisSmall").css('display', 'flex');
-		$("#allChatDuMois").css('display', 'none');
+// 		$("#allChatDuMoisSmall").css('display', 'flex');
+// 		$("#allChatDuMois").css('display', 'none');
 
-	}else{
-		$("#presentation").css('height', '500px');
-		$("#presentation img").css('height', '500px');
-		$("#presentationTexte").css('height', '500px');
-		$("#presentationTexte").css('left', '15%');
-		$("#presentationTexte1").css('font-size', '58px');
-		$("#presentationTexte1").css('width', '80%');
-		$("#presentationTexte2").css('font-size', '16px');
-		$("#allChatDuMoisSmall").css('display', 'none');
-		$("#allChatDuMois").css('display', 'block');
-	}
-}
+// 	}else{
+// 		$("#presentation").css('height', '500px');
+// 		$("#presentation img").css('height', '500px');
+// 		$("#presentationTexte").css('height', '500px');
+// 		$("#presentationTexte").css('left', '15%');
+// 		$("#presentationTexte1").css('font-size', '58px');
+// 		$("#presentationTexte1").css('width', '80%');
+// 		$("#presentationTexte2").css('font-size', '16px');
+// 		$("#allChatDuMoisSmall").css('display', 'none');
+// 		$("#allChatDuMois").css('display', 'block');
+// 	}
+// }
 
 
 
