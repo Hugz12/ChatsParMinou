@@ -57,10 +57,6 @@ function filterConseils() {
     // Définit un nouveau délai pour exécuter la fonction de filtrage après 300 ms
     filterTimeout = setTimeout(function() {
         currentSearch = document.querySelector("#rechercheConseil").value;
-        conseilsFiltres = conseils.filter(conseil => {
-            return conseil.name.toLowerCase().includes(currentSearch.toLowerCase());
-        });
-
         var container = document.querySelector("#container");
         Array.from(container.children).forEach(child => {
             if (child.children[0].innerHTML.toLowerCase().includes(currentSearch.toLowerCase()) || child.children[1].innerHTML.toLowerCase().includes(currentSearch.toLowerCase())){
