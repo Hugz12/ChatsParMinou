@@ -14,8 +14,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <div id="rechercher">
 	<form>
         <div class="group">
-            <input id="rechercheBubble" type="text" required>
-            <label for="rechercheBubble">Rechercher</label>
+            <input id="rechercheConseil" type="text" required>
+            <label for="rechercheConseil">Rechercher</label>
         </div>
         
 		
@@ -97,7 +97,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		echo "
 					</select>
 
-					<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Conseil'>
+					<input type='submit' class='buttonType' name='action' value='Supprimer Conseil'>
 				
 				</form>
 			</div>

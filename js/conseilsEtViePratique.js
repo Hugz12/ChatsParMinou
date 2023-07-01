@@ -1,10 +1,14 @@
+var conseils = [];
+var conseilsFiltres = [];
+
 window.addEventListener("load", createConseils);
+document.querySelector("#rechercheConseil").addEventListener("keyup", filterConseils);
+
 
 async function createConseils () {
-    
-    var conseils;
 
-    await fetch("./controleur.php?" +  new URLSearchParams({
+    // met une constante en attente de la réponse de la fonction fetch
+    conseils = await fetch("./controleur.php?" +  new URLSearchParams({
         action: "getConseils"
     }),
     {
@@ -13,11 +17,8 @@ async function createConseils () {
             "Content-Type": "application/x-www-form-urlencoded"
         },
     })
-    .then(response => response.json()) // Le premier .then permet de résoudre la promesse de la fonction fetch
-    .then(data => conseils = data)
+    .then(response => response.json()) 
     .catch(error => console.log(error));
-    
-
 
 
     if(conseils != null) {
@@ -47,3 +48,27 @@ async function createConseils () {
     }
     
 }
+
+var filterTimeout; // Variable pour stocker l'ID du délai, si pas de délai en cours, vaut undefined
+
+function filterConseils() {
+    clearTimeout(filterTimeout); // Efface le délai précédent (s'il existe)
+  
+    // Définit un nouveau délai pour exécuter la fonction de filtrage après 300 ms
+    filterTimeout = setTimeout(function() {
+        currentSearch = document.querySelector("#rechercheConseil").value;
+        conseilsFiltres = conseils.filter(conseil => {
+            return conseil.name.toLowerCase().includes(currentSearch.toLowerCase());
+        });
+
+        var container = document.querySelector("#container");
+        Array.from(container.children).forEach(child => {
+            if (child.children[0].innerHTML.toLowerCase().includes(currentSearch.toLowerCase()) || child.children[1].innerHTML.toLowerCase().includes(currentSearch.toLowerCase())){
+                child.style.display = "flex";
+            } else {
+                child.style.display = "none";
+            }
+        });
+    }, 300); 
+}
+
