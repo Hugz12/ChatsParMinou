@@ -125,6 +125,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 					<span class="text">J'ai pris conscience du certificat d'engagement</span>
 			</label>
         </div>
-        <input id ="submitFormulaireAdoption" type="submit" class='buttonType' value="submitForm" onclick="submitForm();"/>
+        <input id ="submitFormulaireAdoption" type="submit" class='buttonType' onclick="submitForm();"/>
     </form>
 </div>
