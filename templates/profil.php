@@ -45,10 +45,14 @@ if (!valider('Connecte', 'SESSION')) {
 		<div class="pdp">
 			<form action="controleur.php" method="post" enctype="multipart/form-data">
 				<?php
-				echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   /></label>";
+				if (file_exists("./ressources/users/".$_SESSION['mail'].".jpg")) {
+					echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   /></label>";
+				} else{
+					echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"./ressources/users/default.png\"   /></label>";
+				}
 				?>
 				<input type="file" name="image" style="display : none;" id="image" onchange="changerPhotoProfil(this);">
-				<input type="hidden" class="buttonType" value="Changer la photo de profil" name="action">
+				<input type="hidden" class="buttonType" value="ChangerPhotoProfil" name="action">
 			</form>
 		</div>
 
@@ -114,41 +118,45 @@ if (!valider('Connecte', 'SESSION')) {
 				<div class="titre">Gestion des utilisateurs
 				<div id="i">i</div>
 				</div>
-				<form>
-					<div class="group">
-						<input type="text" id="contenuRecherche" placeholder="Rechercher..." required>
-					</div>
+				<form id="formRechercheUser" onsubmit="return false;" onkeyup="rechercher();">
+				<div class="group">
+					<input type="text" id="rechercheUser" required>
+					<label for="rechercheUser">Rechercher un utilisateur par son nom</label>
+				</div>
 				</form>';
-
+				echo '<div class="utilisateurs">';
 				foreach($resultats as $resultat) {
 					echo'<div class="utilisateur">';
-					if ($resultat['role']!=1){
-					echo '<label class="checkbox">
-						  <input type="checkbox" id="upRole_'.$resultat['id'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'">
-						  <span class="checkmark"></span>
-						  </label>';
+					if (($resultat['role']==3||( $resultat['role']==2 && isSuperAdmin($_SESSION['mail']))&& $resultat['role']!=1)){
+					echo '<input type="button" id="upRole_'.$resultat['mail'].'" data-mail="'.$resultat['mail'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'" class="buttonType" value="+" onclick="changerRole();">';
 					}
+					echo'<div class="perso">';
+					$mail = $resultat['mail'];
+					echo "<img id=\"photoDeProfil\" class=\"photoGestion\" src=\"./ressources/users/$mail.jpg\"/>";
 					// Utilisation de la structure de contrôle if/else pour déterminer la classe de couleur
 					if ($resultat['role'] == 1) {
 						echo '<span class="role-1">' . $resultat['name'] . '</span>';
-					} elseif ($resultat['role'] == 2) {
+					} else if ($resultat['role'] == 2) {
 						echo '<span class="role-2">' . $resultat['name'] . '</span>';
-					} elseif ($resultat['role'] == 3) {
+					} else if ($resultat['role'] == 3) {
 						echo '<span class="role-3">' . $resultat['name'] . '</span>';
 					} else {
 						echo $resultat['name'];
 					}
-					
-					echo '<label class="checkbox">
-						  <input type="checkbox" id="downRole_'.$resultat['id'].'" data-nom="'.$resultat['name'].'"  data-role="'.$resultat['role'].'">
-						  <span class="checkmark"></span>
-						  </label>';
+
+					echo '</div>';
+					if ($resultat['role']==2){
+					echo '<input type="button" id="downRole_'.$resultat['mail'].'" data-mail="'.$resultat['mail'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'" class="buttonType" value="-" onclick="changerRole();">';
+					} else if ( $resultat['role']==3) {
+					echo '<input type="button" id="downRole_'.$resultat['mail'].'" data-mail="'.$resultat['mail'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'" class="buttonType" value="x" onclick="changerRole();">';
+					}
 					echo '</div>';
 				}
+				echo '</div>';
 			
 				
 
-				echo '<input type="button" class="buttonType" value="Changer rôle " onclick="changerRole();">';
+
 				echo '</div>';
 				echo '</div>';
 				echo '</form>';

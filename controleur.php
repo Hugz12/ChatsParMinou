@@ -539,38 +539,86 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 		
 		case 'changerRole' :
-			if ($up = valider("up"))
-			if ($down= valider("down"))
-			if ($noms= valider("noms"))
+			if ($nom= valider("nom"))
 			if ($role = valider("role"))
-			for ($i=0;$i<=count($noms);$i++){
-				$nom = $noms[$i];
-				$isUp = $up[$i];
-				$isDown = $down[$i];
-				$role = $role[$i];
-				var_dump($i,$nom, $isUp, $isDown, $role,$noms);
-				if ($isUp == 1){
-					changerRole($nom,$role);
+			if ($mail = valider("mail")){
+				$mMail = $_SESSION["mail"];
+				$mNom=getNom($mMail);
+				if ($role == 4){
+					supprimerUtilisateur($nom,$mail);
+					ob_clean();
+					echo json_encode("ok");
+				} else if ($role == 1) {
+					changerRole($nom, $role, $mail);
+					changerRole($mNom, 2, $mMail);
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+					ob_clean();
+					echo json_encode("ok");
+				} else {
+					changerRole($nom, $role, $mail);
 				}
-				if ($isDown == 1){
-					if ($role == 4){
-						supprimerUtilisateur($nom);
-					}
-					else{
-					changerRole($nom,$role);
-					}
+				if ($mail == $mMail){
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
 				}
+				ob_clean();
+				echo json_encode("ok");
+				die();
 			}
-			ob_clean();
-			echo json_encode("ok");
-			die();
 		break;
+
+		case 'changerPhotoProfil' :
+			if ($photo = valider("photo","FILES")){
+				// on supprime l'ancienne image
+				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
+				// on upload la nouvelle
+				if (!uploadPhoto($photo, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
+					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
+					break;
+				}
+				$qs = "?view=profil";
+			
+			}
+		break;
+
+		case 'submitForm':
+			if ($nom = valider("nom"))
+			if ($prenom = valider("prenom"))
+			if ($mail = valider("mail"))
+			if ($tel = valider("tel"))
+			if ($adresse = valider("adresse"))
+			if ($habitation = valider("habitation"))
+			if ($ext = valider("ext"))
+			if ($sortir = valider("sortir"))
+			if ($animaux = valider("animaux"))
+			if ($sit = valider("sit"))
+			if ($com = valider("com"))
+			//affiche les valeurs des variables
+			ajoutDemande($nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com, $pre, $justi);
+			$nextAutoIncrementValue = getNextAutoIncrementValue("demandeAdoption", "id");
+			echo $nextAutoIncrementValue;
+			if ($retour = valider("retour")) {
+			  if (is_array($retour)) {
+				foreach ($retour as $value) {
+				  ajoutConcerne($nextAutoIncrementValue, $value);
+				}
+			  } else {
+				ajoutConcerne($nextAutoIncrementValue, $retour);
+			  }
+			  ob_clean();
+			  echo json_encode("ok");
+			  $qs = "?view=accueil";
+			  die();
+			}
+		break;  
 	}
 
 
 	
 
 }
+
 
 
 // On redirige vers la page index avec les bons arguments

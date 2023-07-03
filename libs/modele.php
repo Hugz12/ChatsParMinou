@@ -45,6 +45,14 @@ function isAdmin($mail){
 		return false;
 }
 
+function isSuperAdmin($mail){
+    $SQL ="SELECT role FROM utilisateur WHERE mail='$mail'";
+    $isAdmin = SQLGetChamp($SQL); 
+    if ($isAdmin == "1") 
+        return true;
+    else 
+        return false;
+}
 
 
 /**
@@ -110,19 +118,47 @@ function getPassword($mail){
     return SQLGetChamp($SQL);
 }
 
+function getNom($mail){
+    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
+}
 
-function changerRole($nom,$role){
-    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom'";
+function changerRole($nom,$role,$mail){
+    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom' and mail='$mail'";
     return SQLUpdate($SQL);
 }
 
-function supprimerUtilisateur($nom){
-    $SQL = "DELETE FROM utilisateur WHERE name = '$nom'";
+function supprimerUtilisateur($nom,$mail){
+    $SQL = "DELETE FROM passageRefuge WHERE mailBenevole = '$mail';
+            DELETE FROM hebergement WHERE mailHebergeur = '$mail';
+            DELETE FROM utilisateur WHERE name = '$nom' and mail='$mail';";
     return SQLDelete($SQL);
 }
 function countName($name){
     $SQL = "SELECT COUNT(*) FROM utilisateur WHERE name = '$name'";
     return SQLGetChamp($SQL);
+}
+
+function getNextAutoIncrementValue($tableName, $columnName) {
+    $query = "SHOW TABLE STATUS LIKE '$tableName'";
+    $result = mysqli_query($connection, $query);
+    
+    if ($result && mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+      return $row['Auto_increment'];
+    }
+    
+    return null;
+}
+
+function ajoutConcerne($nextAutoIncrementValue,$value){
+    $SQL = "INSERT INTO concerne (idDemande,codeChat) VALUES ('$nextAutoIncrementValue','$value')";
+    return SQLInsert($SQL);
+}
+
+function ajoutDemande($nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "INSERT INTO demandeAdoption (nom, prenom, mail, tel, adresse, habitation, exterieur, sortie, animaux, situationFamiliale, commentaire) VALUES ('$nom', '$prenom', '$mail', '$tel', '$adresse', '$habitation', '$ext', '$sortir', '$animaux', '$sit', '$com')";
+    return SQLInsert($SQL);
 }
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
@@ -181,7 +217,7 @@ function listerChats(){
  * Fonction qui retourne la liste des utilisateurs
  */
 function listerUtilisateurs(){
-    $SQL = "SELECT name,role FROM utilisateur";
+    $SQL = "SELECT * FROM utilisateur";
     return parcoursRS(SQLSelect($SQL));
 }
 

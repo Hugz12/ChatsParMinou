@@ -12,6 +12,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
+
 <link rel="stylesheet" href="./css/formulaireAdoption.css">
 <script src="./js/formulaireAdoption.js"></script>
 <div id="patteFormulaireAdoption" class="conteneurDeConteneurDePattes">
@@ -51,78 +52,79 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
         <div id="infoPerso">
             <div class='p1'>
                 <div class='group'>
-                    <input type='text' name='nom' required>
+                    <input type='text' name='nom' id='nomForm'required>
                     <label for="nom">Nom</label>
                 </div>
                 <div class='group'>
-                    <input type='text' name='prenom' required>
+                    <input type='text' name='prenom' id='prenomForm'required>
                     <label for="prenom">Prénom</label>
                 </div>
                 <div class='group'>
-                    <input type='text' name='mail' required>
+                    <input type='text' name='mail'id='mailForm' required>
                     <label for="mail">Adresse mail</label>
                 </div>
             </div>
             <div class='p2'>
                 <div class='group'>
-                    <input type='text' name='tel' required>
+                    <input type='text' name='tel'id='telForm' required>
                     <label for="tel">Numéro de téléphone</label>
                 </div>
                 <div class='group'>
-                    <input type='text' name='adresse' required>
+                    <input type='text' name='adresse'id='adresseForm' required>
                     <label for="adresse">Adresse</label>
                 </div>
                 <div class='group'>
-                    <input type='text' name='habitation' required>
+                    <input type='text' name='habitation' id='habitationForm' required>
                     <label for="habitation">Type d'habitation</label>
                 </div>
             </div>
         </div>
         <div id="infoChat">
             <div class="titre">Choix des chats</div>
-            <div class='group'>
-                <input type='text' name='nomChat' required>
-                <label for="nomChat">Nom du chat</label>
-            </div>
-        </div>
+            <div id="conteneurChats"></div>
+            <script>
+                var chats = <?= json_encode(listerChats());?>;
+                afficherChats(chats);
+            </script> 
+         </div>
         <div id="infoAdoption">
             <div class="titre">Informations pratiques</div>
             <div id="coche">
                 <label class="checkbox">
-                        <input type="checkbox" id="filtreFemelle">
+                        <input type="checkbox" id="extForm">
                         <span class="checkmark"></span>
                         <span class="textP">Je dispose d'un espace extérieur</span>
                 </label>
                 <label class="checkbox">
-                        <input type="checkbox" id="filtreFemelle">
+                        <input type="checkbox" id="sortirForm">
                         <span class="checkmark"></span>
                         <span class="textP">Le chat aura la possibilité de sortir</span>
                 </label>
             </div>
             <div class='group'>
-                <input type='text' name='animaux' required>
+                <input type='text' name='animaux' id='animauxForm' required>
                 <label for="animaux">Animaux</label>
             </div>
             <div class='group'>
-                <input type='text' name='situationFamiliale' required>
+                <input type='text' name='situationFamiliale' id='sitForm' required>
                 <label for="situationFamiliale">Situation familiale</label>
             </div>
             <div class='group'>
-                <input type='text' name='commentaire' required>
+                <input type='text' name='commentaire' id='comForm' required>
                 <label for="commentaire">Commentaire libre</label>
             </div>           
 
             <label class="checkbox">
-					<input type="checkbox" id="filtreFemelle" required>
+					<input type="checkbox" id="preForm" required>
 					<span class="checkmark"></span>
 					<span class="text">Je m'engage à faire une prévisite et à prendre en charge les frais de vétérinaire </span>
 			</label>
             <label class="checkbox">
-					<input type="checkbox" id="filtreFemelle" required>
+					<input type="checkbox" id="justiForm" required>
 					<span class="checkmark"></span>
 					<span class="text">J'ai pris conscience du certificat d'engagement</span>
 			</label>
         </div>
-        <input id ="submitFormulaireAdoption"type="submit" name="action" value="Demande adoption"/>
+        <input id ="submitFormulaireAdoption" type="submit" class='buttonType' value="submitForm" onclick="submitForm();"/>
     </form>
 </div>
