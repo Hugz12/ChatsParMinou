@@ -86,13 +86,14 @@ function afficherEvenements(evenements){
 		date = date[0];
 
 		slides.append(`
-			<div class='slide slideEvent' style='background-color:${evenements[i]['couleur']}'>
+			<div class='slide slideEvent'>
 				<div class='texteEvent'>
 					<div class='titreEvent policeTitre'>${evenements[i]['titre']}</div>
 					<div class='descriptionEvent policeTexte'>${evenements[i]['description']}</div>
 					<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le ${date} à ${heure}</div>
 				</div>
 				<div class='imgEvent'>
+					<div class='blurImage'></div>
 					<img src='./ressources/evenements/${evenements[i]['id']}.jpg' alt='${evenements[i]['titre']}'/>
 				</div>
 		`);
@@ -510,5 +511,13 @@ function adopterChatDuMois(code) {
 
 
 function nousAiderDisplay() {
-	
+	var nousAiderResponsiveBox = document.getElementById("nousAiderResponsiveBox");
+	if (nousAiderResponsiveBox.style.right == "0px") {
+		nousAiderResponsiveBox.style.right = "-200px";
+		nousAiderResponsiveBox.children[0].style.transform = "rotate(0deg)";
+	}
+	else {
+		nousAiderResponsiveBox.style.right = "0px";
+		nousAiderResponsiveBox.children[0].style.transform = "rotate(180deg)";
+	}
 }
