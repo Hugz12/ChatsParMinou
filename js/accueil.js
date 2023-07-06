@@ -116,8 +116,8 @@ function afficherEvenements(evenements){
 					elt.onclick = function() {displayFormEditEvent(this);};
 					elt.innerHTML = xhr.responseText;
 					elt.style.position = "absolute";
-					elt.style.bottom = "25px";
-					elt.style.left= "75%";
+					elt.style.top = "0px";
+					elt.style.right = "0px";
 					elt.style.setProperty("--third-color", convertColor(document.getElementsByClassName("slideEvent")[k].style.backgroundColor, 0.5));
 					console.log(document.getElementsByClassName("slideEvent")[k].children[0]);
 					document.getElementsByClassName("slideEvent")[k].children[0].appendChild(elt);
@@ -507,3 +507,8 @@ function adopterChatDuMois(code) {
 	document.body.appendChild(form);
 	form.submit();
 } 
+
+
+function nousAiderDisplay() {
+	
+}

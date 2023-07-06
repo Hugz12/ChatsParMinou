@@ -385,7 +385,6 @@
 
 
 #eventTitre {
-	font-size: 60px;
 	font-weight: bold;
 	text-align: center;
 	color: var(--fifth-color);
@@ -417,17 +416,20 @@
 
 
 
+.slideEvent {
+	display: flex;
+	align-items: center;
+	padding-top: 50px;
+}
 
 .imgEvent {
 	z-index: 0;
 	position: absolute;
 	top: 10%;
-	right: 4%;
+	right: 5%;
 	width: 70%;
 	height: 80%;
-	
-
-}
+}	
 
 .imgEvent > img {
 	width: 100%;
@@ -438,53 +440,80 @@
 
 .texteEvent {
 	z-index: 1;
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	min-height: 45%;
 	width: 35%;
-	min-width: 265px;
 	background-color: var(--main-color);
 	padding: 15px 20px 15px 30px;
-	margin-left: 5%;
+	margin: 0 0 0 5%;
 }
 
-@media (max-width: 500px) {
-	.texteEvent {
-		min-width: 0px
-	}
+.texteEvent > * {
+	margin: 10px 0 10px 0;
 }
 
 .titreEvent {
 	font-size: 40px;
 	font-weight: bold;
-	margin: 10px 0 10px 0;
 }
 
 .descriptionEvent {
 	font-size: 15px;
-	margin: 10px 0 10px 0;
 }
 
 .dateEvent {
-	width: 60%;
-	max-width: 230px;
+	width: 80%;
+	max-width: 260px;
 	font-size: 20px;
-	margin: 10px 0 10px 0;
 	padding: 15px;
+	text-align: center;
+	box-sizing: border-box;
 }
 
 
 
+@media (max-width: 800px) {
+
+	.texteEvent {
+		width: 75%;
+		margin: 3% 0 0 0;
+		align-items: center;
+		min-height: 0;
+		height: auto;
+		box-sizing: border-box;
+	}
+
+	.texteEvent > * {
+		margin: 0 10px 0 10px;
+	}
+
+	.dateEvent {
+		position: absolute;
+		margin: 0;
+		top: 90%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	.imgEvent {
+		position: relative;
+		top: 0;
+		right: 0;
+		margin-top: -5%;
+		width: 90%;
+		height: 60%;
+	}
+
+	.slideEvent {
+		padding-top: 0px;
+		flex-direction: column;
+	}
 
 
-.slideEvent {
-	display: flex;
-	align-items: center;
-	padding-top: 50px;
+
 }
-
 
 
 
@@ -545,7 +574,7 @@
 	right: 50px;
 	width: 200px;
 	height : auto;
-	display : flex;
+	display : none;
 	justify-content : space-around;
 	align-items: center;
 	padding: 20px 10px 20px 10px;
@@ -554,7 +583,6 @@
 	border-radius: 46px;
 	z-index: 2;
 	text-decoration: none;
-
 }
 
 #nousAider > img {
@@ -562,6 +590,50 @@
 	height: 50px;
 	transition-duration: 0.3s;
 }
+
+
+#nousAiderResponsiveBox {
+	position: fixed;
+	bottom: 50px;
+	right: 0px;
+	background-color: var(--fourth-color);
+	border-radius: 46px 0 0 46px;
+	padding: 0px 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#nousAiderResponsive {
+	display : flex;
+	justify-content : space-around;
+	align-items: center;
+	padding: 20px 0px;
+	font-size: 20px;
+	
+	z-index: 2;
+	text-decoration: none;
+}
+
+#nousAiderResponsive > * {
+	margin: 0 10px 0 10px;
+}
+
+#nousAiderResponsive > img {
+	width: 50px;
+	height: 50px;
+	transition-duration: 0.3s;
+}
+
+
+
+
+
+
+
+
+
 
 
 #addEvenement {

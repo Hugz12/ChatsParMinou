@@ -39,7 +39,7 @@ async function createConseils () {
                 <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>`
             }
             div.addEventListener("click", () => {
-                window.open("./ressources/conseils/" + conseil.name);
+                window.open("./ressources/conseils/" + conseil.name + ".pdf");
             });
             div.style.setProperty("--position", Math.random() * 80 + 10 + "%");
             container.appendChild(div);
