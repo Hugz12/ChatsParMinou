@@ -14,7 +14,6 @@ function getSVG(img) {
 
 // Fonction qui append une demande
 function appendDemande(statut, date, btn, img, demande) {
-    console.log(demande);
     $(statut).append(`<div id="demande${demande["id"]}" class="demandes">
                 <div class="btnDemande ${btn} clickable" onclick='changerStatut(this);'>${img}</div>
                 <div class="fondDemande">
@@ -138,8 +137,6 @@ function dateCompteur(dateDemande){
 
 // Fonction qui affiche les demandes
 function afficherDemandes(demandes) {
-    console.log(demandes);
-    console.log(demandes[1]);
     var statut, btn, img, date, dateDemande;
     var iN = 0, iC = 0, iT = 0;
     for (var i=0; i < demandes.length; i++) {
@@ -148,13 +145,10 @@ function afficherDemandes(demandes) {
 
         switch (demandes[i]["statutDemande"]) {
             case 1:
-                console.log("1");
                 statut = "#nouvellesDemandes";
                 btn = "btnNouvelleDemande";
                 img = "check";
                 iN++;
-
-                console.log(getSVG(img));
 
                 appendDemande(statut, date, btn, getSVG(img), demandes[i]);
                 if (iN > 10) $("#demande" + demandes[i]["id"]).css("display", "none");
@@ -162,7 +156,6 @@ function afficherDemandes(demandes) {
                 break;
 
             case 2:
-                console.log("2");
                 statut = "#demandesEnCours";
                 btn = "btnEnCours";
                 img = "play";
@@ -174,7 +167,6 @@ function afficherDemandes(demandes) {
                 break;
 
             case 3:
-                console.log("3");
                 statut = "#traitees";
                 btn = "btnTraitees";
                 img = "return";
