@@ -65,7 +65,27 @@ body{
 }
 
 .tailleTitre {
-	font-size: 50px;
+	font-size: 70px;
+}
+
+.tailleSousTitre {
+	font-size: 20px;
+}
+
+@media (max-width: 750px) {
+	.tailleTitre {
+		font-size: 50px;
+	}
+	
+	.tailleSousTitre {
+		font-size: 15px;
+	}
+}
+
+@media (max-width: 400px) {
+	.tailleTitre {
+		font-size: 40px;
+	}
 }
 
 .ombre {

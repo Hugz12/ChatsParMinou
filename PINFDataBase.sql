@@ -76,7 +76,7 @@ CREATE TABLE `hebergement` (
 
 CREATE TABLE `conseils` (
   `name` varchar(255) PRIMARY KEY,
-  `description` varchar(255),
+  `description` varchar(255)
 )ENGINE = InnoDB;
 
 ALTER TABLE `passageRefuge` ADD FOREIGN KEY (`mailBenevole`) REFERENCES `utilisateur` (`mail`);

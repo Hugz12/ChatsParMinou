@@ -34,37 +34,37 @@ function switchChatDuMois(){
 
 
 
-/**
- * Fonction qui gère le responsive de la page d'accueil
- */
-window.addEventListener("resize", responsive); // on appelle la fonction responsive quand on redimensionne la fenêtre
-function responsive(){
+// /**
+//  * Fonction qui gère le responsive de la page d'accueil
+//  */
+// window.addEventListener("resize", responsive); // on appelle la fonction responsive quand on redimensionne la fenêtre
+// function responsive(){
 
-	// Responsive la présentation
-	if (window.innerWidth < 900) {
-		$("#presentation").css('height', '350px');
-		$("#presentation img").css('height', '350px');
-		$("#presentationTexte").css('height', '350px');
-		$("#presentationTexte").css('left', '10%');
-		$("#presentationTexte1").css('font-size', '35px');
-		$("#presentationTexte1").css('width', '100%');
-		$("#presentationTexte2").css('font-size', '12px');
+// 	// Responsive la présentation
+// 	if (window.innerWidth < 900) {
+// 		$("#presentation").css('height', '350px');
+// 		$("#presentation img").css('height', '350px');
+// 		$("#presentationTexte").css('height', '350px');
+// 		$("#presentationTexte").css('left', '10%');
+// 		$("#presentationTexte1").css('font-size', '35px');
+// 		$("#presentationTexte1").css('width', '100%');
+// 		$("#presentationTexte2").css('font-size', '12px');
 
-		$("#allChatDuMoisSmall").css('display', 'flex');
-		$("#allChatDuMois").css('display', 'none');
+// 		$("#allChatDuMoisSmall").css('display', 'flex');
+// 		$("#allChatDuMois").css('display', 'none');
 
-	}else{
-		$("#presentation").css('height', '500px');
-		$("#presentation img").css('height', '500px');
-		$("#presentationTexte").css('height', '500px');
-		$("#presentationTexte").css('left', '15%');
-		$("#presentationTexte1").css('font-size', '58px');
-		$("#presentationTexte1").css('width', '80%');
-		$("#presentationTexte2").css('font-size', '16px');
-		$("#allChatDuMoisSmall").css('display', 'none');
-		$("#allChatDuMois").css('display', 'block');
-	}
-}
+// 	}else{
+// 		$("#presentation").css('height', '500px');
+// 		$("#presentation img").css('height', '500px');
+// 		$("#presentationTexte").css('height', '500px');
+// 		$("#presentationTexte").css('left', '15%');
+// 		$("#presentationTexte1").css('font-size', '58px');
+// 		$("#presentationTexte1").css('width', '80%');
+// 		$("#presentationTexte2").css('font-size', '16px');
+// 		$("#allChatDuMoisSmall").css('display', 'none');
+// 		$("#allChatDuMois").css('display', 'block');
+// 	}
+// }
 
 
 
@@ -86,13 +86,14 @@ function afficherEvenements(evenements){
 		date = date[0];
 
 		slides.append(`
-			<div class='slide slideEvent' style='background-color:${evenements[i]['couleur']}'>
+			<div class='slide slideEvent'>
 				<div class='texteEvent'>
 					<div class='titreEvent policeTitre'>${evenements[i]['titre']}</div>
 					<div class='descriptionEvent policeTexte'>${evenements[i]['description']}</div>
 					<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le ${date} à ${heure}</div>
 				</div>
 				<div class='imgEvent'>
+					<div class='blurImage'></div>
 					<img src='./ressources/evenements/${evenements[i]['id']}.jpg' alt='${evenements[i]['titre']}'/>
 				</div>
 		`);
@@ -116,8 +117,8 @@ function afficherEvenements(evenements){
 					elt.onclick = function() {displayFormEditEvent(this);};
 					elt.innerHTML = xhr.responseText;
 					elt.style.position = "absolute";
-					elt.style.bottom = "25px";
-					elt.style.left= "75%";
+					elt.style.top = "0px";
+					elt.style.right = "0px";
 					elt.style.setProperty("--third-color", convertColor(document.getElementsByClassName("slideEvent")[k].style.backgroundColor, 0.5));
 					console.log(document.getElementsByClassName("slideEvent")[k].children[0]);
 					document.getElementsByClassName("slideEvent")[k].children[0].appendChild(elt);
@@ -507,3 +508,16 @@ function adopterChatDuMois(code) {
 	document.body.appendChild(form);
 	form.submit();
 } 
+
+
+function nousAiderDisplay() {
+	var nousAiderResponsiveBox = document.getElementById("nousAiderResponsiveBox");
+	if (nousAiderResponsiveBox.style.right == "0px") {
+		nousAiderResponsiveBox.style.right = "-200px";
+		nousAiderResponsiveBox.children[0].style.transform = "rotate(0deg)";
+	}
+	else {
+		nousAiderResponsiveBox.style.right = "0px";
+		nousAiderResponsiveBox.children[0].style.transform = "rotate(180deg)";
+	}
+}

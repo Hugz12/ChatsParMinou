@@ -114,20 +114,20 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
 			
 		<div id="nav2">
-			<a href="index.php?view=chatsAdoption">Chats à l'adoption</a>
+			<a class="navLink policeTexte" href="index.php?view=chatsAdoption">Chats à l'adoption</a>
 			<?php
 				// si l'utilisateur est connecté, on affiche un lien vers le planning
 				if (valider("Connecte","SESSION")){
-					echo "<a class=\"policeTexte\" href=\"index.php?view=planning\">Planning</a>";
+					echo "<a class=\"navLink policeTexte\" class=\"policeTexte\" href=\"index.php?view=planning\">Planning</a>";
 				}
 			?>
-			<a href="index.php?view=quiSommesNous">Qui sommes-nous ?</a>
-			<a href="index.php?view=conseilsEtViePratique">Conseils et vie pratique</a>
-			<a href="index.php?view=nousAider">Nous aider</a>
+			<a class="navLink policeTexte" href="index.php?view=quiSommesNous">Qui sommes-nous ?</a>
+			<a class="navLink policeTexte"href="index.php?view=conseilsEtViePratique">Conseils et vie pratique</a>
+			<a class="navLink policeTexte" href="index.php?view=nousAider">Nous aider</a>
 			<?php
 				// si l'utilisateur est admin, on affiche un lien vers les pages d'administration
 				if (valider("Admin","SESSION"))
-					echo "<a href=\"index.php?view=demandesAdoption\">Demandes d'adoption</a>";
+					echo "<a class=\"navLink policeTexte\" href=\"index.php?view=demandesAdoption\">Demandes d'adoption</a>";
 			?>
 		</div>
 
