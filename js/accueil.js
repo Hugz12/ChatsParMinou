@@ -117,8 +117,8 @@ function afficherEvenements(evenements){
 					elt.onclick = function() {displayFormEditEvent(this);};
 					elt.innerHTML = xhr.responseText;
 					elt.style.position = "absolute";
-					elt.style.top = "0px";
-					elt.style.right = "0px";
+					elt.style.top = "-20px";
+					elt.style.right = "-20px";
 					elt.style.setProperty("--third-color", convertColor(document.getElementsByClassName("slideEvent")[k].style.backgroundColor, 0.5));
 					console.log(document.getElementsByClassName("slideEvent")[k].children[0]);
 					document.getElementsByClassName("slideEvent")[k].children[0].appendChild(elt);
@@ -140,102 +140,105 @@ function afficherEvenements(evenements){
  * @return {void}
  */
 function displayFormEditEvent(elt){
-	var id = elt.id;
-	$.ajax({
-		url: "./controleur.php",
-		type: "POST",
-		dataType: "json",
-		data: {
-			"action": "getEvent",
-			"id": id
-		},
-		success: function(data){
-			
-			var event = data[0];
+	if (window.innerWidth < 650) {
+		alert("Veuillez utiliser un écran plus grand pour accéder a l'administration du site");
+	} else {
+		var id = elt.id;
+		$.ajax({
+			url: "./controleur.php",
+			type: "POST",
+			dataType: "json",
+			data: {
+				"action": "getEvent",
+				"id": id
+			},
+			success: function(data){
+				
+				var event = data[0];
 
-			console.log(event['date']);
-			console.log(event['date'].split(" ")[0]);
-			date = event['date'].split(" ");
-			event['date'] = event['date'].split(" ")[0];
-			event['heure'] = date[1].split(":")[0] + ":" + date[1].split(":")[1];
+				console.log(event['date']);
+				console.log(event['date'].split(" ")[0]);
+				date = event['date'].split(" ");
+				event['date'] = event['date'].split(" ")[0];
+				event['heure'] = date[1].split(":")[0] + ":" + date[1].split(":")[1];
 
-			
+				
 
-			$("body").append("<div id='formEditEvent' class='formType' style='display:none; opacity:0;'>");
-			displayForm("formEditEvent");
-			$("#formEditEvent").append(`
+				$("body").append("<div id='formEditEvent' class='formType' style='display:none; opacity:0;'>");
+				displayForm("formEditEvent");
+				$("#formEditEvent").append(`
 
-				<div class='buttonHideForm' onclick='deleteForm(\"formEditEvent\");'>
-					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
-				</div>
-
-				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier Evenement</div>
-				<br>
-
-				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
-
-					<div id='evenement'>
-
-						<div class='group'>
-							<input type='text' name='titre' value='${event['titre']}' required>
-							<label for=\"titre\">Titre</label>
-						</div>
-					
-						<div class='group'>
-							<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d H:i:s')."' value='${event['date']}'>
-							<label for=\"date\">${event['date']}</label>
-						</div>
-
-						<div class='group'>
-							<input type='time' name='heure' required value='${event['heure']}'>
-							<label for=\"date\">Horaire</label>
-						</div>
-
-						<div class='colorPicker group'>
-							<label for='couleur' class='colorPickerText'>Couleur</label>
-							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
-							<input id='colorInputEdit' type='hidden' name='couleur' value='${event['couleur']}'>
-						</div>
-
+					<div class='buttonHideForm' onclick='deleteForm(\"formEditEvent\");'>
+						<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 					</div>
 
+					<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier Evenement</div>
+					<br>
 
-					<div class='inputOther'>
+					<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
 
-						<div class='group'>
-							<textarea name='description'required>${event['description']}</textarea>
-							<label for=\"description\">Description</label>
+						<div id='evenement'>
+
+							<div class='group'>
+								<input type='text' name='titre' value='${event['titre']}' required>
+								<label for=\"titre\">Titre</label>
+							</div>
+						
+							<div class='group'>
+								<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d H:i:s')."' value='${event['date']}'>
+								<label for=\"date\">${event['date']}</label>
+							</div>
+
+							<div class='group'>
+								<input type='time' name='heure' required value='${event['heure']}'>
+								<label for=\"date\">Horaire</label>
+							</div>
+
+							<div class='colorPicker group'>
+								<label for='couleur' class='colorPickerText'>Couleur</label>
+								<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
+								<input id='colorInputEdit' type='hidden' name='couleur' value='${event['couleur']}'>
+							</div>
+
 						</div>
 
-						<div class='file'>
-							<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
-							<label for='image' class='photo-upload-label'></label>
-							<img class='previewImg' src='./ressources/evenements/${event['id']}.jpg' alt='preview'>
-							<div class='fileText'>Choisir une photo</div>
-							<img class="addImage" src="./ressources/add.svg" alt="add.svg">
+
+						<div class='inputOther'>
+
+							<div class='group'>
+								<textarea name='description'required>${event['description']}</textarea>
+								<label for=\"description\">Description</label>
+							</div>
+
+							<div class='file'>
+								<input type='file' name='image' id='image' accept='image/*' onchange=\"previewFile(this);\" style='display:none'>
+								<label for='image' class='photo-upload-label'></label>
+								<img class='previewImg' src='./ressources/evenements/${event['id']}.jpg' alt='preview'>
+								<div class='fileText'>Choisir une photo</div>
+								<img class="addImage" src="./ressources/add.svg" alt="add.svg">
+							</div>
+
 						</div>
 
-					</div>
+						<input type='hidden' name='id' value='${event['id']}'>
 
-					<input type='hidden' name='id' value='${event['id']}'>
+						
+						<div class='inputText'>
+							<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Modifier Evenement'>
+						</div>
 
-					
-					<div class='inputText'>
-						<input type='submit' class='buttonType' onclick='undisplayAddEvenement();' name='action' value='Modifier Evenement'>
-					</div>
-
-				</form>
+					</form>
 
 
-			`);
-			document.getElementById("colorInputEdit").parentNode.style.setProperty("--colorSelected", event['couleur']);
+				`);
+				document.getElementById("colorInputEdit").parentNode.style.setProperty("--colorSelected", event['couleur']);
 
-		},
-		error: function(data){
-			console.log("error");
-		}
-	});
-
+			},
+			error: function(data){
+				console.log("error");
+			}
+		});
+	}
 }
 
 

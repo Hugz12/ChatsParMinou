@@ -343,13 +343,11 @@
 
 #validerAdoption {
 	display: block;
-	width: 90%;
+	width: 80%;
 	max-width: fit-content;
 	font-size: 20px;
 	text-align: center;
 	margin: 50px auto 100px auto;
 	white-space: pre-wrap;
 	border-radius: 10px;
-
-	
 }
