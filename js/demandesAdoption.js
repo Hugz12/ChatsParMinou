@@ -13,7 +13,7 @@ function getSVG(img) {
 }
 
 // Fonction qui append une demande
-function appendDemande(statut, date, btn, img, demande){
+function appendDemande(statut, date, btn, img, demande) {
     $(statut).append(`<div id="demande${demande["id"]}" class="demandes">
                 <div class="btnDemande ${btn} clickable" onclick='changerStatut(this);'>${img}</div>
                 <div class="fondDemande">
@@ -137,48 +137,44 @@ function dateCompteur(dateDemande){
 
 // Fonction qui affiche les demandes
 function afficherDemandes(demandes) {
-    var statut, btn, img;
+    var statut, btn, img, date, dateDemande;
     var iN = 0, iC = 0, iT = 0;
     for (var i=0; i < demandes.length; i++) {
-        var dateDemande = new Date(demandes[i]["date"]);
-        var date = dateCompteur(dateDemande) + ", le " + dateDemande.toLocaleDateString();
+        dateDemande = new Date(demandes[i]["date"]);
+        date = dateCompteur(dateDemande) + ", le " + dateDemande.toLocaleDateString();
 
         switch (demandes[i]["statutDemande"]) {
-            case '1':
+            case 1:
                 statut = "#nouvellesDemandes";
                 btn = "btnNouvelleDemande";
                 img = "check";
                 iN++;
 
-                if (iN <= 10) appendDemande(statut,date, btn, getSVG(img), demandes[i]);
-                else {
-                    appendDemande(statut,date, btn, getSVG(img), demandes[i]);
-                    $("#demande" + demandes[i]["id"]).css("display", "none");
-                }
+                appendDemande(statut, date, btn, getSVG(img), demandes[i]);
+                if (iN > 10) $("#demande" + demandes[i]["id"]).css("display", "none");
+            
                 break;
-            case '2':
+
+            case 2:
                 statut = "#demandesEnCours";
                 btn = "btnEnCours";
                 img = "play";
                 iC++;
 
-                if (iC <= 10) appendDemande(statut,date, btn, getSVG(img), demandes[i]);
-                else {
-                    appendDemande(statut,date, btn, getSVG(img), demandes[i]);
-                    $("#demande" + demandes[i]["id"]).css("display", "none");
-                }
+                appendDemande(statut, date, btn, getSVG(img), demandes[i]);
+                if (iC > 10) $("#demande" + demandes[i]["id"]).css("display", "none");
+
                 break;
-            case '3':
+
+            case 3:
                 statut = "#traitees";
                 btn = "btnTraitees";
                 img = "return";
                 iT++;
 
-                if (iT <= 10) appendDemande(statut,date, btn, getSVG(img), demandes[i]);
-                else {
-                    appendDemande(statut,date, btn, getSVG(img), demandes[i]);
-                    $("#demande" + demandes[i]["id"]).css("display", "none");
-                }
+                appendDemande(statut, date, btn, getSVG(img), demandes[i]);
+                if (iT > 10) $("#demande" + demandes[i]["id"]).css("display", "none");
+
                 break;
         }
     }

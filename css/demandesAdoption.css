@@ -241,7 +241,7 @@ form input[type="text"], textarea {
 .lienPlusMoins {
     color: rgb(100, 100, 100);
     cursor: pointer;
-    margin-left: 50px;
+    margin: 0 0 15px 50px;
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
     width: fit-content;
