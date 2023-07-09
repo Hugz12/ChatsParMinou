@@ -147,7 +147,7 @@ function afficherDemandes(demandes) {
             case 1:
                 statut = "#nouvellesDemandes";
                 btn = "btnNouvelleDemande";
-                img = "check";
+                img = "play";
                 iN++;
 
                 appendDemande(statut, date, btn, getSVG(img), demandes[i]);
@@ -158,7 +158,7 @@ function afficherDemandes(demandes) {
             case 2:
                 statut = "#demandesEnCours";
                 btn = "btnEnCours";
-                img = "play";
+                img = "check";
                 iC++;
 
                 appendDemande(statut, date, btn, getSVG(img), demandes[i]);
@@ -266,12 +266,12 @@ function changerStatut(contexte) {
         var statutDemande = 2;
 
         if ($(contexte).hasClass("btnNouvelleDemande")) {
-            $($(demande).children(".btnNouvelleDemande")).html(getSVG("play"));
+            $($(demande).children(".btnNouvelleDemande")).html(getSVG("check"));
 
             $(demande).children(".btnNouvelleDemande").addClass("btnEnCours");
             $(demande).children(".btnNouvelleDemande").removeClass("btnNouvelleDemande");
         } else if ($(contexte).hasClass("btnTraitees")) {
-            $($(demande).children(".btnTraitees")).html(getSVG("play"));
+            $($(demande).children(".btnTraitees")).html(getSVG("check"));
 
             $(demande).children(".btnTraitees").addClass("btnEnCours"); 
             $(demande).children(".btnTraitees").removeClass("btnTraitees");
