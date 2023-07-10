@@ -58,8 +58,9 @@ CREATE TABLE `evenement` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `titre` varchar(255),
   `description` varchar(255),
-  `date` datetime,
-  `couleur` varchar(255)
+  `date` date,
+  `heureDebut` time,
+  `heureFin` time,
 )ENGINE = InnoDB;
 
 CREATE TABLE `concerne` (
@@ -137,10 +138,10 @@ VALUES ('2023-04-03 00:00:00', '10:00:00', '12:00:00', 'user@gmail.com', "Je vai
 
 /*evenement*/
 INSERT INTO `evenement` (`id`, `titre`, `description`, `date`, `couleur`)
-VALUES ('1', 'Fête des chats', 'La fete avec pleins de chats', '2023-04-01 00:00:00', '#CA6f1E');
+VALUES ('1', 'Fête des chats', 'La fete avec pleins de chats', '2023-04-01', '10:00:00', '14:30:00');
 
 INSERT INTO `evenement` (`id`, `titre`, `description`, `date`, `couleur`)
-VALUES ('2', 'Fête des chien', 'La fete avec pleins de chien', '2023-04-02 00:00:00', '#AED6F1');
+VALUES ('2', 'Fête des chien', 'La fete avec pleins de chien', '2023-04-02', '10:00:00', '14:30:00');
 
 /*concerne*/
 INSERT INTO `concerne`( `idDemande`, `codeChat`)

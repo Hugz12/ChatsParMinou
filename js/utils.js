@@ -97,11 +97,15 @@ function rotateLogoBack(contexte){
 
 
 function displayForm(id){
-	console.log("display" + id);
-	$("#"+id + " form").trigger("reset");
-	$("#"+id).css("display", "flex");
-	$(".disabled").css("pointer-events", "none");
-	$("#"+id).animate({opacity: 1}, 250);
+	if (window.innerWidth < 650 && id != "containerPassagesRefuge") {
+		alert("Veuillez utiliser un écran plus grand pour accéder a l'administration du site");
+	} else {
+		console.log("display" + id);
+		$("#"+id + " form").trigger("reset");
+		$("#"+id).css("display", "flex");
+		$(".disabled").css("pointer-events", "none");
+		$("#"+id).animate({opacity: 1}, 250);
+	}
 }
 
 function hideForm(id){
@@ -201,7 +205,7 @@ function openDialogBox(retour, type) {
 function changerDate(contexte) {
 	console.log(contexte);
 	console.log($(contexte).parent().children('label'));
-	date = $(contexte).val();
+	date = $(contexte).val().split("T")[0];
 	date = date.split("-");
 	date = date[2] + "/" + date[1] + "/" + date[0];
 	$(contexte).parent().children('label').html(date);
