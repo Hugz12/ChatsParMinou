@@ -79,18 +79,23 @@ function afficherEvenements(evenements){
 	var slides = $("#allSliderEvent .slides");
 	var sliderPoints = $("#allSliderEvent .sliderPoints");
 	for (var i = 0; i < evenements.length; i++) {
-		var date = evenements[i]['date'];
-		
-		date = date.split(" ");
-		heure = date[1].split(":")[0] + "h" + date[1].split(":")[1];
-		date = date[0];
+
+		var date = evenements[i]['date'].split("-");
+		date = date[2]+"/"+date[1]+"/"+date[0];
+
+		var heureDebut = evenements[i]['heureDebut'].split(":");
+		heureDebut = heureDebut[0]+"h"+heureDebut[1];
+
+		var heureFin = evenements[i]['heureFin'].split(":");
+		heureFin = heureFin[0]+"h"+heureFin[1];
+
 
 		slides.append(`
 			<div class='slide slideEvent'>
 				<div class='texteEvent'>
 					<div class='titreEvent policeTitre'>${evenements[i]['titre']}</div>
 					<div class='descriptionEvent policeTexte'>${evenements[i]['description']}</div>
-					<div class='dateEvent policeTexte' style='color:white;background-color:#22252b;'>Le ${date} à ${heure}</div>
+					<div class='dateEvent policeTexte'>Le ${date} de ${heureDebut} à ${heureFin}</div>
 				</div>
 				<div class='imgEvent'>
 					<div class='blurImage'></div>
@@ -158,11 +163,16 @@ function displayFormEditEvent(elt){
 
 				console.log(event['date']);
 				console.log(event['date'].split(" ")[0]);
-				date = event['date'].split(" ");
-				event['date'] = event['date'].split(" ")[0];
-				event['heure'] = date[1].split(":")[0] + ":" + date[1].split(":")[1];
 
+				var date = event['date'].split("-");
+				date = date[2]+"/"+date[1]+"/"+date[0];
 				
+				var heureDebut = event['heureDebut'].split(":");
+				heureDebut = heureDebut[0]+":"+heureDebut[1];
+				
+				var heureFin = event['heureFin'].split(":");
+				heureFin = heureFin[0]+":"+heureFin[1];
+
 
 				$("body").append("<div id='formEditEvent' class='formType' style='display:none; opacity:0;'>");
 				displayForm("formEditEvent");
@@ -172,7 +182,7 @@ function displayFormEditEvent(elt){
 						<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 					</div>
 
-					<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier Evenement</div>
+					<div class='policeTitre tailleTitre titreForm' style='color:#83bcf2; text-align:center;'>Modifier Evenement</div>
 					<br>
 
 					<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
@@ -186,18 +196,17 @@ function displayFormEditEvent(elt){
 						
 							<div class='group'>
 								<input type='date' name='date' required onchange=\"changerDate(this);\" max='".date('Y-m-d H:i:s')."' value='${event['date']}'>
-								<label for=\"date\">${event['date']}</label>
+								<label for=\"date\">${date}</label>
 							</div>
 
 							<div class='group'>
-								<input type='time' name='heure' required value='${event['heure']}'>
-								<label for=\"date\">Horaire</label>
+								<input type='time' name='heureDebut' required value='${heureDebut}'>
+								<label for=\"date\">Début</label>
 							</div>
 
-							<div class='colorPicker group'>
-								<label for='couleur' class='colorPickerText'>Couleur</label>
-								<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
-								<input id='colorInputEdit' type='hidden' name='couleur' value='${event['couleur']}'>
+							<div class='group'>
+								<input type='time' name='heureFin' required value='${heureFin}'>
+								<label for=\"date\">Fin</label>
 							</div>
 
 						</div>
@@ -231,8 +240,6 @@ function displayFormEditEvent(elt){
 
 
 				`);
-				document.getElementById("colorInputEdit").parentNode.style.setProperty("--colorSelected", event['couleur']);
-
 			},
 			error: function(data){
 				console.log("error");

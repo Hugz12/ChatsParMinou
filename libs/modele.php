@@ -104,8 +104,8 @@ function changerMail($mail){
  * @param $description
  * @return int
  */
-function addEvenement($titre,$description,$date,$couleur){
-    $SQL = "INSERT INTO evenement (titre,description,date,couleur) VALUES ('$titre','$description','$date','$couleur')";
+function addEvenement($titre,$description,$date,$heureDebut,$heureFin,$couleur){
+    $SQL = "INSERT INTO evenement (titre,description,date,heureDebut,heureFin,couleur) VALUES ('$titre','$description','$date','$heureDebut','$heureFin','$couleur')";
     return SQLInsert($SQL); // retourne l'id de l'évènement
 }
 
@@ -332,8 +332,8 @@ function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$
     }
 }
 
-function editEvent($id,$titre,$description,$date,$couleur){
-    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', couleur = '$couleur' WHERE id = $id";
+function editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur){
+    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', heureDebut = '$heureDebut', heureFin = '$heureFin', couleur = '$couleur' WHERE id = $id";
     SQLUpdate($SQL);
 }
 

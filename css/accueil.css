@@ -392,7 +392,6 @@
   
 #allSliderEvent {
 	margin-bottom: 50px;
-	height: 600px;
 
 	--taille: calc(100vw - 60px);
 	--hauteur: 500px;
@@ -481,12 +480,17 @@
 	padding: 15px;
 	border-radius: 15px;
 	text-align: center;
-	box-sizing: border-box;
+	color:white;
+	background-color:#22252b;
 }
 
 
 
 @media (max-width: 1000px) {
+
+	#allSliderEvent {
+		--hauteur: 650px;
+	}
 
 	.texteEvent {
 		width: clamp(200px, 55%, 100%);

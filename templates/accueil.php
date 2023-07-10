@@ -138,14 +138,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 						<div class='group'>
-							<input type='time' name='heure' required>
-							<label for=\"date\">Horaire</label>
+							<input type='time' name='heureDebut' required>
+							<label for=\"date\">Début</label>
 						</div>
 
-						<div class='colorPicker group'>
-							<label for='couleur' class='colorPickerText'>Couleur</label>
-							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputAdd'), 'color');\" ><div></div></div>
-							<input id='colorInputAdd' type='hidden' name='couleur' value='#000000'>
+						<div class='group'>
+							<input type='time' name='heureFin' required>
+							<label for=\"date\">Fin</label>
 						</div>
 
 					</div>

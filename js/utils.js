@@ -205,7 +205,7 @@ function openDialogBox(retour, type) {
 function changerDate(contexte) {
 	console.log(contexte);
 	console.log($(contexte).parent().children('label'));
-	date = $(contexte).val();
+	date = $(contexte).val().split("T")[0];
 	date = date.split("-");
 	date = date[2] + "/" + date[1] + "/" + date[0];
 	$(contexte).parent().children('label').html(date);

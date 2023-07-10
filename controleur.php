@@ -139,12 +139,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
-			if ($heure = valider("heure","POST"))
-			if ($couleur = valider("couleur","POST"))
+			if ($heureDebut = valider("heureDebut","POST"))
+			if ($heureFin = valider("heureFin","POST"))
 			if ($image = valider("image","FILES")){
-				$date = $date." ".$heure.":00"; // On concatène la date et l'heure
+				// On ajoute les :00 pour avoir un format de date valide
+				$heureDebut.=":00";
+				$heureFin.=":00";
+				if (strtotime($heureDebut) > strtotime($heureFin)) // On vérifie que l'heure de début est bien avant l'heure de fin
+					$heureFin = $heureDebut;
+
 				// On ajoute l'événement à la BDD
-				$id = addEvenement($titre,$description,$date,$couleur);
+				$id = addEvenement($titre,$description,$date,$heureDebut,$heureFin,$couleur);
 				if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
 					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
 					break;
@@ -245,11 +250,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
-			if ($heure = valider("heure","POST"))
-			if ($couleur = valider("couleur","POST")){
-				$date = $date." ".$heure.":00";
+			if ($heureDebut = valider("heureDebut","POST"))
+			if ($heureFin = valider("heureFin","POST")) {
+				$heureDebut.=":00";
+				$heureFin.=":00";
+
+				if (strtotime($heureDebut) > strtotime($heureFin)) // On vérifie que l'heure de début est bien avant l'heure de fin
+					$heureFin = $heureDebut;
+
 				// On ajoute l'événement à la BDD
-				editEvent($id,$titre,$description,$date,$couleur);
+				editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur);
 				// on verifie si un fichier a été uploadé
 				$image = valider("image","FILES");
 				if ($image["name"] !== ""){
