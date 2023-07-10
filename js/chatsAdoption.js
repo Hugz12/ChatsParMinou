@@ -615,15 +615,19 @@ function responsivePointsChats() {
 	
 	
 	if (window.innerWidth < 480 && nbElement > 1) {
+		allSliderPoints.style.display = "none";
 		nbElement = 1;
 	}
 	else if (window.innerWidth < 760 && nbElement > 3) {
+		allSliderPoints.style.display = "flex";
 		nbElement = 3;
 	}
 	else if (window.innerWidth < 1040 && nbElement > 5) {
+		allSliderPoints.style.display = "flex";
 		nbElement = 5;
 	}
 	else if (nbElement > 7) {
+		allSliderPoints.style.display = "flex";
 		nbElement = 7;
 	}
 
