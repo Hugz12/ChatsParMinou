@@ -1,3 +1,5 @@
+var alertAdoption = false;
+
 /**
  * Fonction qui permet d'afficher tous les chats dans la page d'adoption
  * @param {*} chats 
@@ -127,20 +129,20 @@ function afficherChats(chats) {
 		option.innerHTML = chatActuel['code'];
 		chatsSelected.appendChild(option);
 
-		var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
-		var colorChat = convertColor(chatActuel['couleur'], 1);
-		var colorChatLight = convertColor(chatActuel['couleur'], 0.25);
+		// var colorChatFade = convertColor(chatActuel['couleur'], 0.5);
+		// var colorChat = convertColor(chatActuel['couleur'], 1);
+		// var colorChatLight = convertColor(chatActuel['couleur'], 0.25);
 
 		var slideChat = document.getElementsByClassName("slideChat")[j];
 		var slideChatSmall = document.getElementsByClassName("slideChatSmall")[j];
 
-		slideChat.style.setProperty('--third-color', colorChatFade);
-		slideChat.style.setProperty('--fourth-color', colorChatLight);
-		slideChat.style.setProperty('--fifth-color', colorChat);
+		// slideChat.style.setProperty('--third-color', colorChatFade);
+		// slideChat.style.setProperty('--fourth-color', colorChatLight);
+		// slideChat.style.setProperty('--fifth-color', colorChat);
 
-		slideChatSmall.style.setProperty('--third-color', colorChatFade);
-		slideChatSmall.style.setProperty('--fourth-color', colorChatLight);
-		slideChatSmall.style.setProperty('--fifth-color', colorChat);
+		// slideChatSmall.style.setProperty('--third-color', colorChatFade);
+		// slideChatSmall.style.setProperty('--fourth-color', colorChatLight);
+		// slideChatSmall.style.setProperty('--fifth-color', colorChat);
 		
 		
 		var slidesPhoto = $(slides.children()[2*j]).children(".chatBox").children(".chatContent").children(".allSliderPhotoChat").children(".sliderPhotoChat").children(".slides");
@@ -228,143 +230,147 @@ function afficherChats(chats) {
  * @param {} element 
  */
 function displayFormEditChat(element){
-	var id = element.id;
-	$.ajax({
-		url: "./controleur.php",
-		type: "POST",
-		dataType: "html",
-		data: {
-			"action": "getChat",
-			"code": id
-		},
-		success: function (retour) {
-			console.log(retour);
-			var chat = JSON.parse(retour);
-			// enleve le double tableau
-			chat = chat[0];
-			// ajoute un element div class="formType" dans le body
-			
-			$("body").append("<div id='formEditChat' class='formType' style='display:none; opacity:0;'></div>");
-			displayForm("formEditChat");
-			$("#formEditChat").append(`
+	if (window.innerWidth < 650) {
+		alert("Veuillez utiliser un écran plus grand pour accéder a l'administration du site");
+	} else {
+		var id = element.id;
+		$.ajax({
+			url: "./controleur.php",
+			type: "POST",
+			dataType: "html",
+			data: {
+				"action": "getChat",
+				"code": id
+			},
+			success: function (retour) {
+				console.log(retour);
+				var chat = JSON.parse(retour);
+				// enleve le double tableau
+				chat = chat[0];
+				// ajoute un element div class="formType" dans le body
+				
+				$("body").append("<div id='formEditChat' class='formType' style='display:none; opacity:0;'></div>");
+				displayForm("formEditChat");
+				$("#formEditChat").append(`
 
-				<div class='buttonHideForm' onclick='deleteForm(\"formEditChat\");'>
-					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
-				</div>
-
-				<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier ${chat['name']} - ${chat['code']} </div>
-				<br>
-
-				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
-
-					<div class='inputText'>
-
-						<div class='group'>
-							<input type='text' name='nom' value='${chat['name']}' required>
-							<label for=\"nom\">Name</label>
-						</div>
-
-						<div class='group'>
-							<select name='statut'>
-								<option value='1' ${chat['statut'] == 1 ? "selected" : ""}>A adopter</option>
-								<option value='2' ${chat['statut'] == 2 ? "selected" : ""}>En cours d'adoption</option>
-								<option value='3' ${chat['statut'] == 3 ? "selected" : ""}>Adopté</option>
-							</select>
-							<label class='labelFocused' for='statut'>Statut</label>
-						</div>
-
-
+					<div class='buttonHideForm' onclick='deleteForm(\"formEditChat\");'>
+						<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 					</div>
 
-					<div class='inputOther'>
+					<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier ${chat['name']} - ${chat['code']} </div>
+					<br>
 
-						<div id='inputAddChatOther' class='group' style='justify-content:center;'>
-							<div class='group'>	
+					<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data' onsubmit='if(document.getElementById(\"fileAjoutChat\").value == \"\" && document.getElementById(\"existentFiles\").value == \"\") return false;'>
 
-								<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
-									<div id='etatFamilleAccueil' class='checkboxText'>Famille</div>
-									<div class='photoGauche'style='opacity : ${chat['familleAccueil'] ? "0" : "1"}'><img src='./ressources/logo_toutnoir.png'></div>
-									<input type='checkbox' class='checkbox checkboxFamille' ${chat['familleAccueil'] ? "checked": ""} name='familleAccueil' value='2'>
-									<div class='photoDroite' style='opacity : ${chat['familleAccueil'] ? "1" : "0"}'><img src='./ressources/famille_accueil_noir.png'></div>
-									<input type='hidden' name='familleAccueil' value='1'> 
-								</div>
+						<div class='inputText'>
 
-								<div class='colorPicker'>
-									<label for='couleur' class='colorPickerText'>Couleur</label>
-									<div class='colorPickerColor' style='--colorSelected: ${chat['couleur']}' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
-									<input id='colorInputEdit' type='hidden' name='couleur' value='${chat['couleur']}'>
-								</div>
-
+							<div class='group'>
+								<input type='text' name='nom' value='${chat['name']}' required>
+								<label for=\"nom\">Name</label>
 							</div>
-						</div>
 
-						<div class='group'>
-							<textarea rows='1' name='description'required>${chat['description']}</textarea>
-							<label for=\"description\">Description</label>
-						</div>
-
-					</div>
-
-					<div class='inputFile'>
-						<div class='labelAllSlider'>Ajouter des photos</div>
-						<div id='allSliderPhoto' class='allSlider'>
-							<div id='sliderPhoto' class='slider'>
-								<div class='flecheGauche clickable' onclick='translateX(this, undefined, false)'></div>
-
-								<div class='slides' id='edit'></div>
-
-								<div class='flecheDroite clickable' onclick='translateX(this, undefined, false)'></div>
+							<div class='group'>
+								<select name='statut'>
+									<option value='1' ${chat['statut'] == 1 ? "selected" : ""}>A adopter</option>
+									<option value='2' ${chat['statut'] == 2 ? "selected" : ""}>En cours d'adoption</option>
+									<option value='3' ${chat['statut'] == 3 ? "selected" : ""}>Adopté</option>
+								</select>
+								<label class='labelFocused' for='statut'>Statut</label>
 							</div>
+
+
 						</div>
-						<label class='clickable' for='fileModifChat'>
-							<svg width='50' height='50'>
-								<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
-								<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
-							</svg>
-						</label>
-						
-						<input id='fileModifChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
-						<input id='existentFiles' type='hidden' name='existentFiles' value="${listePhoto(chat['nbPhoto'])}">
 
-						
+						<div class='inputOther'>
 
-					</div>
+							<div id='inputAddChatOther' class='group' style='justify-content:center;'>
+								<div class='group'>	
 
-					<input type='submit' class='buttonType' name='action' value='Modifier le chat'>
+									<div class='switch' onclick='checkboxPhotoSwitch(this); etatSwitch(this);'>
+										<div id='etatFamilleAccueil' class='checkboxText'>${chat['familleAccueil'] ? "Famille" : "Refuge"}</div>
+										<div class='photoGauche'style='opacity : ${chat['familleAccueil'] ? "0" : "1"}'><img src='./ressources/logo_toutnoir.png'></div>
+										<input type='checkbox' class='checkbox checkboxFamille' ${chat['familleAccueil'] ? "checked": ""} name='familleAccueil' value='2'>
+										<div class='photoDroite' style='opacity : ${chat['familleAccueil'] ? "1" : "0"}'><img src='./ressources/famille_accueil_noir.png'></div>
+										<input type='hidden' name='familleAccueil' value='2'>	
+									</div>
+
+									<div class='colorPicker'>
+										<label for='couleur' class='colorPickerText'>Couleur</label>
+										<div class='colorPickerColor' style='--colorSelected: ${chat['couleur']}' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
+										<input id='colorInputEdit' type='hidden' name='couleur' value='${chat['couleur']}'>
+									</div>
+
+								</div>
+							</div>
+
+							<div class='group'>
+								<textarea rows='1' name='description'required>${chat['description']}</textarea>
+								<label for=\"description\">Description</label>
+							</div>
+
+						</div>
+
+						<div class='inputFile'>
+							<div class='labelAllSlider'>Ajouter des photos</div>
+							<div id='allSliderPhoto' class='allSlider'>
+								<div id='sliderPhoto' class='slider'>
+									<div class='flecheGauche clickable' onclick='translateX(this, undefined, false)'></div>
+
+									<div class='slides' id='edit'></div>
+
+									<div class='flecheDroite clickable' onclick='translateX(this, undefined, false)'></div>
+								</div>
+							</div>
+							<label class='clickable' for='fileModifChat'>
+								<svg width='50' height='50'>
+									<circle cx='25' cy='25' r='20' stroke='black' stroke-width='2' fill='transparent' />
+									<path d='M 20 25 L 30 25 M 25 20 L 25 30' stroke='black' stroke-width='2' />
+								</svg>
+							</label>
+							
+							<input id='fileModifChat' type='file' name='photos[]' onchange='filesAdd(this)' multiple accept='image/*' style='display:none'>
+							<input id='existentFiles' type='hidden' name='existentFiles' value="${listePhoto(chat['nbPhoto'])}">
+
+							
+
+						</div>
+
+						<input type='submit' class='buttonType' name='action' value='Modifier le chat' onclick='if(document.getElementById(\"fileAjoutChat\").value == \"\" && document.getElementById(\"existentFiles\").value == \"\") alert(\"Vous devez ajouter des photos pour continuer\");'>
 
 
-					<input type='hidden' name='code' value='${chat['code']}'>
-			`);
+						<input type='hidden' name='code' value='${chat['code']}'>
+				`);
 
-			$.ajax({
-				url: "./ressources/flecheLeft.svg",
-				dataType: "text",
-				success: function(data) {
-					elt = document.getElementsByClassName("flecheGauche");
-					for (var i=0; i < elt.length; i++) {
-						elt[i].innerHTML = data;
+				$.ajax({
+					url: "./ressources/flecheLeft.svg",
+					dataType: "text",
+					success: function(data) {
+						elt = document.getElementsByClassName("flecheGauche");
+						for (var i=0; i < elt.length; i++) {
+							elt[i].innerHTML = data;
+						}
 					}
-				}
-			});
-		
-			$.ajax({
-				url: "./ressources/flecheRight.svg",
-				dataType: "text",
-				success: function(data) {
-					elt = document.getElementsByClassName("flecheDroite");
-					for (var i=0; i < elt.length; i++) {
-						elt[i].innerHTML = data;
-					}
-				}
-			});
+				});
 			
-			addPreviewOfExistentFiles(chat['code']);
+				$.ajax({
+					url: "./ressources/flecheRight.svg",
+					dataType: "text",
+					success: function(data) {
+						elt = document.getElementsByClassName("flecheDroite");
+						for (var i=0; i < elt.length; i++) {
+							elt[i].innerHTML = data;
+						}
+					}
+				});
+				
+				addPreviewOfExistentFiles(chat['code']);
 
-		},
-		error: function (data) {
-			console.log("error");
-		}
-	});
+			},
+			error: function (data) {
+				console.log("error");
+			}
+		});
+	}
 }
 
 
@@ -609,15 +615,19 @@ function responsivePointsChats() {
 	
 	
 	if (window.innerWidth < 480 && nbElement > 1) {
+		allSliderPoints.style.display = "none";
 		nbElement = 1;
 	}
 	else if (window.innerWidth < 760 && nbElement > 3) {
+		allSliderPoints.style.display = "flex";
 		nbElement = 3;
 	}
 	else if (window.innerWidth < 1040 && nbElement > 5) {
+		allSliderPoints.style.display = "flex";
 		nbElement = 5;
 	}
 	else if (nbElement > 7) {
+		allSliderPoints.style.display = "flex";
 		nbElement = 7;
 	}
 
@@ -902,6 +912,10 @@ function adopterChat(contexte, code) {
 			}
 		}
 	}
+	if (alertAdoption == false) {
+		alert("Vous pouvez valider votre sélection en cliquant sur le bouton \"Accedez au formulaire d'adoption\" en bas de la page");
+		alertAdoption = true;
+	}
 
 }
 
@@ -912,3 +926,4 @@ window.addEventListener("resize", responsivePointsChatsDebounce);
 window.addEventListener("resize", updateFiltreAll);
 
 window.addEventListener('load', updateFiltreAll);
+

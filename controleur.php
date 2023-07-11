@@ -139,12 +139,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
-			if ($heure = valider("heure","POST"))
-			if ($couleur = valider("couleur","POST"))
+			if ($heureDebut = valider("heureDebut","POST"))
+			if ($heureFin = valider("heureFin","POST"))
 			if ($image = valider("image","FILES")){
-				$date = $date." ".$heure.":00"; // On concatène la date et l'heure
+				// On ajoute les :00 pour avoir un format de date valide
+				$heureDebut.=":00";
+				$heureFin.=":00";
+				if (strtotime($heureDebut) > strtotime($heureFin)) // On vérifie que l'heure de début est bien avant l'heure de fin
+					$heureFin = $heureDebut;
+
 				// On ajoute l'événement à la BDD
-				$id = addEvenement($titre,$description,$date,$couleur);
+				$id = addEvenement($titre,$description,$date,$heureDebut,$heureFin,$couleur);
 				if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
 					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
 					break;
@@ -156,6 +161,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 
 		break;
+
 
 
 
@@ -202,24 +208,18 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'Ajouter un chat' : 
 
-			echo "sexe " . $sexe = valider("sexe","POST");
-			echo "familleAccueil " . $familleAccueil = valider("familleAccueil","POST");
-			die();
 			// On vérifie la présence des champs
 			if (($nom = valider("nom","POST"))
 			&& ($code = valider("code","POST"))
 			&& ($date = valider("dateNaissance","POST"))
 			&& ($sexe = valider("sexe","POST"))
 			&& ($race = valider("race","POST"))
-			&& ($statut = valider("statut","POST"))
 			&& ($description = valider("description","POST"))
 			&& ($familleAccueil = valider("familleAccueil","POST"))
 			&& ($couleur = valider("couleur","POST"))
 			&& ($photos = valider_fichiers("photos")))
 			{
-				echo $sexe;
-				echo $familleAccueil;
-				die();
+
 				if(existChat($code)){ // On vérifie que le code n'est pas déjà utilisé
 					$_SESSION['error'] = "Ce code est déjà utilisé";
 					$qs = "?view=chatsAdoption";
@@ -228,7 +228,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 					
 					// On ajoute le chat à la BDD
 					$nbPhotos = count($photos);
-					addChat($nom,$code,$date,$sexe,$race,$statut,$description,$familleAccueil,$couleur,$nbPhotos);					
+					addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos);					
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
@@ -250,11 +250,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
-			if ($heure = valider("heure","POST"))
-			if ($couleur = valider("couleur","POST")){
-				$date = $date." ".$heure.":00";
+			if ($heureDebut = valider("heureDebut","POST"))
+			if ($heureFin = valider("heureFin","POST")) {
+				$heureDebut.=":00";
+				$heureFin.=":00";
+
+				if (strtotime($heureDebut) > strtotime($heureFin)) // On vérifie que l'heure de début est bien avant l'heure de fin
+					$heureFin = $heureDebut;
+
 				// On ajoute l'événement à la BDD
-				editEvent($id,$titre,$description,$date,$couleur);
+				editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur);
 				// on verifie si un fichier a été uploadé
 				$image = valider("image","FILES");
 				if ($image["name"] !== ""){
@@ -280,6 +285,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				unlink("./ressources/evenements/$id.jpg");
 				$qs = "?view=accueil";
 			}
+		break;
 
 
 
@@ -295,6 +301,31 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 
+		case "Ajouter Conseil" :
+			// On vérifie la présence des champs
+			
+			if ($name = valider("name","POST"))
+			if ($description = valider("description","POST"))
+			if ($fichier = verifyPDF("fichier")){
+				$name = str_replace(" ", "_", $name);
+				// On ajoute le conseil à la BDD
+				addConseil($name,$description);
+				move_uploaded_file($fichier['tmp_name'], './ressources/conseils/'.$name.'.pdf');
+				$qs = "?view=conseilsEtViePratique";
+			}
+		break;
+
+		case "Supprimer Conseil" :
+			// On vérifie la présence des champs
+			if ($name = valider("name")){
+				// On supprime la bulle de la BDD
+				delConseil($name);
+				// On supprime le fichier
+				unlink("./ressources/conseils/$name.pdf");
+				$qs = "?view=conseilsEtViePratique";
+			}
+		break;
+
 		case 'Modifier le chat' : 
 			// si il y a au moins un champ non vide
 			
@@ -305,6 +336,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if 	($code = valider("code","POST"))
 			if	($description = valider("description","POST")){
 				
+
 				// On ajoute le chat à la BDD
 				if($existentFiles = valider("existentFiles", "POST")) {
 					$tabExistentFiles = (explode(" ", $existentFiles));
@@ -350,13 +382,14 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				}
 				$nbPhotos = count($photos) + count($tabExistentFiles);
 				//echo $nbPhotos;
+				
 				editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code);					
 				// On ajoute les photos
 				$qs = "?view=chatsAdoption";
 			}
 		break;
 
-		case 'changerLaPhotoDeProfil' :
+		case 'Changer la photo de profil' :
 			// On vérifie la présence des champs
 			if ($image = valider("image","FILES")){
 				// on supprime l'ancienne image
@@ -478,17 +511,11 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		
 		case 'changerNom' :
 			if ($nom = valider("nom")){
-				if (countName($nom) > 0){
-					ob_clean();
-					header('Content-Type: application/json');
-					echo json_encode("ce nom existe déja");
-				} else {
 				changerNom($nom);
 				ob_clean();
 				header('Content-Type: application/json');
 				echo json_encode("ok");
 				die();
-				}
 			}
 		break;
 		case 'getConnectedUser' : 
@@ -500,18 +527,28 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				echo json_encode($user);
 				die(); 
 			}
+
+		case 'getConseils' :
+			$conseils = getConseils();
+			ob_clean(); // On vide le tampon de sortie
+			header('Content-Type: application/json');
+			if ($conseils == null)
+				echo json_encode(null);
+			else
+				echo json_encode($conseils);
+			die();
+			
 		break;
+
 
 		case 'changerMail' :
 			if ($mail = valider("mail")){
 				changerMail($mail);
 				ob_clean();
+				header('Content-Type: application/json');
 				echo json_encode("ok");
-				session_destroy(); // On détruit la session
-				$qs = "?view=accueil";
 				die();
 			}
-		break;
 		
 		case 'changerMdp' :
 			if($mdpV = valider("mdpV","POST"))
@@ -539,88 +576,32 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 		
 		case 'changerRole' :
-			if ($nom= valider("nom"))
+			if ($up = valider("up"))
+			if ($down= valider("down"))
+			if ($noms= valider("noms"))
 			if ($role = valider("role"))
-			if ($mail = valider("mail")){
-				$mMail = $_SESSION["mail"];
-				$mNom=getNom($mMail);
-				if ($role == 4){
-					supprimerUtilisateur($nom,$mail);
-					ob_clean();
-					echo json_encode("ok");
-				} else if ($role == 1) {
-					changerRole($nom, $role, $mail);
-					changerRole($mNom, 2, $mMail);
-					session_destroy(); // On détruit la session
-					$qs = "?view=connexion";
-					ob_clean();
-					echo json_encode("ok");
-				} else {
-					changerRole($nom, $role, $mail);
+			for ($i=0;$i<=count($noms);$i++){
+				$nom = $noms[$i];
+				$isUp = $up[$i];
+				$isDown = $down[$i];
+				$role = $role[$i];
+				var_dump($i,$nom, $isUp, $isDown, $role,$noms);
+				if ($isUp == 1){
+					changerRole($nom,$role);
 				}
-				if ($mail == $mMail){
-					session_destroy(); // On détruit la session
-					$qs = "?view=connexion";
+				if ($isDown == 1){
+					if ($role == 4){
+						supprimerUtilisateur($nom);
+					}
+					else{
+					changerRole($nom,$role);
+					}
 				}
-				ob_clean();
-				echo json_encode("ok");
-				die();
 			}
+			ob_clean();
+			echo json_encode("ok");
+			die();
 		break;
-
-		case 'changerPhotoProfil' :
-			if ($photo = valider("photo","FILES")){
-				// on supprime l'ancienne image
-				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
-				// on upload la nouvelle
-				if (!uploadPhoto($photo, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
-					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
-					break;
-				}
-				$qs = "?view=profil";
-			
-			}
-		break;
-
-		case 'submitForm':
-			if ($nom = valider("nom"))
-			if ($prenom = valider("prenom"))
-			if ($mail = valider("mail"))
-			if ($tel = valider("tel"))
-			if ($adresse = valider("adresse"))
-			if ($habitation = valider("habitation"))
-			if ($ext = valider("ext"))
-			if ($sortir = valider("sortir"))
-			if ($animaux = valider("animaux"))
-			if ($sit = valider("sit"))
-			if ($com = valider("com"))
-			if ($retour = valider("retour"))
-			if ($pre = valider("pre"))
-			if ($justi = valider("justi"))
-			if ($date = valider("date"))
-			if ($pre == 1 && $justi == 1){
-			$inc = -1;
-			foreach ($retour as $value) {
-				$inc++;
-				// Faire une action pour chaque valeur de $retour
-				// Par exemple :
-				// actionPourChaqueValeur($value);
-				ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com);
-				$id = getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com) + $inc;
-				ajoutConcerne($id,$value);
-			}
-			  ob_clean(); // On vide le tampon de sortie
-			  echo json_encode("success");
-			  $qs = "?view=accueil";
-			  die();
-			}
-			else{
-			  ob_clean(); // On vide le tampon de sortie
-			  echo json_encode("error");
-			  die();
-			}
-			
-		break;  
 	}
 
 
@@ -643,12 +624,3 @@ if ($qs) {
 ob_end_flush(); // On vide le tampon de sortie
 	
 ?>
-
-
-
-
-
-
-
-
-

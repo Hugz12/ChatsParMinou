@@ -35,6 +35,7 @@
 html {
 	min-height: 100vh;
 	width: 100vw;
+	overflow-x: hidden;
 
 }
 
@@ -48,10 +49,11 @@ body{
 	font-size: 14px;
 	margin: 0;
 	padding: 70px 0 0 0;
+	font-family: "Roboto",sans-serif;
 }
 
 #pageContent {
-	min-height: calc(100vh - 320px);
+	min-height: calc(100vh - 270px);
 }
 
 .policeTitre {
@@ -64,7 +66,27 @@ body{
 }
 
 .tailleTitre {
-	font-size: 50px;
+	font-size: 70px;
+}
+
+.tailleSousTitre {
+	font-size: 20px;
+}
+
+@media (max-width: 750px) {
+	.tailleTitre {
+		font-size: 50px;
+	}
+	
+	.tailleSousTitre {
+		font-size: 15px;
+	}
+}
+
+@media (max-width: 400px) {
+	.tailleTitre {
+		font-size: 40px;
+	}
 }
 
 .ombre {
@@ -192,57 +214,7 @@ body{
 
 
 
-
-
-
-
-
-
-/* QUI SOMMES NOUS ? */
-.qsn {
-	display: flex;
-	justify-content: space-around;
-	margin: 5% 0;
-}
-
-.qsn a {
-	width: 20%;
-}
-
-.qsn a img{
-	width: 100%;
-}
-
-.qsnContent{
-	vertical-align: auto;
-}
-
-.qsnStats{
-	vertical-align: auto;
-	text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
 /* formulaireAdoption */
-
-
-
-
-
-
-
-
-
-
-
 
 .champTextarea {
 	width:100%;
@@ -446,6 +418,5 @@ g {
 	height: calc(100%);
 	position: absolute;
 	top: 70px;
-	max-height: calc(100% - 270px);
 }
 

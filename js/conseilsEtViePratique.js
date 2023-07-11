@@ -1,23 +1,70 @@
-// Récupérez le bouton et le conteneur de divs
-const boutonAjouter = document.getElementById("ajouter-div");
-const conteneurDivs = document.getElementById("conteneur-divs");
+var conseils = [];
+var conseilsFiltres = [];
 
-// Définissez une fonction qui ajoute une nouvelle div avec un texte et un lien hypertexte
-function ajouterDiv() {
-	//Crée la nouvelle div et l'ajoute au conteneur
-	const nouvelleDiv = document.createElement("div");
-	nouvelleDiv.id = "conseilText";
-	nouvelleDiv.classList.add("policeTexte");
-	conteneurDivs.appendChild(nouvelleDiv);
+window.addEventListener("load", createConseils);
+document.querySelector("#rechercheConseil").addEventListener("keyup", filterConseils);
 
-	// Crée un texte et un lien hypertexte et l'ajoute à la div
-	const texteDiv = document.createTextNode("Nouvelle div ");
-	const lienDiv = document.createElement("a");
-	lienDiv.setAttribute("href", "https://www.google.com");
-	lienDiv.appendChild(document.createTextNode("avec un lien"));
-	nouvelleDiv.appendChild(texteDiv);
-	nouvelleDiv.appendChild(lienDiv);
+
+async function createConseils () {
+
+    // met une constante en attente de la réponse de la fonction fetch
+    conseils = await fetch("./controleur.php?" +  new URLSearchParams({
+        action: "getConseils"
+    }),
+    {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+    })
+    .then(response => response.json()) 
+    .catch(error => console.log(error));
+
+
+    if(conseils != null) {
+        console.log(conseils);
+        var container = document.querySelector("#container");
+        var div = document.createElement("div");
+        conseils.forEach(conseil => {
+            var div = document.createElement("div");
+            div.classList.add("conseil");
+            // alterne le sens des divs 
+            if(conseils.indexOf(conseil) % 2 == 0) {
+                div.innerHTML = `
+                <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>
+                <div class="descriptionConseil">${conseil.description}</div>`
+            } else {
+                div.innerHTML = `
+                <div class="descriptionConseil">${conseil.description}</div>
+                <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>`
+            }
+            div.addEventListener("click", () => {
+                window.open("./ressources/conseils/" + conseil.name + ".pdf");
+            });
+            div.style.setProperty("--position", Math.random() * 80 + 10 + "%");
+            container.appendChild(div);
+
+        });
+    }
+    
 }
 
-// Ajoutez un écouteur d'événement pour le clic sur le bouton
-boutonAjouter.addEventListener("click", ajouterDiv);
+var filterTimeout; // Variable pour stocker l'ID du délai, si pas de délai en cours, vaut undefined
+
+function filterConseils() {
+    clearTimeout(filterTimeout); // Efface le délai précédent (s'il existe)
+  
+    // Définit un nouveau délai pour exécuter la fonction de filtrage après 300 ms
+    filterTimeout = setTimeout(function() {
+        currentSearch = document.querySelector("#rechercheConseil").value;
+        var container = document.querySelector("#container");
+        Array.from(container.children).forEach(child => {
+            if (child.children[0].innerHTML.toLowerCase().includes(currentSearch.toLowerCase()) || child.children[1].innerHTML.toLowerCase().includes(currentSearch.toLowerCase())){
+                child.style.display = "flex";
+            } else {
+                child.style.display = "none";
+            }
+        });
+    }, 300); 
+}
+

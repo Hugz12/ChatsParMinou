@@ -7,7 +7,7 @@
 	background-color: var(--sec-color);
 	border-radius: 12px;
 	position: relative;
-	margin: 50px auto 0 auto;
+	margin: 50px auto 50px auto;
 	display: flex;
 	flex-direction: row;
 	z-index: 0;

@@ -14,28 +14,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 <link rel="stylesheet" href="./css/formulaireAdoption.css">
-<script src="./js/formulaireAdoption.js"></script>
-<div id="patteFormulaireAdoption" class="conteneurDeConteneurDePattes">
-    <div id="1" class="patteContainer"></div>
-    <div id="2" class="patteContainer"></div>
-    <div id="3" class="patteContainer"></div>
-    <div id="4" class="patteContainer"></div>
-</div>
 
-
-<script>
-    
-    var patteContainer = document.getElementById("1");    
-    var patteContainer2 = document.getElementById("2");
-    var patteContainer3 = document.getElementById("3");
-    var patteContainer4 = document.getElementById("4");
-
-
-    move(patteContainer, 0, 0, 0, 0, 500, 1);
-    move(patteContainer2, 180, 0, 0, 0, 600, 1);
-    move(patteContainer3, 270, 0, 0, 500, 0, 1);
-    move(patteContainer4, 180, 0, 0, 250, 0, 1);
-</script>
 
 <script>
 
@@ -94,7 +73,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             </script> 
          </div>
         <div id="infoAdoption">
-            <div class="titre">Informations pratiques</div>
+            <div id="titre">Informations pratiques</div>
             <div id="coche">
                 <label class="checkbox">
                         <input type="checkbox" id="extForm">

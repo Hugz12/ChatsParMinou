@@ -67,7 +67,7 @@ header > div {
 
 
 #nav {
-	display: none;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -119,7 +119,11 @@ header > div {
 #nav2 {
 	width: 100vw;
 	height: 100vh;
-	background-color: #FFFFFF;
+	background-color: var(--main-color);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	
 }
 
@@ -134,7 +138,6 @@ header > div {
 	font-weight: bold;
 	color: var(--fifth-color);
 	text-decoration: none;
-	width: 100%;
 	height: 70px;
 	/* reduire la hauteur des lettres */
 
@@ -208,7 +211,7 @@ header > div {
 #connexion {
 	width: 120px;
 	height: 40px;
-	margin: 0 10px 0 10px;
+	margin: 0 10px;
 	border-radius: 45px;
 	background-color: var(--fourth-color);
 	color: black;
@@ -216,6 +219,16 @@ header > div {
 	justify-content: center;
 	align-items: center;
 	text-decoration:  none;
+}
+
+@media (max-width: 400px) {
+	#connexion {
+		width: 80px;
+		padding: 0 5px;
+		margin: 0;
+		font-size: 12px;
+
+	}
 }
 
 
@@ -276,3 +289,14 @@ header > div {
 #menuDeroulant {
 	display: none;
 }
+
+@media screen and (max-width: 1200px) {
+	#nav {
+		display: none;
+	}
+	#menuDeroulant {
+		display: block;
+	}
+    
+}
+

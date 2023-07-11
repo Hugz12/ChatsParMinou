@@ -8,118 +8,104 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 ?>
 
 <script src="./js/utils.js"></script>
-<script src="./js/conseilsEtViePratique.js"></script>
+
 <link rel="stylesheet" href="css/conseilsEtViePratique.css"> 
 
-<div>
-	<div id="conteneur-divs"></div>
-	
-	<div id="conseils">
-		<div class="conseilTitre policeTitre">Conseils et vie pratique</div>
-		<div class="bulle">
-			<a href="https://www.youtube.com">
-				<div class="conseilText">Au revoir</div>
-			</a>
-		</div>
-		<div class="bulle">
-			<a href="https://www.youtube.com">
-				<div class="conseilText">Au revoir</div>
-			</a>
-		</div>
-		<a href=""></a>
-	</div>
-
-	<?php 
-			if(valider("Admin","SESSION")) {
-
-				echo " 
-					<div class='svgBox'>
-						<div id='svgAddB' class='svg' onclick='displayForm(\"addBulle\")'>
-				";
-							include("ressources/add.svg");
-				echo "
-						</div>
-						<div id='svgDeleteB' class='svg' onclick='displayForm(\"supprimerBulle\")'>
-				";
-							include("ressources/dustbin.svg");
-				echo "
-						</div>
-					</div>
-				";
-				// inclue le svg dans le html
-				
-			}
-	?>
-
-	<!-- <button id="ajouter-div" onclick="ajouterDiv()">Ajouter une bulle</button> -->
-	
-	
+<div id="rechercher">
+	<form>
+        <div class="group">
+            <input id="rechercheConseil" type="text" required>
+            <label for="rechercheConseil">Rechercher</label>
+        </div>
+        
+		
+	</form>
 </div>
 
 
-<div>
-	
+<div id="container">
 </div>
 
-<?php 
-	if(valider("Admin","SESSION")) {
-		echo "
-			
-			<div id='addBulle' class='formType' style='display: none'>
+<script src="./js/conseilsEtViePratique.js"></script>
 
-				<div class='buttonHideForm' onclick='hideForm(\"addBulle\");'>
+<?php
+    if(valider("Admin","SESSION")) {
+        echo "
+
+            <div class='svgBox'>
+                <div id='svgAdd' class='svg' onclick='displayForm(\"addConseil\")'>";
+                    include("ressources/add.svg");
+        echo " </div>
+                <div id='svgDelete' class='svg' onclick='displayForm(\"supprimerConseil\")'>";
+                    include("ressources/dustbin.svg");
+        echo " </div>
+
+            </div>
+            
+            <div id='addConseil' class='formType' style='display: none'>
+
+                <div class='buttonHideForm' onclick='hideForm(\"addConseil\");'>
+                    <img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
+                </div>
+
+                <div class='policeTitre tailleTitre titreForm'>Ajouter un conseil</div>
+                <br>
+                <form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
+                    
+
+                    <div id='evenement'>
+
+                        <div class='group'>
+                            <input type='text' name='name' required>
+                            <label for=\"name\">Nom</label>
+                        </div>
+
+                        <input type='file' name='fichier' accept='application/pdf' required>
+                    
+                    </div>
+
+
+                    <div class='inputOther'>
+
+                        <div class='group'>
+                            <textarea name='description'required></textarea>
+                            <label for=\"description\">Description</label>
+                        </div>
+
+                    </div>
+                    
+                    <input type='submit' class='buttonType' name='action' value='Ajouter Conseil'>
+
+                </form>
+            </div>
+
+            <div id='supprimerConseil' class='formType' style='display: none'>
+
+				<div class='buttonHideForm' onclick='hideForm(\"supprimerConseil\")'>
 					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 				</div>
 
-				<div class='policeTitre tailleTitre titreForm'>Ajouter une bulle</div>
-				<br>
-				<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data'>
-					
-
-					<div id='bulle'>
-
-						<div class='group'>
-							<input type='text' name='texte' required>
-							<label for=\"titre\">Texte</label>
-						</div>
-					
-						<div class='group'>
-							<label for=\"fiche\" class='label-fiche'>Choisir une fiche</label>
-							<input id='fiche' class='input-fiche' type='file'>
-						</div>
-
-					</div>
-
-					</div>
-					
-					<input type='submit' class='buttonType' onclick='undisplayAddBulle();' name='action' value='Ajouter Bulle'>
-
-				</form>
-			</div>
-
-
-			<div id='supprimerBulle' class='formType' style='display: none'>
-
-				<div class='buttonHideForm' onclick='hideForm(\"supprimerBulle\")'>
-					<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
-				</div>
-
-				<div class='policeTitre tailleTitre titreForm' >Supprimer Une Bulle</div><br>
+				<div class='policeTitre tailleTitre titreForm' >Supprimer Conseil</div><br>
 				
 				<form action='controleur.php' method='get'>
 
-					<select name='id' style='width: auto;'>";
+					<select name='name' style='width: auto;'>";
 
-						foreach(listeEvenements() as $event){
-							echo "<option style='font-style:italic;' value='".$event['id']."'>".$event['id']." -- ".$event['titre']."</option>";
+						foreach(getConseils() as $conseil){
+							echo "<option style='font-style:italic;' value='".$conseil["name"]."'>".$conseil["name"]."</option>";
 						}
 		echo "
 					</select>
 
-					<input type='submit' class='buttonType' name='action' onclick='undisplaySwitchChatDuMois();'value='Supprimer Bulle'>
+					<input type='submit' class='buttonType' name='action' value='Supprimer Conseil'>
 				
 				</form>
 			</div>
-		";
-	}
+
+        ";
+
+
+        
+
+    }
 ?>

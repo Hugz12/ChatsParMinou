@@ -71,6 +71,7 @@ form {
 .titreForm {
 	color:var(--third-color); 
 	text-align:center;
+    margin-bottom: 20px;
 }
 
 
@@ -177,7 +178,7 @@ form textarea {
 /*                            input type date                             */
 /*------------------------------------------------------------------------*/
 
-form input[type="date"] {
+form input[type="date"], .inputDate {
     font-size: 100%;
     padding: 15px;
     outline: none;
@@ -189,7 +190,7 @@ form input[type="date"] {
     box-sizing: border-box;
 }
 
-form input[type="date"]~label {
+form input[type="date"]~label, .inputDate~label {
     position: absolute;
     width: max-content;
     left: 50%;

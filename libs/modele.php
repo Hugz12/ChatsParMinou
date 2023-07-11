@@ -118,40 +118,19 @@ function getPassword($mail){
     return SQLGetChamp($SQL);
 }
 
-function getNom($mail){
-    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
-    return SQLGetChamp($SQL);
-}
 
-function changerRole($nom,$role,$mail){
-    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom' and mail='$mail'";
+function changerRole($nom,$role){
+    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom'";
     return SQLUpdate($SQL);
 }
 
-function supprimerUtilisateur($nom,$mail){
-    $SQL = "DELETE FROM passageRefuge WHERE mailBenevole = '$mail';
-            DELETE FROM hebergement WHERE mailHebergeur = '$mail';
-            DELETE FROM utilisateur WHERE name = '$nom' and mail='$mail';";
+function supprimerUtilisateur($nom){
+    $SQL = "DELETE FROM utilisateur WHERE name = '$nom'";
     return SQLDelete($SQL);
 }
 function countName($name){
     $SQL = "SELECT COUNT(*) FROM utilisateur WHERE name = '$name'";
     return SQLGetChamp($SQL);
-}
-
-
-function ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
-    $SQL = "INSERT INTO demandeAdoption (date,nom, prenom, mail, tel, adresse, habitation, exterieur, sortie, animaux, situationFamiliale, commentaire, statutDemande) VALUES ('$date','$nom', '$prenom', '$mail', '$tel', '$adresse', '$habitation', '$ext', '$sortir', '$animaux', '$sit', '$com',1)";
-    return SQLInsert($SQL);
-}
-function getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
-    $SQL = "SELECT id FROM demandeAdoption WHERE date='$date' AND nom='$nom' AND prenom='$prenom' AND mail='$mail' AND tel='$tel' AND adresse='$adresse' AND habitation='$habitation' AND exterieur='$ext' AND sortie='$sortir' AND animaux='$animaux' AND situationFamiliale='$sit' AND commentaire='$com'";
-    return SQLGetChamp($SQL);
-}
-
-function ajoutConcerne ($id,$value){
-    $SQL = "INSERT INTO concerne (idDemande,codeChat) VALUES ('$id','$value')";
-    return SQLInsert($SQL);
 }
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
@@ -159,8 +138,8 @@ function ajoutConcerne ($id,$value){
  * @param $description
  * @return int
  */
-function addEvenement($titre,$description,$date,$couleur){
-    $SQL = "INSERT INTO evenement (titre,description,date,couleur) VALUES ('$titre','$description','$date','$couleur')";
+function addEvenement($titre,$description,$date,$heureDebut,$heureFin,$couleur){
+    $SQL = "INSERT INTO evenement (titre,description,date,heureDebut,heureFin,couleur) VALUES ('$titre','$description','$date','$heureDebut','$heureFin','$couleur')";
     return SQLInsert($SQL); // retourne l'id de l'évènement
 }
 
@@ -169,6 +148,21 @@ function supprimerEvenement($id){
     return SQLDelete($SQL);
 }
 
+function addConseil($name, $description){
+    $SQL = "INSERT INTO conseils (name, description) VALUES ('$name', '$description')";
+    return SQLInsert($SQL);
+}
+
+
+function getConseils(){
+    $SQL = "SELECT * FROM conseils";
+    return parcoursRS(SQLSelect($SQL));
+}
+
+function delConseil($name){
+    $SQL = "DELETE FROM conseils WHERE name = '$name'";
+    return SQLDelete($SQL);
+}
 
 
 /*
@@ -203,6 +197,7 @@ function listerChats(){
     $SQL = "SELECT * FROM chat";
     return parcoursRS(SQLSelect($SQL));
 }
+
 
 
 /**
@@ -344,7 +339,6 @@ function getNbPhotos($code){
 }
 
 function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
-
     if ($nom != false){
         $SQL = "UPDATE chat SET name = '$nom' WHERE code = $code";
         SQLUpdate($SQL);
@@ -372,8 +366,8 @@ function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$
     }
 }
 
-function editEvent($id,$titre,$description,$date,$couleur){
-    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', couleur = '$couleur' WHERE id = $id";
+function editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur){
+    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', heureDebut = '$heureDebut', heureFin = '$heureFin', couleur = '$couleur' WHERE id = $id";
     SQLUpdate($SQL);
 }
 
@@ -411,7 +405,12 @@ function deletePassage($date,$heureDebut,$heureFin){
     SQLDelete($SQL);
 }
 
+
+function verifyPDF($file){
+    if ($_FILES[$file]['type'] != "application/pdf"){
+        return false;
+    }
+    return $_FILES[$file];
+}
+
 ?>
-
-
-

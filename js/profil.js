@@ -54,21 +54,14 @@ function changerMail() {
 }
 
 function changerMdp(){
-    var inputValue3 = document.getElementById("mdpV").value;
-    var inputValue4 = document.getElementById("mdpN").value;
     var inputValue5 = document.getElementById("mdpN2").value;
-    console.log(inputValue3);
-    console.log(inputValue4);
-    console.log(inputValue5);
     $.ajax({
         url: "./controleur.php",
         type: "POST",
         dataType: "json",
         data: {
             "action" : "changerMdp",
-            "mdpN2" : inputValue5,
-            "mdpN" : inputValue4,
-            "mdpV" : inputValue3,
+            "mdp" : inputValue5,
         },
         success: function(retour) {
             console.log("Votre mot de passe a bien été changé");

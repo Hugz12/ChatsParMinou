@@ -19,9 +19,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	<!-- Debut Affichage de la description de l'association -->
 	<div id="presentation" >
 		<img src="ressources/accueil.jpg" alt="accueil">
-		<div id="presentationTexte">
-			<div id="presentationTexte1" class="policeTitre">Chats Par Minou, pour leur bien-être partout</div>
-			<div id="presentationTexte2" class="policeTexte">En adoptant un chat, vous offrez non seulement un foyer chaleureux et aimant, mais aussi une vie pleine de rires, de tendresse et de moments inoubliables.</div>
+		<div id="presentationTexteBox">
+			<div id="presentationTitre" class="policeTitre tailleTitre">Chats Par Minou, pour leur bien-être partout</div>
+			<div id="presentationTexte" class="policeTexte tailleSousTitre">En adoptant un chat, vous offrez non seulement un foyer chaleureux et aimant, mais aussi une vie pleine de rires, de tendresse et de moments inoubliables.</div>
 		</div>
 	</div>
 	<!-- Fin Affichage de la description de l'association -->
@@ -31,8 +31,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 	<!-- Debut Affichage du Chat du Mois -->
 	<div id="boxTitreChatDuMois">
-		<div id="titreChatDuMois" class="policeTitre">Notre chat du mois</div>
-		<div id="sousTitreChatDuMois" class="policeTexte">Il a besoins de vous. Venez l'adopter</div>
+		<div id="titreChatDuMois" class="policeTitre tailleTitre">Notre chat du mois</div>
+		<div id="sousTitreChatDuMois" class="policeTexte tailleSousTitre">Il a besoins de vous. Venez l'adopter</div>
 	</div>
 	<div id="allChatDuMois"></div>
 	<div id="allChatDuMoisSmall"></div>
@@ -51,7 +51,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	
 	<!-- Debut Affichage des Evenements -->
 	<div id="event">
-		<div id="eventTitre" class="policeTitre">Les événements à venir</div>
+		<div id="eventTitre" class="policeTitre tailleTitre">Les événements à venir</div>
 		<?php 
 			if(valider("Admin","SESSION")) {
 
@@ -93,16 +93,19 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	</script>
 	<!-- Fin Affichage des Evenements -->
 
-
+	
 	<div id="nousAider" class="policeTexte clickable" onclick=window.location.href="index.php?view=nousAider" onmouseenter="rotateLogo(this);" onmouseleave="rotateLogoBack(this);">
 		<img src="./ressources/nousAider.png" alt="logo">
 		<div>Nous aider</div>
 	</div>
 
-	<script>
-		responsive();
-	</script>
-
+	<div id="nousAiderResponsiveBox">
+		<img class="clickable" src="./ressources/flecheLeft.svg" alt="arrow" onclick="nousAiderDisplay();">
+		<div id="nousAiderResponsive" class="policeTexte clickable" onclick=window.location.href="index.php?view=nousAider" onmouseenter="rotateLogo(this);" onmouseleave="rotateLogoBack(this);">
+			<img src="./ressources/nousAider.png" alt="logo">
+			<div>Nous aider</div>
+		</div>
+	</div>
 	
 </div>
 
@@ -135,14 +138,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 						<div class='group'>
-							<input type='time' name='heure' required>
-							<label for=\"date\">Horaire</label>
+							<input type='time' name='heureDebut' required>
+							<label for=\"date\">Début</label>
 						</div>
 
-						<div class='colorPicker group'>
-							<label for='couleur' class='colorPickerText'>Couleur</label>
-							<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputAdd'), 'color');\" ><div></div></div>
-							<input id='colorInputAdd' type='hidden' name='couleur' value='#000000'>
+						<div class='group'>
+							<input type='time' name='heureFin' required>
+							<label for=\"date\">Fin</label>
 						</div>
 
 					</div>
