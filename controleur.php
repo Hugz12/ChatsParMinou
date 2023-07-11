@@ -594,23 +594,32 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($animaux = valider("animaux"))
 			if ($sit = valider("sit"))
 			if ($com = valider("com"))
-			//affiche les valeurs des variables
-			ajoutDemande($nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com, $pre, $justi);
-			$nextAutoIncrementValue = getNextAutoIncrementValue("demandeAdoption", "id");
-			echo $nextAutoIncrementValue;
-			if ($retour = valider("retour")) {
-			  if (is_array($retour)) {
-				foreach ($retour as $value) {
-				  ajoutConcerne($nextAutoIncrementValue, $value);
-				}
-			  } else {
-				ajoutConcerne($nextAutoIncrementValue, $retour);
-			  }
-			  ob_clean();
-			  echo json_encode("ok");
+			if ($retour = valider("retour"))
+			if ($pre = valider("pre"))
+			if ($justi = valider("justi"))
+			if ($date = valider("date"))
+			if ($pre == 1 && $justi == 1){
+			$inc = -1;
+			foreach ($retour as $value) {
+				$inc++;
+				// Faire une action pour chaque valeur de $retour
+				// Par exemple :
+				// actionPourChaqueValeur($value);
+				ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com);
+				$id = getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com) + $inc;
+				ajoutConcerne($id,$value);
+			}
+			  ob_clean(); // On vide le tampon de sortie
+			  echo json_encode("success");
 			  $qs = "?view=accueil";
 			  die();
 			}
+			else{
+			  ob_clean(); // On vide le tampon de sortie
+			  echo json_encode("error");
+			  die();
+			}
+			
 		break;  
 	}
 

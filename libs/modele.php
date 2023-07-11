@@ -139,25 +139,18 @@ function countName($name){
     return SQLGetChamp($SQL);
 }
 
-function getNextAutoIncrementValue($tableName, $columnName) {
-    $query = "SHOW TABLE STATUS LIKE '$tableName'";
-    $result = mysqli_query($connection, $query);
-    
-    if ($result && mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_assoc($result);
-      return $row['Auto_increment'];
-    }
-    
-    return null;
-}
 
-function ajoutConcerne($nextAutoIncrementValue,$value){
-    $SQL = "INSERT INTO concerne (idDemande,codeChat) VALUES ('$nextAutoIncrementValue','$value')";
+function ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "INSERT INTO demandeAdoption (date,nom, prenom, mail, tel, adresse, habitation, exterieur, sortie, animaux, situationFamiliale, commentaire, statutDemande) VALUES ('$date','$nom', '$prenom', '$mail', '$tel', '$adresse', '$habitation', '$ext', '$sortir', '$animaux', '$sit', '$com',1)";
     return SQLInsert($SQL);
 }
+function getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "SELECT id FROM demandeAdoption WHERE date='$date' AND nom='$nom' AND prenom='$prenom' AND mail='$mail' AND tel='$tel' AND adresse='$adresse' AND habitation='$habitation' AND exterieur='$ext' AND sortie='$sortir' AND animaux='$animaux' AND situationFamiliale='$sit' AND commentaire='$com'";
+    return SQLGetChamp($SQL);
+}
 
-function ajoutDemande($nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
-    $SQL = "INSERT INTO demandeAdoption (nom, prenom, mail, tel, adresse, habitation, exterieur, sortie, animaux, situationFamiliale, commentaire) VALUES ('$nom', '$prenom', '$mail', '$tel', '$adresse', '$habitation', '$ext', '$sortir', '$animaux', '$sit', '$com')";
+function ajoutConcerne ($id,$value){
+    $SQL = "INSERT INTO concerne (idDemande,codeChat) VALUES ('$id','$value')";
     return SQLInsert($SQL);
 }
 /**

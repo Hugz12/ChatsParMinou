@@ -6,7 +6,7 @@
 // Pas de soucis de bufferisation, puisque c'est dans le cas où on appelle directement la page sans son contexte
 if (basename($_SERVER["PHP_SELF"]) != "index.php")
 {
-	header("Location:../index.php?view=accueil");
+	header("Location:../index.php?view=formulaireAdoption");
 	die("");
 }
 
@@ -47,7 +47,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <div id ="allFormulaireAdoption" class="policeTexte" >
     <div id="titreFormulaireAdoption" class ="policeTitre">formulaire d'adoption</div>
-    <form action="controleur.php" method="get">
+    <form action='controleur.php' method='post'>
         <div class="titre">Informations personnelles</div>
         <div id="infoPerso">
             <div class='p1'>
@@ -85,6 +85,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
             <script>
                 var chats = <?= json_encode(listerChats());?>;
                 afficherChats(chats);
+            </script> 
+            <div class="titre">Liste des chats likés</div>
+            <div id="conteneurChatslike"></div>
+            <script>
+                var chats = <?= json_encode(listerChats());?>;
+                afficherChatslike(chats);
             </script> 
          </div>
         <div id="infoAdoption">
@@ -125,6 +131,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 					<span class="text">J'ai pris conscience du certificat d'engagement</span>
 			</label>
         </div>
-        <input id ="submitFormulaireAdoption" type="submit" class='buttonType' onclick="submitForm();"/>
+        <input id ="submitFormulaireAdoption" type="button" class='buttonType' onclick="submitForm();" value= "Envoyer le formulaire"/>
     </form>
 </div>
