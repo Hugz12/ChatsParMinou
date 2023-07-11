@@ -60,7 +60,7 @@ CREATE TABLE `evenement` (
   `description` varchar(255),
   `date` date,
   `heureDebut` time,
-  `heureFin` time,
+  `heureFin` time
 )ENGINE = InnoDB;
 
 CREATE TABLE `concerne` (
@@ -137,10 +137,10 @@ VALUES ('2023-04-03 00:00:00', '10:00:00', '12:00:00', 'user@gmail.com', "Je vai
 
 
 /*evenement*/
-INSERT INTO `evenement` (`id`, `titre`, `description`, `date`, `couleur`)
+INSERT INTO `evenement` (`id`, `titre`, `description`, `date`, `heureDebut`, `heureFin`)
 VALUES ('1', 'Fête des chats', 'La fete avec pleins de chats', '2023-04-01', '10:00:00', '14:30:00');
 
-INSERT INTO `evenement` (`id`, `titre`, `description`, `date`, `couleur`)
+INSERT INTO `evenement` (`id`, `titre`, `description`, `date`, `heureDebut`, `heureFin`)
 VALUES ('2', 'Fête des chien', 'La fete avec pleins de chien', '2023-04-02', '10:00:00', '14:30:00');
 
 /*concerne*/
