@@ -45,6 +45,14 @@ function isAdmin($mail){
 		return false;
 }
 
+function isSuperAdmin($mail){
+    $SQL ="SELECT role FROM utilisateur WHERE mail='$mail'";
+    $isAdmin = SQLGetChamp($SQL); 
+    if ($isAdmin == "1") 
+        return true;
+    else 
+        return false;
+}
 
 
 /**
@@ -97,6 +105,32 @@ function changerMail($mail){
     $mailv = $_SESSION['mail'];
     $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
     return SQLUpdate($SQL);
+}
+function changerMdp($password){
+    $mail = $_SESSION['mail'];
+    $hashedPassword = hashedPassword($password);
+    $SQL = "UPDATE utilisateur SET password = '$hashedPassword' WHERE mail = '$mail'";
+    return SQLUpdate($SQL);
+
+}
+function getPassword($mail){
+    $SQL = "SELECT password FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
+}
+
+
+function changerRole($nom,$role){
+    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom'";
+    return SQLUpdate($SQL);
+}
+
+function supprimerUtilisateur($nom){
+    $SQL = "DELETE FROM utilisateur WHERE name = '$nom'";
+    return SQLDelete($SQL);
+}
+function countName($name){
+    $SQL = "SELECT COUNT(*) FROM utilisateur WHERE name = '$name'";
+    return SQLGetChamp($SQL);
 }
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
@@ -171,7 +205,7 @@ function listerChats(){
  * Fonction qui retourne la liste des utilisateurs
  */
 function listerUtilisateurs(){
-    $SQL = "SELECT name FROM utilisateur";
+    $SQL = "SELECT * FROM utilisateur";
     return parcoursRS(SQLSelect($SQL));
 }
 
