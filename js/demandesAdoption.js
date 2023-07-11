@@ -375,15 +375,12 @@ function enregistrerMemo(contexte) {
 // Fonction qui permet d'afficher la popup d'infos
 $(function() {
     window.addEventListener("resize", function() {
-        offset = $("#i").offset();
-        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - 420)/2);
+        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
     });
 
     $('#i').click(function() {
-        offset = $("#i").offset();
-
         $('#popupInfos').toggle();
-        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - 420)/2);
+        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
 
         if ($("#popupInfos").css("display") == "block") $("#i").css({'color': 'var(--third-color)', 'border-color': 'var(--third-color)'});
         else $('#i').removeAttr('style');
