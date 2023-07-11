@@ -1,5 +1,21 @@
 <?php
 
+include_once './PHPMailer-master/src/PHPMailer.php';
+/********************Protocole PHPMailer*****************************/
+//$mail = new PHPMailer\PHPMailer\PHPMailer();
+
+
+
+
+
+
+
+
+
+
+
+
+/********************************************************************/
 if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée directement par son adresse
 	header("Location:../index.php?view=accueil"); // on redirige en passant par la page index
 	die("");
@@ -27,10 +43,14 @@ if (!valider('Connecte', 'SESSION')) {
 		<div class="pdp">
 			<form action="controleur.php" method="post" enctype="multipart/form-data">
 				<?php
-				echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   /></label>";
+				if (file_exists("./ressources/users/".$_SESSION['mail'].".jpg")) {
+					echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"".valider("photoDeProfil", "SESSION")."\"   /></label>";
+				} else{
+					echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"./ressources/users/default.png\"   /></label>";
+				}
 				?>
 				<input type="file" name="image" style="display : none;" id="image" onchange="changerPhotoProfil(this);">
-				<input type="hidden" class="buttonType" value="Changer la photo de profil" name="action">
+				<input type="hidden" class="buttonType" value="ChangerPhotoProfil" name="action">
 			</form>
 		</div>
 
@@ -93,12 +113,44 @@ if (!valider('Connecte', 'SESSION')) {
 				
 				// Afficher la div et les résultats
 				echo '<div class="gestion">
-					<div class="titre">Gestion des utilisateurs</div>';
-				
+				<div class="titre">Gestion des utilisateurs
+				<div id="i">i</div>
+				</div>
+				<form>
+					<div class="group">
+						<input type="text" id="contenuRecherche" placeholder="Rechercher..." required>
+					</div>
+				</form>';
+
 				foreach($resultats as $resultat) {
-					echo $resultat['name'] . '<br>';
+					echo'<div class="utilisateur">';
+					if ($resultat['role']!=1){
+					echo '<label class="checkbox">
+						  <input type="checkbox" id="upRole_'.$resultat['id'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'">
+						  <span class="checkmark"></span>
+						  </label>';
+					}
+					// Utilisation de la structure de contrôle if/else pour déterminer la classe de couleur
+					if ($resultat['role'] == 1) {
+						echo '<span class="role-1">' . $resultat['name'] . '</span>';
+					} elseif ($resultat['role'] == 2) {
+						echo '<span class="role-2">' . $resultat['name'] . '</span>';
+					} elseif ($resultat['role'] == 3) {
+						echo '<span class="role-3">' . $resultat['name'] . '</span>';
+					} else {
+						echo $resultat['name'];
+					}
+					
+					echo '<label class="checkbox">
+						  <input type="checkbox" id="downRole_'.$resultat['id'].'" data-nom="'.$resultat['name'].'"  data-role="'.$resultat['role'].'">
+						  <span class="checkmark"></span>
+						  </label>';
+					echo '</div>';
 				}
+			
 				
+
+				echo '<input type="button" class="buttonType" value="Changer rôle " onclick="changerRole();">';
 				echo '</div>';
 			} else {
 				// Si l'utilisateur n'est pas admin, cacher la div en ajoutant un attribut de style

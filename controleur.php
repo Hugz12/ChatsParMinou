@@ -550,13 +550,65 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				die();
 			}
 		
-
+		case 'changerMdp' :
+			if($mdpV = valider("mdpV","POST"))
+			if($mdpN = valider("mdpN","POST"))
+			echo "test";
+			if($mdpN2 = valider("mdpN2","POST")){
+				if(password_verify($mdpV,getPassword($_SESSION["mail"])) && $mdpN === $mdpN2){
+					changerMdp($mdpN2);
+					ob_clean();
+					echo json_encode("ok");
+					session_destroy(); // On détruit la session
+					$qs = "?view=accueil";
+					var_dump($nom, $isUp, $isDown, $role);
+					die();
+				}
+				else {
+					ob_clean();
+					echo json_encode("erreur");
+				}
+			}
+			else {
+				ob_clean();
+				echo json_encode("erreur");
+			}
+		break;
+		
+		case 'changerRole' :
+			if ($up = valider("up"))
+			if ($down= valider("down"))
+			if ($noms= valider("noms"))
+			if ($role = valider("role"))
+			for ($i=0;$i<=count($noms);$i++){
+				$nom = $noms[$i];
+				$isUp = $up[$i];
+				$isDown = $down[$i];
+				$role = $role[$i];
+				var_dump($i,$nom, $isUp, $isDown, $role,$noms);
+				if ($isUp == 1){
+					changerRole($nom,$role);
+				}
+				if ($isDown == 1){
+					if ($role == 4){
+						supprimerUtilisateur($nom);
+					}
+					else{
+					changerRole($nom,$role);
+					}
+				}
+			}
+			ob_clean();
+			echo json_encode("ok");
+			die();
+		break;
 	}
 
 
 	
 
 }
+
 
 
 // On redirige vers la page index avec les bons arguments

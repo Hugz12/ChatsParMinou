@@ -15,6 +15,9 @@
 	justify-content: center;
 	font-weight: bold;
 	color:var(--fifth-color);
+	background-color: var(--main-color);
+	z-index: 1;
+	position: relative;
 }
 
 #allFormulaireAdoption > form > input {
@@ -36,6 +39,8 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	z-index: 10;
+	position: relative;
 }
 
 #checkboxFormulaireAdoption{
@@ -66,6 +71,10 @@
 	cursor: default;
 	font-family: "Roboto",sans-serif;
 	color: var(--third-color);
+	z-index: 1;
+	position: relative;
+	background-color: var(--main-color);
+	width: fit-content;
 }
 #infoPerso{
 	display: flex;
@@ -121,6 +130,7 @@
 	border-radius: 5px;
 	transition: all 0.2s ease-in-out;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	background-color: var(--main-color);
   }
   
   .checkbox:hover .checkmark {
@@ -150,6 +160,8 @@
 	display: inline-block;
 	transition: all 0.2s ease-in-out;
 	color: var(--third-color);
+	z-index : 1;
+	position : relative;
   }
 
   .textP {
@@ -158,4 +170,120 @@
 	transition: all 0.2s ease-in-out;
 	font-size: 16px;
 	color: rgb(100,100,100);
+	z-index : 1;
+	position : relative;
   }
+
+  .patteFormulaireAdoption{
+	z-index: 0;
+  }
+
+/*------------------------------------------------------------------------*/
+.chatContainer {
+    text-align: center;
+    margin-bottom: 20px;
+    display: inline-block;
+	border: rgb(200,200,200) solid 2px;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+	background-color: var(--main-color);
+	z-index: 1;
+	position: relative;
+}
+
+.chatContainerlike {
+    text-align: center;
+    margin-bottom: 20px;
+    display: inline-block;
+	border: rgb(200,200,200) solid 2px;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+	z-index: 1;
+}
+
+.conteneurDeConteneurDePattes{
+	z-index: 0;
+}
+.patteContainer{
+	z-index:0;
+}
+.chatImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.chatTexte {
+    margin-top: 10px;
+    font-size: 18px; /* Ajustez cette valeur selon vos besoins */
+}
+
+	
+.container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+  }
+  
+  .container {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	font-size: 20px;
+	user-select: none;
+	transition: 100ms;
+	background-color: #666;
+  }
+
+  .container input:checked ~ .checkmark path {
+	fill: #FF5353;
+	stroke-width: 0;
+  }
+  
+  .container input:checked ~ .checkmark {
+	animation: like_effect 400ms ease;
+  }
+  
+  .container:hover {
+	transform: scale(1.1);
+  }
+  
+  #conteneurChats {
+	position: relative;
+	z-index: 1;
+  }
+
+
+  @keyframes like_effect {
+	0% {
+	  transform: scale(0);
+	}
+  
+	50% {
+	  transform: scale(1.2);
+	}
+  
+	100% {
+	  transform: scale(1);
+	}
+  }
+  
+  @keyframes dislike_effect {
+	0% {
+	  transform: scale(0);
+	}
+  
+	50% {
+	  transform: scale(1.2);
+	}
+  
+	100% {
+	  transform: scale(1);
+	}
+  }
+  

@@ -38,6 +38,7 @@ function verifUser($mail,$password){
 		$_SESSION["mail"] = $mail;
 		$_SESSION["password"] = $password;
 		$_SESSION["Admin"] = isAdmin($mail);
+		$_SESSION["SuperAdmin"] = isSuperAdmin($mail);
 		$_SESSION["heureConnexion"] = date("H:i:s");
 		
 		$extensions = array();
