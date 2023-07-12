@@ -12,10 +12,6 @@
     background-color: inherit;
 }
 
-#patteProfil {
-    z-index: 2;
-}
-
 #pageContent {
     background-color: inherit;
 }
@@ -35,10 +31,6 @@
     justify-content: space-between;
     align-content: space-between;
     margin-top: 5%;
-}
-
-input {
-    z-index: 3;
 }
 
 .titre {
@@ -199,4 +191,13 @@ input {
 
 #popupInfos ul {
     padding-left: 25px;
+}
+
+.buttonNoHover {
+    opacity: 0.5;
+    cursor: default!important;
+}
+.buttonNoHover:hover {
+    border-color: rgb(200,200,200)!important;
+    transform: none!important;
 }

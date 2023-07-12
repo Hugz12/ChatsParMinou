@@ -576,34 +576,89 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 		
 		case 'changerRole' :
-			if ($up = valider("up"))
-			if ($down= valider("down"))
-			if ($noms= valider("noms"))
+			if ($nom= valider("nom"))
 			if ($role = valider("role"))
-			for ($i=0;$i<=count($noms);$i++){
-				$nom = $noms[$i];
-				$isUp = $up[$i];
-				$isDown = $down[$i];
-				$role = $role[$i];
-				var_dump($i,$nom, $isUp, $isDown, $role,$noms);
-				if ($isUp == 1){
-					changerRole($nom,$role);
+			if ($mail = valider("mail")){
+				$mMail = $_SESSION["mail"];
+				$mNom=getNom($mMail);
+				if ($role == 4){
+					supprimerUtilisateur($nom,$mail);
+					ob_clean();
+					echo json_encode("ok");
+				} else if ($role == 1) {
+					changerRole($nom, $role, $mail);
+					changerRole($mNom, 2, $mMail);
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+					ob_clean();
+					echo json_encode("ok");
+				} else {
+					changerRole($nom, $role, $mail);
 				}
-				if ($isDown == 1){
-					if ($role == 4){
-						supprimerUtilisateur($nom);
-					}
-					else{
-					changerRole($nom,$role);
-					}
+				if ($mail == $mMail){
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
 				}
+				ob_clean();
+				echo json_encode("ok");
+				die();
 			}
-			ob_clean();
-			echo json_encode("ok");
-			die();
 		break;
-	}
 
+		case 'changerPhotoProfil' :
+			if ($photo = valider("photo","FILES")){
+				// on supprime l'ancienne image
+				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
+				// on upload la nouvelle
+				if (!uploadPhoto($photo, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
+					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
+					break;
+				}
+				$qs = "?view=profil";
+			
+			}
+		break;
+
+		case 'submitForm':
+			if ($nom = valider("nom"))
+			if ($prenom = valider("prenom"))
+			if ($mail = valider("mail"))
+			if ($tel = valider("tel"))
+			if ($adresse = valider("adresse"))
+			if ($habitation = valider("habitation"))
+			if ($ext = valider("ext"))
+			if ($sortir = valider("sortir"))
+			if ($animaux = valider("animaux"))
+			if ($sit = valider("sit"))
+			if ($com = valider("com"))
+			if ($retour = valider("retour"))
+			if ($pre = valider("pre"))
+			if ($justi = valider("justi"))
+			if ($date = valider("date"))
+			if ($pre == 1 && $justi == 1){
+			$inc = -1;
+			foreach ($retour as $value) {
+				$inc++;
+				// Faire une action pour chaque valeur de $retour
+				// Par exemple :
+				// actionPourChaqueValeur($value);
+				ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com);
+				$id = getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com) + $inc;
+				ajoutConcerne($id,$value);
+			}
+			ob_clean(); // On vide le tampon de sortie
+			echo json_encode("success");
+			$qs = "?view=accueil";
+			die();
+			}
+			else{
+			ob_clean(); // On vide le tampon de sortie
+			echo json_encode("error");
+			die();
+			}
+			
+		break;  
+	}
 
 	
 

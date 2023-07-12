@@ -118,19 +118,40 @@ function getPassword($mail){
     return SQLGetChamp($SQL);
 }
 
+function getNom($mail){
+    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
+}
 
-function changerRole($nom,$role){
-    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom'";
+function changerRole($nom,$role,$mail){
+    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom' and mail='$mail'";
     return SQLUpdate($SQL);
 }
 
-function supprimerUtilisateur($nom){
-    $SQL = "DELETE FROM utilisateur WHERE name = '$nom'";
+function supprimerUtilisateur($nom,$mail){
+    $SQL = "DELETE FROM passageRefuge WHERE mailBenevole = '$mail';
+            DELETE FROM hebergement WHERE mailHebergeur = '$mail';
+            DELETE FROM utilisateur WHERE name = '$nom' and mail='$mail';";
     return SQLDelete($SQL);
 }
 function countName($name){
     $SQL = "SELECT COUNT(*) FROM utilisateur WHERE name = '$name'";
     return SQLGetChamp($SQL);
+}
+
+
+function ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "INSERT INTO demandeAdoption (date,nom, prenom, mail, tel, adresse, habitation, exterieur, sortie, animaux, situationFamiliale, commentaire, statutDemande) VALUES ('$date','$nom', '$prenom', '$mail', '$tel', '$adresse', '$habitation', '$ext', '$sortir', '$animaux', '$sit', '$com',1)";
+    return SQLInsert($SQL);
+}
+function getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "SELECT id FROM demandeAdoption WHERE date='$date' AND nom='$nom' AND prenom='$prenom' AND mail='$mail' AND tel='$tel' AND adresse='$adresse' AND habitation='$habitation' AND exterieur='$ext' AND sortie='$sortir' AND animaux='$animaux' AND situationFamiliale='$sit' AND commentaire='$com'";
+    return SQLGetChamp($SQL);
+}
+
+function ajoutConcerne ($id,$value){
+    $SQL = "INSERT INTO concerne (idDemande,codeChat) VALUES ('$id','$value')";
+    return SQLInsert($SQL);
 }
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement

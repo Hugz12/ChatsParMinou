@@ -54,14 +54,21 @@ function changerMail() {
 }
 
 function changerMdp(){
+    var inputValue3 = document.getElementById("mdpV").value;
+    var inputValue4 = document.getElementById("mdpN").value;
     var inputValue5 = document.getElementById("mdpN2").value;
+    console.log(inputValue3);
+    console.log(inputValue4);
+    console.log(inputValue5);
     $.ajax({
         url: "./controleur.php",
         type: "POST",
         dataType: "json",
         data: {
             "action" : "changerMdp",
-            "mdp" : inputValue5,
+            "mdpN2" : inputValue5,
+            "mdpN" : inputValue4,
+            "mdpV" : inputValue3,
         },
         success: function(retour) {
             console.log("Votre mot de passe a bien été changé");
@@ -103,6 +110,7 @@ function changerRole(){
             success: function(retour) {
                 console.log("Le rôle de l'utilisateur a été changé avec succès");
                 alert("Le rôle de l'utilisateur a été changé avec succès");
+                location.reload();
             },
             error: function(retour) {
                 console.log("Erreur lors du changement de rôle de l'utilisateur");
