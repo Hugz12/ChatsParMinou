@@ -254,7 +254,6 @@ function uploadPhoto($photo, $rep, $name){
     } else if($photo["type"] == "image/webp"){
         $photoExport = imagecreatefromwebp($photo["tmp_name"]);
     } else {
-        die("Le format de l'image n'est pas supporté");
         return false;
     }
     $pos = $rep . $name . ".jpg";
