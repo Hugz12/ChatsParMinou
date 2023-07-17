@@ -10,6 +10,7 @@
     align-content: stretch;
     flex-flow: row wrap;
     background-color: inherit;
+    margin-bottom: 1%;
 }
 
 #pageContent {
@@ -143,7 +144,7 @@
 }
 
 .tabGestion {
-    display: fit-content;
+    background-color: inherit;
 }
 
 .role-1 {

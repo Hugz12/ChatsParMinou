@@ -31,6 +31,69 @@ function afficherChats(chats) {
     checkboxInput.id = 'chat' + codeChat;
     checkboxInput.dataset.like = codeChat;
 
+    var checkboxCheckmark = document.createElement('div');
+    checkboxCheckmark.className = 'checkmark';
+    checkboxCheckmark.innerHTML = '<svg viewBox="0 0 256 256"><rect fill="none" height="256" width="256"></rect><path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#666" fill="none"></path></svg>';
+
+    checkboxContainer.appendChild(checkboxInput);
+    checkboxContainer.appendChild(checkboxCheckmark);
+
+    chatContainer.appendChild(checkboxContainer);
+
+    conteneurChats.appendChild(chatContainer);
+
+    checkboxInput.addEventListener('change', function(event) {
+      var chatCode = event.target.dataset.like;
+      var likeCheckboxes = document.querySelectorAll('.chat[data-like="' + chatCode + '"]');
+    
+      for (var i = 0; i < likeCheckboxes.length; i++) {
+        var checkbox = likeCheckboxes[i];
+        var chatContainer = checkbox.closest('.chatContainer');
+    
+        if (event.target.checked) {
+          checkbox.checked = true;
+          chatContainer.classList.add('liked');
+        } else {
+          checkbox.checked = false;
+          chatContainer.classList.remove('liked');
+        }
+      }
+    });
+  }
+}
+
+// Fonction qui permet d'afficher tous les chats dans la page d'adoption
+function afficherChatsliké(chats) {
+  var conteneurChats = document.getElementById("conteneurChatsliké");
+
+  for (var j = 0; j < chats.length; j++) {
+    var chatActuel = chats[j];
+
+    var chatContainer = document.createElement('div');
+    chatContainer.className = 'chatContainer';
+
+    var chatImage = document.createElement('img');
+    var codeChat = chatActuel['code'];
+    var imageUrl = './ressources/chats/' + codeChat + '/0.jpg';
+    chatImage.src = imageUrl;
+    chatImage.className = 'chatImage';
+    chatContainer.appendChild(chatImage);
+
+    var chatTexte = document.createElement('div');
+    chatTexte.className = 'chatTexte policeTexte';
+    chatTexte.textContent = chatActuel['name'];
+    chatContainer.appendChild(chatTexte);
+
+    var checkboxContainer = document.createElement('label');
+    checkboxContainer.className = 'container';
+
+    var checkboxInput = document.createElement('input');
+    checkboxInput.type = 'checkbox';
+    checkboxInput.className = 'chat';
+    checkboxInput.dataset.codeChat = codeChat;
+    checkboxInput.checked = retour && retour.includes(codeChat);
+    checkboxInput.id = 'chat' + codeChat;
+    checkboxInput.dataset.like = codeChat;
 
     var checkboxCheckmark = document.createElement('div');
     checkboxCheckmark.className = 'checkmark';
@@ -42,25 +105,75 @@ function afficherChats(chats) {
     chatContainer.appendChild(checkboxContainer);
 
     conteneurChats.appendChild(chatContainer);
+
     checkboxInput.addEventListener('change', function(event) {
       var chatCode = event.target.dataset.like;
-      var likeCheckboxes = document.querySelectorAll('[data-like="' + chatCode + '"]');
+      var likeCheckboxes = document.querySelectorAll('.chat[data-like="' + chatCode + '"]');
     
       for (var i = 0; i < likeCheckboxes.length; i++) {
         var checkbox = likeCheckboxes[i];
         var chatContainer = checkbox.closest('.chatContainer');
     
         if (event.target.checked) {
+          checkbox.checked = true;
           chatContainer.classList.add('liked');
         } else {
+          checkbox.checked = false;
           chatContainer.classList.remove('liked');
         }
       }
     });
-    
   }
 }
 
+function rechercheChat() {
+	var nbChatsShow = 0;
+	var input = document.getElementById("rechercheChats");
+	var recherche = input.value.toUpperCase();
+	console.log(recherche);
+	var allSlider = document.getElementById('allSliderChats');
+	var allSliderPoints = document.getElementById('allSliderPointsChats');
+
+	var listeChats = allSlider.getElementsByClassName('chatNom');
+	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
+	for (var i = 0; i < listeChats.length; i++) {
+
+		if (listeChats[i].innerHTML.toUpperCase().includes(recherche)) {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+			nbChatsShow++;
+		}
+		else {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "none";
+		}
+
+		if (listePoints[i].alt.toUpperCase().includes(recherche)) {
+			listePoints[i].style.display = "block";
+			nbChatsShow++;
+		}
+		else {
+			listePoints[i].style.display = "none";
+		}
+
+		if (recherche == "") {
+			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
+			listePoints[i].style.display = "block";
+		}
+
+	}
+	responsivePointsChats();
+	var allSlider = document.getElementById("allSliderChats");
+	if (nbChatsShow == 0) {
+		$(allSlider).children(".slider")[0].style.display = "none";
+		document.getElementById("zeroChat").style.display = "block";
+	}
+	else {
+		$(allSlider).children(".slider")[0].style.display = "block"
+		document.getElementById("zeroChat").style.display = "none";
+	}
+	allSlider.style.setProperty("--transform", 0);
+}
+
+const rechercher = debounce(() => rechercheChat(), 500);
 
 
 function ajouterRetirerCodeChat(codeChat) {

@@ -63,7 +63,7 @@
 }
 
 .titre{
-	margin-top: 2%;
+	margin: 30px 0;
 	cursor: default;
 	font-family: "Roboto",sans-serif;
 	color: var(--third-color);
@@ -89,7 +89,7 @@
 	display: flex;
 	background-color: inherit;
 	justify-content: space-around;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	align-items: center;
 	flex-direction: row;
 	align-content: center;
@@ -140,7 +140,7 @@ input {
 	width: fit-content;
 	font-size: 20px;
 	line-height: 1.5;
-	margin-bottom: 20px;
+	margin: 0 20px 20px 20px;
 	font-family: Arial, sans-serif;
 	user-select: none;
   }
@@ -273,15 +273,36 @@ input {
 	transform: scale(1.1);
   }
   
-  #conteneurChats {
+  #conteneurChats, #conteneurChatsliké {
 	position: relative;
 	z-index: 1;
 	display: flex;
 	flex-wrap: wrap;
 
   }
+  .tooltip {
+	display: none;
+	position: absolute;
+	top: calc(0%);
+	right: 0;
+	background-color: inherit;
+	border : 2px solid rgb(200,200,200);
+	color: rgb(200,200,200);
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	cursor: default;
+	opacity: 0.8;
+  }
+  
+  .group:hover .tooltip {
+	display: flex;
+  }
 
-
+  #conteneurChatsliké .chatContainer:not(.liked) {
+	display: none;
+  }
+  
   @keyframes like_effect {
 	0% {
 	  transform: scale(0);

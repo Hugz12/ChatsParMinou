@@ -177,7 +177,7 @@ if (!valider('Connecte', 'SESSION')) {
 <div id="popupInfos">
 	<p>Rôles des utilisateurs :</p>
 	<ul>
-		<li class="role-1">Administrateur</li> (de préférence 1 seul / il à tous les droits)
+		<li class="role-1">Administrateur</li> (de préférence 1 seul / il a tous les droits)
 		<li class="role-2">Bénévole</li> (peut voir le calendrier et modifier les événements)
 		<li>Utilisateur</li> (pour les personnes qui veulent juste adopter)
 	</ul>
