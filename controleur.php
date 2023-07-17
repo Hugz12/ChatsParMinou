@@ -67,8 +67,11 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						
 						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
 						if($photo = valider("photo","FILES")){
+							echo "photo";
+							print_r($photo);
+							die();
 							if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
-								$_SESSION['error'] = "Extension non autorisée, vous pourrez changer votre photo depuis la page profil";
+								$_SESSION['error'] = "Erreur lors de l'ajout de la photo de profil, vous pourrez changer votre photo depuis la page profil";
 							}
 						}
 
@@ -92,8 +95,8 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						$qs = "?view=connexion";
 					}
 				} else {
-					$qs = "?view=connexion";
 					$_SESSION['error'] = "Les mots de passe ne sont pas identiques"; // Sinon on affiche un message d'erreur
+					$qs = "?view=connexion";
 				}
 			}
 		break;

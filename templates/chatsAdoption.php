@@ -5,11 +5,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	die("");
 }
 
-if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
-    echo "<script>window.alert('" . $_SESSION['error'] . "');</script>";
-    unset($_SESSION['error']);
-}
-
 ?>
 
 <script src="./js/utils.js"></script>
