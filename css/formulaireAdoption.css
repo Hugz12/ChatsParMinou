@@ -20,7 +20,7 @@
 	position: relative;
 }
 
-#allFormulaireAdoption > form > input {
+#allFormulaireAdoption > * > input {
 	margin: 4% 0 4% 0;
 	width: auto;
 	display: flex;
@@ -330,4 +330,7 @@ input {
 	  transform: scale(1);
 	}
   }
-  
+
+#rechercheChat{
+	margin: 1% 5%;
+}

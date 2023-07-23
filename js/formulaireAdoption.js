@@ -126,54 +126,28 @@ function afficherChatsliké(chats) {
   }
 }
 
-function rechercheChat() {
-	var nbChatsShow = 0;
-	var input = document.getElementById("rechercheChats");
+function rechercheAdoption() {
+	var input = document.getElementById("rechercheAdoption");
 	var recherche = input.value.toUpperCase();
 	console.log(recherche);
-	var allSlider = document.getElementById('allSliderChats');
-	var allSliderPoints = document.getElementById('allSliderPointsChats');
-
-	var listeChats = allSlider.getElementsByClassName('chatNom');
-	var listePoints = allSliderPoints.getElementsByClassName('slidePointChats');
+  var conteneurChats = document.getElementById("conteneurChats");
+	var listeChats = conteneurChats.getElementsByClassName('chatTexte');
 	for (var i = 0; i < listeChats.length; i++) {
-
 		if (listeChats[i].innerHTML.toUpperCase().includes(recherche)) {
-			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
-			nbChatsShow++;
+			listeChats[i].parentElement.style.display = "block";
 		}
 		else {
-			listeChats[i].parentElement.parentElement.parentElement.style.display = "none";
-		}
-
-		if (listePoints[i].alt.toUpperCase().includes(recherche)) {
-			listePoints[i].style.display = "block";
-			nbChatsShow++;
-		}
-		else {
-			listePoints[i].style.display = "none";
+			listeChats[i].parentElement.style.display = "none";
 		}
 
 		if (recherche == "") {
-			listeChats[i].parentElement.parentElement.parentElement.style.display = "block";
-			listePoints[i].style.display = "block";
+			listeChats[i].parentElement.style.display = "block";
 		}
 
 	}
-	responsivePointsChats();
-	var allSlider = document.getElementById("allSliderChats");
-	if (nbChatsShow == 0) {
-		$(allSlider).children(".slider")[0].style.display = "none";
-		document.getElementById("zeroChat").style.display = "block";
-	}
-	else {
-		$(allSlider).children(".slider")[0].style.display = "block"
-		document.getElementById("zeroChat").style.display = "none";
-	}
-	allSlider.style.setProperty("--transform", 0);
 }
 
-const rechercher = debounce(() => rechercheChat(), 500);
+const rechercherChat = debounce(() => rechercheAdoption(), 500);
 
 
 function ajouterRetirerCodeChat(codeChat) {

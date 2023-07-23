@@ -392,20 +392,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		case 'Changer la photo de profil' :
-			// On vérifie la présence des champs
-			if ($image = valider("image","FILES")){
-				// on supprime l'ancienne image
-				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
-				// on upload la nouvelle
-				if (!uploadPhoto($image, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
-					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
-					break;
-				}
-				$qs = "?view=profil";
-			
-			}
-		break;
 
 
 		case 'addPassage' : 
@@ -553,10 +539,23 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				die();
 			}
 		
+		break;
+
+		case 'sendMail' :
+			if ($mailn = valider("mailn")){
+				if (!userExistsBDD($mailn)) { // Si l'utilisateur n'existe pas déjà
+					envoyeMail($mailn);
+					ob_clean();
+					echo json_encode("ok");
+					die();
+				}
+			}
+
+		break;
+
 		case 'changerMdp' :
 			if($mdpV = valider("mdpV","POST"))
 			if($mdpN = valider("mdpN","POST"))
-			echo "test";
 			if($mdpN2 = valider("mdpN2","POST")){
 				if(password_verify($mdpV,getPassword($_SESSION["mail"])) && $mdpN === $mdpN2){
 					changerMdp($mdpN2);
@@ -609,7 +608,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		break;
 
 		case 'changerPhotoProfil' :
-			if ($photo = valider("photo","FILES")){
+
+			if ($photo = valider("image","FILES")){
+				var_dump($photo);
 				// on supprime l'ancienne image
 				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
 				// on upload la nouvelle

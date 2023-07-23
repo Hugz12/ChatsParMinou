@@ -14,6 +14,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 <link rel="stylesheet" href="./css/formulaireAdoption.css">
+<script src="./js/utils.js"></script>
 <script src="./js/formulaireAdoption.js"></script>
 
 <script>
@@ -64,20 +65,30 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 </div>
             </div>
         </div>
+    </form>
         <div id="infoChat">
-        <div class="titre  tailleSousTitre">Chats likés</div>
+            <div class="titre  tailleSousTitre">Chats likés</div>
             <div id="conteneurChatsliké"></div>
             <script>
                 var chats = <?= json_encode(listerChats());?>;
                 afficherChatsliké(chats);
             </script> 
             <div class="titre  tailleSousTitre">Choix des chats</div>
-            <div id="conteneurChats"></div>
-            <script>
-                var chats = <?= json_encode(listerChats());?>;
-                afficherChats(chats);
-            </script> 
-         </div>
+            <div id="rechercheChat">
+                <form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercherChat();">
+                    <div class="group">
+                        <input type="text" id="rechercheAdoption" required>
+                        <label for="rechercheAdoption">Recherche un chat par son nom</label>
+                    </div>
+                </form>
+                <div id="conteneurChats"></div>
+                <script>
+                    var chats = <?= json_encode(listerChats());?>;
+                    afficherChats(chats);
+                </script> 
+            </div>
+        </div>
+    <form action='controleur.php' method='post'>
         <div id="infoAdoption">
             <div class="titre  tailleSousTitre">Informations pratiques</div>
             <div class="infoAdoptionInput">
@@ -121,6 +132,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
                 </label>
             </div>
         </div>
-        <input id ="submitFormulaireAdoption" type="button" class='buttonType' onclick="submitForm();" value= "Envoyer le formulaire"/>
+        <input id ="submitFormulaireAdoption" type="button" class='buttonType' onclick="submitForm();" value= "Envoyer le formulaire">
     </form>
 </div>

@@ -4,7 +4,12 @@
 
 include_once("maLibSQL.pdo.php"); // To make requests to the database
 include_once("maLibSecurisation.php"); // To use hashedPassword()
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 /**
  * @file modele.php
  * Fichier contenant des fonctions de gestion de la base de données
@@ -101,10 +106,88 @@ function changerNom($name){
     return SQLUpdate($SQL);
 }
 
-function changerMail($mail){
+function envoyeMail($mailn){
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 0;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'testdeschats@gmail.com';                     //SMTP username
+        $mail->Password   = 'hcrtwpcdlezuydtm';                               //SMTP password
+        $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('ne-pas-repondre@gmail.com','Administrateur ChatsparMinou');
+        $mail->addAddress($mailn);
+        $mail->addReplyTo('noreplychatsparminou@gmail.com');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+        $confirmationCode = generateConfirmationCode(); // Remplacez 'generateConfirmationCode' par votre fonction pour générer le code
+        // Créer le lien de confirmation avec le code généré
+        $confirmationLink = 'http://localhost/ChatsParMinou/index.php?view=profil&code=' . $confirmationCode;
+        codeMail($confirmationCode,$mailn);
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Réinitialisation mot de passe ChatsparMinou';
+        $mail->Body    = 'En cliquant sur le lien vous pourrez réinitialiser votre mot de passe : <a href="' . $confirmationLink . '">Réinitialiser</a>';
+        $mail->AltBody = 'Réinitialisation du mot de passe ChatsparMinou';
+
+
+        $mail->send();
+        echo 'Le mail à bien été envoyé';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    $mail->smtpClose();
+}
+
+function generateConfirmationCode() {
+    // Générer un code unique basé sur l'heure actuelle en microsecondes
+    return uniqid();
+}
+
+function codeMail($confirmationCode, $mailn) {
     $mailv = $_SESSION['mail'];
-    $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
+    // Utilisez le code de confirmation généré pour l'insérer dans la BDD
+    $SQL = "INSERT INTO codeMail (code, ancienMail, nouveauMail) VALUES ('$confirmationCode', '$mailv', '$mailn')";
+    SQLInsert($SQL);
+}
+
+function verifyConfirmationCode($confirmationCode) {
+    // Requête SQL pour vérifier si le code de confirmation existe dans la base de données
+    $SQL = "SELECT COUNT(*) AS count FROM codeMail WHERE code = '$confirmationCode'";
+    $count = SQLGetChamp($SQL);
+
+    // Si le nombre de lignes avec le code de confirmation est supérieur à 0, cela signifie que le code est valide
+    return $count > 0 ? 1 : 0;
+}
+
+function changerMail($mailv,$mailn){
+    $SQL = "UPDATE utilisateur SET mail = '$mailn' WHERE mail = '$mailv'";
     return SQLUpdate($SQL);
+}
+
+function getMailv($code){
+    $SQL = "SELECT ancienMail FROM codeMail WHERE code = '$code'";
+    return SQLGetChamp($SQL);
+}
+
+function getMailn($code){
+    $SQL = "SELECT nouveauMail FROM codeMail WHERE code = '$code'";
+    return SQLGetChamp($SQL);
+}
+function supCode($code){
+    $SQL = "DELETE FROM codeMail WHERE code = '$code'";
+    return SQLDelete($SQL);
 }
 function changerMdp($password){
     $mail = $_SESSION['mail'];
