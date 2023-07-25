@@ -54,6 +54,7 @@ if (isset($_GET['code'])) {
 				<input type="hidden" class="buttonType" value="ChangerPhotoProfil" name="action">
 			</form>
 		</div>
+		<label id="infoPhoto">Cliquer pour changer la photo</label>
 		<div class="info">
 		<form>
 			<div class='group'>
@@ -75,16 +76,16 @@ if (isset($_GET['code'])) {
 			<form>
 					<div class='group'>
 						<input type='password' name='mdpv' id='mdpV' required>
-						<label for="mdpv">Ancien mdp</label>
+						<label for="mdpv">Ancien mot de passe</label>
 					</div>
 					<div class='group'>
 						<input type='password' name='mdpn' id='mdpN' required>
-						<label for="mdpn">Nouveau mdp</label>
+						<label for="mdpn">Nouveau mot de passe</label>
 					</div>
 
 					<div class='group'>
 						<input type='password' name='mdpn2' id='mdpN2'required>
-						<label for="mdpn2">Confirmer le nouveau mdp</label>
+						<label for="mdpn2">Confirmer le nouveau mot de passe</label>
 					</div>
 
 					<input type="button" class="buttonType" value="changer de mot de passe" onclick="changerMdp();">

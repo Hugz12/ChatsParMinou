@@ -204,3 +204,30 @@
     border-color: rgb(200,200,200)!important;
     transform: none!important;
 }
+
+
+.tooltip {
+	display: none;
+	position: absolute;
+	top: calc(0%);
+	right: 0;
+	background-color: inherit;
+	border : 2px solid rgb(200,200,200);
+	color: rgb(200,200,200);
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	cursor: default;
+	opacity: 0.8;
+}
+
+.group:hover .tooltip {
+    display: flex;
+}
+
+#infoPhoto {
+    display: flex;
+    color: grey;
+    text-align: center;
+    justify-content: center;
+}
