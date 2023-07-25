@@ -67,9 +67,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						
 						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
 						if($photo = valider("photo","FILES")){
-							echo "photo";
-							print_r($photo);
-							die();
 							if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
 								$_SESSION['error'] = "Erreur lors de l'ajout de la photo de profil, vous pourrez changer votre photo depuis la page profil";
 							}
