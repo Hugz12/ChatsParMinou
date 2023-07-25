@@ -73,8 +73,18 @@
     background-color: inherit;
 }
 
-.info > .group {
-    margin-top: 5%;
+.info > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#infoPhoto {
+    display: flex;
+    color: rgb(150, 150, 150);
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 
@@ -86,9 +96,11 @@
 .mdpMailGestion {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 30px;
+    width: 100%;
+    margin-bottom: 70px;
 }
 
 .mdpMailGestion .group:not(:first-child) {
@@ -98,7 +110,8 @@
 .mdpMailGestion > * {
     width: 45%;
     min-width: 300px;
-    margin: 0 15px;
+    max-width: 500px;
+    margin: 0 25px;
     background-color: inherit;
 
     display: flex;
@@ -128,7 +141,8 @@
 
 .gestion {
     width: 100%;
-    margin: 50px 0;
+    margin: 50px 15px 0 15px;
+    max-width: none;
 }
 
 .gestion > .titre {
@@ -259,11 +273,4 @@
 
 .group:hover .tooltip {
     display: flex;
-}
-
-#infoPhoto {
-    display: flex;
-    color: grey;
-    text-align: center;
-    justify-content: center;
 }

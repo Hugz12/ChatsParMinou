@@ -5,26 +5,6 @@ function changerPhotoProfil(contexte){
     console.log(form);
     form.submit();
     console.log("submit");
-    var image = document.getElementById("image");
-    console.log("image");
-    console.log(image);
-    $.ajax({
-        url: "./controleur.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            "action" : "changerPhotoProfil",
-            "image" : image,
-        },
-        success: function(retour) {
-            console.log("Votre nom a bien été changé");
-            alert ("Votre nom a bien été changé");
-        },
-        error: function(retour) {
-            console.log("erreur");
-            alert ("Erreur lors du changement de nom");
-        }
-    }) 
 }
 
 
@@ -147,7 +127,7 @@ function changerRole(){
 
 $(function() {
 
-    $('#i').click(function() {
+    $('#i').hover(function() {
         $('#popupInfos').toggle();
         $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
     });

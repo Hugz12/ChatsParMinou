@@ -8,7 +8,6 @@ include_once "libs/maLibSecurisation.php";
 $url = ($_SERVER["HTTP_REFERER"]); // On récupère l'url de la page précédente
 $urlBase = "index.php"; 
 
-
 if ($action = valider("action")){ // action = valeur de l'attribut name du bouton submit d'1 form
 	ob_start (); // On démarre le tampon de sortie
 	echo "Action = '$action' <br />";
@@ -604,8 +603,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		case 'changerPhotoProfil' :
-
+		case 'ChangerPhotoProfil' :
 			if ($photo = valider("image","FILES")){
 				var_dump($photo);
 				// on supprime l'ancienne image

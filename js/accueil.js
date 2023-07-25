@@ -519,15 +519,3 @@ function adopterChatDuMois(code) {
 	form.submit();
 } 
 
-
-function nousAiderDisplay() {
-	var nousAiderResponsiveBox = document.getElementById("nousAiderResponsiveBox");
-	if (nousAiderResponsiveBox.style.right == "0px") {
-		nousAiderResponsiveBox.style.right = "-200px";
-		nousAiderResponsiveBox.children[0].style.transform = "rotate(0deg)";
-	}
-	else {
-		nousAiderResponsiveBox.style.right = "0px";
-		nousAiderResponsiveBox.children[0].style.transform = "rotate(180deg)";
-	}
-}
