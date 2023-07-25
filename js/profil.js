@@ -147,7 +147,7 @@ function changerRole(){
 
 $(function() {
 
-    $('#i').hover(function() {
+    $('#i').click(function() {
         $('#popupInfos').toggle();
     });
 
