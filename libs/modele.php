@@ -137,7 +137,7 @@ function envoyeMail($mailn){
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Réinitialisation mot de passe ChatsparMinou';
+        $mail->Subject = 'Reinitialisation mot de passe ChatsparMinou';
         $mail->Body    = 'En cliquant sur le lien vous pourrez réinitialiser votre mot de passe : <a href="' . $confirmationLink . '">Réinitialiser</a>';
         $mail->AltBody = 'Réinitialisation du mot de passe ChatsparMinou';
 

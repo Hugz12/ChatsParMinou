@@ -149,11 +149,10 @@ $(function() {
 
     $('#i').click(function() {
         $('#popupInfos').toggle();
+        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
     });
 
-    $('#i').mousemove(function(e) {
-        $("#popupInfos").css('top', e.pageY).css('left', e.pageX);
-    });
+
 });
   
 

@@ -175,6 +175,7 @@ function sauvegarderRetour() {
 }
 
 function initialiserPage() {
+  console.log(retour);
   if (retour === false) {
     retour = [];
   }
@@ -196,9 +197,8 @@ function initialiserPage() {
 }
 
 
-// Appeler la fonction d'initialisation au chargement de la page
-//window.addEventListener('load', initialiserPage);
 document.addEventListener("DOMContentLoaded", initialiserPage);
+
 function submitForm() {
   var nom = document.getElementById("nomForm").value;
   var prenom = document.getElementById("prenomForm").value;
@@ -215,6 +215,7 @@ function submitForm() {
   var pre = document.getElementById("preForm").value;
   var justi = document.getElementById("justiForm").value;
   var date = new Date();
+  console.log(retour);
   date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
   if (ext == "on") {
     ext = 1;
@@ -240,7 +241,7 @@ function submitForm() {
     justi = 0;
   }
   retour = retour.replace(/[\[\]"]/g, '');  // Supprimer les crochets carrés et les guillemets
-
+  console.log(retour);
   // Diviser la chaîne en utilisant la virgule comme délimiteur
   var chiffres = retour.split(',');
 
