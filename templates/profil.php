@@ -144,11 +144,11 @@ if (isset($_GET['code'])) {
 					}
 
 					echo '</div>';
-					if ($resultat['role']==2){
+					if ($resultat['role']==2 && isSuperAdmin($_SESSION['mail'])){
 					echo '<input type="button" id="downRole_'.$resultat['mail'].'" data-mail="'.$resultat['mail'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'" class="buttonType" value="-" onclick="changerRole();">';
 					} else if ( $resultat['role']==3) {
 					echo '<input type="button" id="downRole_'.$resultat['mail'].'" data-mail="'.$resultat['mail'].'" data-nom="'.$resultat['name'].'" data-role="'.$resultat['role'].'" class="buttonType" value="x" onclick="changerRole();">';
-					} else if ($resultat['role']==1) {
+					} else if ($resultat['role']==1 || $resultat['role']==2 && isAdmin($_SESSION['mail'])) {
 						echo '<input type="button" class="buttonType buttonNoHover"  value="-">';	
 					}
 					echo '</div>';
