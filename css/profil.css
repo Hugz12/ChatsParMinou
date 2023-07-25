@@ -99,6 +99,8 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 30px;
+    width: 100%;
+    margin-bottom: 70px;
 }
 
 .mdpMailGestion .group:not(:first-child) {
@@ -140,6 +142,7 @@
 .gestion {
     width: 100%;
     margin: 50px 15px 0 15px;
+    max-width: none;
 }
 
 .gestion > .titre {
