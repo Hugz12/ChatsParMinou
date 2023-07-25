@@ -19,8 +19,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 <script>
 
-    var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
-    console.log(retour);
+
+var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
 
 </script>
 

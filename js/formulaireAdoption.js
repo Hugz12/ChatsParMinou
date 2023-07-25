@@ -175,15 +175,11 @@ function sauvegarderRetour() {
 }
 
 function initialiserPage() {
-  // Récupérer les paramètres d'URL
-  var params = new URLSearchParams(window.location.search);
-
   if (retour === false) {
     retour = [];
   }
   // Récupérer tous les éléments checkbox dans la page
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  
   // Parcourir les checkboxes
   checkboxes.forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
@@ -198,8 +194,8 @@ function initialiserPage() {
 
 
 // Appeler la fonction d'initialisation au chargement de la page
-window.addEventListener('load', initialiserPage);
-
+//window.addEventListener('load', initialiserPage);
+document.addEventListener("DOMContentLoaded", initialiserPage);
 function submitForm() {
   var nom = document.getElementById("nomForm").value;
   var prenom = document.getElementById("prenomForm").value;
