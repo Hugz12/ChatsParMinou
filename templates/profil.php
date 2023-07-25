@@ -57,6 +57,7 @@ if (isset($_GET['code'])) {
 		<label id="infoPhoto">Cliquer pour changer la photo</label>
 		<div class="info">
 		<form>
+		<form class="info">
 			<div class='group'>
 			<?php
 			$nom=getNomUtilisateur($_SESSION['mail']);
@@ -64,9 +65,8 @@ if (isset($_GET['code'])) {
 			?>
 			<label for="nom">Nom et prénom</label>
 			</div>
-			<input type="button" onclick="changerNom();" class="buttonType" value="Modifier mes informations personnelles">
+			<input type="button" onclick="changerNom();" class="buttonType" value="Enregistrer">
 		</form>
-		</div>
 	</div>
 
 
@@ -107,20 +107,20 @@ if (isset($_GET['code'])) {
 			// Vérifier si l'utilisateur est admin
 			if ($_SESSION["Admin"]) {
 
-				echo '<div class="tabGestion">';
 				// Si l'utilisateur est admin, récupérer les résultats de la fonction
 				$resultats = listerUtilisateurs();
 				// Afficher la div et les résultats
-				echo '<div class="gestion">
-				<div class="titre">Gestion des utilisateurs
-				<div id="i">i</div>
-				</div>
-				<form id="formRechercheUser" onsubmit="return false;" onkeyup="rechercher();">
-				<div class="group">
-					<input type="text" id="rechercheUser" required>
-					<label for="rechercheUser">Rechercher un utilisateur par son nom</label>
-				</div>
-				</form>';
+				echo '
+				<div class="gestion">
+					<div class="titre">Gestion des utilisateurs
+						<div id="i">i</div>
+					</div>
+					<form id="formRechercheUser" onsubmit="return false;" onkeyup="rechercher();">
+						<div class="group">
+							<input type="text" id="rechercheUser" required>
+							<label for="rechercheUser">Rechercher un utilisateur par son nom</label>
+						</div>
+					</form>';
 				echo '<form>';
 				echo '<div class="utilisateurs">';
 				foreach($resultats as $resultat) {

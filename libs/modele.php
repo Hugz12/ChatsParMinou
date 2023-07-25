@@ -112,14 +112,14 @@ function envoyeMail($mailn){
 
     try {
         //Server settings
-        $mail->SMTPDebug = 0;                      //Enable verbose debug output
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'testdeschats@gmail.com';                     //SMTP username
-        $mail->Password   = 'hcrtwpcdlezuydtm';                               //SMTP password
-        $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->SMTPDebug = 0;                          //Enable verbose debug output
+        $mail->isSMTP();                               //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';          //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                      //Enable SMTP authentication
+        $mail->Username   = 'testdeschats@gmail.com';  //SMTP username
+        $mail->Password   = 'hcrtwpcdlezuydtm';        //SMTP password
+        $mail->SMTPSecure = 'tls';                     //Enable implicit TLS encryption
+        $mail->Port       = 587;                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
         $mail->setFrom('ne-pas-repondre@gmail.com','Administrateur ChatsparMinou');

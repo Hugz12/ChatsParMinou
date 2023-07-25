@@ -1,74 +1,43 @@
-.contour {
-    position: relative;
-    top: 10%;
-    left: 2%;
-    height: 90%;
-    width: 96%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-content: stretch;
-    flex-flow: row wrap;
-    background-color: inherit;
-    margin-bottom: 1%;
-}
+/********************************************************************/
+/***************************  GENERALE  *****************************/
+/********************************************************************/
+
 
 #pageContent {
     background-color: inherit;
 }
 
-.contour>* {
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
+
+.contour {
+    width: 96%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: inherit;
+    
+}
+
+
+.contour > * {
+    margin: 30px 5% 0 5%;
     background-color: inherit;
     z-index: 2;
 }
 
-.info>*>.group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: space-between;
-    margin-top: 5%;
-}
 
 .titre {
     font-size: 30px;
     font-weight: bold;
     margin: 30px 1px 30px 4%;
-    cursor: default;
 }
 
-.pdp {
-    cursor: default;
-}
-
-.mdp>*>.group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 5%;
-}
-
-.mail>*>.group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 5%;
-}
-
-.buttonType {
-    margin-top: 5%;
-
-}
 
 #photoDeProfil.photoProfil {
     width: 300px;
     height: 300px;
     object-fit: cover;
-    cursor: default;
+    cursor: pointer;
 }
 
 #photoDeProfil.photoGestion {
@@ -78,39 +47,102 @@
     cursor: default;
 }
 
+
+.buttonType {
+    margin-top: 25px;
+}
+
+
+
+
+/********************************************************************/
+/***************************  PROFIL  ******************************/
+/********************************************************************/
+
+.pdpInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: inherit;
+}
+
+.info > .group {
+    margin-top: 5%;
+}
+
+
+
+/********************************************************************/
+/***************************  GESTION  ******************************/
+/********************************************************************/
+
 .mdpMailGestion {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-content: space-between;
     flex-wrap: wrap;
-    flex-grow: 2;
-    margin-top: 5%;
+    margin-top: 30px;
 }
+
+.mdpMailGestion .group:not(:first-child) {
+    margin-top: 25px;
+}
+
+.mdpMailGestion > * {
+    width: 45%;
+    min-width: 300px;
+    margin: 0 15px;
+    background-color: inherit;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.mdpMailGestion > * > form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+/********************************************************************/
+/***************************  UTILISATEURS  *************************/
+/********************************************************************/
+
+
 
 .gestion {
-    flex-grow: 3;
-    background-color: inherit;
+    width: 100%;
+    margin: 50px 0;
 }
 
-.mdp {
-    flex-grow: 1;
-    width: 45%;
-    min-width: 300px;
-    margin: 0 2%;
-    background-color: inherit;
+.gestion > .titre {
+    display: flex;
+    flex-direction: row;
+
 }
 
-.mail {
-    flex-grow: 1;
-    width: 45%;
-    min-width: 300px;
-    margin: 0 2%;
-    background-color: inherit;
-}
-
-.info {
-    background-color: inherit;
+.utilisateurs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .utilisateur {
@@ -122,8 +154,12 @@
     align-items: center;
     flex-wrap: wrap;
     align-content: space-between;
-    padding: 2% 2%;
-    margin: 1% 1%;
+    padding: 15px 15px;
+    margin: 10px 10px;
+}
+
+.utilisateur .buttonType {
+    margin-top: 0!important;
 }
 
 .perso{
@@ -133,20 +169,11 @@
     flex-direction: column;
     align-content: space-between;
 }
-.utilisateurs {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-grow: 2;
-    margin-top: 5%;
-}
 
-.tabGestion {
-    background-color: inherit;
-    width: 100%;
+
+
+#formRechercheUser {
+    max-width: 450px;
 }
 
 .role-1 {
@@ -157,6 +184,21 @@
     color: var(--third-color);
 }
 
+.buttonNoHover {
+    opacity: 0.5;
+    cursor: default!important;
+}
+
+.buttonNoHover:hover {
+    border-color: rgb(200,200,200)!important;
+    transform: none!important;
+}
+
+
+
+/********************************************************************/
+/***************************  INFOS  ********************************/
+/********************************************************************/
 
 #i {
     display: flex;
@@ -196,14 +238,6 @@
     padding-left: 25px;
 }
 
-.buttonNoHover {
-    opacity: 0.5;
-    cursor: default!important;
-}
-.buttonNoHover:hover {
-    border-color: rgb(200,200,200)!important;
-    transform: none!important;
-}
 
 
 .tooltip {
