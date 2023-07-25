@@ -73,10 +73,11 @@
     background-color: inherit;
 }
 
-.info > .group {
-    margin-top: 5%;
+.info > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 
 #infoPhoto {
     display: flex;
@@ -95,7 +96,7 @@
 .mdpMailGestion {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 30px;
 }
@@ -107,7 +108,8 @@
 .mdpMailGestion > * {
     width: 45%;
     min-width: 300px;
-    margin: 0 15px;
+    max-width: 500px;
+    margin: 0 25px;
     background-color: inherit;
 
     display: flex;
