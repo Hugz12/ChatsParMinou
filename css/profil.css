@@ -237,7 +237,8 @@
 #popupInfos {
     display: none;
     position: absolute;
-    width: auto;
+    width: 80%;
+    max-width: 500px;
     padding: 10px;
     background-color: var(--sec-color);
     border-radius: 30px;
@@ -247,6 +248,7 @@
     color: rgb(100, 100, 100);
     font-size: 15px;
     z-index: 11;
+
 }
 
 #popupInfos ul {
