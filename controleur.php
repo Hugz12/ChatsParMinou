@@ -540,9 +540,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		case 'sendMail' :
 			if ($mailn = valider("mailn")){
 				if (!userExistsBDD($mailn)) { // Si l'utilisateur n'existe pas déjà
-					envoyeMail($mailn);
 					ob_clean();
-					echo json_encode("ok");
+					envoyeMail($mailn);
+					echo "ok";
 					die();
 				}
 			}

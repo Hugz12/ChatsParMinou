@@ -46,7 +46,7 @@ function sendMail(){
       data: {
         "action" : "sendMail",
         "mailn" : mailn,
-        },
+      },
       success: function(retour) {
         console.log("Un mail vient d'être envoyé à la nouvelle adresse");
         alert("Un mail vient d'être envoyé à la nouvelle adresse"); // Affichez le message de confirmation renvoyé par PHP.
