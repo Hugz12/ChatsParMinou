@@ -200,6 +200,7 @@ function initialiserPage() {
 document.addEventListener("DOMContentLoaded", initialiserPage);
 
 function submitForm() {
+  retour = JSON.stringify(retour);
   var nom = document.getElementById("nomForm").value;
   var prenom = document.getElementById("prenomForm").value;
   var mail = document.getElementById("mailForm").value;
@@ -211,7 +212,6 @@ function submitForm() {
   var animaux = document.getElementById("animauxForm").value;
   var sit = document.getElementById("sitForm").value;
   var com = document.getElementById("comForm").value;
-  var retour = localStorage.getItem('retour');
   var pre = document.getElementById("preForm").value;
   var justi = document.getElementById("justiForm").value;
   var date = new Date();
