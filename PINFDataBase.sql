@@ -80,6 +80,12 @@ CREATE TABLE `conseils` (
   `description` varchar(255)
 )ENGINE = InnoDB;
 
+CREATE TABLE `codeMail` (
+  `code` varchar(13) PRIMARY KEY,
+  `ancienMail` varchar(255),
+  `nouveauMail` varchar(255)
+)ENGINE = InnoDB;
+
 ALTER TABLE `passageRefuge` ADD FOREIGN KEY (`mailBenevole`) REFERENCES `utilisateur` (`mail`);
 
 ALTER TABLE `concerne` ADD FOREIGN KEY (`codeChat`) REFERENCES `chat` (`code`);

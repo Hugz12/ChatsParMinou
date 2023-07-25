@@ -1,10 +1,32 @@
 function changerPhotoProfil(contexte){
+    console.log("contexte");
     console.log(contexte);
     var form = contexte.parentNode;
+    console.log(form);
     form.submit();
+    console.log("submit");
+    var image = document.getElementById("image");
+    console.log("image");
+    console.log(image);
+    $.ajax({
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "changerPhotoProfil",
+            "image" : image,
+        },
+        success: function(retour) {
+            console.log("Votre nom a bien été changé");
+            alert ("Votre nom a bien été changé");
+        },
+        error: function(retour) {
+            console.log("erreur");
+            alert ("Erreur lors du changement de nom");
+        }
+    }) 
 }
 
-// script.js
 
 
   
@@ -32,25 +54,28 @@ function changerNom() {
     }) 
 }
 
-function changerMail() {
-    var inputValue2 = document.getElementById("mail-input").value;
+
+
+function sendMail(){
+    var mailn = document.getElementById("mail-input").value;
+    console.log(mailn);
     $.ajax({
-        url: "./controleur.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            "action" : "changerMail",
-            "mail" : inputValue2,
+      url: './controleur.php', // Le nom du fichier PHP qui contient la fonction sendmail() et le code de l'envoi d'e-mail.
+      type: "POST",
+      dataType: "json",
+      data: {
+        "action" : "sendMail",
+        "mailn" : mailn,
         },
-        success: function(retour) {
-            console.log("Votre mail a bien été changé");
-            alert ("Votre mail a bien été changé");
-        },
-        error: function(retour) {
-            console.log("erreur");
-            alert ("Erreur lors du changement de mail");
-        }
-    }) 
+      success: function(retour) {
+        console.log("Un mail vient d'être envoyé à la nouvelle adresse");
+        alert("Un mail vient d'être envoyé à la nouvelle adresse"); // Affichez le message de confirmation renvoyé par PHP.
+      },
+      error: function(retour) {
+        console.error("erreur"); // Affichez les erreurs éventuelles dans la console.
+        alert("Le mail n'est pas bon"); // Affichez le message de confirmation renvoyé par PHP.
+      }
+    });
 }
 
 function changerMdp(){
@@ -133,29 +158,23 @@ $(function() {
   
 
 function rechercheUser() {
-	var nbUserShow = 0;
 	var input = document.getElementById("rechercheUser");
 	var recherche = input.value.toUpperCase();
 	console.log(recherche);
-
-	var listeUser = allSlider.getElementsByClassName('utilisateur');
-	for (var i = 0; i < listeUser.length; i++) {
-
-		if (listeUser[i].innerHTML.toUpperCase().includes(recherche)) {
-			listeUser[i].parentElement.parentElement.parentElement.style.display = "block";
-			nbUserShow++;
+	var listeUsers = document.getElementsByClassName('nomUser');
+	for (var i = 0; i < listeUsers.length; i++) {
+		if (listeUsers[i].innerHTML.toUpperCase().includes(recherche)) {
+			listeUsers[i].parentElement.parentElement.style.display = "flex";
 		}
 		else {
-			listeUser[i].parentElement.parentElement.parentElement.style.display = "none";
+			listeUsers[i].parentElement.parentElement.style.display = "none";
 		}
 
 		if (recherche == "") {
-			listeUser[i].parentElement.parentElement.parentElement.style.display = "block";
-			listePoints[i].style.display = "block";
+			listeUsers[i].parentElement.parentElement.style.display = "flex";
 		}
 
 	}
-	allSlider.style.setProperty("--transform", 0);
 }
 
 const rechercher = debounce(() => rechercheUser(), 500);

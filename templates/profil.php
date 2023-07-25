@@ -1,5 +1,4 @@
 <?php
-
 if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée directement par son adresse
 	header("Location:../index.php?view=accueil"); // on redirige en passant par la page index
 	die("");
@@ -14,14 +13,32 @@ if (!valider('Connecte', 'SESSION')) {
 <link rel="stylesheet" href="./css/profil.css">
 <link rel="stylesheet" href="css/form.css">
 <script src="./js/profil.js"></script>
+<script src="./js/utils.js"></script>
 <div class="titre">
 				<?php
 				$nom=getNomUtilisateur($_SESSION['mail']);
 				echo "Bonjour  " .$nom. ", voici votre profil";
 				?> 
 </div>
-			
+<?php
+if (isset($_GET['code'])) {
+    $confirmationCode = $_GET['code'];
 
+    // Vérifier si le code de confirmation est valide dans la base de données
+    if (verifyConfirmationCode($confirmationCode)) {
+        // Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
+		$mailv = getMailv($confirmationCode);
+		$mailn = getMailn($confirmationCode);
+		changerMail($mailv,$mailn);
+		supCode($confirmationCode);
+        // Afficher un message de confirmation
+        echo "Votre adresse e-mail a été mise à jour avec succès !";
+    } else {
+        // Le code de confirmation n'est pas valide, afficher un message d'erreur
+        echo "Le code de confirmation n'est pas valide. Veuillez réessayer.";
+    }
+}
+?>
 <div class="contour">
 	<div class="pdpInfo">
 		<div class="pdp">
@@ -33,11 +50,10 @@ if (!valider('Connecte', 'SESSION')) {
 					echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"./ressources/users/default.png\"   /></label>";
 				}
 				?>
-				<input type="file" name="image" style="display : none;" id="image" onchange="changerPhotoProfil(this);">
+				<input type="file" name="image" style="display : none;" id="image" onchange="changerPhotoProfil(this);" value="'changerPhotoProfil">
 				<input type="hidden" class="buttonType" value="ChangerPhotoProfil" name="action">
 			</form>
 		</div>
-
 		<div class="info">
 		<form>
 			<div class='group'>
@@ -71,27 +87,25 @@ if (!valider('Connecte', 'SESSION')) {
 						<label for="mdpn2">Confirmer le nouveau mdp</label>
 					</div>
 
-					<input type="button" class="buttonType" value="changer de mot de passe" onclick="changerMdp()">
+					<input type="button" class="buttonType" value="changer de mot de passe" onclick="changerMdp();">
 				</form>
 		</div>
 
 		<div class="mail">
-			<div class="titre">Changer d'adresse mails</div>
+			<div class="titre">Changer d'adresse mail ici</div>
 			<form>
-
-
 					<div class='group'>
 						<input type='text' name='mailn' id="mail-input" required>
 						<label for="mailn">Nouveau mail</label>
 					</div>
 
-					<input type="button" class="buttonType" value="changer d'adresse mail" onclick="changerMail();">
-				</form>
+					<input type="button" class="buttonType" value="changer d'adresse mail" onclick="sendMail();">
+			</form>
 		</div>
 		<?php
 			// Vérifier si l'utilisateur est admin
 			if ($_SESSION["Admin"]) {
-				echo '<form>';
+
 				echo '<div class="tabGestion">';
 				// Si l'utilisateur est admin, récupérer les résultats de la fonction
 				$resultats = listerUtilisateurs();
@@ -106,6 +120,7 @@ if (!valider('Connecte', 'SESSION')) {
 					<label for="rechercheUser">Rechercher un utilisateur par son nom</label>
 				</div>
 				</form>';
+				echo '<form>';
 				echo '<div class="utilisateurs">';
 				foreach($resultats as $resultat) {
 					echo'<div class="utilisateur">';
@@ -123,13 +138,11 @@ if (!valider('Connecte', 'SESSION')) {
 					}
 					// Utilisation de la structure de contrôle if/else pour déterminer la classe de couleur
 					if ($resultat['role'] == 1) {
-						echo '<span class="role-1">' . $resultat['name'] . '</span>';
+						echo '<span class="role-1 nomUser">' . $resultat['name'] . '</span>';
 					} else if ($resultat['role'] == 2) {
-						echo '<span class="role-2">' . $resultat['name'] . '</span>';
+						echo '<span class="role-2 nomUser">' . $resultat['name'] . '</span>';
 					} else if ($resultat['role'] == 3) {
-						echo '<span class="role-3">' . $resultat['name'] . '</span>';
-					} else {
-						echo $resultat['name'];
+						echo '<span class="role-3 nomUser">' . $resultat['name'] . '</span>';
 					}
 
 					echo '</div>';
@@ -161,7 +174,7 @@ if (!valider('Connecte', 'SESSION')) {
 <div id="popupInfos">
 	<p>Rôles des utilisateurs :</p>
 	<ul>
-		<li class="role-1">Administrateur</li> (de préférence 1 seul / il à tous les droits)
+		<li class="role-1">Administrateur</li> (de préférence 1 seul / il a tous les droits)
 		<li class="role-2">Bénévole</li> (peut voir le calendrier et modifier les événements)
 		<li>Utilisateur</li> (pour les personnes qui veulent juste adopter)
 	</ul>
