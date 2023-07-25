@@ -302,7 +302,7 @@ input {
   #conteneurChatsliké .chatContainer:not(.liked) {
 	display: none;
   }
-  
+
   @keyframes like_effect {
 	0% {
 	  transform: scale(0);

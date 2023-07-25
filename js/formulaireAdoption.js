@@ -189,6 +189,9 @@ function initialiserPage() {
 
     // Initialiser l'état de la checkbox en fonction des valeurs dans le tableau retour
     checkbox.checked = retour.includes(checkbox.dataset.codeChat);
+    if (checkbox.checked) {
+      checkbox.parentElement.parentElement.classList.add('liked');
+    }
   });
 }
 
