@@ -72,9 +72,11 @@ $(function() {
 
 function sendMailMdp(){
     var mailx = document.getElementById("mailOublie").value;
-    var mdp = document.getElementById("mdpOublie").value;
+    var mdp = document.getElementById("mdp1Oublie").value;
     var mdp2 = document.getElementById("mdp2Oublie").value;
-    console.log(mailn);
+    console.log(mailx);
+    console.log(mdp);
+    console.log(mdp2);
     $.ajax({
       url: './controleur.php', // Le nom du fichier PHP qui contient la fonction sendmail() et le code de l'envoi d'e-mail.
       type: "POST",
@@ -91,7 +93,7 @@ function sendMailMdp(){
       },
       error: function(retour) {
         console.error("erreur"); // Affichez les erreurs éventuelles dans la console.
-        alert("Ce mail n'est pas disponible"); // Affichez le message de confirmation renvoyé par PHP.
+        alert("Ce mail n'est pas disponible ou les codes ne correspondent pas"); // Affichez le message de confirmation renvoyé par PHP.
       }
     });
 }

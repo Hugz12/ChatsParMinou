@@ -167,7 +167,7 @@ function envoyeMailMdp($mailx, $mdp){
 
         //Recipients
         $mail->setFrom('ne-pas-repondre@gmail.com','Administrateur ChatsparMinou');
-        $mail->addAddress($_SESSION['mail']);
+        $mail->addAddress($mailx);
         $mail->addReplyTo('noreplychatsparminou@gmail.com');
         //$mail->addCC('cc@example.com');
         //$mail->addBCC('bcc@example.com');
@@ -242,6 +242,11 @@ function changerMdp($password){
     $mail = $_SESSION['mail'];
     $hashedPassword = hashedPassword($password);
     $SQL = "UPDATE utilisateur SET password = '$hashedPassword' WHERE mail = '$mail'";
+    return SQLUpdate($SQL);
+
+}
+function changerMdpOublie($mailx,$info){
+    $SQL = "UPDATE utilisateur SET password = '$info' WHERE mail = '$mailx'";
     return SQLUpdate($SQL);
 
 }

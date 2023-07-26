@@ -534,7 +534,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				if (verifyConfirmationCode($confirmationCode)) {
 					// Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
 					$mailv = getMailv($confirmationCode);
-					$mailn = getMailn($confirmationCode);
+					$mailn = getInfo($confirmationCode);
 					$mailfv = "./ressources/users/".$mailv.".jpg";
 					$mailfn = "./ressources/users/".$mailn.".jpg";
 					rename($mailfv,$mailfn);
@@ -565,9 +565,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($mdp2 = valider("mdp2"))
 			if ($mdp === $mdp2){
 				ob_clean();
-				envoyeMailMdp($mailx, $mdp);
+				$mdphashed = hashedPassword($mdp);
+				envoyeMailMdp($mailx, $mdphashed);
 				echo "ok";
-				die();
 			}
 			else {
 				ob_clean();
@@ -583,11 +583,9 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// Vérifier si le code de confirmation est valide dans la base de données
 				if (verifyConfirmationCode($confirmationCode)) {
 					// Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
-					$mailv = getMailv($confirmationCode);
+					$mailx = getMailv($confirmationCode);
 					$info = getInfo($confirmationCode);
-					$mailfv = "./ressources/users/".$mailv.".jpg";
-					rename($mailfv,$mailfn);
-					changerMail($mailv,$mailn);
+					changerMdpOublie($mailx,$info);
 					supCode($confirmationCode);
 					// Afficher un message de confirmation
 					session_destroy(); // On détruit la session
