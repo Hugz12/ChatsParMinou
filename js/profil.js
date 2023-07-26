@@ -127,7 +127,7 @@ function changerRole(){
 
 $(function() {
 
-    $('#i').hover(function() {
+    $('#i').click(function() {
         $('#popupInfos').toggle();
         $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
     });

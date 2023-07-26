@@ -559,6 +559,44 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		break;
 
+		case 'sendMailMdp' :
+			if ($mailx = valider("mailx"))
+			if ($mdp = valider("mdp"))
+			if ($mdp2 = valider("mdp2"))
+			if ($mdp === $mdp2){
+				ob_clean();
+				envoyeMailMdp($mailx, $mdp);
+				echo "ok";
+				die();
+			}
+			else {
+				ob_clean();
+				echo "erreur";
+				die();
+			}
+		break;	
+
+		case 'changerMdpCode' :
+			if (isset($_GET['code'])) {
+				$confirmationCode = $_GET['code'];
+			
+				// Vérifier si le code de confirmation est valide dans la base de données
+				if (verifyConfirmationCode($confirmationCode)) {
+					// Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
+					$mailv = getMailv($confirmationCode);
+					$info = getInfo($confirmationCode);
+					$mailfv = "./ressources/users/".$mailv.".jpg";
+					rename($mailfv,$mailfn);
+					changerMail($mailv,$mailn);
+					supCode($confirmationCode);
+					// Afficher un message de confirmation
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+				}
+			}
+		break;
+
+		break;
 		case 'changerMdp' :
 			if($mdpV = valider("mdpV","POST"))
 			if($mdpN = valider("mdpN","POST"))

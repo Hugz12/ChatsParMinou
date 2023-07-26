@@ -137,6 +137,50 @@ function envoyeMail($mailn){
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Reinitialisation mail ChatsparMinou';
+        $mail->Body    = 'En cliquant sur le lien vous pourrez réinitialiser votre adresse mail : <a href="' . $confirmationLink . '">Réinitialiser</a>';
+        $mail->AltBody = 'Réinitialisation du mail ChatsparMinou';
+
+
+        $mail->send();
+        echo 'Le mail à bien été envoyé';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    $mail->smtpClose();
+}
+
+function envoyeMailMdp($mailx, $mdp){
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 0;                          //Enable verbose debug output
+        $mail->isSMTP();                               //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';          //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                      //Enable SMTP authentication
+        $mail->Username   = 'testdeschats@gmail.com';  //SMTP username
+        $mail->Password   = 'hcrtwpcdlezuydtm';        //SMTP password
+        $mail->SMTPSecure = 'tls';                     //Enable implicit TLS encryption
+        $mail->Port       = 587;                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('ne-pas-repondre@gmail.com','Administrateur ChatsparMinou');
+        $mail->addAddress($_SESSION['mail']);
+        $mail->addReplyTo('noreplychatsparminou@gmail.com');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+        $confirmationCode = generateConfirmationCode(); // Remplacez 'generateConfirmationCode' par votre fonction pour générer le code
+        // Créer le lien de confirmation avec le code généré
+        $confirmationLink = 'http://localhost/ChatsParMinou/controleur.php?action=changerMdpCode&code=' . $confirmationCode;
+        codeMdp($confirmationCode,$mailx,$mdp);
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Reinitialisation mot de passe ChatsparMinou';
         $mail->Body    = 'En cliquant sur le lien vous pourrez réinitialiser votre mot de passe : <a href="' . $confirmationLink . '">Réinitialiser</a>';
         $mail->AltBody = 'Réinitialisation du mot de passe ChatsparMinou';
@@ -149,7 +193,6 @@ function envoyeMail($mailn){
     }
     $mail->smtpClose();
 }
-
 function generateConfirmationCode() {
     // Générer un code unique basé sur l'heure actuelle en microsecondes
     return uniqid();
@@ -158,7 +201,13 @@ function generateConfirmationCode() {
 function codeMail($confirmationCode, $mailn) {
     $mailv = $_SESSION['mail'];
     // Utilisez le code de confirmation généré pour l'insérer dans la BDD
-    $SQL = "INSERT INTO codeMail (code, ancienMail, nouveauMail) VALUES ('$confirmationCode', '$mailv', '$mailn')";
+    $SQL = "INSERT INTO codeMail (code, ancienMail, info) VALUES ('$confirmationCode', '$mailv', '$mailn')";
+    SQLInsert($SQL);
+}
+
+function codeMdp($confirmationCode, $mailx , $mdp) {
+    // Utilisez le code de confirmation généré pour l'insérer dans la BDD
+    $SQL = "INSERT INTO codeMail (code, ancienMail, info) VALUES ('$confirmationCode', '$mailx', '$mdp')";
     SQLInsert($SQL);
 }
 
@@ -181,8 +230,8 @@ function getMailv($code){
     return SQLGetChamp($SQL);
 }
 
-function getMailn($code){
-    $SQL = "SELECT nouveauMail FROM codeMail WHERE code = '$code'";
+function getInfo($code){
+    $SQL = "SELECT info FROM codeMail WHERE code = '$code'";
     return SQLGetChamp($SQL);
 }
 function supCode($code){

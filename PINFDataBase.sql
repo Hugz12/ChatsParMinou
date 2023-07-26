@@ -83,7 +83,7 @@ CREATE TABLE `conseils` (
 CREATE TABLE `codeMail` (
   `code` varchar(13) PRIMARY KEY,
   `ancienMail` varchar(255),
-  `nouveauMail` varchar(255)
+  `info` varchar(255)
 )ENGINE = InnoDB;
 
 ALTER TABLE `passageRefuge` ADD FOREIGN KEY (`mailBenevole`) REFERENCES `utilisateur` (`mail`);
