@@ -105,3 +105,60 @@
 #patteConnexion {
 	max-height: calc(100% - 270px);
 }
+
+#mdpOublie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: rgb(100, 100, 100);
+    margin: 2px 5px;
+}
+
+
+
+#x {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+	position: absolute;
+	top: -15px;
+	left: -15px;
+	background-color: var(--main-color);
+	border-radius: 50%;
+}
+
+#mdpOublie:hover {
+    color: var(--third-color);
+    border-color: var(--third-color);
+}
+/* Popup infos */
+#popupInfos {
+    display: none;
+    position: absolute;
+    width: 80%;
+    max-width: 500px;
+    padding: 10px;
+    background-color: var(--sec-color);
+    border-radius: 15px;
+    border: none;
+    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.5);
+    font-family: 'Roboto', sans-serif;
+    color: rgb(100, 100, 100);
+    font-size: 15px;
+    z-index: 11;
+
+}
+
+#formMdpOublie {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#formMdpOublie > div {
+	margin: 10px 10px 10px 10px;
+}
+#popupInfos ul {
+    padding-left: 25px;
+}
