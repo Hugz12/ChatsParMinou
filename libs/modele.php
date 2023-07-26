@@ -129,7 +129,7 @@ function envoyeMail($mailn){
         //$mail->addBCC('bcc@example.com');
         $confirmationCode = generateConfirmationCode(); // Remplacez 'generateConfirmationCode' par votre fonction pour générer le code
         // Créer le lien de confirmation avec le code généré
-        $confirmationLink = 'http://localhost/ChatsParMinou/index.php?view=profil&code=' . $confirmationCode;
+        $confirmationLink = 'http://localhost/ChatsParMinou/controleur.php?action=changerMail&code=' . $confirmationCode;
         codeMail($confirmationCode,$mailn);
         //Attachments
         //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments

@@ -20,25 +20,7 @@ if (!valider('Connecte', 'SESSION')) {
 				echo "Bonjour  " .$nom. ", voici votre profil";
 				?> 
 </div>
-<?php
-if (isset($_GET['code'])) {
-    $confirmationCode = $_GET['code'];
 
-    // Vérifier si le code de confirmation est valide dans la base de données
-    if (verifyConfirmationCode($confirmationCode)) {
-        // Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
-		$mailv = getMailv($confirmationCode);
-		$mailn = getMailn($confirmationCode);
-		changerMail($mailv,$mailn);
-		supCode($confirmationCode);
-        // Afficher un message de confirmation
-        echo "Votre adresse e-mail a été mise à jour avec succès !";
-    } else {
-        // Le code de confirmation n'est pas valide, afficher un message d'erreur
-        echo "Le code de confirmation n'est pas valide. Veuillez réessayer.";
-    }
-}
-?>
 <div class="contour">
 	<div class="pdpInfo">
 		<div class="pdp">
