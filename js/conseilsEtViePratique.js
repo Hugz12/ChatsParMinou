@@ -29,15 +29,13 @@ async function createConseils () {
             var div = document.createElement("div");
             div.classList.add("conseil");
             // alterne le sens des divs 
-            if(conseils.indexOf(conseil) % 2 == 0) {
-                div.innerHTML = `
-                <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>
-                <div class="descriptionConseil">${conseil.description}</div>`
-            } else {
-                div.innerHTML = `
-                <div class="descriptionConseil">${conseil.description}</div>
-                <div class="titreConseil policeTitre">${conseil.name.replaceAll('_', ' ')}</div>`
+            if(conseils.indexOf(conseil) % 2 != 0) {
+                div.classList.add("conseilInverse");
             }
+            div.innerHTML = `
+            
+                <div class="titreConseil policeTitre tailleTitre">${conseil.name.replaceAll('_', ' ')}</div>
+                <div class="descriptionConseil tailleSousTitre">${conseil.description}</div>`
             div.addEventListener("click", () => {
                 window.open("./ressources/conseils/" + conseil.name + ".pdf");
             });
