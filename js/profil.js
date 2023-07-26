@@ -53,7 +53,7 @@ function sendMail(){
       },
       error: function(retour) {
         console.error("erreur"); // Affichez les erreurs éventuelles dans la console.
-        alert("Le mail n'est pas bon"); // Affichez le message de confirmation renvoyé par PHP.
+        alert("Ce mail n'est pas disponible"); // Affichez le message de confirmation renvoyé par PHP.
       }
     });
 }

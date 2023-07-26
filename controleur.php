@@ -527,14 +527,24 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 
 		case 'changerMail' :
-			if ($mail = valider("mail")){
-				changerMail($mail);
-				ob_clean();
-				header('Content-Type: application/json');
-				echo json_encode("ok");
-				die();
+			if (isset($_GET['code'])) {
+				$confirmationCode = $_GET['code'];
+			
+				// Vérifier si le code de confirmation est valide dans la base de données
+				if (verifyConfirmationCode($confirmationCode)) {
+					// Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
+					$mailv = getMailv($confirmationCode);
+					$mailn = getMailn($confirmationCode);
+					$mailfv = "./ressources/users/".$mailv.".jpg";
+					$mailfn = "./ressources/users/".$mailn.".jpg";
+					rename($mailfv,$mailfn);
+					changerMail($mailv,$mailn);
+					supCode($confirmationCode);
+					// Afficher un message de confirmation
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+				}
 			}
-		
 		break;
 
 		case 'sendMail' :
