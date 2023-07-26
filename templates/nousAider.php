@@ -9,33 +9,29 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <link rel="stylesheet" href="./css/nousAider.css">
 
 
-<div class="nousAider">
-	<div class="fondCouleur">
-		<div class="photo">
-			<img src="./ressources/users/aze.jpg" alt="Photo 1" width="100" height="100">
+
+<div class="container fondBlanc">
+	<img src="./ressources/divers/chat.jpg" alt="Photo 1" width="100" height="100">
+	<div>
+		<div class="tailleTitre policeTitre">Devenir bénévole</div>
+		<div class="texte">
+			La misère féline vous touche ? Vous avez envie de vous investir dans des actions de protection 
+			animale concrètes, serieuse, et efficaces, dans un contexte associatif serein et épanouissant ? Alors rejoignez les bénévoles de Chats par Minous
 		</div>
-		<div class="droite">
-			<div class="texte tailleSousTitre">
-				<h1>Devenir bénévole</h1>
-				<p>Pour devenir membre et/ou bénévole de Chats par Minou il vous suffit d'appuyer sur ce bouton</p>
-				<input type='button' class='buttonType' onclick=window.location.href='https://www.helloasso.com/associations/association-chats-par-minou/adhesions/adhesion-2021'; value='Adhérer' />
-			</div>
-		</div>
-		<div style="clear:both;"></div>
-	</div>
-	<div class="fondBlanc">
-		<div class="photo">
-			<img src="./ressources/users/aze.jpg" alt="Photo 2" width="100" height="100">
-		</div>
-		<div class="droite">
-			<div class="texte">
-				<h1>Titre 1</h1>
-				<p>Texte 1</p>
-			</div>
-		</div>
-		<div style="clear:both;"></div>
+		<button class="buttonType">Rejoindre Chats par Minous</button>
 	</div>
 </div>
-		<!-- Ajoutez les autres blocs similaires ici -->
+
+<div class="container fondCouleur">
+	<div class="photo">
+		<img src="./ressources/divers/chat.jpg" alt="Photo 2" width="100" height="100">
 	</div>
-</body>
+	<div class="droite">
+		<div class="texte">
+			<h1>Titre 1</h1>
+			<p>Texte 1</p>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+</div>
+
