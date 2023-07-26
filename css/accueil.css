@@ -20,7 +20,7 @@
 
 #presentationTexteBox {
 	position: absolute;
-	left:15vw;
+	left:10%;
 	top: 0px;
 	height: 100%;
 	width: 80%;
@@ -290,7 +290,7 @@
 }
 
 .firstBanner {
-	margin: 30px 40px 10px 40px;
+	margin: 30px 30px 10px 30px;
 	height: auto;
 	min-height: 80px;
 	justify-content: space-around;
@@ -385,7 +385,6 @@
 
 
 #eventTitre {
-	font-size: 60px;
 	font-weight: bold;
 	text-align: center;
 	color: var(--fifth-color);
@@ -393,7 +392,6 @@
   
 #allSliderEvent {
 	margin-bottom: 50px;
-	height: 600px;
 
 	--taille: calc(100vw - 60px);
 	--hauteur: 500px;
@@ -417,17 +415,20 @@
 
 
 
+.slideEvent {
+	display: flex;
+	align-items: center;
+	padding-top: 50px;
+}
 
 .imgEvent {
 	z-index: 0;
 	position: absolute;
 	top: 10%;
-	right: 4%;
+	right: 5%;
 	width: 70%;
 	height: 80%;
-	
-
-}
+}	
 
 .imgEvent > img {
 	width: 100%;
@@ -436,55 +437,97 @@
 	background-position: center;
 }
 
+.imgEvent > .blurImage {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.15);
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+
 .texteEvent {
 	z-index: 1;
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	min-height: 45%;
 	width: 35%;
-	min-width: 265px;
 	background-color: var(--main-color);
 	padding: 15px 20px 15px 30px;
-	margin-left: 5%;
+	margin: 0 0 0 5%;
+	box-shadow: 10px 10px 24px 5px rgba(0,0,0,0.2),-8px -8px 24px -2px var(--fourth-color);
+	border-radius: 15px;
 }
 
-@media (max-width: 500px) {
-	.texteEvent {
-		min-width: 0px
-	}
+.texteEvent > * {
+	margin: 10px 0 10px 0;
 }
 
 .titreEvent {
 	font-size: 40px;
 	font-weight: bold;
-	margin: 10px 0 10px 0;
 }
 
 .descriptionEvent {
 	font-size: 15px;
-	margin: 10px 0 10px 0;
 }
 
 .dateEvent {
-	width: 60%;
-	max-width: 230px;
+	max-width: 325px;
 	font-size: 20px;
-	margin: 10px 0 10px 0;
 	padding: 15px;
+	border-radius: 15px;
+	text-align: center;
+	color:white;
+	background-color:#22252b;
 }
 
 
 
+@media (max-width: 1000px) {
+
+	#allSliderEvent {
+		--hauteur: 650px;
+	}
+
+	.texteEvent {
+		width: clamp(200px, 55%, 100%);
+		margin: -7% 0 5% 0;
+		padding: 15px;
+		align-items: center;
+		min-height: 0;
+		height: auto;
+		box-sizing: border-box;
+	}
+
+	.texteEvent > * {
+		margin: 0;
+	}
+
+	.dateEvent {
+		margin: 10px 0 0 0;
+		box-sizing: border-box;
+	}
+
+	.imgEvent {
+		position: relative;
+		top: 0;
+		right: 0;
+		margin-top: -5%;
+		width: 90%;
+		height: 60%;
+	}
+
+	.slideEvent {
+		padding-top: 0px;
+		flex-direction: column-reverse;
+	}
 
 
-.slideEvent {
-	display: flex;
-	align-items: center;
-	padding-top: 50px;
+
 }
-
 
 
 
@@ -554,7 +597,6 @@
 	border-radius: 46px;
 	z-index: 2;
 	text-decoration: none;
-
 }
 
 #nousAider > img {
@@ -562,6 +604,57 @@
 	height: 50px;
 	transition-duration: 0.3s;
 }
+
+
+#nousAiderResponsiveBox {
+	position: fixed;
+	bottom: 50px;
+	right: -200px;
+	z-index: 3;
+	background-color: var(--fourth-color);
+	border-radius: 46px 0 0 46px;
+	padding: 0px 10px;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	transition-duration: 0.3s;
+}
+
+
+#nousAiderResponsive {
+	display : flex;
+	justify-content : space-around;
+	align-items: center;
+	padding: 20px 0px;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+#nousAiderResponsive > * {
+	margin: 0 10px 0 10px;
+}
+
+#nousAiderResponsive > img {
+	width: 50px;
+	height: 50px;
+	transition-duration: 0.3s;
+}
+
+@media (max-width: 800px) {
+	#nousAider {
+		display: none;
+	}
+
+	#nousAiderResponsiveBox {
+		display: flex;
+	}
+}
+
+
+
+
+
+
 
 
 #addEvenement {

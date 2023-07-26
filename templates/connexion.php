@@ -5,11 +5,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	die("");
 }
 
-if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
-    echo "<script>window.alert('" . $_SESSION['error'] . "');</script>";
-    unset($_SESSION['error']);
-}
-
 ?>
 
 <link rel="stylesheet" href="./css/connexion.css">
@@ -50,6 +45,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
                 <input type="password" name="password" required/>
                 <label for="password">Mot de passe</label>
             </div>
+            <div id="mdpOublie">Mot de passe oublié</div>
             <input type="submit" class="buttonType" name="action" value="Connexion"/>
         </form>
     </div>
@@ -109,4 +105,24 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
     </div>
 
 
+</div>
+
+<div id="popupInfos">
+    <img src="./ressources/fermer_form.png" id="x">
+    <div id="titrePopupInfos" class="policeTitre tailleTitre">Changer de mot de passe</div>
+    <form id="formMdpOublie">
+        <div class="group">
+            <input type="text" name="mail" id="mailOublie" required/>
+            <label for="mail">Adresse mail</label>
+        </div>
+        <div class="group">
+            <input type="text" name="password" id="mdpOublie" required/>
+            <label for="mail">Nouveau mot de passe</label>
+        </div>
+        <div class="group">
+            <input type="password" name="password2" id="mdp2Oublie" required/>
+            <label for="password">Confirmez le nouveau mot de passe</label>
+        </div>
+        <input type="submit" class="buttonType" value="Enregistrer" onclick="sendMail();"/>
+    </form>
 </div>

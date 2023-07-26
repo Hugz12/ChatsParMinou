@@ -5,11 +5,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	die("");
 }
 
-if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
-    echo "<script>window.alert('" . $_SESSION['error'] . "');</script>";
-    unset($_SESSION['error']);
-}
-
 ?>
 
 <script src="./js/utils.js"></script>
@@ -72,7 +67,12 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 				Aucun chat ne correspond à votre recherche
 			</div>
 		</div>
-		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire d'adoption">
+		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire">
+		
+		<div id="validerAdoptionResponsiveBox">
+			<img class="clickable" src="./ressources/flecheLeft.svg" alt="arrow" onclick="sideButtonToggle('validerAdoptionResponsiveBox');">
+			<input id="validerAdoptionResponsive" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire">
+		</div>
 		<select name="chatsSelected[]" id="chatsSelected" multiple></select>
 	</form>
 

@@ -4,7 +4,12 @@
 
 include_once("maLibSQL.pdo.php"); // To make requests to the database
 include_once("maLibSecurisation.php"); // To use hashedPassword()
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 /**
  * @file modele.php
  * Fichier contenant des fonctions de gestion de la base de données
@@ -45,6 +50,14 @@ function isAdmin($mail){
 		return false;
 }
 
+function isSuperAdmin($mail){
+    $SQL ="SELECT role FROM utilisateur WHERE mail='$mail'";
+    $isAdmin = SQLGetChamp($SQL); 
+    if ($isAdmin == "1") 
+        return true;
+    else 
+        return false;
+}
 
 
 /**
@@ -93,10 +106,184 @@ function changerNom($name){
     return SQLUpdate($SQL);
 }
 
-function changerMail($mail){
+function envoyeMail($mailn){
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 0;                          //Enable verbose debug output
+        $mail->isSMTP();                               //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';          //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                      //Enable SMTP authentication
+        $mail->Username   = 'testdeschats@gmail.com';  //SMTP username
+        $mail->Password   = 'hcrtwpcdlezuydtm';        //SMTP password
+        $mail->SMTPSecure = 'tls';                     //Enable implicit TLS encryption
+        $mail->Port       = 587;                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('ne-pas-repondre@gmail.com','Administrateur ChatsparMinou');
+        $mail->addAddress($mailn);
+        $mail->addReplyTo('noreplychatsparminou@gmail.com');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+        $confirmationCode = generateConfirmationCode(); // Remplacez 'generateConfirmationCode' par votre fonction pour générer le code
+        // Créer le lien de confirmation avec le code généré
+        $confirmationLink = 'http://localhost/ChatsParMinou/controleur.php?action=changerMail&code=' . $confirmationCode;
+        codeMail($confirmationCode,$mailn);
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Reinitialisation mail ChatsparMinou';
+        $mail->Body    = 'En cliquant sur le lien vous pourrez réinitialiser votre adresse mail : <a href="' . $confirmationLink . '">Réinitialiser</a>';
+        $mail->AltBody = 'Réinitialisation du mail ChatsparMinou';
+
+
+        $mail->send();
+        echo 'Le mail à bien été envoyé';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    $mail->smtpClose();
+}
+
+function envoyeMailMdp($mailx, $mdp){
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 0;                          //Enable verbose debug output
+        $mail->isSMTP();                               //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';          //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                      //Enable SMTP authentication
+        $mail->Username   = 'testdeschats@gmail.com';  //SMTP username
+        $mail->Password   = 'hcrtwpcdlezuydtm';        //SMTP password
+        $mail->SMTPSecure = 'tls';                     //Enable implicit TLS encryption
+        $mail->Port       = 587;                       //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('ne-pas-repondre@gmail.com','Administrateur ChatsparMinou');
+        $mail->addAddress($_SESSION['mail']);
+        $mail->addReplyTo('noreplychatsparminou@gmail.com');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+        $confirmationCode = generateConfirmationCode(); // Remplacez 'generateConfirmationCode' par votre fonction pour générer le code
+        // Créer le lien de confirmation avec le code généré
+        $confirmationLink = 'http://localhost/ChatsParMinou/controleur.php?action=changerMdpCode&code=' . $confirmationCode;
+        codeMdp($confirmationCode,$mailx,$mdp);
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Reinitialisation mot de passe ChatsparMinou';
+        $mail->Body    = 'En cliquant sur le lien vous pourrez réinitialiser votre mot de passe : <a href="' . $confirmationLink . '">Réinitialiser</a>';
+        $mail->AltBody = 'Réinitialisation du mot de passe ChatsparMinou';
+
+
+        $mail->send();
+        echo 'Le mail à bien été envoyé';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    $mail->smtpClose();
+}
+function generateConfirmationCode() {
+    // Générer un code unique basé sur l'heure actuelle en microsecondes
+    return uniqid();
+}
+
+function codeMail($confirmationCode, $mailn) {
     $mailv = $_SESSION['mail'];
-    $SQL = "UPDATE utilisateur SET mail = '$mail' WHERE mail = '$mailv'";
+    // Utilisez le code de confirmation généré pour l'insérer dans la BDD
+    $SQL = "INSERT INTO codeMail (code, ancienMail, info) VALUES ('$confirmationCode', '$mailv', '$mailn')";
+    SQLInsert($SQL);
+}
+
+function codeMdp($confirmationCode, $mailx , $mdp) {
+    // Utilisez le code de confirmation généré pour l'insérer dans la BDD
+    $SQL = "INSERT INTO codeMail (code, ancienMail, info) VALUES ('$confirmationCode', '$mailx', '$mdp')";
+    SQLInsert($SQL);
+}
+
+function verifyConfirmationCode($confirmationCode) {
+    // Requête SQL pour vérifier si le code de confirmation existe dans la base de données
+    $SQL = "SELECT COUNT(*) AS count FROM codeMail WHERE code = '$confirmationCode'";
+    $count = SQLGetChamp($SQL);
+
+    // Si le nombre de lignes avec le code de confirmation est supérieur à 0, cela signifie que le code est valide
+    return $count > 0 ? 1 : 0;
+}
+
+function changerMail($mailv,$mailn){
+    $SQL = "UPDATE utilisateur SET mail = '$mailn' WHERE mail = '$mailv'";
     return SQLUpdate($SQL);
+}
+
+function getMailv($code){
+    $SQL = "SELECT ancienMail FROM codeMail WHERE code = '$code'";
+    return SQLGetChamp($SQL);
+}
+
+function getInfo($code){
+    $SQL = "SELECT info FROM codeMail WHERE code = '$code'";
+    return SQLGetChamp($SQL);
+}
+function supCode($code){
+    $SQL = "DELETE FROM codeMail WHERE code = '$code'";
+    return SQLDelete($SQL);
+}
+function changerMdp($password){
+    $mail = $_SESSION['mail'];
+    $hashedPassword = hashedPassword($password);
+    $SQL = "UPDATE utilisateur SET password = '$hashedPassword' WHERE mail = '$mail'";
+    return SQLUpdate($SQL);
+
+}
+function getPassword($mail){
+    $SQL = "SELECT password FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
+}
+
+function getNom($mail){
+    $SQL = "SELECT name FROM utilisateur WHERE mail = '$mail'";
+    return SQLGetChamp($SQL);
+}
+
+function changerRole($nom,$role,$mail){
+    $SQL = "UPDATE utilisateur SET role = '$role' WHERE name = '$nom' and mail='$mail'";
+    return SQLUpdate($SQL);
+}
+
+function supprimerUtilisateur($nom,$mail){
+    $SQL = "DELETE FROM passageRefuge WHERE mailBenevole = '$mail';
+            DELETE FROM hebergement WHERE mailHebergeur = '$mail';
+            DELETE FROM utilisateur WHERE name = '$nom' and mail='$mail';";
+    return SQLDelete($SQL);
+}
+function countName($name){
+    $SQL = "SELECT COUNT(*) FROM utilisateur WHERE name = '$name'";
+    return SQLGetChamp($SQL);
+}
+
+
+function ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "INSERT INTO demandeAdoption (date,nom, prenom, mail, tel, adresse, habitation, exterieur, sortie, animaux, situationFamiliale, commentaire, statutDemande) VALUES ('$date','$nom', '$prenom', '$mail', '$tel', '$adresse', '$habitation', '$ext', '$sortir', '$animaux', '$sit', '$com',1)";
+    return SQLInsert($SQL);
+}
+function getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com){
+    $SQL = "SELECT id FROM demandeAdoption WHERE date='$date' AND nom='$nom' AND prenom='$prenom' AND mail='$mail' AND tel='$tel' AND adresse='$adresse' AND habitation='$habitation' AND exterieur='$ext' AND sortie='$sortir' AND animaux='$animaux' AND situationFamiliale='$sit' AND commentaire='$com'";
+    return SQLGetChamp($SQL);
+}
+
+function ajoutConcerne ($id,$value){
+    $SQL = "INSERT INTO concerne (idDemande,codeChat) VALUES ('$id','$value')";
+    return SQLInsert($SQL);
 }
 /**
  * Fonction qui gère l'ajout d'un évènement et retourne l'id de l'évènement
@@ -104,8 +291,8 @@ function changerMail($mail){
  * @param $description
  * @return int
  */
-function addEvenement($titre,$description,$date,$couleur){
-    $SQL = "INSERT INTO evenement (titre,description,date,couleur) VALUES ('$titre','$description','$date','$couleur')";
+function addEvenement($titre,$description,$date,$heureDebut,$heureFin,$couleur){
+    $SQL = "INSERT INTO evenement (titre,description,date,heureDebut,heureFin,couleur) VALUES ('$titre','$description','$date','$heureDebut','$heureFin','$couleur')";
     return SQLInsert($SQL); // retourne l'id de l'évènement
 }
 
@@ -171,7 +358,7 @@ function listerChats(){
  * Fonction qui retourne la liste des utilisateurs
  */
 function listerUtilisateurs(){
-    $SQL = "SELECT name FROM utilisateur";
+    $SQL = "SELECT * FROM utilisateur";
     return parcoursRS(SQLSelect($SQL));
 }
 
@@ -220,7 +407,6 @@ function uploadPhoto($photo, $rep, $name){
     } else if($photo["type"] == "image/webp"){
         $photoExport = imagecreatefromwebp($photo["tmp_name"]);
     } else {
-        die("Le format de l'image n'est pas supporté");
         return false;
     }
     $pos = $rep . $name . ".jpg";
@@ -332,8 +518,8 @@ function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$
     }
 }
 
-function editEvent($id,$titre,$description,$date,$couleur){
-    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', couleur = '$couleur' WHERE id = $id";
+function editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur){
+    $SQL = "UPDATE evenement SET titre = '$titre', description = '$description', date = '$date', heureDebut = '$heureDebut', heureFin = '$heureFin', couleur = '$couleur' WHERE id = $id";
     SQLUpdate($SQL);
 }
 

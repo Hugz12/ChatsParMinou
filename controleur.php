@@ -8,7 +8,6 @@ include_once "libs/maLibSecurisation.php";
 $url = ($_SERVER["HTTP_REFERER"]); // On récupère l'url de la page précédente
 $urlBase = "index.php"; 
 
-
 if ($action = valider("action")){ // action = valeur de l'attribut name du bouton submit d'1 form
 	ob_start (); // On démarre le tampon de sortie
 	echo "Action = '$action' <br />";
@@ -68,7 +67,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
 						if($photo = valider("photo","FILES")){
 							if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
-								$_SESSION['error'] = "Extension non autorisée, vous pourrez changer votre photo depuis la page profil";
+								$_SESSION['error'] = "Erreur lors de l'ajout de la photo de profil, vous pourrez changer votre photo depuis la page profil";
 							}
 						}
 
@@ -92,8 +91,8 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 						$qs = "?view=connexion";
 					}
 				} else {
-					$qs = "?view=connexion";
 					$_SESSION['error'] = "Les mots de passe ne sont pas identiques"; // Sinon on affiche un message d'erreur
+					$qs = "?view=connexion";
 				}
 			}
 		break;
@@ -139,12 +138,17 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
-			if ($heure = valider("heure","POST"))
-			if ($couleur = valider("couleur","POST"))
+			if ($heureDebut = valider("heureDebut","POST"))
+			if ($heureFin = valider("heureFin","POST"))
 			if ($image = valider("image","FILES")){
-				$date = $date." ".$heure.":00"; // On concatène la date et l'heure
+				// On ajoute les :00 pour avoir un format de date valide
+				$heureDebut.=":00";
+				$heureFin.=":00";
+				if (strtotime($heureDebut) > strtotime($heureFin)) // On vérifie que l'heure de début est bien avant l'heure de fin
+					$heureFin = $heureDebut;
+
 				// On ajoute l'événement à la BDD
-				$id = addEvenement($titre,$description,$date,$couleur);
+				$id = addEvenement($titre,$description,$date,$heureDebut,$heureFin,$couleur);
 				if (!uploadPhoto($image, "./ressources/evenements/", $id)) { // on convertit l'image en jpg
 					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant l'évenement";
 					break;
@@ -245,11 +249,16 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($titre = valider("titre","POST"))
 			if ($description = valider("description","POST"))
 			if ($date = valider("date","POST"))
-			if ($heure = valider("heure","POST"))
-			if ($couleur = valider("couleur","POST")){
-				$date = $date." ".$heure.":00";
+			if ($heureDebut = valider("heureDebut","POST"))
+			if ($heureFin = valider("heureFin","POST")) {
+				$heureDebut.=":00";
+				$heureFin.=":00";
+
+				if (strtotime($heureDebut) > strtotime($heureFin)) // On vérifie que l'heure de début est bien avant l'heure de fin
+					$heureFin = $heureDebut;
+
 				// On ajoute l'événement à la BDD
-				editEvent($id,$titre,$description,$date,$couleur);
+				editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur);
 				// on verifie si un fichier a été uploadé
 				$image = valider("image","FILES");
 				if ($image["name"] !== ""){
@@ -379,20 +388,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			}
 		break;
 
-		case 'Changer la photo de profil' :
-			// On vérifie la présence des champs
-			if ($image = valider("image","FILES")){
-				// on supprime l'ancienne image
-				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
-				// on upload la nouvelle
-				if (!uploadPhoto($image, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
-					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
-					break;
-				}
-				$qs = "?view=profil";
-			
-			}
-		break;
 
 
 		case 'addPassage' : 
@@ -532,21 +527,190 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 
 		case 'changerMail' :
-			if ($mail = valider("mail")){
-				changerMail($mail);
+			if (isset($_GET['code'])) {
+				$confirmationCode = $_GET['code'];
+			
+				// Vérifier si le code de confirmation est valide dans la base de données
+				if (verifyConfirmationCode($confirmationCode)) {
+					// Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
+					$mailv = getMailv($confirmationCode);
+					$mailn = getMailn($confirmationCode);
+					$mailfv = "./ressources/users/".$mailv.".jpg";
+					$mailfn = "./ressources/users/".$mailn.".jpg";
+					rename($mailfv,$mailfn);
+					changerMail($mailv,$mailn);
+					supCode($confirmationCode);
+					// Afficher un message de confirmation
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+				}
+			}
+		break;
+
+		case 'sendMail' :
+			if ($mailn = valider("mailn")){
+				if (!userExistsBDD($mailn)) { // Si l'utilisateur n'existe pas déjà
+					ob_clean();
+					envoyeMail($mailn);
+					echo "ok";
+					die();
+				}
+			}
+
+		break;
+
+		case 'sendMailMdp' :
+			if ($mailx = valider("mailx"))
+			if ($mdp = valider("mdp"))
+			if ($mdp2 = valider("mdp2"))
+			if ($mdp === $mdp2){
 				ob_clean();
-				header('Content-Type: application/json');
+				envoyeMailMdp($mailx, $mdp);
+				echo "ok";
+				die();
+			}
+			else {
+				ob_clean();
+				echo "erreur";
+				die();
+			}
+		break;	
+
+		case 'changerMdpCode' :
+			if (isset($_GET['code'])) {
+				$confirmationCode = $_GET['code'];
+			
+				// Vérifier si le code de confirmation est valide dans la base de données
+				if (verifyConfirmationCode($confirmationCode)) {
+					// Mettre à jour l'adresse e-mail de l'utilisateur dans la base de données
+					$mailv = getMailv($confirmationCode);
+					$info = getInfo($confirmationCode);
+					$mailfv = "./ressources/users/".$mailv.".jpg";
+					rename($mailfv,$mailfn);
+					changerMail($mailv,$mailn);
+					supCode($confirmationCode);
+					// Afficher un message de confirmation
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+				}
+			}
+		break;
+
+		break;
+		case 'changerMdp' :
+			if($mdpV = valider("mdpV","POST"))
+			if($mdpN = valider("mdpN","POST"))
+			if($mdpN2 = valider("mdpN2","POST")){
+				if(password_verify($mdpV,getPassword($_SESSION["mail"])) && $mdpN === $mdpN2){
+					changerMdp($mdpN2);
+					ob_clean();
+					echo json_encode("ok");
+					session_destroy(); // On détruit la session
+					$qs = "?view=accueil";
+					var_dump($nom, $isUp, $isDown, $role);
+					die();
+				}
+				else {
+					ob_clean();
+					echo json_encode("erreur");
+				}
+			}
+			else {
+				ob_clean();
+				echo json_encode("erreur");
+			}
+		break;
+		
+		case 'changerRole' :
+			if ($nom= valider("nom"))
+			if ($role = valider("role"))
+			if ($mail = valider("mail")){
+				$mMail = $_SESSION["mail"];
+				$mNom=getNom($mMail);
+				if ($role == 4){
+					supprimerUtilisateur($nom,$mail);
+					ob_clean();
+					echo json_encode("ok");
+				} else if ($role == 1) {
+					changerRole($nom, $role, $mail);
+					changerRole($mNom, 2, $mMail);
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+					ob_clean();
+					echo json_encode("ok");
+				} else {
+					changerRole($nom, $role, $mail);
+				}
+				if ($mail == $mMail){
+					session_destroy(); // On détruit la session
+					$qs = "?view=connexion";
+				}
+				ob_clean();
 				echo json_encode("ok");
 				die();
 			}
-		
+		break;
 
+		case 'ChangerPhotoProfil' :
+			if ($photo = valider("image","FILES")){
+				var_dump($photo);
+				// on supprime l'ancienne image
+				unlink("./ressources/users/".$_SESSION["mail"].".jpg");
+				// on upload la nouvelle
+				if (!uploadPhoto($photo, "./ressources/users/", $_SESSION["mail"])) { // on convertit l'image en jpg
+					$_SESSION['error'] = "Extension non autorisée, vous pourrez ajouter une photo en modifiant votre profil";
+					break;
+				}
+				$qs = "?view=profil";
+			
+			}
+		break;
+
+		case 'submitForm':
+			if ($nom = valider("nom"))
+			if ($prenom = valider("prenom"))
+			if ($mail = valider("mail"))
+			if ($tel = valider("tel"))
+			if ($adresse = valider("adresse"))
+			if ($habitation = valider("habitation"))
+			if ($ext = valider("ext"))
+			if ($sortir = valider("sortir"))
+			if ($animaux = valider("animaux"))
+			if ($sit = valider("sit"))
+			if ($com = valider("com"))
+			if ($retour = valider("retour"))
+			if ($pre = valider("pre"))
+			if ($justi = valider("justi"))
+			if ($date = valider("date"))
+			if ($pre == 1 && $justi == 1){
+			$inc = -1;
+			foreach ($retour as $value) {
+				$inc++;
+				// Faire une action pour chaque valeur de $retour
+				// Par exemple :
+				// actionPourChaqueValeur($value);
+				ajoutDemande($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com);
+				$id = getIdConcerne($date,$nom, $prenom, $mail, $tel, $adresse, $habitation, $ext, $sortir, $animaux, $sit, $com) + $inc;
+				ajoutConcerne($id,$value);
+			}
+			ob_clean(); // On vide le tampon de sortie
+			echo json_encode("success");
+			$qs = "?view=accueil";
+			die();
+			}
+			else{
+			ob_clean(); // On vide le tampon de sortie
+			echo json_encode("error");
+			die();
+			}
+			
+		break;  
 	}
-
 
 	
 
 }
+
 
 
 // On redirige vers la page index avec les bons arguments
