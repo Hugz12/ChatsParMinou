@@ -10,28 +10,57 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 
-<div class="container fondBlanc">
-	<img src="./ressources/divers/chat.jpg" alt="Photo 1" width="100" height="100">
-	<div>
-		<div class="tailleTitre policeTitre">Devenir bénévole</div>
-		<div class="texte">
-			La misère féline vous touche ? Vous avez envie de vous investir dans des actions de protection 
-			animale concrètes, serieuse, et efficaces, dans un contexte associatif serein et épanouissant ? Alors rejoignez les bénévoles de Chats par Minous
+<div class="category categoryColor1">
+	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<div class="directContent">
+		<div class="title">Devenir bénévole</div>
+		<div class="content">
+			La misère féline vous touche ? vous avez envie de vous investir dans des actions de protection animale concrètes, 
+			serieuses et efficaces, dans un contexte associatif serein et épanouissant ? Alors rejoignez les bénévoles de Chats par Minou.
 		</div>
-		<button class="buttonType">Rejoindre Chats par Minous</button>
+		<div class="buttonList">
+			<button class="buttonType">Devenir bénévole</button>
+		</div>
 	</div>
 </div>
 
-<div class="container fondCouleur">
-	<div class="photo">
-		<img src="./ressources/divers/chat.jpg" alt="Photo 2" width="100" height="100">
-	</div>
-	<div class="droite">
-		<div class="texte">
-			<h1>Titre 1</h1>
-			<p>Texte 1</p>
+
+<div class="category categoryColor2">
+	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<div class="directContent">
+		<div class="title">Don matériel</div>
+		<div class="content">
+			Vous souhaitez faire un don de alimentaire/matériel ? Vous pouvez le faire a la permanance de la Maison des Chats par Minou tout les 
+			mercredi de 14h a 16h ou sur rendez-vous <br>(contactez-nous: chatsparminou@gmail.com ou via Facebook)
 		</div>
 	</div>
-	<div style="clear:both;"></div>
+</div>
+
+
+<div class="category categoryColor1">
+	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<div class="directContent">
+		<div class="title">Don financier</div>
+		<div class="content">
+			Vous souhaitez faire un don de financer ? Vous pouvez le faire par virement (RIB sur demande), par Paypal, par chèque, en espèces 
+			(directement a l'association) ou en participant sur HelloAsso ou Teaming   
+		</div>
+		<div class="buttonList">
+			<button class="buttonType" onclick="window.open('https://www.helloasso.com/associations/association-chats-par-minou/adhesions/adhesion-2021', '_blank')">HelloAsso</button>
+			<button class="buttonType" onclick="window.open('https://www.teaming.net/chatsparminou', '_blank')">Teaming</button>
+		</div>
+	</div>
+</div>
+
+
+<div class="category categoryColor2">
+	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<div class="directContent">
+		<div class="title">Spécial entreprise</div>
+		<div class="content">
+			Si vous etes une entreprise ou un commerçant, vous pouvez ajouter une tirelire dans votre commerce/entreprise on en développant 
+			des actions solidaires contre publicité
+		</div>
+	</div>
 </div>
 
