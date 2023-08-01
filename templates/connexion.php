@@ -116,13 +116,13 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
             <label for="mail">Adresse mail</label>
         </div>
         <div class="group">
-            <input type="text" name="password" id="mdpOublie" required/>
-            <label for="mail">Nouveau mot de passe</label>
+            <input type="password" name="passwordv" id="mdp1Oublie" required/>
+            <label for="passwordv">Nouveau mot de passe</label>
         </div>
         <div class="group">
             <input type="password" name="password2" id="mdp2Oublie" required/>
-            <label for="password">Confirmez le nouveau mot de passe</label>
+            <label for="password2">Confirmez le nouveau mot de passe</label>
         </div>
-        <input type="submit" class="buttonType" value="Enregistrer" onclick="sendMail();"/>
+        <input type="button" class="buttonType" value="Changer mdp" onclick="sendMailMdp();"/>
     </form>
 </div>
