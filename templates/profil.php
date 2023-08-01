@@ -32,7 +32,7 @@ if (!valider('Connecte', 'SESSION')) {
 					echo "<label for='image'><img id=\"photoDeProfil\" class=\"photoProfil\" src=\"./ressources/users/default.png\"   /></label>";
 				}
 				?>
-				<input type="file" name="image" style="display : none;" id="image" onchange="changerPhotoProfil(this);" value="'changerPhotoProfil">
+				<input type="file" name="image" accept="image/*" style="display : none;" id="image" onchange="changerPhotoProfil(this);" value="'changerPhotoProfil">
 				<input type="hidden" class="buttonType" value="ChangerPhotoProfil" name="action">
 			</form>
 		</div>
