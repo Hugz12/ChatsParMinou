@@ -11,6 +11,7 @@
 
 	width: auto;
 	height: auto;
+	margin-bottom: 100px;
 
 	--taille: 100vw;
 	--hauteur: auto;
@@ -355,7 +356,7 @@
 	background-color: var(--fourth-color);
 	border-color: transparent;
 	border-radius: 46px;
-	z-index: 2;
+	z-index: 11;
 	text-decoration: none;
 }
 
@@ -364,7 +365,7 @@
 	position: fixed;
 	bottom: 50px;
 	right: -218px;
-	z-index: 3;
+	z-index: 11;
 	background-color: var(--fourth-color);
 	border-radius: 46px 0 0 46px;
 	padding: 0px 10px;

@@ -77,7 +77,7 @@ CREATE TABLE `hebergement` (
 
 CREATE TABLE `conseils` (
   `name` varchar(255) PRIMARY KEY,
-  `description` varchar(255)
+  `description` varchar(3000)
 )ENGINE = InnoDB;
 
 CREATE TABLE `codeMail` (
