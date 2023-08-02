@@ -328,7 +328,6 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 		case 'Modifier le chat' : 
 			// si il y a au moins un champ non vide
 			
-			if  ($statut = valider("statut","POST"))
 			if  ($nom = valider("nom", "POST")) 
 			if 	($familleAccueil = valider("familleAccueil","POST")) 
 			if	($couleur = valider("couleur","POST")) 
