@@ -186,7 +186,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 					<select name='id' style='width: auto;'>";
 
 						foreach(listeEvenements() as $event){
-							echo "<option style='font-style:italic;' value='".$event['id']."'>".$event['id']." -- ".$event['titre']."</option>";
+							echo "<option value='".$event['id']."'>".$event['id']." -- ".$event['titre']."</option>";
 						}
 		echo "
 					</select>

@@ -156,7 +156,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){
-							echo "<option style='font-style:italic;' value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
+							echo "<option value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
 						}
 		echo "
 					</select>
