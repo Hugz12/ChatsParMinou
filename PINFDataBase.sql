@@ -77,7 +77,13 @@ CREATE TABLE `hebergement` (
 
 CREATE TABLE `conseils` (
   `name` varchar(255) PRIMARY KEY,
-  `description` varchar(255)
+  `description` varchar(3000)
+)ENGINE = InnoDB;
+
+CREATE TABLE `codeMail` (
+  `code` varchar(13) PRIMARY KEY,
+  `ancienMail` varchar(255),
+  `info` varchar(255)
 )ENGINE = InnoDB;
 
 ALTER TABLE `passageRefuge` ADD FOREIGN KEY (`mailBenevole`) REFERENCES `utilisateur` (`mail`);
@@ -157,6 +163,16 @@ VALUES ('3', '3');
 /*hebergement*/
 INSERT INTO `hebergement` (`mailHebergeur`, `codeChat`)
 VALUES ('user@gmail.com', '4');
+
+/*conseils*/
+INSERT INTO `conseils` (`name`, `description`)
+VALUES ('Mal_de_ventre', 'Toi aussi ton chat a mal au ventre, regarde cette astuce de genie pour lui couper les couilles, plus de couille plus de probleme');
+
+INSERT INTO `conseils` (`name`, `description`)
+VALUES ('Mal_de_tete', 'Toi aussi ton chat a mal a la tete, regarde cette astuce de genie pour lui couper les couilles, plus de couille plus de probleme');
+
+INSERT INTO `conseils` (`name`, `description`)
+VALUES ('Mal_de_pattes', 'Toi aussi ton chat a mal au pattes, regarde cette astuce de genie pour lui couper les couilles, plus de couille plus de probleme');
 
 
 

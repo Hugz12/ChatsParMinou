@@ -100,7 +100,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	</div>
 
 	<div id="nousAiderResponsiveBox">
-		<img class="clickable" src="./ressources/flecheLeft.svg" alt="arrow" onclick="nousAiderDisplay();">
+		<img class="clickable" src="./ressources/flecheLeft.svg" alt="arrow" onclick="sideButtonToggle('nousAiderResponsiveBox');">
 		<div id="nousAiderResponsive" class="policeTexte clickable" onclick=window.location.href="index.php?view=nousAider" onmouseenter="rotateLogo(this);" onmouseleave="rotateLogoBack(this);">
 			<img src="./ressources/nousAider.png" alt="logo">
 			<div>Nous aider</div>
@@ -186,7 +186,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 					<select name='id' style='width: auto;'>";
 
 						foreach(listeEvenements() as $event){
-							echo "<option style='font-style:italic;' value='".$event['id']."'>".$event['id']." -- ".$event['titre']."</option>";
+							echo "<option value='".$event['id']."'>".$event['id']." -- ".$event['titre']."</option>";
 						}
 		echo "
 					</select>

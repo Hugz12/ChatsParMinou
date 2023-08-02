@@ -1,5 +1,6 @@
 <?php
 	session_start(); // On démarre la session
+	
 
 	// On inclut les fichiers nécessaires
 	include_once("libs/maLibUtils.php");

@@ -1,122 +1,163 @@
-.contour {
-    position: relative;
-    top: 10%;
-    left: 2%;
-    height: 90%;
-    width: 96%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-content: stretch;
-    flex-flow: row wrap;
-    background-color: inherit;
-}
+/********************************************************************/
+/***************************  GENERALE  *****************************/
+/********************************************************************/
 
-#patteProfil {
-    z-index: 2;
-}
 
 #pageContent {
     background-color: inherit;
 }
 
-.contour>* {
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
+
+.contour {
+    width: 96%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: inherit;
+    
+}
+
+
+.contour > * {
+    margin: 30px 5% 0 5%;
     background-color: inherit;
     z-index: 2;
 }
 
-.info>*>.group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: space-between;
-    margin-top: 5%;
-}
-
-input {
-    z-index: 3;
-}
 
 .titre {
     font-size: 30px;
     font-weight: bold;
     margin: 30px 1px 30px 4%;
-    cursor: default;
 }
 
-.pdp {
-    cursor: default;
-}
-
-.mdp>*>.group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 5%;
-}
-
-.mail>*>.group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 5%;
-}
-
-.buttonType {
-    margin-top: 5%;
-
-}
 
 #photoDeProfil.photoProfil {
     width: 300px;
     height: 300px;
     object-fit: cover;
-    cursor: default;
+    cursor: pointer;
 }
 
 #photoDeProfil.photoGestion {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     cursor: default;
 }
-.mdpMailGestion {
+
+
+.buttonType {
+    margin-top: 25px;
+}
+
+
+
+
+/********************************************************************/
+/***************************  PROFIL  ******************************/
+/********************************************************************/
+
+.pdpInfo {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: space-between;
-    flex-wrap: wrap;
-    flex-grow: 2;
-    margin-top: 5%;
-}
+    flex-direction: column;
+    align-items: center;
 
-.gestion {
-    flex-grow: 3;
-    background-color: inherit;
-}
-
-.mdp {
-    flex-grow: 1;
-    width: 45%;
-    min-width: 300px;
-    margin: 0 2%;
-    background-color: inherit;
-}
-
-.mail {
-    flex-grow: 1;
-    width: 45%;
-    min-width: 300px;
-    margin: 0 2%;
-    background-color: inherit;
 }
 
 .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: inherit;
+}
+
+.info > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#infoPhoto {
+    display: flex;
+    color: rgb(150, 150, 150);
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+
+
+/********************************************************************/
+/***************************  GESTION  ******************************/
+/********************************************************************/
+
+.mdpMailGestion {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: inherit;
+    margin-top: 30px;
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+.mdpMailGestion .group:not(:first-child) {
+    margin-top: 25px;
+}
+
+.mdpMailGestion > * {
+    width: 45%;
+    min-width: 300px;
+    max-width: 500px;
+    margin: 0 25px;
+    background-color: inherit;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.mdpMailGestion > * > form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+/********************************************************************/
+/***************************  UTILISATEURS  *************************/
+/********************************************************************/
+
+
+
+.gestion {
+    width: 100%;
+    margin: 50px 15px 0 15px;
+    max-width: none;
+}
+
+.gestion > .titre {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.utilisateurs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .utilisateur {
@@ -128,8 +169,12 @@ input {
     align-items: center;
     flex-wrap: wrap;
     align-content: space-between;
-    padding: 2% 2%;
-    margin: 1% 1%;
+    padding: 15px 15px;
+    margin: 10px 10px;
+}
+
+.utilisateur .buttonType {
+    margin-top: 0!important;
 }
 
 .perso{
@@ -139,19 +184,11 @@ input {
     flex-direction: column;
     align-content: space-between;
 }
-.utilisateurs {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-grow: 2;
-    margin-top: 5%;
-}
 
-.tabGestion {
-    display: fit-content;
+
+
+#formRechercheUser {
+    max-width: 450px;
 }
 
 .role-1 {
@@ -162,11 +199,27 @@ input {
     color: var(--third-color);
 }
 
+.buttonNoHover {
+    opacity: 0.5;
+    cursor: default!important;
+}
+
+.buttonNoHover:hover {
+    border-color: rgb(200,200,200)!important;
+    transform: none!important;
+}
+
+
+
+/********************************************************************/
+/***************************  INFOS  ********************************/
+/********************************************************************/
 
 #i {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -185,7 +238,8 @@ input {
 #popupInfos {
     display: none;
     position: absolute;
-    width: auto;
+    width: 80%;
+    max-width: 500px;
     padding: 10px;
     background-color: var(--sec-color);
     border-radius: 30px;
@@ -195,8 +249,30 @@ input {
     color: rgb(100, 100, 100);
     font-size: 15px;
     z-index: 11;
+
 }
 
 #popupInfos ul {
     padding-left: 25px;
+}
+
+
+
+.tooltip {
+	display: none;
+	position: absolute;
+	top: calc(0%);
+	right: 0;
+	background-color: inherit;
+	border : 2px solid rgb(200,200,200);
+	color: rgb(200,200,200);
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	cursor: default;
+	opacity: 0.8;
+}
+
+.group:hover .tooltip {
+    display: flex;
 }

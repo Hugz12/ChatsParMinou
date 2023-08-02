@@ -5,11 +5,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	die("");
 }
 
-if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
-    echo "<script>window.alert('" . $_SESSION['error'] . "');</script>";
-    unset($_SESSION['error']);
-}
-
 ?>
 
 <script src="./js/utils.js"></script>
@@ -72,7 +67,12 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 				Aucun chat ne correspond à votre recherche
 			</div>
 		</div>
-		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire d'adoption">
+		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire">
+		
+		<div id="validerAdoptionResponsiveBox">
+			<img class="clickable" src="./ressources/flecheLeft.svg" alt="arrow" onclick="sideButtonToggle('validerAdoptionResponsiveBox');">
+			<input id="validerAdoptionResponsive" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire">
+		</div>
 		<select name="chatsSelected[]" id="chatsSelected" multiple></select>
 	</form>
 
@@ -88,7 +88,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 		<div id="filtreTitre">Filtrer vos recherches</div>
 
 		<div id="filtreRace" class="filtre">
-			<div class="filtreTitre">Filtrer par race</div>
+			<div class="filtreTitre">Filtrer par couleur</div>
 			<div class="filtreContent">
 				
 			</div>
@@ -156,7 +156,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 
 					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){
-							echo "<option style='font-style:italic;' value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
+							echo "<option value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
 						}
 		echo "
 					</select>
@@ -193,7 +193,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 					
 						<div class='group'>
 							<input type='text' name='race' required>
-							<label for=\"race\">Race</label>
+							<label for=\"race\">Couleur</label>
 						</div>
 
 					</div>
@@ -228,7 +228,7 @@ if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
 								</div>
 
 								<div class='colorPicker'>
-									<label for='couleur' class='colorPickerText'>Couleur</label>
+									<label for='couleur' class='colorPickerText'>Couleur de fond</label>
 									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputAdd'), 'color');\" ><div></div></div>
 									<input id='colorInputAdd' type='hidden' name='couleur' value='#000000'>
 								</div>

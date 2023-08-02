@@ -58,7 +58,45 @@ function responsive () {
     }
 }
 
+$(function() {
 
+    $('#mdpOublie').click(function() {
+        $('#popupInfos').toggle();
+        $("#popupInfos").css('top', $("#mdpOublie").offset().top-200).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
+    });
+    $('#x').click(function() {
+        $('#popupInfos').toggle();
+    });
+
+});
+
+function sendMailMdp(){
+    var mailx = document.getElementById("mailOublie").value;
+    var mdp = document.getElementById("mdp1Oublie").value;
+    var mdp2 = document.getElementById("mdp2Oublie").value;
+    console.log(mailx);
+    console.log(mdp);
+    console.log(mdp2);
+    $.ajax({
+      url: './controleur.php', // Le nom du fichier PHP qui contient la fonction sendmail() et le code de l'envoi d'e-mail.
+      type: "POST",
+      dataType: "json",
+      data: {
+        "action" : "sendMailMdp",
+        "mailx" : mailx,
+        "mdp" : mdp,
+        "mdp2" : mdp2,
+      },
+      success: function(retour) {
+        console.log("Un mail vient d'être envoyé à la nouvelle adresse");
+        alert("Un mail vient d'être envoyé à la nouvelle adresse"); // Affichez le message de confirmation renvoyé par PHP.
+      },
+      error: function(retour) {
+        console.error("erreur"); // Affichez les erreurs éventuelles dans la console.
+        alert("Ce mail n'est pas disponible ou les codes ne correspondent pas"); // Affichez le message de confirmation renvoyé par PHP.
+      }
+    });
+}
 
 window.addEventListener("resize", responsive);
 
