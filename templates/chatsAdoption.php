@@ -88,7 +88,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		<div id="filtreTitre">Filtrer vos recherches</div>
 
 		<div id="filtreRace" class="filtre">
-			<div class="filtreTitre">Filtrer par race</div>
+			<div class="filtreTitre">Filtrer par couleur</div>
 			<div class="filtreContent">
 				
 			</div>
@@ -193,7 +193,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 					
 						<div class='group'>
 							<input type='text' name='race' required>
-							<label for=\"race\">Race</label>
+							<label for=\"race\">Couleur</label>
 						</div>
 
 					</div>
@@ -228,7 +228,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 								</div>
 
 								<div class='colorPicker'>
-									<label for='couleur' class='colorPickerText'>Couleur</label>
+									<label for='couleur' class='colorPickerText'>Couleur de fond</label>
 									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputAdd'), 'color');\" ><div></div></div>
 									<input id='colorInputAdd' type='hidden' name='couleur' value='#000000'>
 								</div>

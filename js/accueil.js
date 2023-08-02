@@ -280,7 +280,7 @@ function afficherChatDuMois(chatDuMois){
 							<div class="chatTexte policeTexte">${chatDuMois['name']}</div>
 						</div>
 						<div>
-							<div class="chatTitre policeTexte">Race</div>
+							<div class="chatTitre policeTexte">Couleur</div>
 							<div class="chatTexte policeTexte">${chatDuMois['race']}</div>
 						</div>
 						<div>
@@ -401,7 +401,7 @@ function afficherChatDuMoisSmall(chatDuMois){
 			<div class="tailleTitre policeTitre titreChatDuMois">${chatDuMois['name']}</div>
 			
 			<div class="chatInfoSmall">
-				<div class="policeTexte boxInfoTitle">Race</div>
+				<div class="policeTexte boxInfoTitle">Couleur</div>
 				<div class="policeTexte boxInfoSmall">${chatDuMois['race']}</div>
 			</div>
 
