@@ -205,9 +205,9 @@ function afficherTitres(demandes) {
     } else $("#titreEnCours").text("Aucune demande en cours");
 
     if (iT != 0){
-        if (iT == 1) $("#titreTraitees").text("Demande traitée");
-        else $("#titreTraitees").text("Demandes traitées");
-    } else $("#titreTraitees").text("Aucune demande traitée");
+        if (iT == 1) $("#titreTraitees").text("Demande finalisée");
+        else $("#titreTraitees").text("Demandes finalisées");
+    } else $("#titreTraitees").text("Aucune demande finalisée");
 
     montrerPlusMoins();
 }
@@ -229,9 +229,9 @@ function changerTitres() {
     } else $("#titreEnCours").text("Aucune demande en cours");
 
     if (idT.childElementCount != 0) {
-        if ((idT.childElementCount == 1)) $("#titreTraitees").text("Demande traitée");
-        else $("#titreTraitees").text("Demandes traitées");
-    } else $("#titreTraitees").text("Aucune demande traitée");
+        if ((idT.childElementCount == 1)) $("#titreTraitees").text("Demande finalisée");
+        else $("#titreTraitees").text("Demandes finalisées");
+    } else $("#titreTraitees").text("Aucune demande finalisée");
 }
 
 // Tri par date
