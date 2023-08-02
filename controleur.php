@@ -231,7 +231,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
-					chmod("./ressources/chats/$code", 777);
+					#shell_exec("chmod 777 ./ressources/chats/$code");
 					
 					// On ajoute les photos
 					$i = 0;
@@ -295,7 +295,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On supprime le chat de la BDD
 				supprimerChat($code);
 				// On supprime le dossier du chat
-				supprimerDossier("./ressources/chats/$code");
+				shell_exec("rm -rf ./ressources/chats/$code");
 				$qs = "?view=chatsAdoption";
 			}
 		break;

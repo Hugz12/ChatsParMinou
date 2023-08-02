@@ -546,12 +546,6 @@ function ajouterPassage($date,$heureDebut,$heureFin,$description,$mail){
     return "success";
 }
 
-
-
-function supprimerDossier($dir){
-    rmdir($dir);
-}
-
 function getPassages($mois, $annee){
     $SQL = "SELECT * FROM passageRefuge WHERE MONTH(date) = $mois AND YEAR(date) = $annee";
     return parcoursRS(SQLSelect($SQL));
