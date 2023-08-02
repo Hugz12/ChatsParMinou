@@ -1,12 +1,10 @@
 function changerPhotoProfil(contexte){
-    console.log("contexte");
     console.log(contexte);
     var form = contexte.parentNode;
-    console.log(form);
     form.submit();
-    console.log("submit");
 }
 
+// script.js
 
 
   
@@ -34,46 +32,36 @@ function changerNom() {
     }) 
 }
 
-
-
-function sendMail(){
-    var mailn = document.getElementById("mail-input").value;
-    console.log(mailn);
+function changerMail() {
+    var inputValue2 = document.getElementById("mail-input").value;
     $.ajax({
-      url: './controleur.php', // Le nom du fichier PHP qui contient la fonction sendmail() et le code de l'envoi d'e-mail.
-      type: "POST",
-      dataType: "json",
-      data: {
-        "action" : "sendMail",
-        "mailn" : mailn,
-      },
-      success: function(retour) {
-        console.log("Un mail vient d'être envoyé à la nouvelle adresse");
-        alert("Un mail vient d'être envoyé à la nouvelle adresse"); // Affichez le message de confirmation renvoyé par PHP.
-      },
-      error: function(retour) {
-        console.error("erreur"); // Affichez les erreurs éventuelles dans la console.
-        alert("Ce mail n'est pas disponible"); // Affichez le message de confirmation renvoyé par PHP.
-      }
-    });
+        url: "./controleur.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            "action" : "changerMail",
+            "mail" : inputValue2,
+        },
+        success: function(retour) {
+            console.log("Votre mail a bien été changé");
+            alert ("Votre mail a bien été changé");
+        },
+        error: function(retour) {
+            console.log("erreur");
+            alert ("Erreur lors du changement de mail");
+        }
+    }) 
 }
 
 function changerMdp(){
-    var inputValue3 = document.getElementById("mdpV").value;
-    var inputValue4 = document.getElementById("mdpN").value;
     var inputValue5 = document.getElementById("mdpN2").value;
-    console.log(inputValue3);
-    console.log(inputValue4);
-    console.log(inputValue5);
     $.ajax({
         url: "./controleur.php",
         type: "POST",
         dataType: "json",
         data: {
             "action" : "changerMdp",
-            "mdpN2" : inputValue5,
-            "mdpN" : inputValue4,
-            "mdpV" : inputValue3,
+            "mdp" : inputValue5,
         },
         success: function(retour) {
             console.log("Votre mot de passe a bien été changé");
@@ -115,7 +103,6 @@ function changerRole(){
             success: function(retour) {
                 console.log("Le rôle de l'utilisateur a été changé avec succès");
                 alert("Le rôle de l'utilisateur a été changé avec succès");
-                location.reload();
             },
             error: function(retour) {
                 console.log("Erreur lors du changement de rôle de l'utilisateur");
@@ -127,33 +114,40 @@ function changerRole(){
 
 $(function() {
 
-    $('#i').click(function() {
+    $('#i').hover(function() {
         $('#popupInfos').toggle();
-        $("#popupInfos").css('top', $("#i").offset().top + 60).css('left', ($(window).width() - $("#popupInfos").width() - 20) / 2);
     });
 
-
+    $('#i').mousemove(function(e) {
+        $("#popupInfos").css('top', e.pageY).css('left', e.pageX);
+    });
 });
   
 
 function rechercheUser() {
+	var nbUserShow = 0;
 	var input = document.getElementById("rechercheUser");
 	var recherche = input.value.toUpperCase();
 	console.log(recherche);
-	var listeUsers = document.getElementsByClassName('nomUser');
-	for (var i = 0; i < listeUsers.length; i++) {
-		if (listeUsers[i].innerHTML.toUpperCase().includes(recherche)) {
-			listeUsers[i].parentElement.parentElement.style.display = "flex";
+
+	var listeUser = allSlider.getElementsByClassName('utilisateur');
+	for (var i = 0; i < listeUser.length; i++) {
+
+		if (listeUser[i].innerHTML.toUpperCase().includes(recherche)) {
+			listeUser[i].parentElement.parentElement.parentElement.style.display = "block";
+			nbUserShow++;
 		}
 		else {
-			listeUsers[i].parentElement.parentElement.style.display = "none";
+			listeUser[i].parentElement.parentElement.parentElement.style.display = "none";
 		}
 
 		if (recherche == "") {
-			listeUsers[i].parentElement.parentElement.style.display = "flex";
+			listeUser[i].parentElement.parentElement.parentElement.style.display = "block";
+			listePoints[i].style.display = "block";
 		}
 
 	}
+	allSlider.style.setProperty("--transform", 0);
 }
 
 const rechercher = debounce(() => rechercheUser(), 500);

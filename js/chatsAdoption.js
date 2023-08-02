@@ -37,7 +37,7 @@ function afficherChats(chats) {
 									<div class="chatTexte policeTexte">${chatActuel['name']}</div>
 								</div>
 								<div>
-									<div class="chatTitre textColor3 policeTexte">Couleur</div>
+									<div class="chatTitre textColor3 policeTexte">Race</div>
 									<div class="chatTexte policeTexte">${chatActuel['race']}</div>
 								</div>
 								<div>
@@ -78,7 +78,7 @@ function afficherChats(chats) {
 
 					
 					<div class="chatInfoSmall">
-						<div class="policeTexte boxInfoTitle">Couleur</div>
+						<div class="policeTexte boxInfoTitle">Race</div>
 						<div class="policeTexte boxInfoSmall">${chatActuel['race']}</div>
 					</div>
 
@@ -269,6 +269,16 @@ function displayFormEditChat(element){
 								<label for=\"nom\">Name</label>
 							</div>
 
+							<div class='group'>
+								<select name='statut'>
+									<option value='1' ${chat['statut'] == 1 ? "selected" : ""}>A adopter</option>
+									<option value='2' ${chat['statut'] == 2 ? "selected" : ""}>En cours d'adoption</option>
+									<option value='3' ${chat['statut'] == 3 ? "selected" : ""}>Adopté</option>
+								</select>
+								<label class='labelFocused' for='statut'>Statut</label>
+							</div>
+
+
 						</div>
 
 						<div class='inputOther'>
@@ -285,7 +295,7 @@ function displayFormEditChat(element){
 									</div>
 
 									<div class='colorPicker'>
-										<label for='couleur' class='colorPickerText'>Couleur de fond</label>
+										<label for='couleur' class='colorPickerText'>Couleur</label>
 										<div class='colorPickerColor' style='--colorSelected: ${chat['couleur']}' onclick=\"openDialogBox(document.getElementById('colorInputEdit'), 'color');\" ><div></div></div>
 										<input id='colorInputEdit' type='hidden' name='couleur' value='${chat['couleur']}'>
 									</div>

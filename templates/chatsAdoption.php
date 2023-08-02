@@ -5,6 +5,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	die("");
 }
 
+if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
+    echo "<script>window.alert('" . $_SESSION['error'] . "');</script>";
+    unset($_SESSION['error']);
+}
+
 ?>
 
 <script src="./js/utils.js"></script>
@@ -67,12 +72,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 				Aucun chat ne correspond à votre recherche
 			</div>
 		</div>
-		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire">
-		
-		<div id="validerAdoptionResponsiveBox">
-			<img class="clickable" src="./ressources/flecheLeft.svg" alt="arrow" onclick="sideButtonToggle('validerAdoptionResponsiveBox');">
-			<input id="validerAdoptionResponsive" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire">
-		</div>
+		<input id="validerAdoption" class="buttonType policeTexte" type="submit" name="action" value="Accedez au formulaire d'adoption">
 		<select name="chatsSelected[]" id="chatsSelected" multiple></select>
 	</form>
 
@@ -88,7 +88,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		<div id="filtreTitre">Filtrer vos recherches</div>
 
 		<div id="filtreRace" class="filtre">
-			<div class="filtreTitre">Filtrer par couleur</div>
+			<div class="filtreTitre">Filtrer par race</div>
 			<div class="filtreContent">
 				
 			</div>
@@ -156,7 +156,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 					<select name='code' style='width: auto;'>";
 						foreach(listerChats() as $chat){
-							echo "<option value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
+							echo "<option style='font-style:italic;' value='".$chat['code']."'>".$chat['code']." -- ".$chat['name']."</option>";
 						}
 		echo "
 					</select>
@@ -193,7 +193,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 					
 						<div class='group'>
 							<input type='text' name='race' required>
-							<label for=\"race\">Couleur</label>
+							<label for=\"race\">Race</label>
 						</div>
 
 					</div>
@@ -228,7 +228,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 								</div>
 
 								<div class='colorPicker'>
-									<label for='couleur' class='colorPickerText'>Couleur de fond</label>
+									<label for='couleur' class='colorPickerText'>Couleur</label>
 									<div class='colorPickerColor' onclick=\"openDialogBox(document.getElementById('colorInputAdd'), 'color');\" ><div></div></div>
 									<input id='colorInputAdd' type='hidden' name='couleur' value='#000000'>
 								</div>

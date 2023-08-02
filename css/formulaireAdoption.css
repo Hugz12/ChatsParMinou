@@ -2,14 +2,14 @@
 	max-width: 100%;
 	height: auto;
 	border-radius: 12px;
-	z-index: 1;
-	padding : 40px;
-	max-width: 1050px;
-	margin : auto;
+	margin: 50px 250px 0 250px;
+	z-index: 0;
+	padding : 1% 1%;
 }
 
 
 #titreFormulaireAdoption{
+	font-size: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -20,7 +20,7 @@
 	position: relative;
 }
 
-#allFormulaireAdoption > * > input {
+#allFormulaireAdoption > form > input {
 	margin: 4% 0 4% 0;
 	width: auto;
 	display: flex;
@@ -54,81 +54,50 @@
 	justify-content: center;
 	background-color: var(--main-color);
 	margin: 25px 0 25px 0;
-	font-size: 18px;
 }
-
+#infoPerso .group{
+	width: 100%;
+	font-size: 18px;
+	margin: 8% 0 8% 0;
+}
 #allFormulaireAdoption > form{
 	background-color: inherit;
 
 }
 
-.titre{
-	margin: 30px 0;
+#titre{
+	font-size: 30px;
+	margin-top: 2%;
 	cursor: default;
 	font-family: "Roboto",sans-serif;
 	color: var(--third-color);
 	z-index: 1;
 	position: relative;
 	background-color: var(--main-color);
-}
-.tailleSousTitre{
-	font-size: 30px;
+	width: fit-content;
 }
 #infoPerso{
 	display: flex;
 	background-color: inherit;
 	justify-content: space-around;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	align-items: center;
 	flex-direction: row;
 	align-content: center;
 }
 
-
+.p1,.p2{
+	width: 40%;
+}
 #coche{
 	display: flex;
 	background-color: inherit;
 	justify-content: space-around;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	align-items: center;
 	flex-direction: row;
 	align-content: center;
 }
-
-#infoPerso > * {
-	min-width: 220px;
-	width: 40%;
-	padding: 0 10px;
-}
-
-.group:last-child{
-	margin: 0!important;
-}
-
-input {
-	min-width: 220px;
-}
-
-.infoAdoptionInput{
-	margin: 1% 5%;
-}
-
-@media (max-width: 650px) {
-	#infoPerso > * {
-		width: 100%;
-		margin: 0 5%;
-	}
-	#conteneurChats {
-		justify-content: center;
-	}
-	.tailleSousTitre{
-		font-size: 20px;
-	}
-	.titre{
-		text-align: center;
-	}
-}
-
 /*------------------------------------------------------------------------*/
 /*                                 Checkbox                              */
 /*------------------------------------------------------------------------*/
@@ -140,7 +109,7 @@ input {
 	width: fit-content;
 	font-size: 20px;
 	line-height: 1.5;
-	margin: 0 20px 20px 20px;
+	margin-bottom: 20px;
 	font-family: Arial, sans-serif;
 	user-select: none;
   }
@@ -213,6 +182,7 @@ input {
 .chatContainer {
     text-align: center;
     margin-bottom: 20px;
+    display: inline-block;
 	border: rgb(200,200,200) solid 2px;
 	border-radius: 5px;
 	margin: 10px;
@@ -222,6 +192,16 @@ input {
 	position: relative;
 }
 
+.chatContainerlike {
+    text-align: center;
+    margin-bottom: 20px;
+    display: inline-block;
+	border: rgb(200,200,200) solid 2px;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+	z-index: 1;
+}
 
 .conteneurDeConteneurDePattes{
 	z-index: 0;
@@ -273,35 +253,11 @@ input {
 	transform: scale(1.1);
   }
   
-  #conteneurChats, #conteneurChatsliké {
+  #conteneurChats {
 	position: relative;
 	z-index: 1;
-	display: flex;
-	flex-wrap: wrap;
-
-  }
-  .tooltip {
-	display: none;
-	position: absolute;
-	top: calc(0%);
-	right: 0;
-	background-color: inherit;
-	border : 2px solid rgb(200,200,200);
-	color: rgb(200,200,200);
-	padding: 5px;
-	border-radius: 5px;
-	font-size: 12px;
-	cursor: default;
-	opacity: 0.8;
-  }
-  
-  .group:hover .tooltip {
-	display: flex;
   }
 
-  #conteneurChatsliké .chatContainer:not(.liked) {
-	display: none;
-  }
 
   @keyframes like_effect {
 	0% {
@@ -330,7 +286,4 @@ input {
 	  transform: scale(1);
 	}
   }
-
-#rechercheChat , #conteneurChatsliké {
-	margin: 1% 5%;
-}
+  

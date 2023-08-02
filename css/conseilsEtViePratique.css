@@ -17,6 +17,7 @@
     position: relative;
     margin: 25px 0px;
     padding: 15px;
+    height: 150px;
     width: 100%;
     font-size: 17px;
     border-radius: 100px;
@@ -51,13 +52,13 @@
 
 #container > div > a{
     display: flex;
+    
 }
 
 
 .conseil {
     display: flex;
     flex-direction: row;
-    height: 150px;
 } 
 
 .conseil > div {
@@ -65,32 +66,9 @@
     text-align: center;
 }
 
-@media screen and (max-width: 600px) {
-    .conseil {
-        flex-wrap: wrap;
-        height: auto;
-    }
-
-    .conseil > div {
-        width: 90%;
-    }
-
-    .conseilInverse {
-        flex-direction: row
-    }
-
-    #container > div:not(:last-child)::after {
-        left: calc(50% - 15px);
-    }
-
-   
-    
+.conseil > .titreConseil {
+    font-size: 70px;
 }
-
-.conseilInverse {
-    flex-direction: row-reverse;
-}
-
 
 
 

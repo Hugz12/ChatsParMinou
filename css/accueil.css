@@ -138,7 +138,8 @@
 }
 
 .chatDescription {
-	
+	width: 25%;
+	max-width: 500px;
 	min-width: 150px;
 	z-index: 1;
 }
@@ -160,7 +161,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0 0 160px 0;
+	margin: 0 0 80px 0;
 
 }
 
@@ -225,17 +226,6 @@
 	padding: 10px 10px 10px 10px;
 	border-radius: 7px;
 	background-color: var(--third-color);
-}
-.chatBanniere .chatTexte {
-	font-size: 11px;
-	font-weight: initial;
-	background-color: initial;
-}
-
-.secondBanner .chatTexte {
-	font-size: 11px;
-	font-weight: initial;
-	background-color: initial;
 }
 
 
@@ -335,9 +325,9 @@
 }
 
 .secondBanner {
+	height: 130px;
 	background-color: var(--third-color);
 	justify-content: center;
-	padding-bottom: 10px;
 }
 
 .secondBanner > div {
@@ -357,6 +347,7 @@
 
 .allSliderPhotoChatSmall {
 	position: relative;
+	top : -5vw;
 
 	--taille: calc(100vw - 60px);
 	--hauteur: 340px;

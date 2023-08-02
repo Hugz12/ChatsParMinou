@@ -316,19 +316,3 @@ function verifierCaracteres(contexte, event) {
 	}
 			
 }
-
-
-
-function sideButtonToggle(id) {
-	var button = document.getElementById(id);
-	if (button.style.right == "0px") {
-		console.log("fermer");
-		button.style.right =  "-" + (button.offsetWidth - 54) + "px";
-		button.children[0].style.transform = "rotate(0deg)";
-	}
-	else {
-		console.log("ouvrir");
-		button.style.right = "0px";
-		button.children[0].style.transform = "rotate(180deg)";
-	}
-}

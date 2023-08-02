@@ -31,6 +31,7 @@ function afficherChats(chats) {
     checkboxInput.id = 'chat' + codeChat;
     checkboxInput.dataset.like = codeChat;
 
+
     var checkboxCheckmark = document.createElement('div');
     checkboxCheckmark.className = 'checkmark';
     checkboxCheckmark.innerHTML = '<svg viewBox="0 0 256 256"><rect fill="none" height="256" width="256"></rect><path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#666" fill="none"></path></svg>';
@@ -41,30 +42,28 @@ function afficherChats(chats) {
     chatContainer.appendChild(checkboxContainer);
 
     conteneurChats.appendChild(chatContainer);
-
     checkboxInput.addEventListener('change', function(event) {
       var chatCode = event.target.dataset.like;
-      var likeCheckboxes = document.querySelectorAll('.chat[data-like="' + chatCode + '"]');
+      var likeCheckboxes = document.querySelectorAll('[data-like="' + chatCode + '"]');
     
       for (var i = 0; i < likeCheckboxes.length; i++) {
         var checkbox = likeCheckboxes[i];
         var chatContainer = checkbox.closest('.chatContainer');
     
         if (event.target.checked) {
-          checkbox.checked = true;
           chatContainer.classList.add('liked');
         } else {
-          checkbox.checked = false;
           chatContainer.classList.remove('liked');
         }
       }
     });
+    
   }
 }
 
 // Fonction qui permet d'afficher tous les chats dans la page d'adoption
-function afficherChatsliké(chats) {
-  var conteneurChats = document.getElementById("conteneurChatsliké");
+function afficherChatslike(chats) {
+  var conteneurChats = document.getElementById("conteneurChatslike");
 
   for (var j = 0; j < chats.length; j++) {
     var chatActuel = chats[j];
@@ -95,6 +94,7 @@ function afficherChatsliké(chats) {
     checkboxInput.id = 'chat' + codeChat;
     checkboxInput.dataset.like = codeChat;
 
+
     var checkboxCheckmark = document.createElement('div');
     checkboxCheckmark.className = 'checkmark';
     checkboxCheckmark.innerHTML = '<svg viewBox="0 0 256 256"><rect fill="none" height="256" width="256"></rect><path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#666" fill="none"></path></svg>';
@@ -105,49 +105,27 @@ function afficherChatsliké(chats) {
     chatContainer.appendChild(checkboxContainer);
 
     conteneurChats.appendChild(chatContainer);
-
+    // Ajouter une écoute d'événement sur la case à cocher
     checkboxInput.addEventListener('change', function(event) {
       var chatCode = event.target.dataset.like;
-      var likeCheckboxes = document.querySelectorAll('.chat[data-like="' + chatCode + '"]');
+      var likeCheckboxes = document.querySelectorAll('[data-like="' + chatCode + '"]');
     
       for (var i = 0; i < likeCheckboxes.length; i++) {
         var checkbox = likeCheckboxes[i];
         var chatContainer = checkbox.closest('.chatContainer');
     
         if (event.target.checked) {
-          checkbox.checked = true;
           chatContainer.classList.add('liked');
+          console.log("liked");
         } else {
-          checkbox.checked = false;
           chatContainer.classList.remove('liked');
+          console.log("unliked");
         }
       }
     });
   }
 }
 
-function rechercheAdoption() {
-	var input = document.getElementById("rechercheAdoption");
-	var recherche = input.value.toUpperCase();
-	console.log(recherche);
-  var conteneurChats = document.getElementById("conteneurChats");
-	var listeChats = conteneurChats.getElementsByClassName('chatTexte');
-	for (var i = 0; i < listeChats.length; i++) {
-		if (listeChats[i].innerHTML.toUpperCase().includes(recherche)) {
-			listeChats[i].parentElement.style.display = "block";
-		}
-		else {
-			listeChats[i].parentElement.style.display = "none";
-		}
-
-		if (recherche == "") {
-			listeChats[i].parentElement.style.display = "block";
-		}
-
-	}
-}
-
-const rechercherChat = debounce(() => rechercheAdoption(), 500);
 
 
 function ajouterRetirerCodeChat(codeChat) {
@@ -175,12 +153,15 @@ function sauvegarderRetour() {
 }
 
 function initialiserPage() {
-  console.log(retour);
+  // Récupérer les paramètres d'URL
+  var params = new URLSearchParams(window.location.search);
+
   if (retour === false) {
     retour = [];
   }
   // Récupérer tous les éléments checkbox dans la page
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  
   // Parcourir les checkboxes
   checkboxes.forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
@@ -190,17 +171,14 @@ function initialiserPage() {
 
     // Initialiser l'état de la checkbox en fonction des valeurs dans le tableau retour
     checkbox.checked = retour.includes(checkbox.dataset.codeChat);
-    if (checkbox.checked) {
-      checkbox.parentElement.parentElement.classList.add('liked');
-    }
   });
 }
 
 
-document.addEventListener("DOMContentLoaded", initialiserPage);
+// Appeler la fonction d'initialisation au chargement de la page
+window.addEventListener('load', initialiserPage);
 
 function submitForm() {
-  retour = JSON.stringify(retour);
   var nom = document.getElementById("nomForm").value;
   var prenom = document.getElementById("prenomForm").value;
   var mail = document.getElementById("mailForm").value;
@@ -212,10 +190,10 @@ function submitForm() {
   var animaux = document.getElementById("animauxForm").value;
   var sit = document.getElementById("sitForm").value;
   var com = document.getElementById("comForm").value;
+  var retour = localStorage.getItem('retour');
   var pre = document.getElementById("preForm").value;
   var justi = document.getElementById("justiForm").value;
   var date = new Date();
-  console.log(retour);
   date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
   if (ext == "on") {
     ext = 1;
@@ -241,7 +219,7 @@ function submitForm() {
     justi = 0;
   }
   retour = retour.replace(/[\[\]"]/g, '');  // Supprimer les crochets carrés et les guillemets
-  console.log(retour);
+
   // Diviser la chaîne en utilisant la virgule comme délimiteur
   var chiffres = retour.split(',');
 
