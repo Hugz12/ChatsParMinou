@@ -158,8 +158,8 @@ if (!valider('Connecte', 'SESSION')) {
 	<p>Rôles des utilisateurs :</p>
 	<ul>
 		<li class="role-1">Super Administrateur</li> (1 seul / il a tous les droits)
-		<li class="role-2">Administrateur</li> (peut voir le calendrier et modifier les événements)
-		<li>Bénévole</li> (peut voir le calendrier)
+		<li class="role-2">Administrateur</li> (peut traiter les demandes d'adoption, et acceder au calendrier. Il peut promouvoir des administrateurs mais pas les retirer)
+		<li>Bénévole</li> (peut acceder au calendrier)
 	</ul>
 	<p>Boutons de gestions :</p>
 	<ul>
