@@ -231,6 +231,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 					// On crée le dossier du chat
 					mkdir("./ressources/chats/$code", 0777, true);
+					chmod("./ressources/chats/$code", 777);
 					
 					// On ajoute les photos
 					$i = 0;
@@ -327,7 +328,7 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 
 		case 'Modifier le chat' : 
 			// si il y a au moins un champ non vide
-			
+
 			if  ($nom = valider("nom", "POST")) 
 			if 	($familleAccueil = valider("familleAccueil","POST")) 
 			if	($couleur = valider("couleur","POST")) 
