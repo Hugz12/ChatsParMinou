@@ -138,7 +138,7 @@ function dateCompteur(dateDemande){
 // Fonction qui affiche les demandes
 function afficherDemandes(demandes) {
     var statut, btn, img, date, dateDemande;
-    var iN = 0, iC = 0, iT = 0;
+    var iN = 0, iC = 0, iF = 0;
     for (var i=0; i < demandes.length; i++) {
         dateDemande = new Date(demandes[i]["date"]);
         date = dateCompteur(dateDemande) + ", le " + dateDemande.toLocaleDateString();
@@ -167,13 +167,13 @@ function afficherDemandes(demandes) {
                 break;
 
             case 3:
-                statut = "#traitees";
-                btn = "btnTraitees";
+                statut = "#finalisees";
+                btn = "btnFinalisees";
                 img = "return";
-                iT++;
+                iF++;
 
                 appendDemande(statut, date, btn, getSVG(img), demandes[i]);
-                if (iT > 10) $("#demande" + demandes[i]["id"]).css("display", "none");
+                if (iF > 10) $("#demande" + demandes[i]["id"]).css("display", "none");
 
                 break;
         }
@@ -182,17 +182,17 @@ function afficherDemandes(demandes) {
 
 //Fonction qui affiche les titres des demandes
 function afficherTitres(demandes) {
-    var iC = 0 , iN = 0 , iT = 0; 
+    var iC = 0 , iN = 0 , iF = 0; 
     for (var i=0; i < demandes.length; i++) {
         if (demandes[i]["statutDemande"] == 1) iN++;
         if (demandes[i]["statutDemande"] == 2) iC++;
-        if (demandes[i]["statutDemande"] == 3) iT++;
+        if (demandes[i]["statutDemande"] == 3) iF++;
     }
 
     var classe = "class='policeTitre tailleTitre marginTitre'";
     $("#nouvellesDemandes").before("<p id='titreNouvellesDemandes' " + classe + "></p>");
     $("#demandesEnCours").before("<p id='titreEnCours' " + classe + "></p>");
-    $("#traitees").before("<p id='titreTraitees' " + classe + "></p>");
+    $("#finalisees").before("<p id='titreFinalisees' " + classe + "></p>");
 
     if (iN != 0){
         if (iN == 1) $("#titreNouvellesDemandes").text("Nouvelle demande");
@@ -204,10 +204,10 @@ function afficherTitres(demandes) {
         else $("#titreEnCours").text("Demandes en cours");
     } else $("#titreEnCours").text("Aucune demande en cours");
 
-    if (iT != 0){
-        if (iT == 1) $("#titreTraitees").text("Demande finalisée");
-        else $("#titreTraitees").text("Demandes finalisées");
-    } else $("#titreTraitees").text("Aucune demande finalisée");
+    if (iF != 0){
+        if (iF == 1) $("#titreFinalisees").text("Demande finalisée");
+        else $("#titreFinalisees").text("Demandes finalisées");
+    } else $("#titreFinalisees").text("Aucune demande finalisée");
 
     montrerPlusMoins();
 }
@@ -216,7 +216,7 @@ function afficherTitres(demandes) {
 function changerTitres() {
     var idN = document.getElementById("nouvellesDemandes");
     var idC = document.getElementById("demandesEnCours");
-    var idT = document.getElementById("traitees");
+    var idF = document.getElementById("finalisees");
 
     if (idN.childElementCount != 0) {
         if (idN.childElementCount == 1) $("#titreNouvellesDemandes").text("Nouvelle demande");
@@ -228,10 +228,10 @@ function changerTitres() {
         else $("#titreEnCours").text("Demandes en cours");
     } else $("#titreEnCours").text("Aucune demande en cours");
 
-    if (idT.childElementCount != 0) {
-        if ((idT.childElementCount == 1)) $("#titreTraitees").text("Demande finalisée");
-        else $("#titreTraitees").text("Demandes finalisées");
-    } else $("#titreTraitees").text("Aucune demande finalisée");
+    if (idF.childElementCount != 0) {
+        if ((idF.childElementCount == 1)) $("#titreFinalisees").text("Demande finalisée");
+        else $("#titreFinalisees").text("Demandes finalisées");
+    } else $("#titreFinalisees").text("Aucune demande finalisée");
 }
 
 // Tri par date
@@ -261,7 +261,7 @@ function changerStatut(contexte) {
     var id = $($(contexte).parent()).attr("id").match(/\d+/g).toString().replace(',', '');
     id = parseInt(id);
 
-    if ($(contexte).hasClass("btnNouvelleDemande") || $(contexte).hasClass("btnTraitees")) {
+    if ($(contexte).hasClass("btnNouvelleDemande") || $(contexte).hasClass("btnFinalisees")) {
         var statut = "demandesEnCours";
         var statutDemande = 2;
 
@@ -270,20 +270,20 @@ function changerStatut(contexte) {
 
             $(demande).children(".btnNouvelleDemande").addClass("btnEnCours");
             $(demande).children(".btnNouvelleDemande").removeClass("btnNouvelleDemande");
-        } else if ($(contexte).hasClass("btnTraitees")) {
-            $($(demande).children(".btnTraitees")).html(getSVG("check"));
+        } else if ($(contexte).hasClass("btnFinalisees")) {
+            $($(demande).children(".btnFinalisees")).html(getSVG("check"));
 
-            $(demande).children(".btnTraitees").addClass("btnEnCours"); 
-            $(demande).children(".btnTraitees").removeClass("btnTraitees");
+            $(demande).children(".btnFinalisees").addClass("btnEnCours"); 
+            $(demande).children(".btnFinalisees").removeClass("btnFinalisees");
         }
     } 
     else if ($(contexte).hasClass("btnEnCours")) {
-        var statut = "traitees";
+        var statut = "finalisees";
         var statutDemande = 3;
         
         $($(demande).children(".btnEnCours")).html(getSVG("return"));
 
-        $(demande).children(".btnEnCours").addClass("btnTraitees");
+        $(demande).children(".btnEnCours").addClass("btnFinalisees");
         $(demande).children(".btnEnCours").removeClass("btnEnCours");
     }
 
@@ -429,8 +429,8 @@ $(function() {
             $("#demandesEnCours").append(aucun);
         }
 
-        if($('#traitees').children(':visible').length == 0 && $("#titreTraitees").text().match("Aucune") == null) {
-            $("#traitees").append(aucun);
+        if($('#finalisees').children(':visible').length == 0 && $("#titreFinalisees").text().match("Aucune") == null) {
+            $("#finalisees").append(aucun);
         }
     });
 });
@@ -457,8 +457,8 @@ $(function() {
             $("#demandesEnCours").prepend(this);
         }); 
 
-        $("#traitees .demandes").each(function(){ 
-            $("#traitees").prepend(this);
+        $("#finalisees .demandes").each(function(){ 
+            $("#finalisees").prepend(this);
         }); 
 
         if ($("#lienNouvellesDemandes").text() == "Montrer plus") {
@@ -475,10 +475,10 @@ $(function() {
             }
         }
 
-        if ($("#lienTraitees").text() == "Montrer plus") {
-            $("#traitees .demandes").hide();
+        if ($("#lienFinalisees").text() == "Montrer plus") {
+            $("#finalisees .demandes").hide();
             for (var i = 0; i < 10; i++) {
-                $("#traitees .demandes").eq(i).show();
+                $("#finalisees .demandes").eq(i).show();
             }
         }
     });
@@ -491,7 +491,7 @@ $(function() {
 
         if ($(this).attr("id") == "lienNouvellesDemandes") statut = "#nouvellesDemandes";
         else if ($(this).attr("id") == "lienEnCours") statut = "#demandesEnCours";
-        else statut = "#traitees";
+        else statut = "#finalisees";
 
         if ($(this).text() == "Montrer plus") {
             $(this).text("Montrer moins");
@@ -509,7 +509,7 @@ $(function() {
 function montrerPlusMoins() {
     $("#lienNouvellesDemandes").toggle($("#titreNouvellesDemandes").text().match("Aucune") == null);
     $("#lienEnCours").toggle($("#titreEnCours").text().match("Aucune") == null);
-    $("#lienTraitees").toggle($("#titreTraitees").text().match("Aucune") == null);
+    $("#lienFinalisees").toggle($("#titreFinalisees").text().match("Aucune") == null);
 }
 
 // Zoom sur une demande
