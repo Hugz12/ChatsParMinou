@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    width: 50%;
+    width: 100%;
 }
 
 .para {
@@ -38,6 +38,7 @@
 
 .para p {
     font-size: 1.2em;
+    overflow: auto;
 }
 
 form label {
@@ -315,8 +316,9 @@ form input[type="text"], textarea {
     margin: auto;
 }
 
-.infosChat p{
+.infosChat .para p{
     margin: 0;
+    height: 50px;
 }
 
 .infosChat img{
@@ -329,25 +331,9 @@ form input[type="text"], textarea {
     cursor: pointer;
 }
 
-.idChat {
-    display: flex;
-    background-color: var(--sec-color);
-    width: 100%;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.idChat p {
-    margin: 0;
-}
-
-.idChat .para {
-    width: 50%;
-    margin: 0;
-}
-
 .nomChat {
     font-size: 2.3em;
+    margin: 10px 0 0 0;
 }
 
 
@@ -368,6 +354,11 @@ form input[type="text"], textarea {
 
 .nomPers {
     font-size: 4em;
+}
+
+.commentaire > p{
+    margin: 0;
+    height: 50px;
 }
 
 /* form */
@@ -519,6 +510,10 @@ svg {
     display: unset;
 }
 
+.zoom .column {
+    width: 50%;
+}
+
 .zoom .tpsDate{
     display: none;
 }
@@ -561,10 +556,6 @@ svg {
 
 .zoom .infosPers {
     width: clamp(400px, 45%, 1000px);
-}
-
-.zoom .commentaire > p{
-    margin: 0;
 }
 
 .zoom .memo {
@@ -702,10 +693,6 @@ svg {
         right: 0;
         width: 100%;
         text-align: center;
-    }
-
-    .zoom .infosPers p {
-        overflow: auto;
     }
 
     #popupInfos {

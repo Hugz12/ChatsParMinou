@@ -14,7 +14,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <div id="rechercher">
 	<form>
         <div class="group">
-            <input id="rechercheConseil" type="text" required>
+            <input id="rechercheConseil" maxlength='255' type="text" required>
             <label for="rechercheConseil">Rechercher</label>
         </div>
         
@@ -56,7 +56,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
                     <div id='evenement'>
 
                         <div class='group'>
-                            <input type='text' name='name' required>
+                            <input type='text' maxlength='255' name='name' required>
                             <label for=\"name\">Nom</label>
                         </div>
 
@@ -68,7 +68,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
                     <div class='inputOther'>
 
                         <div class='group'>
-                            <textarea name='description'required></textarea>
+                            <textarea maxlength='3000' name='description'required></textarea>
                             <label for=\"description\">Description</label>
                         </div>
 

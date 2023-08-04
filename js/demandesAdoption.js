@@ -23,12 +23,7 @@ function appendDemande(statut, date, btn, img, demande) {
                         <div class="infos">
                             <div class="infosChat">
                                 <img onclick='zoom(this);' src="./ressources/chats/${demande["code"]}/0.jpg" alt="${demande["code"]}/0.jpg">
-                                <div class="idChat">
-                                    <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
-                                    <div class="para none">
-                                        <p class="statutChat" name="statut">${demande["statut"]}</p>
-                                    </div>
-                                </div>
+                                <p class="nomChat policeTitre">${demande['name']} - ${demande["code"]}</p>
                                 <div class='para none'>
                                     <p name='description'>${demande['description']}</p>
                                     <label for=\"description\">Description</label>
@@ -82,7 +77,7 @@ function appendDemande(statut, date, btn, img, demande) {
                         </div>
                         <form>
                             <div class='group memo'>
-                                <textarea name='memo' maxlength="255" required>${demande['memo']}</textarea>
+                                <textarea name='memo' maxlength="3000" required>${demande['memo']}</textarea>
                                 <label for=\"memo\">Mémo</label>
                             </div>
                             <div class="sous-memos">
@@ -311,7 +306,7 @@ function supprimerDemande(contexte) {
     id = parseInt(id);
 
     var code = $($(contexte).parent().children(".fondDemande").children(".contenuDemande").children(".infos")
-        .children(".infosChat").children(".idChat").children(".nomChat")).text().split("-");
+        .children(".infosChat").children(".nomChat")).text().split("-");
     code = code[1].trim();
 
     $("#overlay").show();
@@ -532,20 +527,6 @@ $(function() {
     $(".para p").each(function() {
         if ($(this).text() == "null") $(this).text("Aucune information");
     });
-    
-    $(".statutChat").each(function() {
-        switch ($(this).text()) {
-            case '1':
-                $(this).text("A adopter");
-                break;
-            case '2':
-                $(this).text("En cours d'adoption");
-                break;
-            case '3':
-                $(this).text("Adopté");
-                break;
-        }
-    });
 
     $(".exterieur").each(function() {
         switch ($(this).text()) {
@@ -554,17 +535,6 @@ $(function() {
                 break;
             case '1':
                 $(this).text("Extérieur disponible");
-                break;
-        }
-    });
-
-    $(".sortie").each(function() {
-        switch ($(this).text()) {
-            case '0':
-                $(this).text("Pas de sortie");
-                break;
-            case '1':
-                $(this).text("Sortie autorisée");
                 break;
         }
     });

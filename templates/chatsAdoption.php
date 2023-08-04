@@ -16,7 +16,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	<div id="chatsTitre" class="policeTexte">
 		<form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercher();">
 				<div class="group">
-					<input type="text" id="rechercheChats" required>
+					<input type="text" maxlength='255' id="rechercheChats" required>
 					<label for="rechercheChats">Rechercher</label>
 				</div>
 		</form>
@@ -117,11 +117,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 			<div class="filtreContent">
 				<form class="filtreAgeBox">
 					<label for="filtreAgeMin">Age minimum : </label>
-					<input type="text" id="filtreAgeMin" onkeypress="verifierCaracteres(this, event); return false;" onkeyup="updateFiltreAll();">
+					<input type="text" maxlength='255' id="filtreAgeMin" onkeypress="verifierCaracteres(this, event); return false;" onkeyup="updateFiltreAll();">
 				</form>
 				<form class="filtreAgeBox">
 					<label for="filtreAgeMax">Age maximum : </label>
-					<input type="text" id="filtreAgeMax" onkeypress="verifierCaracteres(this, event); return false;" onkeyup="updateFiltreAll();">
+					<input type="text" maxlength='255' id="filtreAgeMax" onkeypress="verifierCaracteres(this, event); return false;" onkeyup="updateFiltreAll();">
 				</form>
 			</div>
 		</div>
@@ -182,17 +182,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 					<div class='inputText'>
 
 						<div class='group'>
-							<input type='text' name='nom' required>
+							<input type='text' maxlength='255' name='nom' required>
 							<label for=\"nom\">Nom</label>
 						</div>
 
 						<div class='group'>
-							<input type='text' name='code' required>
+							<input type='text' maxlength='255' name='code' required>
 							<label for=\"code\">Code</label>
 						</div>
 					
 						<div class='group'>
-							<input type='text' name='race' required>
+							<input type='text' maxlength='255' name='race' required>
 							<label for=\"race\">Couleur</label>
 						</div>
 
@@ -238,7 +238,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 						</div>
 
 						<div class='group'>
-							<textarea name='description' required></textarea>
+							<textarea maxlength='3000' name='description' required></textarea>
 							<label for=\"description\">Description</label>
 						</div>
 					

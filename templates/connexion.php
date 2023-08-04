@@ -38,11 +38,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
         <div id="titreLogin" class="policeTitre">Connexion</div>
         <form action="controleur.php" method="get"> 
             <div class="group">
-                <input type="text" name="mail" required/>
+                <input type="text" maxlength='255' name="mail" required/>
                 <label for="mail">Adresse mail</label>
             </div>
             <div class="group">
-                <input type="password" name="password" required/>
+                <input type="password" maxlength='255' name="password" required/>
                 <label for="password">Mot de passe</label>
             </div>
             <div id="mdpOublie">Mot de passe oublié</div>
@@ -56,22 +56,22 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
         <div id="titreRegister" class="policeTitre">Inscription</div>
         <form action="controleur.php" method="post" enctype="multipart/form-data"> 
         <div class="group">
-                <input type="text" name="mail" required/>
+                <input type="text" maxlength='255' name="mail" required/>
                 <label for="mail">Adresse mail</label>
             </div>
 
             <div class="group">
-                <input type="password" name="password" required/>
+                <input type="password" maxlength='255' name="password" required/>
                 <label for="password">Mot de passe</label>
             </div>
 
             <div class="group">
-                <input type="password" name="password2" required/>
+                <input type="password" maxlength='255' name="password2" required/>
                 <label for="password2">Confirmer votre mot de passe</label>
             </div>
 
             <div class="group">
-                <input type="text" name="name" required/>
+                <input type="text" maxlength='255' name="name" required/>
                 <label for="name">Nom et Prénom</label>
             </div>
 
@@ -112,15 +112,15 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
     <div id="titrePopupInfos" class="policeTitre tailleTitre">Changer de mot de passe</div>
     <form id="formMdpOublie">
         <div class="group">
-            <input type="text" name="mail" id="mailOublie" required/>
+            <input type="text" maxlength='255' name="mail" id="mailOublie" required/>
             <label for="mail">Adresse mail</label>
         </div>
         <div class="group">
-            <input type="password" name="passwordv" id="mdp1Oublie" required/>
+            <input type="password" maxlength='255' name="passwordv" id="mdp1Oublie" required/>
             <label for="passwordv">Nouveau mot de passe</label>
         </div>
         <div class="group">
-            <input type="password" name="password2" id="mdp2Oublie" required/>
+            <input type="password" maxlength='255' name="password2" id="mdp2Oublie" required/>
             <label for="password2">Confirmez le nouveau mot de passe</label>
         </div>
         <input type="button" class="buttonType" value="Changer mdp" onclick="sendMailMdp();"/>

@@ -43,7 +43,7 @@ if (!valider('Connecte', 'SESSION')) {
 			<div class='group'>
 			<?php
 			$nom=getNomUtilisateur($_SESSION['mail']);
-			echo "<input type='text' name='nom' value='$nom' id='nom-input' required>";
+			echo "<input type='text' maxlength='255' name='nom' value='$nom' id='nom-input' required>";
 			?>
 			<label for="nom">Nom et prénom</label>
 			</div>
@@ -57,16 +57,16 @@ if (!valider('Connecte', 'SESSION')) {
 			<div class="titre">Changer de mot de passe</div>
 			<form>
 					<div class='group'>
-						<input type='password' name='mdpv' id='mdpV' required>
+						<input type='password' maxlength='255' name='mdpv' id='mdpV' required>
 						<label for="mdpv">Ancien mot de passe</label>
 					</div>
 					<div class='group'>
-						<input type='password' name='mdpn' id='mdpN' required>
+						<input type='password' maxlength='255' name='mdpn' id='mdpN' required>
 						<label for="mdpn">Nouveau mot de passe</label>
 					</div>
 
 					<div class='group'>
-						<input type='password' name='mdpn2' id='mdpN2'required>
+						<input type='password' maxlength='255' name='mdpn2' id='mdpN2'required>
 						<label for="mdpn2">Confirmer le nouveau mot de passe</label>
 					</div>
 
@@ -78,7 +78,7 @@ if (!valider('Connecte', 'SESSION')) {
 			<div class="titre">Changer d'adresse mail ici</div>
 			<form>
 					<div class='group'>
-						<input type='text' name='mailn' id="mail-input" required>
+						<input type='text' maxlength='255' name='mailn' id="mail-input" required>
 						<label for="mailn">Nouveau mail</label>
 					</div>
 
@@ -99,7 +99,7 @@ if (!valider('Connecte', 'SESSION')) {
 					</div>
 					<form id="formRechercheUser" onsubmit="return false;" onkeyup="rechercher();">
 						<div class="group">
-							<input type="text" id="rechercheUser" required>
+							<input type="text" maxlength="255" id="rechercheUser" required>
 							<label for="rechercheUser">Rechercher un utilisateur par son nom</label>
 						</div>
 					</form>';

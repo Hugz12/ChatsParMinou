@@ -32,34 +32,34 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
         <div id="infoPerso">
             <div class='p1'>
                 <div class='group'>
-                    <input type='text' name='nom' id='nomForm'required>
+                    <input type='text' maxlength="255" name='nom' id='nomForm'required>
                     <label for="nom">Nom</label>
                     <span class="tooltip">Votre nom</span>
                 </div>
                 <div class='group'>
-                    <input type='text' name='prenom' id='prenomForm'required>
+                    <input type='text' maxlength="255" name='prenom' id='prenomForm'required>
                     <label for="prenom">Prénom</label>
                     <span class="tooltip">Votre prénom</span>
                 </div>
                 <div class='group'>
-                    <input type='text' name='mail'id='mailForm' required>
+                    <input type='text' maxlength="255" name='mail'id='mailForm' required>
                     <label for="mail">Adresse mail</label>
                     <span class="tooltip">Votre adresse mail</span>
                 </div>
             </div>
             <div class='p2'>
                 <div class='group'>
-                    <input type='text' name='tel'id='telForm' required>
+                    <input type='text' maxlength="255" name='tel'id='telForm' required>
                     <label for="tel">Numéro de téléphone</label>
                     <span class="tooltip">Votre numéro de téléphone</span>
                 </div>
                 <div class='group'>
-                    <input type='text' name='adresse'id='adresseForm' required>
+                    <input type='text' maxlength="255" name='adresse'id='adresseForm' required>
                     <label for="adresse">Adresse</label>
                     <span class="tooltip">Votre adresse postal</span>
                 </div>
                 <div class='group'>
-                    <input type='text' name='habitation' id='habitationForm' required>
+                    <input type='text' maxlength="255" name='habitation' id='habitationForm' required>
                     <label for="habitation">Type d'habitation</label>
                     <span class="tooltip">Type de logement dans lequel vous êtes</span>
                 </div>
@@ -77,7 +77,7 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
             <div id="rechercheChat">
                 <form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercherChat();">
                     <div class="group">
-                        <input type="text" id="rechercheAdoption" required>
+                        <input type="text" maxlength="255" id="rechercheAdoption" required>
                         <label for="rechercheAdoption">Recherche un chat par son nom</label>
                     </div>
                 </form>
@@ -105,17 +105,17 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
                     </label>
                 </div>
                 <div class='group'>
-                    <input type='text' name='animaux' id='animauxForm' required>
+                    <input type='text' maxlength="255" name='animaux' id='animauxForm' required>
                     <label for="animaux">Animaux</label>
                     <span class="tooltip">Les animaux que vous avez</span>
                 </div>
                 <div class='group'>
-                    <input type='text' name='situationFamiliale' id='sitForm' required>
+                    <input type='text' maxlength="255" name='situationFamiliale' id='sitForm' required>
                     <label for="situationFamiliale">Situation familiale</label>
                     <span class="tooltip">Informations des personnes dans votre foyer</span>
                 </div>
                 <div class='group'>
-                    <input type='text' name='commentaire' id='comForm' required>
+                    <input type='text' maxlength="3000" name='commentaire' id='comForm' required>
                     <label for="commentaire">Commentaire libre</label>
                     <span class="tooltip">Ajoutez ce que vous voulez</span>
                 </div>           

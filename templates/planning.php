@@ -117,7 +117,7 @@ if(isset($_SESSION["message"])){
 
 
 			<div class='group'>
-				<textarea id='description' name='description' required></textarea>
+				<textarea id='description' maxlength="3000" name='description' required></textarea>
 				<label for="description">Description</label>
 			</div>
 			
