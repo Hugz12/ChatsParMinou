@@ -68,9 +68,9 @@ if (!valider('Admin', 'SESSION')) {
 
 <div id="lienEnCours" class="lienPlusMoins">Montrer plus</div>
 
-<div id="traitees"></div>
+<div id="finalisees"></div>
 
-<div id="lienTraitees" class="lienPlusMoins">Montrer plus</div>
+<div id="lienFinalisees" class="lienPlusMoins">Montrer plus</div>
 
 <div id="overlay">
 	<div id="popupSupp">
