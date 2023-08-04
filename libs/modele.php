@@ -470,7 +470,7 @@ function existChat($code){
 function addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$couleur,$nbPhotos){
     $sexe--;
     $familleAccueil--;
-    $SQL = "INSERT INTO chat (code, name, dateDeNaissance, race, sexe, statut, description, chatDuMois, nbDemande, familleAccueil, vues, nbPhoto, couleur) VALUES ('$code','$nom','$date','$race','$sexe','1','$description','0','0','$familleAccueil','0','$nbPhotos','$couleur')";
+    $SQL = "INSERT INTO chat (code, name, dateDeNaissance, race, sexe, description, chatDuMois, familleAccueil, nbPhoto, couleur) VALUES ('$code','$nom','$date','$race','$sexe','$description','0','$familleAccueil','$nbPhotos','$couleur')";
     return SQLInsert($SQL);
 }
 

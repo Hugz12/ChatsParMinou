@@ -2,7 +2,7 @@
 
 //  E  N  T  E  T  E  S  //
 
-include_once "config.php"; // To get the variables $BDD_host, $BDD_password, $BDD_base and $BDD_user
+include_once "libs/config.php"; // To get the variables $BDD_host, $BDD_password, $BDD_base and $BDD_user
 
 
 /**

@@ -257,7 +257,7 @@ function displayFormEditChat(element){
 						<img src='./ressources/fermer_form.png' style='width: 30px; height: 30px;'>
 					</div>
 
-					<div class='policeTitre tailleTitre' style='color:#83bcf2; text-align:center;'>Modifier ${chat['name']} - ${chat['code']} </div>
+					<div class='policeTitre tailleTitre' style='color:var(--third-color); text-align:center;'>Modifier ${chat['name']} - ${chat['code']} </div>
 					<br>
 
 					<form class='policeTexte' action='controleur.php' method='post' enctype='multipart/form-data' onsubmit='if(document.getElementById(\"fileAjoutChat\").value == \"\" && document.getElementById(\"existentFiles\").value == \"\") return false;'>
@@ -352,7 +352,7 @@ function displayFormEditChat(element){
 						}
 					}
 				});
-				
+				selectedFiles = [];
 				addPreviewOfExistentFiles(chat['code']);
 
 			},
@@ -369,7 +369,7 @@ function displayFormEditChat(element){
  * Fonction qui ajoute les photos de l'input file dans le slider
  * @param {Object} contexte
  */
-let selectedFiles = [];
+var selectedFiles = [];
 function filesAdd(contexte) {
 	slides = $(contexte).parent().find(".slides");
 	slider = $(contexte).parent().find(".slider");
@@ -446,6 +446,7 @@ function pushSelectedFilesInInput(contexte) {
 	}
 	fileInput.files = fileData.files;
 	console.log(fileInput.files);
+	console.log(selectedFiles);
 }
 
 
@@ -467,7 +468,6 @@ function addPreviewOfExistentFiles(code){
 			var nbPhoto = data;
 			$("#existentFiles").val(listePhoto(nbPhoto));
 			const slides = $(".formType #edit");
-			
 			for (var i=0; i < nbPhoto; i++	) {
 				const img = document.createElement("img");
 				img.src = "./ressources/chats/" + code + "/" + i + ".jpg";

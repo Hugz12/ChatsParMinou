@@ -33,10 +33,6 @@ function appendDemande(statut, date, btn, img, demande) {
                                     <p name='description'>${demande['description']}</p>
                                     <label for=\"description\">Description</label>
                                 </div>
-                                <div class='para none'>
-                                    <p name='particularite'>${demande['particularite']}</p>
-                                    <label for=\"particularite\">Particularité</label>
-                                </div>
                             </div>
                             <div class="infosPers">
                                 <p class="nomPers policeTitre">${demande['prenom']} ${demande["nom"]}</p>

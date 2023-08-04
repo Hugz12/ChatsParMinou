@@ -6,20 +6,16 @@ CREATE TABLE `utilisateur` (
 )ENGINE = InnoDB;
 
 CREATE TABLE `chat` (
-  `code` int PRIMARY KEY,
+  `code` varchar(255) PRIMARY KEY,
   `name` varchar(255),
   `dateDeNaissance` date,
   `race` varchar(255),
   `sexe` boolean,
-  `statut` int,
-  `description` varchar(255),
+  `description` varchar(3000),
   `chatDuMois` boolean,
-  `nbDemande` int,
   `familleAccueil` boolean,
-  `vues` int,
   `nbPhoto` int,
-  `couleur` varchar(255),
-  `particularite` varchar(255)
+  `couleur` varchar(255)
 )ENGINE = InnoDB;
 
 CREATE TABLE `demandeAdoption` (
@@ -35,29 +31,27 @@ CREATE TABLE `demandeAdoption` (
   `sortie` boolean,
   `situationFamiliale` varchar(255),
   `animaux` varchar(255),
-  `commentaire` varchar(255),
+  `commentaire` varchar(3000),
   `statutDemande` int,
-  `memo` varchar(255),
+  `memo` varchar(3000),
   `datePv` varchar(255),
   `resultatPv` varchar(255),
   `dateRencontre` varchar(255)
 )ENGINE = InnoDB;
-
-
 
 CREATE TABLE `passageRefuge` (
   `date` datetime,
   `heureDebut` time,
   `heureFin` time,
   `mailBenevole` varchar(255),
-  `description` varchar(255),
+  `description` varchar(3000),
   PRIMARY KEY (`date`, `heureDebut`, `heureFin`)
 )ENGINE = InnoDB;
 
 CREATE TABLE `evenement` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `titre` varchar(255),
-  `description` varchar(255),
+  `description` varchar(3000),
   `date` date,
   `heureDebut` time,
   `heureFin` time
@@ -65,14 +59,8 @@ CREATE TABLE `evenement` (
 
 CREATE TABLE `concerne` (
   `idDemande` int,
-  `codeChat` int,
+  `codeChat` varchar(255),
   PRIMARY KEY (`idDemande`, `codeChat`)
-)ENGINE = InnoDB;
-
-CREATE TABLE `hebergement` (
-  `mailHebergeur` varchar(255),
-  `codeChat` int,
-  PRIMARY KEY (`mailHebergeur`, `codeChat`)
 )ENGINE = InnoDB;
 
 CREATE TABLE `conseils` (
@@ -92,11 +80,6 @@ ALTER TABLE `concerne` ADD FOREIGN KEY (`codeChat`) REFERENCES `chat` (`code`);
 
 ALTER TABLE `concerne` ADD FOREIGN KEY (`idDemande`) REFERENCES `demandeAdoption` (`id`);
 
-ALTER TABLE `hebergement` ADD FOREIGN KEY (`mailHebergeur`) REFERENCES `utilisateur` (`mail`);
-
-ALTER TABLE `hebergement` ADD FOREIGN KEY (`codeChat`) REFERENCES `chat` (`code`);
-
-
 /*INSERTION DES DONNEES*/
 
 /*utilisateur*/
@@ -107,17 +90,17 @@ INSERT INTO `utilisateur` (`mail`, `password`, `name`, `role`)
 VALUES ('user@gmail.com', '$2y$10$pMANbag2FYSUNdxQuyL.BeEVjHL5kwwTk0cN357TXumdBTlcsRvQC', 'user', '3');
 
 /*chat*/
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
-VALUES ('1', 'Mimi', '2023-04-01', 'Chat tigré', '1', '2', "Bonjour moi c'est mimi et je cherche quelqu'un avec qui vivre pour l'eternité", '0', '1', '0', '1', '4', '#FF0000', 'Je suis un chat très calin');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `description`, `chatDuMois`, `familleAccueil`, `nbPhoto`, `couleur`) 
+VALUES ('1', 'Mimi', '2023-04-01', 'Chat tigré', '1', "Bonjour moi c'est mimi et je cherche quelqu'un avec qui vivre pour l'eternité", '0', '0', '4', '#FF0000');
 
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
-VALUES ('2', 'Satine', '2023-04-01', 'Chat tigré', '1', '3', "Je m'appelle satine et j'adore les calins, si tu m'adopte je te ferais pleins de calin", '0', '1', '0', '1', '2', '#A569BD', 'Je suis un chat très calin');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `description`, `chatDuMois`, `familleAccueil`, `nbPhoto`, `couleur`) 
+VALUES ('2', 'Satine', '2023-04-01', 'Chat tigré', '1', "Je m'appelle satine et j'adore les calins, si tu m'adopte je te ferais pleins de calin", '0', '0', '2', '#A569BD');
 
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
-VALUES ('3', 'Sunset', '2023-04-01', 'Chat blanc', '1', '1', "Je suis un peu timide mais quand on me connait bien je suis adorable", '0', '1', '0', '1', '2', '#117A65', 'Je suis un chat très calin');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `description`, `chatDuMois`, `familleAccueil`, `nbPhoto`, `couleur`) 
+VALUES ('3', 'Sunset', '2023-04-01', 'Chat blanc', '1', "Je suis un peu timide mais quand on me connait bien je suis adorable", '0', '0', '2', '#117A65');
 
-INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `statut`, `description`, `chatDuMois`, `nbDemande`, `familleAccueil`, `vues`, `nbPhoto`, `couleur`, `particularite`) 
-VALUES ('4', 'Salto', '2023-04-01', 'Chat roux', '1', '1', "J'adore faire la fete et sauter partout. Wouhou!", '1', '0', '1', '0', '1', '#D35400', 'Je suis un chat très calin');
+INSERT INTO `chat` (`code`, `name`, `dateDeNaissance`, `race`, `sexe`, `description`, `chatDuMois`, `familleAccueil`, `nbPhoto`, `couleur`) 
+VALUES ('4', 'Salto', '2023-04-01', 'Chat roux', '1', "J'adore faire la fete et sauter partout. Wouhou!", '1', '1', '1', '#D35400');
 
 
 /*demandeAdoption*/
@@ -158,11 +141,6 @@ VALUES ('2', '2');
 
 INSERT INTO `concerne`( `idDemande`, `codeChat`)
 VALUES ('3', '3');
-
-
-/*hebergement*/
-INSERT INTO `hebergement` (`mailHebergeur`, `codeChat`)
-VALUES ('user@gmail.com', '4');
 
 /*conseils*/
 INSERT INTO `conseils` (`name`, `description`)

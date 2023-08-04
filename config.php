@@ -14,10 +14,10 @@
 
 //  C  O  D  E  //
 
-$BDD_host="localhost";
-$BDD_user="root";
-$BDD_password=""; // vide sous windows
-$BDD_base="PINF";
+$BDD_host="db5011844120.hosting-data.io";
+$BDD_user="dbu1478191";
+$BDD_password="96M&5!6L^kfL"; // vide sous windows
+$BDD_base="dbs9975749";
 
 ?>
 
