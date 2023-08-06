@@ -56,42 +56,47 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 			if ($mail = valider("mail", "POST"))
 			if ($password = valider("password", "POST"))
 			if ($password2 = valider("password2", "POST"))
-			if ($name = valider("name", "POST")){
+			if ($name = valider("name", "POST"))
+			if ($code = valider("code", "POST")){
 
-				
-				if ($password == $password2) {// On vérifie que les mots de passe sont identiques
-					if (!userExistsBDD($mail)) { // Si l'utilisateur n'existe pas déjà
+				if ($code == 'CPM62750') {// On vérifie que le code est le bon
+					if ($password == $password2) {// On vérifie que les mots de passe sont identiques
+						if (!userExistsBDD($mail)) { // Si l'utilisateur n'existe pas déjà
 
-						addUserBDD($mail,$password,$name); // On ajoute l'utilisateur à la BDD
-						
-						// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
-						if($photo = valider("photo","FILES")){
-							if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
-								$_SESSION['error'] = "Erreur lors de l'ajout de la photo de profil, vous pourrez changer votre photo depuis la page profil";
+							addUserBDD($mail,$password,$name); // On ajoute l'utilisateur à la BDD
+							
+							// on véririfie si une photo a été envoyé et on l'upload si c'est le cas
+							if($photo = valider("photo","FILES")){
+								if (!uploadPhoto($photo, "./ressources/users/", $mail)) { // on convertit l'image en jpg
+									$_SESSION['error'] = "Erreur lors de l'ajout de la photo de profil, vous pourrez changer votre photo depuis la page profil";
+								}
 							}
-						}
 
-						// on connecte l'utilisateur
-						if (verifUser($mail,$password)) { // On verifie l'utilisateur, et on crée des variables de session si tout est OK
-							if (valider("remember")) { 
-								setcookie("mail",$mail , time()+60*60*24*30);
-								setcookie("password",$password, time()+60*60*24*30);
-								setcookie("remember",true, time()+60*60*24*30);
-							} else {
-								setcookie("Pseudo","", time());
-								setcookie("Mdp","", time());
-								setcookie("remember",false, time());
+							// on connecte l'utilisateur
+							if (verifUser($mail,$password)) { // On verifie l'utilisateur, et on crée des variables de session si tout est OK
+								if (valider("remember")) { 
+									setcookie("mail",$mail , time()+60*60*24*30);
+									setcookie("password",$password, time()+60*60*24*30);
+									setcookie("remember",true, time()+60*60*24*30);
+								} else {
+									setcookie("Pseudo","", time());
+									setcookie("Mdp","", time());
+									setcookie("remember",false, time());
+								}
 							}
-						}
 
-						$qs = "?view=accueil";
-						
+							$qs = "?view=accueil";
+							
+						} else {
+							$_SESSION['error'] = "Ce mail est déjà utilisé"; // Sinon on affiche un message d'erreur
+							$qs = "?view=connexion";
+						}
 					} else {
-						$_SESSION['error'] = "Ce mail est déjà utilisé"; // Sinon on affiche un message d'erreur
+						$_SESSION['error'] = "Les mots de passe ne sont pas identiques"; // Sinon on affiche un message d'erreur
 						$qs = "?view=connexion";
 					}
 				} else {
-					$_SESSION['error'] = "Les mots de passe ne sont pas identiques"; // Sinon on affiche un message d'erreur
+					$_SESSION['error'] = "Le code d'inscription est incorrect"; // Sinon on affiche un message d'erreur
 					$qs = "?view=connexion";
 				}
 			}

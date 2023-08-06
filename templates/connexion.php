@@ -67,12 +67,17 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
             <div class="group">
                 <input type="password" maxlength='255' name="password2" required/>
-                <label for="password2">Confirmer votre mot de passe</label>
+                <label for="password2">Confirmer le mot de passe</label>
             </div>
 
             <div class="group">
                 <input type="text" maxlength='255' name="name" required/>
                 <label for="name">Nom et Prénom</label>
+            </div>
+
+            <div class="group">
+                <input type="text" name="code" required/>
+                <label for="code">Code d'inscription</label>
             </div>
 
             <div id="previewPhotoDeProfil" class='file'>
