@@ -7,10 +7,6 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
-if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
-    echo "<script>window.alert('" . addslashes($_SESSION['error']) . "');</script>";
-    unset($_SESSION['error']);
-}
 ?>
 
 

@@ -300,9 +300,12 @@ if ($action = valider("action")){ // action = valeur de l'attribut name du bouto
 				// On supprime le chat de la BDD
 				supprimerChat($code);
 				// On supprime le dossier du chat
-				echo "retour du shell :";
-				echo shell_exec("echo oui");
-				echo shell_exec("rm -rf ./ressources/chats/$code");
+				$i = 0;
+				while(file_exists("./ressources/chats/$code/$i.jpg")) {
+					unlink("./ressources/chats/$code/$i.jpg");
+					$i++;
+				}
+				rmdir("./ressources/chats/$code");
 				$qs = "?view=chatsAdoption";
 			}
 		break;

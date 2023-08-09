@@ -20,8 +20,8 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	<div id="presentation" >
 		<img src="ressources/accueil.jpg" alt="accueil">
 		<div id="presentationTexteBox">
-			<div id="presentationTitre" class="policeTitre tailleTitre">Chats Par Minou, pour leur bien-être partout</div>
-			<div id="presentationTexte" class="policeTexte tailleSousTitre">En adoptant un chat, vous offrez non seulement un foyer chaleureux et aimant, mais aussi une vie pleine de rires, de tendresse et de moments inoubliables.</div>
+			<div id="presentationTitre" class="policeTitre tailleTitre">Chats Par Minou, pour leur bien-être avant tout</div>
+			<div id="presentationTexte" class="policeTexte tailleSousTitre">En adoptant un chat via notre association, vous offrez à un petit malheureux issu des rues la belle vie qu'il mérite !</div>
 		</div>
 	</div>
 	<!-- Fin Affichage de la description de l'association -->
@@ -32,7 +32,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	<!-- Debut Affichage du Chat du Mois -->
 	<div id="boxTitreChatDuMois">
 		<div id="titreChatDuMois" class="policeTitre tailleTitre">Notre chat du mois</div>
-		<div id="sousTitreChatDuMois" class="policeTexte tailleSousTitre">Il a besoins de vous. Venez l'adopter</div>
+		<div id="sousTitreChatDuMois" class="policeTexte tailleSousTitre">C'est la star du moment !</div>
 	</div>
 	<div id="allChatDuMois"></div>
 	<div id="allChatDuMoisSmall"></div>

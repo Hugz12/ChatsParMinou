@@ -114,7 +114,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 <div id="rejoignezNous" class="category categoryColor1">
 	<div class="title">Rejoignez nous!</div>
-	<video autoplay loop controls>
+	<video controls>
 		<source src="./ressources/divers/video.mp4" type="video/mp4">
 	</video>
 	<div class="directContent">

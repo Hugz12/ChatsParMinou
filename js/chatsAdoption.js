@@ -903,7 +903,7 @@ function adopterChat(contexte, code) {
 		}
 	}
 	if (alertAdoption == false) {
-		alert("Vous pouvez valider votre sélection en cliquant sur le bouton \"Accedez au formulaire d'adoption\" en bas de la page");
+		alert("Vous pouvez valider votre sélection en cliquant sur le bouton \"Accedez au formulaire\" en bas de la page");
 		alertAdoption = true;
 	}
 

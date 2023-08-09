@@ -15,9 +15,7 @@
         </div>
         <div id="reseauxSociaux">
             <div class="footerTitre">Réseaux sociaux</div>
-            <a class="footerContent" href="https://facebook.com/">Facebook</a>
-            <a class="footerContent" href="https://www.instagram.com/">Instagram</a>
-            <a class="footerContent" href="https://twitter.com/">Twitter</a>
+            <a class="footerContent" target="_blank" href="https://facebook.com/Chatsparminou">Facebook</a>
         </div>
         <div id="lienImportant">
             <div class="footerTitre">Liens importants</div>
@@ -32,3 +30,10 @@
 
 </body>
 </html>
+
+<?php
+if (isset($_SESSION['error'])){ // Si mauvais login ou mot de passe
+    echo "<script>window.alert('" . addslashes($_SESSION['error']) . "');</script>";
+    unset($_SESSION['error']);
+}
+?>

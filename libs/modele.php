@@ -390,7 +390,7 @@ function setChatDuMois($code){
     }
 
     // On désigne le nouveau chat du mois
-    $SQL = "UPDATE chat SET chatDuMois = 1 WHERE code = $code";
+    $SQL = "UPDATE chat SET chatDuMois = 1 WHERE code = '$code'";
     SQLUpdate($SQL);
 }
 
@@ -437,7 +437,7 @@ function getDemandes(){
  * Fonction qui supprime une demande d'adoption
  */
 function supprimerDemande($id, $code){
-    $SQL = "DELETE FROM concerne WHERE idDemande=$id AND codeChat=$code;
+    $SQL = "DELETE FROM concerne WHERE idDemande=$id AND codeChat='$code';
             DELETE FROM demandeAdoption WHERE id=$id;";
     SQLDelete($SQL);
 }
@@ -459,7 +459,7 @@ function setMemo($id, $memo, $datePv, $resultatPv, $dateRencontre){
 }
 
 function existChat($code){
-    $SQL = "SELECT code FROM chat WHERE code = $code";
+    $SQL = "SELECT code FROM chat WHERE code = '$code'";
     $chat = SQLGetChamp($SQL);
     if ($chat == false) 
         return false;
@@ -475,7 +475,7 @@ function addChat($nom,$code,$date,$sexe,$race,$description,$familleAccueil,$coul
 }
 
 function getChat($code){
-    $SQL = "SELECT * FROM chat WHERE code = $code";
+    $SQL = "SELECT * FROM chat WHERE code = '$code'";
     return parcoursRS(SQLSelect($SQL));
 }
 
@@ -491,34 +491,34 @@ function getEvent($id){
 
 function getNbPhotos($code){
     // retourne un tableau de photos du chat stocké dans le dossier ressources/chats/$code qui contient toutes les informations sur les photos pour pouvoir les afficher
-    $SQL = "SELECT nbPhoto FROM chat WHERE code = $code";
+    $SQL = "SELECT nbPhoto FROM chat WHERE code = '$code'";
     return SQLGetChamp($SQL);
 }
 
 function editChat($nom,$statut,$description,$familleAccueil,$couleur,$nbPhotos,$code){
     if ($nom != false){
-        $SQL = "UPDATE chat SET name = '$nom' WHERE code = $code";
+        $SQL = "UPDATE chat SET name = '$nom' WHERE code = '$code'";
         SQLUpdate($SQL);
     }
     if ($statut != false){
-        $SQL = "UPDATE chat SET statut = '$statut' WHERE code = $code";
+        $SQL = "UPDATE chat SET statut = '$statut' WHERE code = '$code'";
         SQLUpdate($SQL);
     }
     if ($description != false){
-        $SQL = "UPDATE chat SET description = '$description' WHERE code = $code";
+        $SQL = "UPDATE chat SET description = '$description' WHERE code = '$code'";
         SQLUpdate($SQL);
     }
     if ($familleAccueil != false){
         $familleAccueil--;
-        $SQL = "UPDATE chat SET familleAccueil = '$familleAccueil' WHERE code = $code";
+        $SQL = "UPDATE chat SET familleAccueil = '$familleAccueil' WHERE code = '$code'";
         SQLUpdate($SQL);
     }
     if ($couleur != false){
-        $SQL = "UPDATE chat SET couleur = '$couleur' WHERE code = $code";
+        $SQL = "UPDATE chat SET couleur = '$couleur' WHERE code = '$code'";
         SQLUpdate($SQL);
     }
     if ($nbPhotos != false){
-        $SQL = "UPDATE chat SET nbPhoto = '$nbPhotos' WHERE code = $code";
+        $SQL = "UPDATE chat SET nbPhoto = '$nbPhotos' WHERE code = '$code'";
         SQLUpdate($SQL);
     }
 }
@@ -530,7 +530,7 @@ function editEvent($id,$titre,$description,$date,$heureDebut,$heureFin,$couleur)
 
 
 function supprimerChat($code){
-    $SQL = "DELETE FROM chat WHERE code = $code";
+    $SQL = "DELETE FROM chat WHERE code = '$code'";
     SQLDelete($SQL);
 }
 

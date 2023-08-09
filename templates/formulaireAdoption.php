@@ -56,7 +56,7 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
                 <div class='group'>
                     <input type='text' maxlength="255" name='adresse'id='adresseForm' required>
                     <label for="adresse">Adresse</label>
-                    <span class="tooltip">Votre adresse postal</span>
+                    <span class="tooltip">Votre adresse postale</span>
                 </div>
                 <div class='group'>
                     <input type='text' maxlength="255" name='habitation' id='habitationForm' required>
@@ -67,13 +67,13 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
         </div>
     </form>
         <div id="infoChat">
-            <div class="titre  tailleSousTitre">Chats likés</div>
+            <div class="titre  tailleSousTitre">Chats repérés</div>
             <div id="conteneurChatsliké"></div>
             <script>
                 var chats = <?= json_encode(listerChats());?>;
                 afficherChatsliké(chats);
             </script> 
-            <div class="titre  tailleSousTitre">Choix des chats</div>
+            <div class="titre  tailleSousTitre">Tous nos chats a l'adoption</div>
             <div id="rechercheChat">
                 <form id="formRechercheChats" onsubmit="return false;" onkeyup="rechercherChat();">
                     <div class="group">
@@ -107,15 +107,15 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
                 <div class='group'>
                     <input type='text' maxlength="255" name='animaux' id='animauxForm' required>
                     <label for="animaux">Animaux</label>
-                    <span class="tooltip">Les animaux que vous avez</span>
+                    <span class="tooltip">Listez les différents animaux que vous avez</span>
                 </div>
                 <div class='group'>
                     <input type='text' maxlength="255" name='situationFamiliale' id='sitForm' required>
                     <label for="situationFamiliale">Situation familiale</label>
-                    <span class="tooltip">Informations des personnes dans votre foyer</span>
+                    <span class="tooltip">Expliquez brievement votre situation familiale</span>
                 </div>
                 <div class='group'>
-                    <input type='text' maxlength="3000" name='commentaire' id='comForm' required>
+                    <textarea id="comForm" name="commentaire" rows="10" maxlength="3000" required></textarea>
                     <label for="commentaire">Commentaire libre</label>
                     <span class="tooltip">Ajoutez ce que vous voulez</span>
                 </div>           
@@ -123,12 +123,12 @@ var retour = <?= json_encode(valider("chatsSelected", "POST")); ?>;
                 <label class="checkbox">
                         <input type="checkbox" id="preForm" required>
                         <span class="checkmark"></span>
-                        <span class="text">Je m'engage à faire une prévisite et à prendre en charge les frais de vétérinaire </span>
+                        <span class="text">Je m'engage à autoriser une pré-visite à mon domicile et à participer aux frais vétérinaires liés à l'adoption</span>
                 </label>
                 <label class="checkbox">
                         <input type="checkbox" id="justiForm" required>
                         <span class="checkmark"></span>
-                        <span class="text">J'ai pris conscience du certificat d'engagement</span>
+                        <span class="text">J'ai pris connaissance du <a target="_Blank" href="./ressources/divers/certificatEngagement.pdf">certificat d'engagement</a></span>
                 </label>
             </div>
         </div>

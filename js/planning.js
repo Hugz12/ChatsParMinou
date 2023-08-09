@@ -221,6 +221,7 @@ function validerFormPassageRefuge(){
         success: function (data) {
             switch(data){
                 case "added":
+                    hideForm("formPassageRefuge")
                     alert("Le passage a bien été ajouté");
                     break;
                 case "alreadyExist":
@@ -238,43 +239,49 @@ function validerFormPassageRefuge(){
             console.log("error");
         }
     });
+    
 
 }
 
 
 function deletePassage(element){
-    var passage = element.parentNode;
-    var date = passage.children[1].innerHTML;
-    var heureDebut = passage.children[2].innerHTML.split(" ")[1];
-    var heureFin = passage.children[2].innerHTML.split(" ")[3];
-    console.log(date);
-    console.log(heureDebut);
-    console.log(heureFin);
+    if (!window.confirm("Voulez-vous vraiment supprimer ce passage ?")) {
+        return;
+    }
+    else {
+        var passage = element.parentNode;
+        var date = passage.children[1].innerHTML;
+        var heureDebut = passage.children[2].innerHTML.split(" ")[1];
+        var heureFin = passage.children[2].innerHTML.split(" ")[3];
+        console.log(date);
+        console.log(heureDebut);
+        console.log(heureFin);
 
-    $.ajax({
-        url: "./controleur.php",
-        type: "POST",
-        dataType: "json",
-        data: {
-            "action" : "deletePassage",
-            "date" : date,
-            "heureDebut" : heureDebut,
-            "heureFin" : heureFin
-        },
-        success: function (data) {
-           
-            var elt = document.createElement("div");
-            elt.id = "refreshMonth";
+        $.ajax({
+            url: "./controleur.php",
+            type: "POST",
+            dataType: "json",
+            data: {
+                "action" : "deletePassage",
+                "date" : date,
+                "heureDebut" : heureDebut,
+                "heureFin" : heureFin
+            },
+            success: function (data) {
             
-            changeMonth(elt);
-            alert("Le passage a bien été supprimé");
-            
-            
-            
-        },
-        error: function (data) {
-            console.log("error");
-        }
-    });
+                var elt = document.createElement("div");
+                elt.id = "refreshMonth";
+                
+                changeMonth(elt);
+                alert("Le passage a bien été supprimé");
+                
+                
+                
+            },
+            error: function (data) {
+                console.log("error");
+            }
+        });
+    }
 }
 
