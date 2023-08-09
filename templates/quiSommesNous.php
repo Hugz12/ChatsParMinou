@@ -46,7 +46,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 			<div class="content">
 				<p>
 					Fonctionnant sous forme de refuge associatif (La Maison des Chats par Minou), complétée de
-					plusieurs familles d’accueil, notre association comprend près de <b>80 adhérents</b> dont plus de <b>30
+					plusieurs familles d’accueil, notre association comprend près de <b>90 adhérents</b> dont plus de <b>30
 					bénévoles actifs.</b>
 					<br><br>
 					Nous avons ainsi sauvé <b>plusieurs centaines</b> de chats (entre 150 et 200 / an) depuis
@@ -77,9 +77,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 	<div class="directContent">
 		<div class="title">Nos actions</div>
 		<div class="content">
-		Le Bureau est composé de 5 personnes. Il assure la gestion de l’association.
-		Et à côté, plus d’une trentaine de bénévoles font vivre l’association dans les différentes actions et
-		missions :
+		Le Bureau est composé de 5 personnes. <br>
+		Il assure la gestion de l’association. <br>
+		Et à côté, plus d’une trentaine de bénévoles font vivre l’association dans les différentes actions et missions :
 		</div>
 	</div>
 	<div class="directContent">
@@ -118,26 +118,9 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 		<source src="./ressources/divers/video.mp4" type="video/mp4">
 	</video>
 	<div class="directContent">
-		
-		<div class="content">
-			<p class="pCenter">La misère féline vous touche ? </p><br>
-			<br>
-			<p>Vous avez envie de vous investir dans des actions de protection animale concrètes, sérieuses et
-			efficaces, dans un contexte associatif <i>serein et épanouissant</i> ?
-			<b>Alors vous avez le choix !</b></p><br>
-			<br>
-			<p class="pCenter">Plusieurs possibilités s’offrent à vous : </p>
-			<div>
-				<p class="pCenter listContent">Simplement adhérer pour suivre la vie et le devenir de notre association (adhésion valable un
-				an, de janvier à janvier) : c’est par ici ! ; (mettre le lien hypertexte sur “c’est par ici”) </p>
-				<p class="pCenter listContent">Investir un peu de votre temps dans les différentes actions de l’association, à votre
-				convenance et en fonction de vos possibilités en devenant bénévole. </p>
-			</div>
-			<br>
-			<p> Si vous souhaitez avoir plus d’informations et en discuter, alors venez nous rencontrer à la Maison des
-			Chats par Minou - 21 rue de Condé à Loos-en-Gohelle ! <br>
-			Permanence chaque mercredi de 14 à 16h ou sur rendez-vous.</p>
-		</div>
+		<a href="index.php?view=nousAider" class="clickable">
+			Toutes les possibilités de nous aider par ICI
+		</a>
 	</div>
 </div>
 

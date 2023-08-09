@@ -148,18 +148,14 @@
 
 
 #quiSommesNous > .category {
-    min-height: calc(100vh - 70px);
-    margin: 0 0 10vh 0;
+    margin: 0 0 160px 0;
     padding: 0px;
-    position: sticky;
+    position: relative;
     top: 50px;
     flex-wrap: wrap;
     align-content: center;
 }
 
-#quiSommesNous > .category:last-child {
-    margin: 0px;
-}
 
 
 #quiSommesNous > div > img {
@@ -317,6 +313,8 @@
     height: 100%;
     padding: 50px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -329,6 +327,15 @@
 #rejoignezNous p {
     display: block;
     width: 100%;
+}
+
+#rejoignezNous a {
+    padding: 15px;
+    border-radius: 25px;
+    background-color: var(--fourth-color);
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
 }
 
 #rejoignezNous > .directContent > .content > p:is(:nth-child(1),:nth-child(7)) {
