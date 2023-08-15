@@ -10,8 +10,7 @@
         <div id="nousContacter">
             <div class="footerTitre">Nous contacter</div>
             <div class="footerContent">chatsparminou@gmail.com</div>
-            <div class="footerContent">06 06 06 06 06</div>
-            <div class="footerContent">Adresse du refuge</div>
+            <div class="footerContent">21 rue Condé 62750 Loos-en-gohelle</div>
         </div>
         <div id="reseauxSociaux">
             <div class="footerTitre">Réseaux sociaux</div>
