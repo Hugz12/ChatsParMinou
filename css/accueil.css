@@ -338,6 +338,7 @@
 	background-color: var(--third-color);
 	justify-content: center;
 	padding-bottom: 10px;
+	min-height: 150px;
 }
 
 .secondBanner > div {
