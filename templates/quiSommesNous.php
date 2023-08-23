@@ -14,7 +14,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 <div id="quiSommesNous" class="categoryColor1">
 	
 	<div class="category">
-		<img src="./ressources/chats/1/0.jpg" alt="photo qui somme nous">
+		<img src="./ressources/divers/quiSommesNous1.jpg" alt="photo qui somme nous">
 		<div class="directContent">
 			<div class="title">Qui sommes-nous ?</div>
 			<div class="content">
@@ -36,12 +36,12 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 				<div class="listContent">à développer la sensibilisation à la cause animale et au respect du vivant dans l’opinion publique.</div>
 			</div>
 		</div>
-		<img src="./ressources/chats/1/0.jpg" alt="photo qui somme nous">
+		<img src="./ressources/divers/quiSommesNous2.jpg" alt="photo qui somme nous">
 	</div>
 	
 	
 	<div class="category">
-		<img src="./ressources/chats/1/0.jpg" alt="photo qui somme nous">
+		<img src="./ressources/divers/quiSommesNous3.jpg" alt="photo qui somme nous">
 		<div class="directContent">
 			<div class="content">
 				<p>
@@ -62,10 +62,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 			<div class="flecheGauche clickable" onclick="translateX(this)"><?php include("./ressources/flecheLeft.svg") ?></div>
 
 			<div class="slides">
-				<div class="slide slideQuiSommesNous"><img src="./ressources/chats/1/0.jpg" alt="chat"></div>
-				<div class="slide slideQuiSommesNous"><img src="./ressources/chats/1/0.jpg" alt="chat"></div>
-				<div class="slide slideQuiSommesNous"><img src="./ressources/chats/1/0.jpg" alt="chat"></div>
-				<div class="slide slideQuiSommesNous"><img src="./ressources/chats/1/0.jpg" alt="chat"></div>
+				<div class="slide slideQuiSommesNous"><img src="./ressources/divers/quiSommesNous4.jpg" alt="chat"></div>
+				<div class="slide slideQuiSommesNous"><img src="./ressources/divers/quiSommesNous5.jpg" alt="chat"></div>
+				<div class="slide slideQuiSommesNous"><img src="./ressources/divers/quiSommesNous6.jpg" alt="chat"></div>
+				<div class="slide slideQuiSommesNous"><img src="./ressources/divers/quiSommesNous7.jpg" alt="chat"></div>
+				<div class="slide slideQuiSommesNous"><img src="./ressources/divers/quiSommesNous8.jpg" alt="chat"></div>
 			</div>
 			<div id="pointsQuiSommesNous" class="sliderPoints"></div>
 
@@ -89,7 +90,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 			<div class="listContent">Les bénévoles pour les autres actions et événements : transport des chats chez les vétérinaires, collectes alimentaires, ventes de livres et marchés de Noël, etc.</div>
 		</div>
 	</div>
-	<img src="./ressources/chats/1/0.jpg" alt="photo action">
+	<img src="./ressources/divers/quiSommesNous9.jpg" alt="photo action">
 
 	
 </div>

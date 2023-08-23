@@ -11,7 +11,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 <div class="category categoryColor1">
-	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<img src="./ressources/divers/nousAider1.jpg" alt="photo qui somme nous">
 	<div class="directContent">
 		<div class="title">Devenir bénévole</div>
 		<div class="content">
@@ -27,7 +27,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 <div class="category categoryColor2">
-	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<img src="./ressources/divers/nousAider2.jpg" alt="photo qui somme nous">
 	<div class="directContent">
 		<div class="title">Don matériel</div>
 		<div class="content">
@@ -43,7 +43,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 <div class="category categoryColor1">
-	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<img src="./ressources/divers/nousAider3.jpg" alt="photo qui somme nous">
 	<div class="directContent">
 		<div class="title">Don financier</div>
 		<div class="content">
@@ -60,7 +60,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php"){ // Si la page est appelée d
 
 
 <div class="category categoryColor2">
-	<img src="./ressources/divers/chat.jpg" alt="photo qui somme nous">
+	<img src="./ressources/divers/nousAider4.jpg" alt="photo qui somme nous">
 	<div class="directContent">
 		<div class="title">Spécial entreprise</div>
 		<div class="content">
